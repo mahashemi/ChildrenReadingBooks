@@ -96,6 +96,28 @@ $("mediumFlagSettings").addEventListener("click",()=>preset("medium"));
 $("hardFlagSettings").addEventListener("click",()=>preset("hard"));
 let targets=[],pool=[],selected=new Set(),timer=null,left=5,phase="ready",targetCount=3;
 function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
+function addCelebrationStyles(){
+if(document.getElementById("flagCelebrationStyles"))return;
+const style=document.createElement("style");style.id="flagCelebrationStyles";
+style.textContent=`
+.flag-celebration{position:relative;overflow:hidden;margin:16px 0 8px;padding:19px 16px;border:1px solid #f0dfae;border-radius:16px;background:linear-gradient(120deg,#fff8dc,#fff0e9 55%,#f4efff);text-align:center;animation:flagYayPop .42s cubic-bezier(.2,.8,.2,1) both}
+.flag-celebration strong{display:block;color:#705b32;font-size:clamp(20px,3vw,27px);font-weight:900}
+.flag-celebration span{display:block;margin-top:4px;color:#887b60;font-size:12px;font-weight:800}
+.flag-celebration .yay-spark{position:absolute;font-size:22px;animation:flagSparkle 1.1s ease-in-out infinite alternate}
+.flag-celebration .yay-spark:nth-child(1){left:9%;top:12%}.flag-celebration .yay-spark:nth-child(2){right:10%;top:18%;animation-delay:.2s}.flag-celebration .yay-spark:nth-child(3){left:18%;bottom:8%;animation-delay:.4s}.flag-celebration .yay-spark:nth-child(4){right:19%;bottom:8%;animation-delay:.1s}
+@keyframes flagYayPop{from{opacity:0;transform:scale(.88) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes flagSparkle{from{transform:scale(.7) rotate(-15deg);opacity:.55}to{transform:scale(1.2) rotate(18deg);opacity:1}}
+@media(prefers-reduced-motion:reduce){.flag-celebration,.flag-celebration .yay-spark{animation:none!important}}
+`;
+document.head.appendChild(style);
+}
+function celebrateFlagWin(perfect,hits,total){
+addCelebrationStyles();
+const old=$("flagCelebration");if(old)old.remove();
+const banner=document.createElement("div");banner.id="flagCelebration";banner.className="flag-celebration";banner.setAttribute("role","status");banner.setAttribute("aria-live","polite");
+banner.innerHTML='<span class="yay-spark" aria-hidden="true">✨</span><span class="yay-spark" aria-hidden="true">⭐</span><span class="yay-spark" aria-hidden="true">🎉</span><span class="yay-spark" aria-hidden="true">💫</span><strong>'+(perfect?'YAAAAY! 🎊':'Great spotting! 🌟')+'</strong><span>'+(perfect?'You found all '+total+' flags. What a brilliant memory!': 'You found '+hits+' out of '+total+' flags. Keep shining!')+'</span>';
+$("flagGameResult").before(banner);
+}
 function updateSelection(){
 $("flagSelectionCount").textContent=selected.size+" of "+targetCount+" selected";
 $("checkFlagAnswers").disabled=selected.size===0;
@@ -154,7 +176,7 @@ return '<div class="flag-option-card '+(correct?"correct":chosen?"incorrect":"")
 }).join("");
 $("flagSelectionCount").textContent=hits.length+" / "+targets.length+" correct";
 $("checkFlagAnswers").disabled=true;$("clearFlagChoices").disabled=true;
-$("flagGameResult").textContent=perfect?"You remembered every flag. Well done!":"The flags to remember were: "+targets.map(x=>x.name).join(", ")+". Try another round and see if you can remember them all.";
+if(hits.length>0)celebrateFlagWin(perfect,hits.length,targets.length);\n$("flagGameResult").textContent=perfect?"You remembered every flag. Well done!":"The flags to remember were: "+targets.map(x=>x.name).join(", ")+". Try another round and see if you can remember them all.";
 $("nextFlagRound").hidden=false;
 });
 $("nextFlagRound").addEventListener("click",startGame);
