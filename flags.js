@@ -46,7 +46,7 @@ $("flagProgressSummary").textContent="You have explored "+progress.seen.filter(c
 }
 function seen(entry){addUnique(progress.seen,entry.code);progress.clicks++;save();updateProgress();}
 function markKnown(entry){
-if(progress.known.includes(entry.code))progress.known=progress.known.filter(x=>x!==entry.code);else addUnique(progress.known,entry.code);
+if(progress.known.includes(entry.code))progress.known=progress.known.filter(x=>x!==entry.code);else{addUnique(progress.known,entry.code);addUnique(progress.seen,entry.code);}
 save();renderLibrary();updateProgress();
 }
 let revealed=new Set();
@@ -106,7 +106,7 @@ updateSelection();
 function startGame(){
 stopTimer();selected.clear();
 const list=source(),n=Math.min(Number($("flagTargetCount").value),list.length),size=Math.min(Math.max(n,Number($("flagPoolSize").value)),list.length);
-targetCount=n;targets=shuffle(list).slice(0,n);
+targetCount=n;targets=shuffle(list).slice(0,n);targets.forEach(x=>addUnique(progress.seen,x.code));save();updateProgress();
 pool=shuffle(targets.concat(shuffle(list.filter(x=>!targets.some(t=>t.code===x.code))).slice(0,size-n)));
 left=Number($("flagShowSeconds").value);phase="memorise";
 $("flagGamePhase").textContent="MEMORISE THESE FLAGS";$("flagGameTitle").textContent="Look carefully!";
@@ -128,7 +128,7 @@ if(phase!=="choose")return;
 const b=e.target.closest("[data-code]");if(!b)return;
 const x=pool.find(t=>t.code===b.dataset.code);if(!x)return;
 if(selected.has(x.code)){selected.delete(x.code);b.classList.remove("selected");b.querySelectorAll(".flag-name,.flag-name-syllables,.flag-name-whole").forEach(n=>n.remove());}
-else{selected.add(x.code);b.classList.add("selected");b.insertAdjacentHTML("beforeend",nameHtml(x));seen(x);speak(x);}
+else{if(selected.size>=targetCount){$("flagGameInstruction").textContent="You need "+targetCount+" flags. Remove one choice before selecting another.";return;}selected.add(x.code);b.classList.add("selected");b.insertAdjacentHTML("beforeend",nameHtml(x));seen(x);speak(x);}
 updateSelection();
 });
 $("clearFlagChoices").addEventListener("click",()=>{
