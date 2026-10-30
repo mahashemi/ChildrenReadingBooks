@@ -285,7 +285,7 @@ function startStoryReading(){
 }
 $("readAloud").addEventListener("click",()=>isReadingStory?stopReading():startStoryReading());
 $("slowerSpeech").addEventListener("click",()=>{
-  speechRate=Math.max(.6,Math.round((speechRate-.1)*10)/10);
+  speechRate=Math.max(.3,Math.round((speechRate-.1)*10)/10);
   updateSpeechRate();
   if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
 });
