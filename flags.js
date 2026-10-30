@@ -77,7 +77,7 @@ $("flagGameReadingLevel").addEventListener("change",()=>{$("flagReadingLevel").v
 $("flagTestMode").addEventListener("change",renderLibrary);
 
 function card(entry,cls,showName){
-return '<button type="button" class="'+cls+'" data-code="'+entry.code+'" aria-label="'+(showName?escapeHtml(entry.name):"Flag option")+'"><span class="flag-emoji">'+emoji(entry.code)+'</span>'+(showName?nameHtml(entry):"")+'</button>';
+return '<button type="button" class="'+cls+'" data-code="'+entry.code+'" aria-label="'+(showName?escapeHtml(entry.name):"Flag option")+'">'+flagMarkup(entry)+(showName?nameHtml(entry):"")+'</button>';
 }
 function shuffle(list){const a=list.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function source(){return $("flagGameCollection").value==="all"?entries:countries;}
