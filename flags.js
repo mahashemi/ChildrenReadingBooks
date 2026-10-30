@@ -143,7 +143,7 @@ closeWinOverlay();
 const ratio=total?hits/total:0;
 let mood;
 if(perfect)mood={key:"perfect",icon:"🏆🎆",title:"YAAAAY! PERFECT!",copy:"You remembered every single flag! What an amazing memory. You're a Flag Spotter superstar!",level:3};
-else if(ratio>=.7)mood={key:"great",icon:"🌟🎉",title:"AMAZING WORK!",copy:"You spotted most of the flags! You're getting really good at this. Keep that brilliant memory growing!",level:2};
+else if(ratio>=2/3)mood={key:"great",icon:"🌟🎉",title:"AMAZING WORK!",copy:"You spotted most of the flags! You're getting really good at this. Keep that brilliant memory growing!",level:2};
 else if(hits>0)mood={key:"some",icon:"✨💪",title:"GOOD TRY!",copy:"You remembered "+hits+" flag"+(hits===1?"":"s")+". Every round helps your memory grow. Let's keep practising!",level:1};
 else mood={key:"zero",icon:"🌱💛",title:"LET'S LEARN TOGETHER!",copy:"That's okay! New things take practice. Take another look at the flags and give it another try. You've got this!",level:0};
 const overlay=document.createElement("div");overlay.className="flag-win-overlay is-"+mood.key;overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");overlay.setAttribute("aria-labelledby","flagWinTitle");overlay.setAttribute("aria-describedby","flagWinCopy");
