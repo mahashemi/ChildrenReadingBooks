@@ -231,7 +231,7 @@ const readingChapters = [
     "icon": "🌙",
     "subtitle": "What Shia narrations report about the companions of Imam al-Mahdi.",
     "source": "Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8; Qur'an 2:148 as cited in one report; Qur'an 9:119, 23:8 and 2:153 for the qualities discussed. The Hilla forty-guests anecdote and the '1,200 years' wording are not established by these reports and are not presented here as hadith.",
-    "art": "courtyard",
+    "art": "stars",
     "takeaway": "Prepare through faith, truth, patience and obedience; do not turn the number 313 into a countdown.",
     "start": 15,
     "end": 16
