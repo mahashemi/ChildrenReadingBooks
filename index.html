@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8ed">
+  <meta name="description" content="A joyful English learning adventure for children, rooted in Qur'anic learning and beautiful character.">
+  <title>Little Lanterns — Read, Grow & Shine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="top-glow"></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Little Lanterns home">
+      <span class="brand-mark">✦</span>
+      <span><strong>little lanterns</strong><small>READ · GROW · SHINE</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-link active" data-view="home">Home</button>
+      <button class="nav-link" data-view="reading">Reading</button>
+      <button class="nav-link" data-view="quran">Qur’an corner</button>
+      <button class="nav-link" data-view="speak">My speech stage</button>
+    </nav>
+    <button class="parent-button" id="parentButton">For grown-ups <span>↗</span></button>
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+  </header>
+
+  <main>
+    <section class="view active" id="homeView">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-star">✦</span> A little learning, a lot of wonder</div>
+          <h1>Every word is<br>an <span>adventure.</span></h1>
+          <p class="hero-intro">Read wonderful stories. Discover beautiful values. Find your voice and let it shine.</p>
+          <div class="hero-actions">
+            <button class="button button-primary" data-go="reading">Let’s start reading <span>→</span></button>
+            <button class="button button-quiet" data-go="quran">Explore Qur’an corner</button>
+          </div>
+          <div class="hero-note"><span class="tiny-avatar">🌱</span><span>A happy place to learn a little more every day.</span></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a magical storybook garden">
+          <div class="sun-disc"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+          <div class="star star-one">✦</div><div class="star star-two">✧</div><div class="star star-three">✦</div>
+          <div class="hill hill-back"></div><div class="hill hill-front"></div>
+          <div class="book-illustration"><div class="book-page left-page"></div><div class="book-page right-page"></div><div class="book-spine"></div><span class="book-spark">✦</span></div>
+          <div class="floating-pill pill-read">📖 <b>Read</b></div><div class="floating-pill pill-grow">🌼 <b>Grow</b></div>
+          <div class="little-flower flower-one">✿</div><div class="little-flower flower-two">✿</div>
+        </div>
+      </section>
+
+      <section class="welcome-strip">
+        <div><span class="strip-icon">☀️</span><div><strong>Today is full of possibility!</strong><small>Choose a little adventure and make it yours.</small></div></div>
+        <div class="streak"><span>✨</span><b>One day at a time</b><small>Every effort counts</small></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><div class="eyebrow">YOUR LEARNING GARDEN</div><h2>What shall we explore?</h2></div><span class="heading-doodle">✳</span></div>
+        <div class="learning-grid">
+          <button class="learning-card card-peach" data-go="reading"><span class="card-art">📚</span><span class="card-label">STORIES & WORDS</span><strong>Reading adventures</strong><small>Sound it out, follow the story and discover new words.</small><span class="card-arrow">Explore reading →</span></button>
+          <button class="learning-card card-mint" data-go="quran"><span class="card-art">🌙</span><span class="card-label">QUR’AN & REFLECTION</span><strong>Qur’an corner</strong><small>Meet short surahs, understand their messages and memorise.</small><span class="card-arrow">Visit the corner →</span></button>
+          <button class="learning-card card-lilac" data-go="speak"><span class="card-art">🎤</span><span class="card-label">FIND YOUR VOICE</span><strong>My speech stage</strong><small>Share an idea, tell a story and speak with confidence.</small><span class="card-arrow">Take the stage →</span></button>
+          <button class="learning-card card-yellow" data-go="values"><span class="card-art">💛</span><span class="card-label">HEART & CHARACTER</span><strong>Values in action</strong><small>Explore kindness, truth, gratitude, faith and our fitrat.</small><span class="card-arrow">Discover values →</span></button>
+        </div>
+      </section>
+
+      <section class="quote-banner"><span class="quote-mark">“</span><div><p>Read with curiosity. Speak with kindness. Let your knowledge become good action.</p><small>A LITTLE LANTERNS REMINDER</small></div><span class="quote-spark">✧</span></section>
+      <footer class="site-footer"><span>✦ little lanterns</span><span>Made for curious hearts and growing minds.</span></footer>
+    </section>
+
+    <section class="view" id="readingView">
+      <div class="page-heading"><div><div class="eyebrow">STORIES & WORDS</div><h1>Reading <span>adventures</span></h1><p>Take your time. Every page is a new discovery.</p></div><span class="heading-emoji">📚</span></div>
+      <div class="reader-layout">
+        <aside class="story-sidebar">
+          <div class="sidebar-title">YOUR STORYBOOK <span>01</span></div>
+          <button class="story-choice selected"><span class="story-thumb">🌌</span><span><b>A Special Dream</b><small>Inspired by Surah Yusuf</small></span><span class="choice-check">✓</span></button>
+          <div class="coming-story"><span>🌿</span><div><b>More stories are growing</b><small>New adventures will appear here.</small></div></div>
+          <div class="sidebar-tip"><span>💡</span><b>Reader tip</b><p>Try reading a sentence twice: first slowly, then smoothly.</p></div>
+        </aside>
+        <article class="reader-card">
+          <div class="reader-topline"><span class="tag tag-green">LEVEL 2 · STORY 01</span><span class="page-count" id="pageCount">PAGE 1 OF 3</span></div>
+          <div class="reader-title-row"><div><h2 id="storyTitle">A Special Dream</h2><p id="storySubtitle">A story inspired by the Qur’anic account of Prophet Yusuf (peace be upon him).</p></div><span class="reader-moon">🌙</span></div>
+          <div class="reader-tools">
+            <div class="mode-switch" role="group" aria-label="Reading mode">
+              <button class="mode-button active" data-mode="syllables">Syllables</button><button class="mode-button" data-mode="mixed">Mixed</button><button class="mode-button" data-mode="normal">Normal</button>
+            </div>
+            <div class="reader-controls"><button id="smallerText" aria-label="Decrease text size">A−</button><button id="largerText" aria-label="Increase text size">A+</button><button id="readAloud" class="audio-button" title="Read this page aloud">🔊 Listen</button></div>
+          </div>
+          <div class="mode-hint" id="modeHint">Longer words are gently divided into syllables. Tap a word to explore it.</div>
+          <div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
+          <div class="story-text" id="storyText" aria-live="polite"></div>
+          <div class="word-panel" id="wordPanel" hidden><div><small>WORD EXPLORER</small><strong id="wordDisplay"></strong><span id="wordBreakdown"></span><p id="wordMeaning"></p></div><button id="closeWord" aria-label="Close word explorer">×</button></div>
+          <div class="reader-bottom"><span class="progress-dots" id="progressDots"><i class="on"></i><i></i><i></i></span><div class="page-buttons"><button class="button button-outline" id="previousPage" disabled>← Previous</button><button class="button button-primary" id="nextPage">Next page →</button></div></div>
+          <div class="source-note"><span>📜</span><span><b>Source note:</b> This is an educational retelling inspired by Surah Yusuf (12:4–6), not a direct translation. The Qur’anic text and the retelling are kept distinct.</span></div>
+        </article>
+      </div>
+      <section class="after-reading"><div><span class="mini-icon">🧠</span><div><b>Think about the story</b><small>Who did Yusuf speak to about his dream?</small></div></div><button class="text-button" data-go="values">Explore the lesson →</button></section>
+    </section>
+
+    <section class="view" id="quranView">
+      <div class="page-heading"><div><div class="eyebrow">LISTEN · READ · REFLECT · REMEMBER</div><h1>Qur’an <span>corner</span></h1><p>Small surahs, beautiful meanings and a little practice every day.</p></div><span class="heading-emoji">🌙</span></div>
+      <div class="quran-feature">
+        <div class="quran-feature-copy"><span class="tag tag-gold">TODAY’S SURAH</span><h2>Surah Al-Ikhlas</h2><p>A short surah that teaches us about the oneness and uniqueness of Allah.</p><div class="surah-meta"><span>4 ayat</span><span>•</span><span>Makki</span><span>•</span><span>Surah 112</span></div></div>
+        <div class="quran-orbit"><span class="orbit-star">✦</span><span class="orbit-moon">☾</span><span class="orbit-dot">✧</span></div>
+      </div>
+      <div class="quran-content-grid">
+        <div class="content-panel"><div class="panel-heading"><div><span class="eyebrow">READ THE ARABIC</span><h3>Listen and follow</h3></div><span class="panel-icon">📖</span></div>
+          <div class="arabic-verses" lang="ar" dir="rtl"><p>قُلْ هُوَ ٱللَّهُ أَحَدٌ</p><p>ٱللَّهُ ٱلصَّمَدُ</p><p>لَمْ يَلِدْ وَلَمْ يُولَدْ</p><p>وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌ</p></div>
+          <p class="small-note">Arabic text is presented as Qur’anic text. Please listen to a trusted reciter for pronunciation and tajwid.</p>
+        </div>
+        <div class="content-panel meaning-panel"><div class="panel-heading"><div><span class="eyebrow">UNDERSTAND THE MESSAGE</span><h3>What does it teach us?</h3></div><span class="panel-icon">💡</span></div>
+          <p>This surah teaches that Allah is One, unique and completely independent. Everything depends on Him. He has no parent, child or equal.</p>
+          <div class="reflection-question"><b>Think about it</b><span>Why do you think it is important to know that Allah is One?</span></div>
+          <div class="source-chip">Qur’an · Surah Al-Ikhlas · 112:1–4</div>
+        </div>
+      </div>
+      <div class="practice-panel"><div><span class="eyebrow">A LITTLE EVERY DAY</span><h3>Memorise with care</h3><p>Listen to one ayah, repeat it slowly, then try it without looking. Ask a teacher or parent to listen.</p></div><div class="practice-steps"><span>1. Listen</span><span>2. Repeat</span><span>3. Recall</span><span>4. Revise</span></div></div>
+      <p class="editorial-note">The English explanation above is a child-friendly meaning summary, not a verbatim translation of the Qur’an. A licensed, named translation and recitation audio will be added with source attribution in a later content pass.</p>
+    </section>
+
+    <section class="view" id="speakView">
+      <div class="page-heading"><div><div class="eyebrow">YOUR VOICE MATTERS</div><h1>My speech <span>stage</span></h1><p>Start with one sentence. Grow towards five wonderful minutes.</p></div><span class="heading-emoji">🎤</span></div>
+      <div class="speech-hero"><div><span class="tag tag-lilac">TODAY’S SPEAKING CHALLENGE</span><h2>Why is kindness important?</h2><p>Tell us what kindness means, share an example and explain how you can show kindness today.</p><button class="button button-primary" id="speechStart">Let’s practise →</button></div><div class="speech-mic">🎙️<span>✦</span></div></div>
+      <div class="speech-grid"><div class="content-panel"><span class="eyebrow">BUILD YOUR SPEECH</span><h3>Your five little steps</h3><ol class="speech-outline"><li><b>Say hello</b><small>Greet your audience and introduce your topic.</small></li><li><b>Explain your idea</b><small>What does kindness mean?</small></li><li><b>Give an example</b><small>Tell a short story from everyday life.</small></li><li><b>Connect to your values</b><small>What do the Qur’an and good character teach?</small></li><li><b>Finish with a thought</b><small>What will you do differently today?</small></li></ol></div><div class="content-panel timer-panel"><span class="eyebrow">YOUR SPEAKING JOURNEY</span><h3>Every voice grows</h3><div class="time-ladder"><div><span>🌱</span><b>30 seconds</b><small>Say one clear idea</small></div><div><span>🌿</span><b>1 minute</b><small>Explain and give an example</small></div><div><span>🌳</span><b>2–3 minutes</b><small>Build a beginning, middle and end</small></div><div><span>⭐</span><b>5 minutes</b><small>Speak with confidence and clarity</small></div></div></div></div>
+      <div class="speech-prompt"><b>Try this opening:</b><p>“Good morning, everyone. Today I would like to talk about kindness. I think kindness is important because…”</p><button class="button button-outline" id="copyPrompt">Copy speech starter</button></div>
+    </section>
+
+    <section class="view" id="valuesView">
+      <div class="page-heading"><div><div class="eyebrow">A HEART THAT KEEPS GROWING</div><h1>Values in <span>action</span></h1><p>Learning is even more beautiful when it changes the way we live.</p></div><span class="heading-emoji">💛</span></div>
+      <div class="values-grid">
+        <article class="value-card card-peach"><span>🌷</span><h3>Akhlaq</h3><p>Good character: honesty, kindness, patience, gratitude, respect and helping others.</p></article>
+        <article class="value-card card-mint"><span>✨</span><h3>Aqa’id</h3><p>Age-appropriate learning about Allah, Prophethood, Imamate, divine justice and the Hereafter.</p></article>
+        <article class="value-card card-lilac"><span>🌱</span><h3>Fitrat</h3><p>Discovering our natural inclination towards truth, goodness, justice and recognising the signs of Allah.</p></article>
+      </div>
+      <div class="reflection-box"><span>💭</span><div><b>Today’s little reflection</b><p>What is one kind thing you can do for someone today? Can you explain why you chose it?</p></div></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="parentModal" hidden><div class="parent-modal"><button class="modal-close" id="closeModal">×</button><span class="modal-icon">🌼</span><h2>A note for grown-ups</h2><p>Little Lanterns is an early visual prototype. Stories, syllable annotations, Qur’anic translations, audio and assessments will go through editorial review before being treated as finished learning material.</p><p>Children should use the site with an appropriate parent or teacher. The first version stores no child accounts or personal data.</p><button class="button button-primary" id="gotIt">Got it</button></div></div>
+  <script src="./app.js"></script>
+</body>
+</html>
