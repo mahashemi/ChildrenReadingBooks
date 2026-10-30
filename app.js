@@ -18,6 +18,135 @@ const storyPages = [
   ]}
 ];
 
+
+// New reading chapters: child-friendly original lessons with explicit source labels.
+storyPages.push(
+  {title:"A Pause Before the Words",paragraphs:[
+    "One afternoon, Sami was building a tall tower. His little sister bumped the table, and the blocks fell down.",
+    "Sami felt heat rise inside him. He wanted to shout. Then he remembered that anger can make a small problem much bigger.",
+    "He took a slow breath, stepped back, and waited until his voice felt calm."
+  ]},
+  {title:"The Strong Choice",paragraphs:[
+    "When Sami felt ready, he said, “I was upset when the tower fell. Please be careful next time.” His sister said sorry, and they built it again together.",
+    "Being calm did not mean that Sami had no feelings. It meant he chose what to do with those feelings.",
+    "Akhlaq lesson: pause, breathe, speak kindly and forgive when you can. If someone is unsafe or hurt, ask a trusted grown-up for help."
+  ]},
+  {title:"A World Full of Gifts",paragraphs:[
+    "Look around you. The sky gives us light. Rain helps plants grow. The earth gives us food, water and places to live.",
+    "Our families, friends, health and time are also gifts. We should enjoy good things, but we should not waste them or forget people who need help.",
+    "In Islam, this world is a place where we choose our actions. Every kind deed can become a seed for the Hereafter."
+  ]},
+  {title:"Use the World Well",paragraphs:[
+    "Mariam planted a small tree with her grandfather. She watered it, protected it and waited patiently as it grew.",
+    "Her grandfather said, “We do not own the earth to harm it. We are trusted to care for it.” Mariam decided to save water and keep the garden clean.",
+    "Akhlaq lesson: be thankful for the world, care for living things, share what you have and remember that our choices matter."
+  ]},
+  {title:"The Brave Battle Within",paragraphs:[
+    "A boy named Ali wanted to win every game. When he lost, he felt a strong urge to blame his friends.",
+    "One day, his teacher explained a beautiful idea: jihad al-nafs means striving against the selfish parts of ourselves. It means trying to choose what is right, even when it is difficult.",
+    "Ali began with small efforts. He told the truth, accepted a loss and congratulated the winner."
+  ]},
+  {title:"Small Steps of Courage",paragraphs:[
+    "Ali learned that real strength is not hurting people or showing off. It is controlling anger, resisting unfairness, helping someone in need and correcting your own mistakes.",
+    "Some days he succeeded. Some days he had to try again. He learned that sincere effort matters.",
+    "Akhlaq lesson: every day, choose one good action over one selfish action. This lesson is about inner effort and good character."
+  ]},
+  {title:"A Meeting Through Prayer",paragraphs:[
+    "Before school, Zahra's mother spread a clean prayer mat. Zahra washed for prayer and stood quietly beside her.",
+    "They began with Allah's name. Zahra recited what she had learned and bowed and prostrated as taught by her family.",
+    "She knew that namaz was not a performance. It was a time to remember Allah, thank Him and ask for guidance."
+  ]},
+  {title:"Carry the Prayer Into Your Day",paragraphs:[
+    "After prayer, Zahra tried to carry its goodness into the day. She spoke truthfully, shared her lunch and helped her younger brother.",
+    "Her mother reminded her that prayer and character belong together. We should try to remember Allah not only on the prayer mat, but also in our choices.",
+    "Aqa'id and Akhlaq lesson: namaz is worship of Allah alone. Learn its words and movements carefully with a parent or teacher, and let prayer help you become kinder."
+  ]},
+  {title:"The Heart and the Soul",paragraphs:[
+    "We can see our hands, eyes and feet. But what about the part of us that thinks, hopes, loves and chooses?",
+    "Muslims speak about the soul as a special part of human life created by Allah. We cannot understand everything about it, but we know that our choices and intentions are important.",
+    "When Noor told the truth even though it was hard, she felt peaceful inside. She had chosen honesty."
+  ]},
+  {title:"Keep Your Inner Light Bright",paragraphs:[
+    "Noor learned that the soul grows through faith, prayer, knowledge, kindness and good actions. Jealousy, cruelty and lies can make the heart feel heavy.",
+    "When she made a mistake, she did not give up. She said sorry, asked Allah for help and tried to repair the harm.",
+    "Akhlaq lesson: care for your inner self. Feed it with truth, remembrance of Allah, learning and kindness."
+  ]},
+  {title:"A Student Who Loved Knowledge",paragraphs:[
+    "Many centuries ago, in the city of Hillah, lived a great Shia scholar known as Allama Hilli. His name was Hasan ibn Yusuf.",
+    "He learned from teachers in his family and from other scholars. He studied the Qur'an, language, law, reasoning and many other subjects.",
+    "He worked hard and wrote many books. Students and scholars learned from his knowledge."
+  ]},
+  {title:"Knowledge Must Bring Goodness",paragraphs:[
+    "Allama Hilli's life reminds us that learning takes patience. A person grows by asking questions, listening to teachers, reading carefully and checking what is true.",
+    "Knowledge should not make us proud or unkind. It should help us understand our duties and serve people better.",
+    "Akhlaq lesson: respect teachers, keep learning, think carefully and use knowledge to help others. This is a child-friendly biography, not a retelling of a single miracle story."
+  ]},
+  {title:"Forty Friends Make a Promise",paragraphs:[
+    "This is an imaginative story for learning; it is not a hadith or a report of a historical event.",
+    "In a small town, forty children formed a group called the Friends of Justice. They loved Imam al-Mahdi (may Allah hasten his reappearance) and wanted to become people who would support truth.",
+    "They made a promise: each child would practise honesty, help someone, learn something useful and stand beside a person who was treated unfairly."
+  ]},
+  {title:"Ready Hearts, Helpful Hands",paragraphs:[
+    "The children discovered that preparing for a just world begins with today's choices. One returned something that was lost. Another stopped a cruel joke. Others cared for an elderly neighbour.",
+    "They learned that narrations speak of 313 special companions of Imam al-Mahdi, but we must not claim that reaching this number by itself makes the reappearance happen. The full matter belongs to Allah and includes conditions we cannot control.",
+    "Aqa'id and Akhlaq lesson: love for the Imam should make us more truthful, fair, brave, knowledgeable and helpful. We prepare ourselves by doing good now."
+  ]},
+  {title:"Surah Al-Asr: Time Is Precious",paragraphs:[
+    "Surah Al-Asr is the 103rd chapter of the Qur'an. It is very short, but it gives us a powerful reminder about time and the way we live.",
+    "The surah teaches that people need faith, good actions, truth and patience. These are not just words to remember. They are qualities to practise.",
+    "Think about your day. Did you learn something good? Did you tell the truth? Did you help someone?"
+  ]},
+  {title:"Make Your Time Shine",paragraphs:[
+    "A minute can be used to comfort a friend, read a page, say a prayer or help at home. Time is a gift that we cannot bring back.",
+    "Surah Al-Asr connects belief with good actions, encouraging one another toward truth and patience. This is a child-friendly summary, not a verbatim translation.",
+    "Akhlaq lesson: use your time well. Be faithful, do good, tell the truth and stay patient."
+  ]},
+  {title:"Surah Al-Kawthar: A Gift from Allah",paragraphs:[
+    "Surah Al-Kawthar is the 108th chapter of the Qur'an. It has three short verses and reminds us of the great goodness Allah gave to the Prophet Muhammad (peace be upon him and his family).",
+    "The surah connects gratitude with prayer and worship. When we receive a gift, we should remember the One who gives every blessing.",
+    "A thankful child does not only say “thank you.” The child also uses blessings in good ways."
+  ]},
+  {title:"A Thankful Heart",paragraphs:[
+    "Hassan was grateful for his food, his family and the chance to learn. He decided not to waste his lunch and to share with a friend who had forgotten theirs.",
+    "Surah Al-Kawthar teaches us to turn toward Allah in worship and gratitude. The explanation here is a simple meaning summary, not a translation.",
+    "Aqa'id and Akhlaq lesson: Allah is the giver of blessings. Thank Him through prayer, kindness and using what you have responsibly."
+  ]},
+  {title:"Surah Al-Falaq: Ask for Protection",paragraphs:[
+    "Surah Al-Falaq is the 113th chapter of the Qur'an. In it, we are taught to seek Allah's protection from harm and from things that frighten or trouble us.",
+    "The word Al-Falaq refers to the daybreak. Just as dawn brings light after darkness, we can turn to Allah when we feel worried.",
+    "Asking Allah for protection does not mean we stop taking sensible steps. We also stay safe, ask trusted adults for help and make good choices."
+  ]},
+  {title:"Surah An-Nas: Allah Is Our Lord",paragraphs:[
+    "Surah An-Nas is the 114th and final chapter of the Qur'an. It teaches us to seek refuge in Allah, the Lord and Creator of people.",
+    "It reminds us that whispers can invite people toward wrong choices. We can ask Allah for help, remember what is right and choose good company.",
+    "Aqa'id lesson: Allah cares for His creation and is the One we turn to for protection. These are child-friendly summaries, not verbatim translations."
+  ]}
+);
+
+const readingChapters = [
+  {title:"A Special Dream",icon:"🌌",subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling inspired by Surah Yusuf 12:4–6; not a direct translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
+  {title:"Anger: Pause and Choose",icon:"💛",subtitle:"A small pause can help us make a better choice.",source:"Original educational story; Akhlaq lesson.",art:"anger",takeaway:"Pause, breathe, speak kindly and ask for help when needed.",start:3,end:4},
+  {title:"The World Is a Trust",icon:"🌍",subtitle:"Enjoy Allah's gifts and care for the world around you.",source:"Original educational story; reflection on gratitude and responsibility.",art:"world",takeaway:"Be thankful, avoid waste and care for living things.",start:5,end:6},
+  {title:"Jihad al-Nafs: The Inner Struggle",icon:"🌱",subtitle:"The courage to choose what is right inside ourselves.",source:"Original educational story explaining the ethical idea of striving against the self; not a call to violence.",art:"growth",takeaway:"Choose honesty, self-control, fairness and helpful actions.",start:7,end:8},
+  {title:"Namaz: A Meeting with Allah",icon:"🕌",subtitle:"Prayer helps us remember Allah and carry goodness into our day.",source:"Original educational story; learn prayer details from a trusted parent or teacher.",art:"prayer",takeaway:"Worship Allah alone and let prayer improve your character.",start:9,end:10},
+  {title:"The Soul: Our Inner Self",icon:"✨",subtitle:"Care for the part of us that thinks, loves and chooses.",source:"Original age-appropriate reflection; details of the soul are not fully known to us.",art:"soul",takeaway:"Feed your inner self with faith, truth, learning and kindness.",start:11,end:12},
+  {title:"Allama Hilli: A Love of Learning",icon:"📚",subtitle:"Meet a great scholar who dedicated his life to knowledge.",source:"Child-friendly biography based on the Allama Hilli biography at Al-Islam.org.",art:"book",takeaway:"Learn with patience and use knowledge to serve others.",start:13,end:14},
+  {title:"Forty Friends of the Imam",icon:"⭐",subtitle:"An imaginative story about preparing ourselves for justice.",source:"Original imaginative story—not a hadith or historical report. 313 companions are mentioned in Shia narrations; their number alone is not a guarantee or countdown to reappearance.",art:"stars",takeaway:"Show love for Imam al-Mahdi through truth, fairness, courage and service.",start:15,end:16},
+  {title:"Qur'an: Surah Al-Asr",icon:"⏳",subtitle:"A short surah with a big lesson about time, faith and patience.",source:"Qur'an 103. Child-friendly meaning summary, not a verbatim translation.",art:"time",takeaway:"Use time for faith, good actions, truth and patience.",start:17,end:18},
+  {title:"Qur'an: Surah Al-Kawthar",icon:"🌸",subtitle:"Remember Allah's blessings and respond with gratitude.",source:"Qur'an 108. Child-friendly meaning summary, not a verbatim translation.",art:"flower",takeaway:"Thank Allah through worship, kindness and responsible use of blessings.",start:19,end:20},
+  {title:"Qur'an: Al-Falaq and An-Nas",icon:"🌅",subtitle:"Two short surahs that teach us to seek Allah's protection.",source:"Qur'an 113–114. Child-friendly meaning summaries, not verbatim translations.",art:"moon",takeaway:"Turn to Allah, make safe choices and seek help from trusted adults.",start:21,end:22}
+];
+readingChapters.forEach((chapter,index)=>{
+  for(let i=chapter.start;i<=chapter.end;i++){
+    Object.assign(storyPages[i],{
+      chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
+      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,
+      chapterIndex:index,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
+      chapterLength:chapter.end-chapter.start+1
+    });
+  }
+});
+
 // These are reviewed pronunciation/teaching annotations, not automatic vowel splits.
 // Original spelling is retained. Possessive endings are attached after the base word.
 const syllables = {
@@ -168,22 +297,43 @@ function renderParagraph(paragraph){
     const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=6):false;
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
     const breakdown=parts?parts.join("-")+(possessive?"'s":"")+(soundGuides[base.toLowerCase()]?" · "+soundGuides[base.toLowerCase()]:""):soundGuides[base.toLowerCase()]||"";
-    const meaning=meanings[base.toLowerCase()]||"Meaning not added yet.";
+    const meaning=meanings[base.toLowerCase()]||"Ask a parent or teacher to explain this word, then try using it in your own sentence.";
     const className=shouldBreak?(mode==="mixed"?"mixed-word":"syllabified"):"";
     return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
   }).join("");
 }
+function renderStoryLibrary(){
+  const host=$("storyLibrary");
+  if(!host)return;
+  host.innerHTML=readingChapters.map((chapter,index)=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join("");
+}
+$("storyLibrary")?.addEventListener("click",event=>{
+  const button=event.target.closest("[data-chapter]");
+  if(!button)return;
+  if(isReadingStory)stopReading();
+  const chapter=readingChapters[Number(button.dataset.chapter)];
+  page=chapter.start;
+  renderStory();
+});
 function renderStory(){
   const current=storyPages[page];
-  $("storyTitle").textContent=current.title;
-  $("pageCount").textContent="PAGE "+(page+1)+" OF "+storyPages.length;
+  $("storyTitle").textContent=current.chapterTitle||current.title;
+  $("storySubtitle").textContent=current.chapterSubtitle||"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).";
+  $("readerTag").textContent="READING CHAPTER "+String(current.chapterIndex+1).padStart(2,"0");
+  $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
   storyText.style.fontSize=fontSize+"px";
   storyText.innerHTML=current.paragraphs.map(p=>"<p>"+renderParagraph(p)+"</p>").join("");
   $("previousPage").disabled=page===0;
-  $("nextPage").textContent=page===storyPages.length-1?"Finish story ✓":"Next page →";
-  $("progressDots").innerHTML=storyPages.map((_,i)=>'<i class="'+(i===page?"on":"")+'"></i>').join("");
+  $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
+  $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
+  $("sourceNoteText").textContent=current.chapterSource||"Educational retelling; see the chapter note.";
+  $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
+  $("storyArt").dataset.art=current.chapterArt||"dream";
+  $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
+  $("storyArt").innerHTML='<span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span><span class="art-illustration" aria-hidden="true"><svg viewBox="0 0 160 100" role="presentation"><use href="./assets/reading-illustrations.svg#'+(current.chapterArt||"dream")+'"></use></svg></span>';
   $("wordPanel").hidden=true;
-  $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it and see what it means.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and see what it means.":"Read in ordinary English spelling. Tap a word to hear it and see what it means.";
+  $("modeHint").textContent=mode==="syllables"?"Longer words are divided into syllables. Tap any word to hear it and explore its meaning.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and explore its meaning.":"Read in ordinary English spelling. Tap a word to hear it and explore its meaning.";
+  renderStoryLibrary();
 }
 function selectWord(target){
   if(isReadingStory)stopReading();
@@ -199,7 +349,7 @@ document.querySelectorAll(".mode-button").forEach(btn=>btn.addEventListener("cli
   if(isReadingStory)stopReading();mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
 }));
 $("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page>0){page--;renderStory();}});
-$("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished the story. 🌟");page=0;renderStory();}});
+$("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished every chapter. 🌟");page=0;renderStory();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
@@ -325,7 +475,7 @@ window.littleLanternsQA={
     })||[];
   },
   storyAudit(){
-    return storyPages.flatMap((p,i)=>p.paragraphs.flatMap(t=>this.inspect(t).map(w=>({...w,page:i+1}))));
+    return storyPages.flatMap((p,i)=>p.paragraphs.flatMap(t=>this.inspect(t).map(w=>({...w,page:i+1,chapter:p.chapterTitle||"A Special Dream"}))));
   },
   annotations:syllables
 };
