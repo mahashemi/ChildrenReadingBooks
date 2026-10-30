@@ -152,12 +152,13 @@ function renderStory(){
   $("nextPage").textContent=page===storyPages.length-1?"Finish story ✓":"Next page →";
   $("progressDots").innerHTML=storyPages.map((_,i)=>'<i class="'+(i===page?"on":"")+'"></i>').join("");
   $("wordPanel").hidden=true;
-  $("modeHint").textContent=mode==="syllables"?"Every reviewed multisyllabic word is divided. Tap a word to explore its syllables and meaning.":mode==="mixed"?"Longer reviewed words are divided; familiar and shorter words stay whole.":"Read in ordinary English spelling. Tap a word to explore it.";
+  $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it, explore its meaning and imagine it.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to explore it.":"Read in ordinary English spelling. Tap a word to explore it.";
 }
 function selectWord(target){
   $("wordDisplay").textContent=target.dataset.word;
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
+  $("wordImagine").textContent=target.dataset.imagine;
   $("wordPanel").hidden=false;
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
@@ -169,7 +170,8 @@ $("previousPage").addEventListener("click",()=>{if(page>0){page--;renderStory();
 $("nextPage").addEventListener("click",()=>{if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished the story. 🌟");page=0;renderStory();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
-$("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);\n$("wordSound").addEventListener("click",()=>{if(!("speechSynthesis" in window)){showToast("Sound is not available in this browser.");return;}speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance($("wordDisplay").textContent);utterance.lang="en-GB";utterance.rate=.78;speechSynthesis.speak(utterance);});
+$("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
+$("wordSound").addEventListener("click",()=>{if(!("speechSynthesis" in window)){showToast("Sound is not available in this browser.");return;}speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance($("wordDisplay").textContent);utterance.lang="en-GB";utterance.rate=.78;speechSynthesis.speak(utterance);});
 $("readAloud").addEventListener("click",()=>{
   if(!("speechSynthesis" in window)){showToast("Read-aloud is not available in this browser.");return;}
   window.speechSynthesis.cancel();
