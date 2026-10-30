@@ -25,3 +25,117 @@
 
 /* Give early readers a little more visual room between words. */
 .story-text{word-spacing:.18em;}
+
+
+/* Flags navigation: hover on desktop, tap to expand on touch devices. */
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.flags-nav-trigger{display:flex;align-items:center;gap:6px}
+.nav-submenu{display:none;position:absolute;top:calc(100% + 9px);right:0;min-width:235px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 35px #3343371c;z-index:25}
+.nav-submenu:before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+.nav-dropdown:hover .nav-submenu,.nav-dropdown:focus-within .nav-submenu,.nav-dropdown.expanded .nav-submenu{display:grid;gap:4px}
+.nav-submenu-link{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border:0;border-radius:10px;background:transparent;text-align:left;color:#526454}
+.nav-submenu-link:hover,.nav-submenu-link.active{background:#f0f6ee}
+.nav-submenu-link>span:first-child{font-size:20px}
+.nav-submenu-link b,.nav-submenu-link small{display:block}
+.nav-submenu-link b{font-size:11px}
+.nav-submenu-link small{font-size:9px;color:#8a968b;margin-top:3px}
+
+/* Flag learning experiences */
+.flag-intro-strip{display:flex;align-items:center;gap:12px;padding:15px 18px;background:#f0f5eb;border:1px solid #e2ebdc;border-radius:15px;margin-bottom:17px}
+.flag-intro-strip>span{font-size:27px}
+.flag-intro-strip b,.flag-intro-strip small{display:block}
+.flag-intro-strip b{font-size:12px;color:#506b55}
+.flag-intro-strip small{font-size:10px;color:#829083;margin-top:4px;line-height:1.5}
+.flag-settings-panel,.flag-game-panel,.flag-progress-panel{background:#fff;border:1px solid var(--line);border-radius:19px;padding:20px 22px;box-shadow:0 5px 20px #5a624b08}
+.flag-settings-heading{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.flag-settings-heading>div{margin-right:auto}
+.flag-settings-heading h2,.flag-game-panel h2,.flag-progress-panel h2{font-size:19px;margin:5px 0 0}
+.flag-settings-heading .button{font-size:9px;padding:8px 11px}
+.flag-settings-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.flag-settings-grid label,.flag-library-toolbar>label:not(.flag-search-label){display:grid;gap:6px;font-size:10px;font-weight:900;color:#68786b}
+.flag-settings-grid select,.flag-library-toolbar select{width:100%;border:1px solid #e4e9df;border-radius:9px;background:#fbfcf9;padding:10px;color:#536457;font:700 11px Nunito,sans-serif}
+.flag-settings-panel>.button{font-size:11px}
+.flag-game-panel{margin-top:17px;min-height:250px}
+.flag-game-topline{display:flex;align-items:center;justify-content:space-between}
+.flag-game-panel h2{font-size:22px;margin-top:15px}
+.flag-game-panel>p{font-size:11px;color:#879287;line-height:1.6;margin:7px 0 16px}
+.flag-target-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:15px 0}
+.flag-target-card,.flag-option-card,.flag-library-card{min-width:0;border:1px solid #e9ece5;border-radius:14px;background:#fff;padding:12px 8px;text-align:center;transition:border-color .15s,background .15s,transform .15s}
+.flag-target-card .flag-emoji,.flag-option-card .flag-emoji,.flag-library-card .flag-emoji{display:block;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:clamp(34px,5vw,55px);line-height:1.25;min-height:1.3em}
+.flag-target-card small,.flag-option-card small,.flag-library-card small{display:block;font-size:10px;line-height:1.45;font-weight:900;color:#526b56;margin-top:7px;overflow-wrap:anywhere}
+.flag-target-card .flag-name-whole,.flag-option-card .flag-name-whole,.flag-library-card .flag-name-whole{display:block;font-size:9px;color:#98a197;font-weight:700;margin-top:2px}
+.flag-target-card{background:#fbfaf4;border-color:#f1e8d4}
+.flag-pool-wrap{margin-top:18px}
+.flag-pool-wrap[hidden]{display:none}
+.flag-pool-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.flag-pool-heading b,.flag-pool-heading small{display:block}
+.flag-pool-heading b{font-size:13px}
+.flag-pool-heading small{font-size:10px;color:#879287;margin-top:4px}
+.flag-choice-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.flag-option-card{cursor:pointer;min-height:112px}
+.flag-option-card:hover{border-color:#b8cdb5;transform:translateY(-2px)}
+.flag-option-card.selected{background:#eef6eb;border:2px solid #78a17b;padding:11px 7px}
+.flag-option-card.correct{background:#edf7e9;border-color:#6f9c71}
+.flag-option-card.incorrect{background:#fff0eb;border-color:#d99b83}
+.flag-option-card:focus-visible,.flag-library-card:focus-visible{outline:3px solid #d6b56e;outline-offset:2px}
+.flag-game-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.flag-game-actions .button,.flag-game-panel>#nextFlagRound{font-size:10px;padding:10px 13px}
+.flag-result{margin-top:13px;font-size:12px;line-height:1.6;color:#5f765f}
+.flag-result:empty{display:none}
+.flag-learning-note{display:flex;gap:9px;flex-direction:column;margin:14px 3px 0;padding:13px 16px;background:#fff9ed;border-radius:12px;color:#887b5e;font-size:10px;line-height:1.6}
+.flag-learning-note b{color:#7d6b48;font-size:11px}
+.flag-progress-panel{display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(110deg,#edf4e9,#fbf5e7)}
+.flag-progress-panel h2{font-size:19px}
+.flag-progress-panel p{font-size:10px;color:#879287;line-height:1.5;margin:6px 0 0}
+.flag-progress-stats{display:flex;gap:8px;flex-shrink:0}
+.flag-progress-stats>div{min-width:65px;padding:10px 12px;background:#ffffffb8;border:1px solid #ffffff;border-radius:12px;text-align:center}
+.flag-progress-stats strong,.flag-progress-stats small{display:block}
+.flag-progress-stats strong{font-size:19px;color:#55765b}
+.flag-progress-stats small{font-size:9px;color:#879287}
+.flag-library-toolbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:17px 0 11px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:15px}
+.flag-search-label{display:flex;align-items:center;gap:8px;flex:1 1 190px;min-width:160px;border:1px solid #e4e9df;border-radius:9px;padding:0 10px;background:#fbfcf9}
+.flag-search-label>span{font-size:20px;color:#829183}
+.flag-search-label input{width:100%;min-width:0;border:0;outline:0;background:transparent;padding:10px 0;font:700 11px Nunito,sans-serif;color:#536457}
+.flag-library-toolbar>label:not(.flag-search-label){min-width:130px;flex:0 1 155px}
+.flag-toggle-label{display:flex!important;align-items:center;gap:7px;font-size:10px;font-weight:800;color:#66766a;min-height:37px}
+.flag-toggle-label input{accent-color:#719675;width:15px;height:15px}
+.flag-library-meta{display:flex;justify-content:space-between;gap:10px;color:#89948a;font-size:10px;margin:10px 3px}
+.flag-library-meta span:first-child{font-weight:900;color:#607d64}
+.flag-library-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px}
+.flag-library-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:135px;padding:12px 8px;cursor:pointer;position:relative}
+.flag-library-card:hover{border-color:#c4d4bf;background:#fbfdf9}
+.flag-library-card .flag-name{font-size:11px;line-height:1.45;color:#526b56;font-weight:900;margin-top:8px;min-height:16px}
+.flag-library-card .flag-name-syllables{font-size:10px;line-height:1.4;color:#52795a;font-weight:900;margin-top:7px;min-height:14px}
+.flag-library-card .flag-name-whole{font-size:9px;line-height:1.35;color:#8b978c;margin-top:2px}
+.flag-library-card .flag-region{font-size:8px;color:#a0a89f;margin-top:auto;padding-top:7px}
+.flag-library-card .flag-heard{position:absolute;top:6px;right:7px;font-size:10px;color:#76a078}
+.flag-library-card.is-known{border-color:#d5e5d1}
+.flag-library-card.is-known:after{content:"✓";position:absolute;left:7px;top:5px;width:17px;height:17px;display:grid;place-items:center;background:#eaf4e7;color:#5d895f;border-radius:50%;font-size:10px;font-weight:900}
+.flag-library-card .flag-hidden-name{font-size:9px;color:#9da69d;margin-top:8px}
+.flag-collection-note{margin:16px 2px 0;padding:12px 14px;background:#f7f6f0;border-radius:11px;color:#899087;font-size:9px;line-height:1.6}
+.flag-collection-note b{color:#68776a}
+@media(max-width:900px){.flag-settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flag-library-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.flag-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.flag-target-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:650px){
+  .nav-dropdown{display:block;width:100%}.flags-nav-trigger{width:100%;justify-content:space-between}
+  .nav-submenu{position:static;min-width:0;box-shadow:none;border:0;border-radius:10px;background:#f8faf6;margin:3px 0 5px;padding:5px 8px}
+  .nav-dropdown:hover .nav-submenu{display:none}.nav-dropdown.expanded .nav-submenu,.nav-dropdown:focus-within .nav-submenu{display:grid}
+  .flag-settings-panel,.flag-game-panel{padding:16px 13px}
+  .flag-settings-heading{gap:5px}.flag-settings-heading h2{font-size:17px}.flag-settings-heading .button{padding:7px 8px}
+  .flag-settings-grid{gap:9px}.flag-settings-grid label{font-size:9px}
+  .flag-target-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .flag-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .flag-option-card{padding:9px 5px;min-height:100px}.flag-option-card.selected{padding:8px 4px}
+  .flag-option-card .flag-emoji,.flag-target-card .flag-emoji{font-size:38px}
+  .flag-progress-panel{display:block;padding:16px}
+  .flag-progress-stats{margin-top:13px;justify-content:space-between}
+  .flag-progress-stats>div{flex:1;min-width:0;padding:8px 5px}
+  .flag-library-toolbar{gap:9px;padding:11px}
+  .flag-search-label{flex-basis:100%}
+  .flag-library-toolbar>label:not(.flag-search-label){flex:1 1 42%;min-width:0}
+  .flag-library-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .flag-library-card{min-height:119px;padding:9px 5px}
+  .flag-library-card .flag-emoji{font-size:36px}
+  .flag-library-card .flag-name{font-size:10px}
+  .flag-library-meta{font-size:9px}
+  .flag-game-actions{justify-content:stretch}.flag-game-actions .button{flex:1}
+}
