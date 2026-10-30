@@ -6,8 +6,8 @@ const storyPages = [
   ]},
   { title:"A Father's Loving Advice", paragraphs:[
     "Yusuf's father listened very carefully. He was a wise and loving father. He understood that the dream was special.",
-    "He told Yusuf to keep his dream a secret from his brothers. He did not want them to feel jealous or unhappy.",
-    "His father also told him that Allah had chosen him for something special. He would teach him to understand things that others could not.",
+    "He warned Yusuf not to tell his brothers about the dream. He feared they might make a harmful plan against him.",
+    "He reminded Yusuf that Shaytan is an enemy to people. He also told him that Allah would teach him the meaning of dreams.",
     "Yusuf listened to his father. He knew that his father loved him and wanted the best for him.",
     "He decided to follow his father's advice. He felt peaceful and safe."
   ]},
@@ -21,24 +21,24 @@ const storyPages = [
 // These are reviewed pronunciation/teaching annotations, not automatic vowel splits.
 // Original spelling is retained. Possessive endings are attached after the base word.
 const syllables = {
-  about:["a","bout"], advice:["ad","vice"], ago:["a","go"], allah:["Al","lah"],
+  about:["a","bout"], advice:["ad","vice"], against:["a","gainst"], ago:["a","go"], allah:["Al","lah"],
   also:["al","so"], before:["be","fore"], brothers:["broth","ers"],
   carefully:["care","ful","ly"], cannot:["can","not"], challenges:["chal","len","ges"],
-  chosen:["cho","sen"], continued:["con","tin","ued"], decided:["de","cid","ed"],
+  chosen:["cho","sen"], continued:["con","tin","ued"], decided:["de","cid","ed"], enemy:["en","e","my"],
   eleven:["e","lev","en"], excitement:["ex","cite","ment"], father:["fa","ther"],
-  follow:["fol","low"], hopeful:["hope","ful"], important:["im","por","tant"],
+  follow:["fol","low"], hopeful:["hope","ful"], harmful:["harm","ful"], important:["im","por","tant"],
   jealous:["jeal","ous"], listened:["lis","tened"], listen:["lis","ten"],
   loving:["lov","ing"], many:["man","y"], matters:["mat","ters"],
-  morning:["morn","ing"], others:["oth","ers"], patience:["pa","tience"],
+  meaning:["mean","ing"], morning:["morn","ing"], others:["oth","ers"], patience:["pa","tience"], people:["peo","ple"],
   patient:["pa","tient"], peaceful:["peace","ful"], remain:["re","main"],
-  remembered:["re","mem","bered"], reminds:["re","minds"], secret:["se","cret"],
+  remembered:["re","mem","bered"], reminds:["re","minds"], secret:["se","cret"], shaytan:["Shay","tan"],
   special:["spe","cial"], story:["sto","ry"], something:["some","thing"],
   teaches:["teach","es"], truthful:["truth","ful"], understand:["un","der","stand"],
   understood:["un","der","stood"], unhappy:["un","hap","py"], wanted:["want","ed"],
   very:["ver","y"], wonderful:["won","der","ful"], yusuf:["Yu","suf"], yaqub:["Ya","qub"]
 };
 const oneSyllable = new Set((
-  "a and be best bow boy bring but care close could did dream dreams feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long loved moon much named night not of one or our safe saw see seemed shared should some stars sun teach that the them there they things to told trust us want was we went what with wise words would"
+  "a and be best bow boy bring but care close could did dream dreams feared feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long make might named night not of one or our plan safe saw see seemed shared should some stars sun teach tell that the them there they things to told trust us warned was we went what with wise words would"
 ).split(/\s+/).filter(Boolean));
 const meanings = {
   wonderful:"Very special or amazing.", excitement:"A feeling of happiness and eagerness.",
