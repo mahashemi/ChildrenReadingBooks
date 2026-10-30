@@ -18,9 +18,9 @@ AF:"Af-ghan-i-stan",AM:"Ar-me-ni-a",AZ:"A-zer-bai-jan",BH:"Bah-rain",BD:"Bang-la
 AL:"Al-ba-ni-a",AD:"An-dor-ra",AT:"Aus-tri-a",BY:"Bel-a-rus",BE:"Bel-gium",BA:"Bos-ni-a and Her-ze-go-vi-na",BG:"Bul-gar-i-a",HR:"Cro-a-ti-a",CZ:"Czech-i-a",DK:"Den-mark",EE:"Es-to-ni-a",FI:"Fin-land",FR:"France",DE:"Ger-ma-ny",GR:"Greece",HU:"Hun-ga-ry",IS:"Ice-land",IE:"Ire-land",IT:"It-a-ly",LV:"Lat-vi-a",LI:"Liech-ten-stein",LT:"Lith-u-a-ni-a",LU:"Lux-em-bourg",MT:"Mal-ta",MD:"Mol-do-va",MC:"Mon-a-co",ME:"Mon-te-ne-gro",NL:"Neth-er-lands",MK:"North Mac-e-do-ni-a",NO:"Nor-way",PL:"Po-land",PT:"Por-tu-gal",RO:"Ro-ma-ni-a",RU:"Rus-sia",SM:"San Ma-ri-no",RS:"Ser-bi-a",SK:"Slo-va-ki-a",SI:"Slo-ve-ni-a",ES:"Spain",SE:"Swe-den",CH:"Switz-er-land",UA:"U-kraine",GB:"Unit-ed King-dom",VA:"Vat-i-can Cit-y",
 AG:"An-ti-gua and Bar-bu-da",BS:"The Ba-ha-mas",BB:"Bar-ba-dos",BZ:"Be-lize",CA:"Can-a-da",CR:"Cos-ta Ri-ca",CU:"Cu-ba",DM:"Dom-i-ni-ca",DO:"Do-min-i-can Re-pub-lic",SV:"El Sal-va-dor",GD:"Gre-na-da",GT:"Gua-te-ma-la",HT:"Hai-ti",HN:"Hon-du-ras",JM:"Ja-mai-ca",MX:"Mex-i-co",NI:"Nic-a-ra-gua",PA:"Pan-a-ma",KN:"Saint Kitts and Ne-vis",LC:"Saint Lu-ci-a",VC:"Saint Vin-cent and the Gren-a-dines",TT:"Trin-i-dad and To-ba-go",US:"U-ni-ted States",
 AR:"Ar-gen-ti-na",BO:"Bo-liv-i-a",BR:"Bra-zil",CL:"Chi-le",CO:"Co-lom-bi-a",EC:"Ec-u-a-dor",GY:"Guy-an-a",PY:"Par-a-guay",PE:"Pe-ru",SR:"Sur-i-name",UY:"U-ru-guay",VE:"Ven-e-zu-e-la",
-AU:"Aus-tral-i-a",FJ:"Fi-ji",KI:"Kir-i-ba-ti",MH:"Mar-shall Is-lands",FM:"Mi-cro-ne-sia",NR:"Nau-ru",NZ:"New Zea-land",PW:"Pa-lau",PG:"Pa-pu-a New Guin-e-a",WS:"Sa-mo-a",SB:"Sol-o-mon Is-lands",TO:"Ton-ga",TV:"Tu-va-lu",VU:"Van-u-a-tu"
+AU:"Aus-tral-i-a",FJ:"Fi-ji",KI:"Kir-i-ba-ti",MH:"Mar-shall Is-lands",FM:"Mi-cro-ne-sia",NR:"Nau-ru",NZ:"New Zea-land",PW:"Pa-lau",PG:"Pa-pu-a New Guin-e-a",WS:"Sa-mo-a",SB:"Sol-o-mon Is-lands",TO:"Ton-ga",TV:"Tu-va-lu",VU:"Van-u-a-tu",AS:"Am-er-i-can Sa-mo-a",AI:"An-guil-la",AW:"A-ru-ba",BM:"Ber-mu-da",VG:"Brit-ish Vir-gin Is-lands",KY:"Cay-man Is-lands",CK:"Cook Is-lands",CW:"Cu-ra-cao",FO:"Far-oe Is-lands",PF:"French Pol-y-ne-sia",GL:"Green-land",GU:"Guam",HK:"Hong Kong",MO:"Ma-cao",PR:"Puer-to Ri-co",SX:"Sint Maar-ten",TC:"Turks and Cai-cos Is-lands",VI:"U-ni-ted States Vir-gin Is-lands",GI:"Gi-bral-tar",JE:"Jer-sey",GG:"Guern-sey",IM:"Isle of Man",NC:"New Cal-e-do-ni-a",MP:"North-ern Mar-i-an-a Is-lands",XK:"Ko-so-vo",TW:"Tai-wan"
 };
-const level=()=>$("flagReadingLevel").value;
+const level=()=>$("flagGameReadingLevel").value||$("flagReadingLevel").value;
 function flagMarkup(entry){
 return '<img class="flag-image" src="https://flagcdn.com/w160/'+entry.code.toLowerCase()+'.png" alt="'+escapeHtml(entry.name)+' flag" loading="lazy"><span class="flag-emoji" hidden>'+emoji(entry.code)+'</span>';
 }
@@ -72,7 +72,8 @@ if(open){const entry=entries.find(x=>x.code===open.dataset.code);if(!entry)retur
 });
 $("flagSearch").addEventListener("input",renderLibrary);
 $("flagContinentFilter").addEventListener("change",renderLibrary);
-$("flagReadingLevel").addEventListener("change",renderLibrary);
+$("flagReadingLevel").addEventListener("change",()=>{$("flagGameReadingLevel").value=$("flagReadingLevel").value;renderLibrary();});
+$("flagGameReadingLevel").addEventListener("change",()=>{$("flagReadingLevel").value=$("flagGameReadingLevel").value;renderLibrary();});
 $("flagTestMode").addEventListener("change",renderLibrary);
 
 function card(entry,cls,showName){
