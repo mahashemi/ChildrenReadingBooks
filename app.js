@@ -330,7 +330,7 @@ function renderStory(){
   $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
   $("storyArt").dataset.art=current.chapterArt||"dream";
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
-  $("storyArt").innerHTML='<span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span><span class="art-illustration" aria-hidden="true">'+(current.chapterIcon||"📖")+'</span>';
+  $("storyArt").innerHTML='<span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span><span class="art-illustration" aria-hidden="true"><svg viewBox="0 0 160 100" role="presentation"><use href="./assets/reading-illustrations.svg#'+(current.chapterArt||"dream")+'"></use></svg></span>';
   $("wordPanel").hidden=true;
   $("modeHint").textContent=mode==="syllables"?"Longer words are divided into syllables. Tap any word to hear it and explore its meaning.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and explore its meaning.":"Read in ordinary English spelling. Tap a word to hear it and explore its meaning.";
   renderStoryLibrary();
