@@ -41,12 +41,60 @@ const oneSyllable = new Set((
   "a an and be best bow boy bring but care close could did dream dreams feared feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long loved make might named night not of one or our plan safe saw see seemed shared should some stars sun teach tell that the them there they things to told trust us warned was we went what with wise words would"
 ).split(/\s+/).filter(Boolean));
 const meanings = {
-  wonderful:"Very special or amazing.", excitement:"A feeling of happiness and eagerness.",
-  carefully:"With attention and care.", understood:"Knew the meaning of something.",
-  secret:"Something kept private.", jealous:"Feeling unhappy because someone has something you want.",
-  peaceful:"Calm, quiet and without worry.", advice:"A helpful suggestion about what to do.",
-  patience:"Staying calm while waiting or facing difficulty.", truthful:"Honest; telling what is true.",
-  fitrat:"A natural inclination towards truth and goodness."
+  wonderful:"Very special or amazing.", excitement:"A happy, eager feeling when something important happens.",
+  carefully:"With attention, so you do something thoughtfully.", understood:"Knew what something meant.",
+  secret:"Something kept private.", jealous:"Feeling upset because someone else has something you wish you had.",
+  peaceful:"Calm inside, with no worry or fighting.", advice:"A helpful idea that guides what you should do.",
+  patience:"Staying calm while you wait or face something difficult.", truthful:"Honest; saying what is true.",
+  about:"On the subject of something.", against:"In opposition to something.", ago:"A time before now.",
+  also:"In addition.", before:"Earlier than a particular time.", brothers:"Boys or men who share the same parent or parents.",
+  challenges:"Difficult things that test your effort.", continued:"Kept doing something; did not stop.", decided:"Made a choice after thinking.",
+  enemy:"Someone or something that tries to harm you.", eleven:"The number after ten.", father:"A male parent; a dad.",
+  follow:"To do what someone advises, or go after them.", hopeful:"Feeling that something good may happen.",
+  harmful:"Able to hurt or cause damage.", important:"Something that matters a lot.", listened:"Paid attention to what someone said.",
+  listen:"To use your ears and pay attention.", loving:"Showing care, kindness and affection.", matters:"Things or subjects that are important.",
+  meaning:"What a word, action or message tells us.", morning:"The early part of the day, after night.", people:"Human beings; men, women and children.",
+  patient:"Able to wait calmly.", remain:"To stay; to continue being in a state.", remembered:"Kept something in your mind from before.",
+  reminds:"Helps someone remember.", shaytan:"The name used in Islam for Satan, who tempts people to do wrong.",
+  special:"Different from ordinary things in an important way.", story:"A telling of events, real or imagined.", teaches:"Helps someone learn.",
+  understand:"To know what something means.", wanted:"Wished for or hoped to have something.", very:"To a great degree.",
+  yusuf:"Prophet Yusuf (Joseph), whose story is told in the Qur'an.", yaqub:"Prophet Yaqub (Jacob), the father of Prophet Yusuf.",
+  allah:"The Arabic name for God, the One worthy of worship.", dream:"Pictures or events your mind experiences while you sleep.",
+  stars:"Tiny-looking points of light in the night sky; huge suns far away.", sun:"The star that gives Earth light and warmth.",
+  moon:"The bright object we see at night; it travels around Earth.", bow:"To bend your head or body forward to show respect.",
+  warned:"Told someone about danger so they could be careful.", feared:"Felt afraid that something bad might happen.",
+  plan:"An idea about what someone intends to do.", safe:"Free from danger or harm.", wise:"Good at making thoughtful choices.",
+  kind:"Caring and gentle towards others.", trust:"To feel sure that someone is good, honest or reliable.",
+  life:"The time during which a person is alive.", grow:"To become bigger, older or more developed.",
+  shared:"Gave or told something to another person.", care:"Kind attention; looking after someone or something.",
+  best:"The very finest or most helpful.", words:"Things we say or write; parts of language.", night:"The dark part of each day when the sun is not visible."
+};
+const imagination = {
+  wonderful:"Imagine seeing a rainbow after the rain. It feels wonderful!",
+  excitement:"Imagine the happy feeling just before your birthday party.",
+  carefully:"Imagine carrying a full glass of water without spilling a drop.",
+  understood:"Imagine when a puzzle finally makes sense. Now you have understood it!",
+  secret:"Imagine a surprise gift you keep quiet about until the right time.",
+  jealous:"Imagine wishing you had your friend's new ball. That feeling can be jealousy.",
+  peaceful:"Imagine sitting in a quiet garden and hearing birds sing.",
+  advice:"Imagine someone showing you the safest way to cross a road.",
+  patience:"Imagine planting a seed and waiting as it slowly grows.",
+  truthful:"Imagine telling your teacher honestly what happened, even when it is difficult.",
+  dream:"Imagine a little film playing in your mind while you sleep.",
+  stars:"Imagine tiny lamps shining in a huge, dark sky.",
+  sun:"Imagine a warm lamp in the sky that lights our day.",
+  moon:"Imagine a bright silver circle in the night sky.",
+  bow:"Imagine gently bending your head to show respect.",
+  enemy:"Imagine someone trying to stop you from doing something good.",
+  plan:"Imagine drawing steps on paper before building a tower.",
+  harmful:"Imagine a sharp thorn that can hurt your finger.",
+  wise:"Imagine stopping to think before choosing the kindest action.",
+  trust:"Imagine holding someone's hand because you know they will help you.",
+  safe:"Imagine being cosy indoors while rain falls outside.",
+  grow:"Imagine a tiny seed becoming a tall green plant.",
+  remain:"Imagine keeping a smile even when a task is difficult.",
+  challenges:"Imagine climbing a hill: each step is hard, but you keep going.",
+  hopeful:"Imagine looking at the sunrise and expecting a bright new day."
 };
 let page=0, mode="syllables", fontSize=19;
 const $=id=>document.getElementById(id);
@@ -88,9 +136,10 @@ function renderParagraph(paragraph){
     const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=6):false;
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
     const breakdown=parts?parts.join("-")+(possessive?"'s":""):isKnownOne?"One syllable":"Review needed";
-    const meaning=meanings[base.toLowerCase()]||"Explore this word in the story. Its child-friendly definition can be added to the vocabulary guide.";
+    const meaning=meanings[base.toLowerCase()]||"A word used in this story. Listen to it, read the sentence again and ask what it tells you.";
+    const imagine=imagination[base.toLowerCase()]||"Picture the moment in the story when this word is used. What would you see, hear or feel?";
     const className=shouldBreak?(mode==="mixed"?"mixed-word":"syllabified"):"";
-    return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
+    return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" data-imagine="'+escapeHtml(imagine)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
   }).join("");
 }
 function renderStory(){
@@ -120,7 +169,7 @@ $("previousPage").addEventListener("click",()=>{if(page>0){page--;renderStory();
 $("nextPage").addEventListener("click",()=>{if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished the story. 🌟");page=0;renderStory();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
-$("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
+$("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);\n$("wordSound").addEventListener("click",()=>{if(!("speechSynthesis" in window)){showToast("Sound is not available in this browser.");return;}speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance($("wordDisplay").textContent);utterance.lang="en-GB";utterance.rate=.78;speechSynthesis.speak(utterance);});
 $("readAloud").addEventListener("click",()=>{
   if(!("speechSynthesis" in window)){showToast("Read-aloud is not available in this browser.");return;}
   window.speechSynthesis.cancel();
