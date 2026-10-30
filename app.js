@@ -38,7 +38,7 @@ const syllables = {
   very:["ver","y"], wonderful:["won","der","ful"], yusuf:["Yu","suf"], yaqub:["Ya","qub"]
 };
 const oneSyllable = new Set((
-  "a and be best bow boy bring but care close could did dream dreams feared feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long make might named night not of one or our plan safe saw see seemed shared should some stars sun teach tell that the them there they things to told trust us warned was we went what with wise words would"
+  "a an and be best bow boy bring but care close could did dream dreams feared feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long make might named night not of one or our plan safe saw see seemed shared should some stars sun teach tell that the them there they things to told trust us warned was we went what with wise words would"
 ).split(/\s+/).filter(Boolean));
 const meanings = {
   wonderful:"Very special or amazing.", excitement:"A feeling of happiness and eagerness.",
