@@ -21,8 +21,7 @@
     <nav class="main-nav" aria-label="Main navigation">
       <button class="nav-link active" data-view="home">Home</button>
       <button class="nav-link" data-view="reading">Reading</button>
-      <button class="nav-link" data-view="quran">Qur’an corner</button>
-      <button class="nav-link" data-view="speak">My speech stage</button>
+            <button class="nav-link" data-view="speak">My speech stage</button>
       <div class="nav-dropdown" id="flagsNav">
         <button class="nav-link flags-nav-trigger" id="flagsNavButton" type="button" aria-haspopup="true" aria-expanded="false">Flags <span aria-hidden="true">▾</span></button>
         <div class="nav-submenu" id="flagsSubmenu">
@@ -44,7 +43,6 @@
           <p class="hero-intro">Read wonderful stories. Discover beautiful values. Find your voice and let it shine.</p>
           <div class="hero-actions">
             <button class="button button-primary" data-go="reading">Let’s start reading <span>→</span></button>
-            <button class="button button-quiet" data-go="quran">Explore Qur’an corner</button>
           </div>
           <div class="hero-note"><span class="tiny-avatar">🌱</span><span>A happy place to learn a little more every day.</span></div>
         </div>
@@ -67,7 +65,6 @@
         <div class="section-heading"><div><div class="eyebrow">YOUR LEARNING GARDEN</div><h2>What shall we explore?</h2></div><span class="heading-doodle">✳</span></div>
         <div class="learning-grid">
           <button class="learning-card card-peach" data-go="reading"><span class="card-art">📚</span><span class="card-label">STORIES & WORDS</span><strong>Reading adventures</strong><small>Sound it out, follow the story and discover new words.</small><span class="card-arrow">Explore reading →</span></button>
-          <button class="learning-card card-mint" data-go="quran"><span class="card-art">🌙</span><span class="card-label">QUR’AN & REFLECTION</span><strong>Qur’an corner</strong><small>Meet short surahs, understand their messages and memorise.</small><span class="card-arrow">Visit the corner →</span></button>
           <button class="learning-card card-lilac" data-go="speak"><span class="card-art">🎤</span><span class="card-label">FIND YOUR VOICE</span><strong>My speech stage</strong><small>Share an idea, tell a story and speak with confidence.</small><span class="card-arrow">Take the stage →</span></button>
           <button class="learning-card card-yellow" data-go="values"><span class="card-art">💛</span><span class="card-label">HEART & CHARACTER</span><strong>Values in action</strong><small>Explore kindness, truth, gratitude, faith and our fitrat.</small><span class="card-arrow">Discover values →</span></button>
         </div>
@@ -90,11 +87,11 @@
           <div class="reader-title-row"><div><h2 id="storyTitle">A Special Dream</h2><p id="storySubtitle">A story inspired by the Qur’anic account of Prophet Yusuf (peace be upon him).</p></div><span class="reader-moon">🌙</span></div>
           <div class="reader-tools">
             <div class="mode-switch" role="group" aria-label="Reading mode">
-              <button class="mode-button active" data-mode="syllables">Syllables</button><button class="mode-button" data-mode="mixed">Mixed</button><button class="mode-button" data-mode="normal">Normal</button>
+              <button class="mode-button" data-mode="syllables">Syllables</button><button class="mode-button" data-mode="mixed">Mixed</button><button class="mode-button active" data-mode="normal">Normal</button>
             </div>
-            <div class="reader-controls"><button id="smallerText" aria-label="Decrease text size">A−</button><button id="largerText" aria-label="Increase text size">A+</button><button id="readAloud" class="audio-button" title="Read this page aloud">🔊 Listen</button><div class="speech-speed" role="group" aria-label="Speech speed"><button id="slowerSpeech" type="button" aria-label="Speak slower" title="Speak slower">−</button><span id="speechRate" aria-live="polite">1.0×</span><button id="fasterSpeech" type="button" aria-label="Speak faster" title="Speak faster">+</button></div></div>
+            <div class="reader-controls"><button id="smallerText" aria-label="Decrease text size">A−</button><button id="largerText" aria-label="Increase text size">A+</button><button id="readAloud" class="audio-button" title="Read this page aloud">🔊 Listen</button><div class="speech-speed" role="group" aria-label="Speech speed"><button id="slowerSpeech" type="button" aria-label="Speak slower" title="Speak slower">−</button><span id="speechRate" aria-live="polite">1.0×</span><button id="fasterSpeech" type="button" aria-label="Speak faster" title="Speak faster">+</button></div><button id="toggleWordBorders" type="button" aria-pressed="false" aria-label="Show word borders" title="Show or hide word borders">Borders: Off</button></div>
           </div>
-          <div class="mode-hint" id="modeHint">Longer words are gently divided into syllables. Tap a word to explore it.</div>
+          <div class="mode-hint" id="modeHint">Read in ordinary English spelling. Tap any word to hear it and explore its meaning.</div>
           <div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
           <div class="story-text" id="storyText" aria-live="polite"></div>
           <div class="word-panel" id="wordPanel" hidden><div class="word-explorer-content"><small>WORD</small><strong id="wordDisplay"></strong><span id="wordBreakdown"></span><div class="word-explorer-section"><b>Meaning</b><p id="wordMeaning"></p><button id="hearMeaning" class="meaning-audio-button" type="button">▶ Hear meaning</button></div></div><button id="closeWord" aria-label="Close word explorer">×</button></div>
@@ -170,36 +167,7 @@
       </div>
     </section>
 
-    <section class="view" id="quranView">
-      <div class="page-heading"><div><div class="eyebrow">LISTEN · READ · REFLECT · REMEMBER</div><h1>Qur’an <span>corner</span></h1><p>Small surahs, beautiful meanings and a little practice every day.</p></div><span class="heading-emoji">🌙</span></div>
-      <div class="quran-feature">
-        <div class="quran-feature-copy"><span class="tag tag-gold">TODAY’S SURAH</span><h2>Surah Al-Ikhlas</h2><p>A short surah that teaches us about the oneness and uniqueness of Allah.</p><div class="surah-meta"><span>4 ayat</span><span>•</span><span>Makki</span><span>•</span><span>Surah 112</span></div></div>
-        <div class="quran-orbit"><span class="orbit-star">✦</span><span class="orbit-moon">☾</span><span class="orbit-dot">✧</span></div>
-      </div>
-      <div class="quran-content-grid">
-        <div class="content-panel"><div class="panel-heading"><div><span class="eyebrow">READ THE ARABIC</span><h3>Listen and follow</h3></div><span class="panel-icon">📖</span></div>
-          <div class="arabic-verses" lang="ar" dir="rtl"><p>قُلْ هُوَ ٱللَّهُ أَحَدٌ</p><p>ٱللَّهُ ٱلصَّمَدُ</p><p>لَمْ يَلِدْ وَلَمْ يُولَدْ</p><p>وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌ</p></div>
-          <p class="small-note">Arabic text is presented as Qur’anic text. Please listen to a trusted reciter for pronunciation and tajwid.</p>
-        </div>
-        <div class="content-panel meaning-panel"><div class="panel-heading"><div><span class="eyebrow">UNDERSTAND THE MESSAGE</span><h3>What does it teach us?</h3></div><span class="panel-icon">💡</span></div>
-          <p>This surah teaches that Allah is One, unique and completely independent. Everything depends on Him. He has no parent, child or equal.</p>
-          <div class="reflection-question"><b>Think about it</b><span>Why do you think it is important to know that Allah is One?</span></div>
-          <div class="source-chip">Qur’an · Surah Al-Ikhlas · 112:1–4</div>
-        </div>
-      </div>
-      <div class="practice-panel"><div><span class="eyebrow">A LITTLE EVERY DAY</span><h3>Memorize with care</h3><p>Listen to one ayah, repeat it slowly, then try it without looking. Ask a teacher or parent to listen.</p></div><div class="practice-steps"><span>1. Listen</span><span>2. Repeat</span><span>3. Recall</span><span>4. Revise</span></div></div>
-      <div class="surah-library">
-        <div class="section-heading"><div><div class="eyebrow">MORE SHORT SURAHS</div><h2>Read, reflect and remember</h2></div><span class="heading-doodle">✦</span></div>
-        <div class="surah-learning-grid">
-          <article class="surah-learning-card surah-asr"><span class="surah-card-icon">⏳</span><div><b>Surah Al-Asr</b><small>103 · 3 ayat</small></div><p>Time is precious. Faith grows through good actions, truth and patience.</p><div class="surah-arabic" lang="ar" dir="rtl">وَالْعَصْرِ ۝ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ</div></article>
-          <article class="surah-learning-card surah-kawthar"><span class="surah-card-icon">🌸</span><div><b>Surah Al-Kawthar</b><small>108 · 3 ayat</small></div><p>Remember Allah’s blessings and respond with worship and gratitude.</p><div class="surah-arabic" lang="ar" dir="rtl">إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ ۝ فَصَلِّ لِرَبِّكَ وَانْحَرْ ۝ إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ</div></article>
-          <article class="surah-learning-card surah-falaq"><span class="surah-card-icon">🌅</span><div><b>Surah Al-Falaq</b><small>113 · 5 ayat</small></div><p>Ask Allah, the Lord of daybreak, to protect you from harm.</p><div class="surah-arabic" lang="ar" dir="rtl">قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ</div></article>
-          <article class="surah-learning-card surah-nas"><span class="surah-card-icon">🌙</span><div><b>Surah An-Nas</b><small>114 · 6 ayat</small></div><p>Turn to Allah, the Lord of people, and seek His protection.</p><div class="surah-arabic" lang="ar" dir="rtl">قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ</div></article>
-        </div>
-        <p class="editorial-note">The Arabic is Qur’anic text. The English descriptions are original child-friendly meaning summaries, not verbatim translations. Please check recitation and tajwid with a trusted teacher.</p>
-      </div>
-      <p class="editorial-note">The English explanation above is a child-friendly meaning summary, not a verbatim translation of the Qur’an. A licensed, named translation and recitation audio will be added with source attribution in a later content pass.</p>
-    </section>
+
 
     <section class="view" id="speakView">
       <div class="page-heading"><div><div class="eyebrow">YOUR VOICE MATTERS</div><h1>My speech <span>stage</span></h1><p>Start with one sentence. Grow toward five wonderful minutes.</p></div><span class="heading-emoji">🎤</span></div>
