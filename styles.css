@@ -263,3 +263,36 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
   .flag-game-panel{padding:17px 12px}
   .flag-pool-heading{align-items:flex-start}
 }
+
+/* Flag Memorizer uses the same settings-rail pattern as Flag Spotter and Reading. */
+.flag-library-workspace{margin-top:18px;grid-template-columns:270px minmax(0,1fr)}
+.flag-library-workspace .flag-library-toolbar{
+  display:flex;flex-direction:column;align-items:stretch;gap:13px;
+  position:sticky;top:16px;margin:0;padding:20px;
+  border:1px solid var(--line);border-radius:var(--panel-radius);
+  background:#fff;box-shadow:var(--panel-shadow);
+}
+.flag-library-workspace .flag-settings-heading h2{font-size:20px;margin:5px 0 2px}
+.flag-library-workspace .flag-search-label{flex:0 0 auto;min-width:0;width:100%}
+.flag-library-workspace .flag-library-toolbar>label:not(.flag-search-label){min-width:0;width:100%}
+.flag-library-workspace .flag-library-toolbar select{
+  width:100%;border:1px solid #e3e9df;border-radius:10px;background:#fbfcf9;
+  color:#526457;padding:10px 11px;font:800 11px Nunito,system-ui,sans-serif;
+}
+.flag-library-workspace .flag-toggle-label{display:flex!important;align-items:center;gap:8px;min-height:38px}
+.flag-library-workspace .flag-library-grid{grid-template-columns:repeat(var(--flag-grid-columns,5),minmax(0,1fr))}
+@media(max-width:1000px){
+  .flag-library-workspace{grid-template-columns:230px minmax(0,1fr)}
+  .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .flag-library-workspace{grid-template-columns:1fr}
+  .flag-library-workspace .flag-library-toolbar{position:static}
+  .flag-library-workspace .flag-library-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-library-workspace .flag-settings-heading,.flag-library-workspace .flag-search-label{grid-column:1/-1}
+  .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .flag-library-workspace .flag-library-toolbar{grid-template-columns:1fr 1fr;padding:14px}
+  .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

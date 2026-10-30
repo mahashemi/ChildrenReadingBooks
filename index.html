@@ -149,20 +149,25 @@
 
     <section class="view" id="flagMemorizerView">
       <div class="page-heading"><div><div class="eyebrow">EXPLORE · LISTEN · REMEMBER</div><h1>Flag <span>memorizer</span></h1><p>Meet the countries of the world, one flag and one name at a time.</p></div><span class="heading-emoji">🌍</span></div>
-      <div class="flag-progress-panel">
-        <div><span class="eyebrow">YOUR WORLD EXPLORER PROGRESS</span><h2 id="flagProgressTitle">Your flag-learning journey</h2><p id="flagProgressSummary">Every country you explore brings you one step closer to remembering the world.</p></div>
-        <div class="flag-progress-stats"><div><strong id="flagSeenCount">0</strong><small>explored</small></div><div><strong id="flagKnownCount">0</strong><small>remembered</small></div><div><strong id="flagTotalCount">195</strong><small>countries</small></div></div>
+      <div class="workspace-layout flag-library-workspace">
+        <aside class="workspace-sidebar flag-library-toolbar" aria-label="Flag Memorizer filters and settings">
+          <div class="flag-settings-heading"><div><span class="eyebrow">FIND & CUSTOMISE</span><h2>Explore flags</h2></div></div>
+          <label class="flag-search-label"><span>⌕</span><input id="flagSearch" type="search" placeholder="Find a country..." autocomplete="off"></label>
+          <label>Region<select id="flagContinentFilter"><option value="all">All regions</option><option>Africa</option><option>Asia</option><option>Europe</option><option>North America</option><option>South America</option><option>Oceania</option><option value="territories">Territories & special status</option></select></label>
+          <label>Reading level<select id="flagReadingLevel"><option value="beginner">Beginner</option><option value="developing" selected>Developing</option><option value="confident">Confident</option></select></label>
+          <label>Grid size<select id="flagGridColumns" aria-label="Number of flag columns"><option value="3">3 columns</option><option value="4">4 columns</option><option value="5" selected>5 columns</option></select></label>
+          <label class="flag-toggle-label"><input id="flagTestMode" type="checkbox"> Hide names for practice</label>
+        </aside>
+        <div class="workspace-main">
+          <div class="flag-progress-panel">
+            <div><span class="eyebrow">YOUR WORLD EXPLORER PROGRESS</span><h2 id="flagProgressTitle">Your flag-learning journey</h2><p id="flagProgressSummary">Every country you explore brings you one step closer to remembering the world.</p></div>
+            <div class="flag-progress-stats"><div><strong id="flagSeenCount">0</strong><small>explored</small></div><div><strong id="flagKnownCount">0</strong><small>remembered</small></div><div><strong id="flagTotalCount">195</strong><small>countries</small></div></div>
+          </div>
+          <div class="flag-library-meta"><span id="flagLibraryCount">195 countries</span><span>Tap a flag to hear its country name.</span></div>
+          <div class="flag-library-grid" id="flagLibraryGrid"></div>
+          <div class="flag-collection-note"><b>About this collection:</b> The collection contains 221 entries: 195 sovereign states (193 UN members, the Holy See and the State of Palestine), plus 26 separately labelled territories and special-status places. This helps children learn the wider set of flags without confusing territories with sovereign countries.</div>
+        </div>
       </div>
-      <div class="flag-library-toolbar">
-        <label class="flag-search-label"><span>⌕</span><input id="flagSearch" type="search" placeholder="Find a country..." autocomplete="off"></label>
-        <label>Region<select id="flagContinentFilter"><option value="all">All regions</option><option>Africa</option><option>Asia</option><option>Europe</option><option>North America</option><option>South America</option><option>Oceania</option><option value="territories">Territories & special status</option></select></label>
-        <label>Reading level<select id="flagReadingLevel"><option value="beginner">Beginner</option><option value="developing" selected>Developing</option><option value="confident">Confident</option></select></label>
-        <label>Grid size<select id="flagGridColumns" aria-label="Number of flag columns"><option value="3">3 columns</option><option value="4">4 columns</option><option value="5" selected>5 columns</option></select></label>
-        <label class="flag-toggle-label"><input id="flagTestMode" type="checkbox"> Hide names for practice</label>
-      </div>
-      <div class="flag-library-meta"><span id="flagLibraryCount">195 countries</span><span>Tap a flag to hear its country name.</span></div>
-      <div class="flag-library-grid" id="flagLibraryGrid"></div>
-      <div class="flag-collection-note"><b>About this collection:</b> The collection contains 221 entries: 195 sovereign states (193 UN members, the Holy See and the State of Palestine), plus 26 separately labelled territories and special-status places. This helps children learn the wider set of flags without confusing territories with sovereign countries.</div>
     </section>
 
     <section class="view" id="quranView">
