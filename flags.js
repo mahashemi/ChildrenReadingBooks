@@ -205,7 +205,7 @@ showRoundResultOverlay(hits,total,misses,perfect);
 }
 function updateSelection(){
 $("flagSelectionCount").textContent=selected.size+" of "+targetCount+" selected";
-$("checkFlagAnswers").disabled=selected.size===0;
+$("checkFlagAnswers").disabled=false;
 }
 function showPool(){
 stopTimer();phase="choose";$("flagGamePhase").textContent="FIND THE FLAGS";
