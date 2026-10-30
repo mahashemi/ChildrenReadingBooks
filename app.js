@@ -222,6 +222,7 @@ function stopReading(){
 }
 function speakText(text){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
+  if(isReadingStory)stopReading();
   window.speechSynthesis.cancel();
   const cleanText=String(text).replace(/\s+/g," ").trim();
   const utterance=new SpeechSynthesisUtterance(cleanText);
