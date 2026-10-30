@@ -373,3 +373,6 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
   .story-library{grid-template-columns:1fr}
   .story-text .story-word{padding:.02em .2em .06em;margin-right:.035em}
 }
+
+.story-art .art-illustration svg{width:100%;height:100%;overflow:visible}
+.story-art .art-illustration svg use{width:100%;height:100%}
