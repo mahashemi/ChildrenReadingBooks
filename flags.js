@@ -99,7 +99,7 @@ function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
 function addCelebrationStyles(){
 if(document.getElementById("flagCelebrationStyles"))return;
 const style=document.createElement("style");style.id="flagCelebrationStyles";
-style.textContent=\`
+style.textContent=`
 .flag-win-overlay{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:22px;background:rgba(16,35,27,.78);backdrop-filter:blur(7px);overflow:hidden;isolation:isolate;animation:flagOverlayIn .32s ease-out both}
 .flag-win-card{position:relative;z-index:4;width:min(92vw,540px);padding:clamp(28px,5vw,48px) 26px 30px;text-align:center;border:2px solid var(--win-border,#ffe6a1);border-radius:28px;background:var(--win-bg,linear-gradient(145deg,#fffdf2,#fff4dc 58%,#f9edff));box-shadow:0 24px 90px #0006;animation:flagWinCardPop .5s cubic-bezier(.16,1,.3,1) both}
 .flag-win-card .win-trophy{display:block;font-size:clamp(48px,9vw,76px);line-height:1.1;margin-bottom:12px}
@@ -132,7 +132,7 @@ style.textContent=\`
 @keyframes flagWinTwinkle{from{opacity:.25;transform:scale(.55) rotate(-20deg)}to{opacity:1;transform:scale(1.25) rotate(25deg)}}
 @media(prefers-reduced-motion:reduce){.flag-win-overlay,.flag-win-card,.flag-firework,.flag-firework i,.flag-confetti i,.flag-win-sparkles span{animation:none!important}.flag-win-card{opacity:1;transform:none}}
 @media(max-width:480px){.flag-win-card{padding:28px 18px 22px}.flag-win-actions{flex-direction:column}.flag-win-again,.flag-win-return{width:100%}}
-\`;
+`;
 document.head.appendChild(style);
 }
 function closeWinOverlay(){
