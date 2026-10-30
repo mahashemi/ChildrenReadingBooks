@@ -147,3 +147,119 @@
 .flag-target-card .flag-image,.flag-option-card .flag-image{height:48px;width:min(100%,88px)}
 .flag-emoji[hidden]{display:none}
 .flag-empty{grid-column:1/-1;padding:25px;text-align:center;color:#89948a;font-size:12px}
+
+
+/* Little Lanterns shared classroom design system */
+:root{
+  --page-width:1440px;
+  --panel-radius:20px;
+  --panel-border:#e9e9df;
+  --panel-shadow:0 12px 32px rgba(48,65,49,.075);
+  --panel-shadow-hover:0 16px 34px rgba(48,65,49,.12);
+  --focus-ring:0 0 0 3px rgba(111,151,116,.22);
+}
+.site-header{max-width:var(--page-width);padding-left:30px;padding-right:30px}
+main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
+.view{min-width:0}
+.reader-layout{grid-template-columns:250px minmax(0,1fr);gap:22px}
+.story-sidebar,.reader-card,.content-panel,.speech-prompt,.flag-game-panel,.flag-settings-panel{
+  border-radius:var(--panel-radius);
+}
+.reader-card,.content-panel,.speech-prompt,.flag-game-panel{
+  box-shadow:var(--panel-shadow);
+}
+.reader-card{padding:clamp(24px,2.5vw,36px)}
+.story-text{max-width:900px;font-size:clamp(19px,1.45vw,22px)}
+.workspace-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:20px;align-items:start}
+.workspace-sidebar{position:sticky;top:16px;min-width:0}
+.workspace-main{min-width:0}
+.flag-workspace{margin-top:16px}
+.flag-settings-panel{padding:20px;background:#fff;border:1px solid var(--line);box-shadow:var(--panel-shadow)}
+.flag-settings-heading h2{margin:5px 0 0;font-size:20px}
+.flag-preset-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:16px 0}
+.flag-preset-row .button{padding:9px 5px;font-size:10px}
+.flag-settings-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.flag-settings-grid label{display:grid;gap:6px;font-size:10px;font-weight:900;color:#6e7d70}
+.flag-settings-grid select{
+  width:100%;min-width:0;border:1px solid #e3e9df;border-radius:10px;
+  background:#fbfcf9;color:#526457;padding:10px 11px;font:800 11px Nunito,system-ui,sans-serif;
+}
+.flag-start-button{width:100%;margin-top:17px;padding:13px 12px}
+.flag-game-panel{min-height:390px;padding:clamp(22px,2.5vw,34px);border:1px solid var(--line);background:#fff}
+.flag-game-panel>h2{font-size:clamp(22px,2.2vw,30px);text-align:center;margin:20px 0 7px}
+.flag-game-panel>p{text-align:center;max-width:720px;margin:0 auto 20px;color:#849084;font-size:13px;line-height:1.7}
+.flag-game-topline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.flag-target-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:18px;max-width:980px;margin:24px auto 10px;justify-items:center;align-items:stretch;
+}
+.flag-target-card,.flag-option-card{
+  width:100%;min-width:0;min-height:190px;padding:18px 12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  border:1px solid #e1e7dc;border-radius:17px;background:#fff;
+  box-shadow:0 5px 15px rgba(42,58,43,.10);
+  transition:transform .18s,border-color .18s,box-shadow .18s,background .18s;
+}
+.flag-target-card{max-width:260px}
+.flag-target-card .flag-image,.flag-option-card .flag-image{
+  width:min(100%,170px);height:96px;object-fit:contain;margin:0 auto;
+  padding:5px;background:#fff;border:1px solid #d9dfd5;border-radius:7px;
+  box-shadow:0 5px 13px rgba(35,48,37,.18),0 1px 3px rgba(35,48,37,.12);
+  filter:none;
+}
+.flag-target-card .flag-emoji,.flag-option-card .flag-emoji{font-size:64px;line-height:1.1}
+.flag-pool-wrap{margin-top:26px}
+.flag-pool-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.flag-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1000px;margin:0 auto}
+.flag-option-card{min-height:175px;max-width:none;color:var(--ink);font:inherit}
+.flag-option-card:hover{transform:translateY(-3px);border-color:#a9c2a5;box-shadow:var(--panel-shadow-hover)}
+.flag-option-card.selected{background:#f0f7ed;border:2px solid #78a17b;padding:17px 11px;box-shadow:0 0 0 3px rgba(120,161,123,.13),0 7px 18px rgba(42,58,43,.11)}
+.flag-option-card.correct{background:#edf7e9;border-color:#6f9c71}
+.flag-option-card.incorrect{background:#fff0eb;border-color:#d99b83}
+.flag-option-card .flag-name,.flag-option-card .flag-name-syllables,.flag-target-card .flag-name,.flag-target-card .flag-name-syllables{
+  font-size:clamp(12px,1vw,15px);font-weight:900;text-align:center;line-height:1.4;margin-top:0;color:#526b56;
+}
+.flag-game-panel button:focus-visible,.flag-settings-panel button:focus-visible,.flag-settings-panel select:focus-visible{
+  outline:0;box-shadow:var(--focus-ring);
+}
+.flag-library-card .flag-image{
+  width:min(100%,130px);height:72px;padding:4px;background:#fff;
+  border:1px solid #d9dfd5;border-radius:6px;
+  box-shadow:0 4px 10px rgba(35,48,37,.16);filter:none;
+}
+.flag-library-card{border:1px solid #e8ece4;border-radius:15px;background:#fff;box-shadow:0 3px 10px rgba(48,65,49,.045)}
+.flag-library-card:hover{box-shadow:var(--panel-shadow);transform:translateY(-2px)}
+.flag-intro-strip,.flag-progress-panel,.flag-learning-note{border-radius:var(--panel-radius)}
+/* Keep the same generous working width and card language across all learning views. */
+.quran-content-grid,.speech-grid{gap:20px}
+.quran-feature,.speech-hero,.practice-panel{border-radius:var(--panel-radius)}
+.values-grid{gap:20px}
+.value-card{box-shadow:0 5px 18px rgba(48,65,49,.055)}
+.after-reading,.reflection-box,.welcome-strip{box-shadow:0 5px 18px rgba(48,65,49,.045)}
+@media(max-width:1000px){
+  .workspace-layout{grid-template-columns:230px minmax(0,1fr)}
+  .flag-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-target-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+  .flag-target-card,.flag-option-card{min-height:160px}
+  .flag-target-card .flag-image,.flag-option-card .flag-image{width:min(100%,145px);height:82px}
+}
+@media(max-width:760px){
+  .site-header{padding-left:18px;padding-right:18px}
+  main{padding-left:18px;padding-right:18px}
+  .workspace-layout{grid-template-columns:1fr}
+  .workspace-sidebar{position:static}
+  .flag-settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .flag-target-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .flag-target-card,.flag-option-card{min-height:140px;padding:12px 8px}
+  .flag-target-card .flag-image,.flag-option-card .flag-image{width:min(100%,125px);height:72px}
+  .reader-layout{grid-template-columns:1fr}
+  .story-sidebar{position:static}
+}
+@media(max-width:480px){
+  .flag-settings-grid{grid-template-columns:1fr 1fr}
+  .flag-choice-grid,.flag-target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-target-card .flag-image,.flag-option-card .flag-image{width:min(100%,110px);height:64px}
+  .flag-game-panel{padding:17px 12px}
+  .flag-pool-heading{align-items:flex-start}
+}
