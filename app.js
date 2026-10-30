@@ -205,7 +205,7 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);r
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
-let speechRate=1, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
+let speechRate=.4, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
 function updateSpeechRate(){
   $("speechRate").textContent=speechRate.toFixed(1)+"×";
 }
@@ -285,7 +285,7 @@ function startStoryReading(){
 }
 $("readAloud").addEventListener("click",()=>isReadingStory?stopReading():startStoryReading());
 $("slowerSpeech").addEventListener("click",()=>{
-  speechRate=Math.max(.3,Math.round((speechRate-.1)*10)/10);
+  speechRate=Math.max(.1,Math.round((speechRate-.1)*10)/10);
   updateSpeechRate();
   if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
 });
