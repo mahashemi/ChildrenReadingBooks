@@ -296,3 +296,11 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
   .flag-library-workspace .flag-library-toolbar{grid-template-columns:1fr 1fr;padding:14px}
   .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* High-visibility classroom countdown for Flag Spotter. */
+.flag-countdown{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:150px;padding:11px 19px;border:2px solid #d5a33f;border-radius:16px;background:linear-gradient(135deg,#fff4c9,#ffe6a1);color:#604510;box-shadow:0 5px 0 #d8b76b,0 8px 18px rgba(105,77,25,.16);font:1000 clamp(20px,2.2vw,29px)/1 Nunito,system-ui,sans-serif;letter-spacing:-.5px;text-align:center;font-variant-numeric:tabular-nums}
+.flag-countdown::before{content:"⏱";font-size:clamp(19px,2vw,25px)}
+.flag-countdown.is-counting{animation:flagTimerPulse 1s ease-in-out infinite}
+@keyframes flagTimerPulse{0%,100%{transform:scale(1);box-shadow:0 5px 0 #d8b76b,0 8px 18px rgba(105,77,25,.16)}50%{transform:scale(1.035);box-shadow:0 5px 0 #d8b76b,0 10px 22px rgba(105,77,25,.23)}}
+@media(prefers-reduced-motion:reduce){.flag-countdown.is-counting{animation:none}}
+@media(max-width:480px){.flag-countdown{min-width:122px;padding:9px 12px;font-size:20px}}
