@@ -21,78 +21,117 @@ const storyPages = [
 
 // New reading chapters: child-friendly original lessons with explicit source labels.
 storyPages.push(
-  {title:"A Pause Before the Words",paragraphs:[
-    "One afternoon, Sami was building a tall tower. His little sister bumped the table, and the blocks fell down.",
-    "Sami felt heat rise inside him. He wanted to shout. Then he remembered that anger can make a small problem much bigger.",
-    "He took a slow breath, stepped back, and waited until his voice felt calm."
-  ]},
-  {title:"The Strong Choice",paragraphs:[
-    "When Sami felt ready, he said, “I was upset when the tower fell. Please be careful next time.” His sister said sorry, and they built it again together.",
-    "Being calm did not mean that Sami had no feelings. It meant he chose what to do with those feelings.",
-    "Akhlaq lesson: pause, breathe, speak kindly and forgive when you can. If someone is unsafe or hurt, ask a trusted grown-up for help."
-  ]},
-  {title:"A World Full of Gifts",paragraphs:[
-    "Look around you. The sky gives us light. Rain helps plants grow. The earth gives us food, water and places to live.",
-    "Our families, friends, health and time are also gifts. We should enjoy good things, but we should not waste them or forget people who need help.",
-    "In Islam, this world is a place where we choose our actions. Every kind deed can become a seed for the Hereafter."
-  ]},
-  {title:"Use the World Well",paragraphs:[
-    "Mariam planted a small tree with her grandfather. She watered it, protected it and waited patiently as it grew.",
-    "Her grandfather said, “We do not own the earth to harm it. We are trusted to care for it.” Mariam decided to save water and keep the garden clean.",
-    "Akhlaq lesson: be thankful for the world, care for living things, share what you have and remember that our choices matter."
-  ]},
-  {title:"The Brave Battle Within",paragraphs:[
-    "A boy named Ali wanted to win every game. When he lost, he felt a strong urge to blame his friends.",
-    "One day, his teacher explained a beautiful idea: jihad al-nafs means striving against the selfish parts of ourselves. It means trying to choose what is right, even when it is difficult.",
-    "Ali began with small efforts. He told the truth, accepted a loss and congratulated the winner."
-  ]},
-  {title:"Small Steps of Courage",paragraphs:[
-    "Ali learned that real strength is not hurting people or showing off. It is controlling anger, resisting unfairness, helping someone in need and correcting your own mistakes.",
-    "Some days he succeeded. Some days he had to try again. He learned that sincere effort matters.",
-    "Akhlaq lesson: every day, choose one good action over one selfish action. This lesson is about inner effort and good character."
-  ]},
-  {title:"A Meeting Through Prayer",paragraphs:[
-    "Before school, Zahra's mother spread a clean prayer mat. Zahra washed for prayer and stood quietly beside her.",
-    "They began with Allah's name. Zahra recited what she had learned and bowed and prostrated as taught by her family.",
-    "She knew that namaz was not a performance. It was a time to remember Allah, thank Him and ask for guidance."
-  ]},
-  {title:"Carry the Prayer Into Your Day",paragraphs:[
-    "After prayer, Zahra tried to carry its goodness into the day. She spoke truthfully, shared her lunch and helped her younger brother.",
-    "Her mother reminded her that prayer and character belong together. We should try to remember Allah not only on the prayer mat, but also in our choices.",
-    "Aqa'id and Akhlaq lesson: namaz is worship of Allah alone. Learn its words and movements carefully with a parent or teacher, and let prayer help you become kinder."
-  ]},
-  {title:"The Heart and the Soul",paragraphs:[
-    "We can see our hands, eyes and feet. But what about the part of us that thinks, hopes, loves and chooses?",
-    "Muslims speak about the soul as a special part of human life created by Allah. We cannot understand everything about it, but we know that our choices and intentions are important.",
-    "When Noor told the truth even though it was hard, she felt peaceful inside. She had chosen honesty."
-  ]},
-  {title:"Keep Your Inner Light Bright",paragraphs:[
-    "Noor learned that the soul grows through faith, prayer, knowledge, kindness and good actions. Jealousy, cruelty and lies can make the heart feel heavy.",
-    "When she made a mistake, she did not give up. She said sorry, asked Allah for help and tried to repair the harm.",
-    "Akhlaq lesson: care for your inner self. Feed it with truth, remembrance of Allah, learning and kindness."
-  ]},
-  {title:"A Student Who Loved Knowledge",paragraphs:[
-    "Many centuries ago, in the city of Hillah, lived a great Shia scholar known as Allama Hilli. His name was Hasan ibn Yusuf.",
-    "He learned from teachers in his family and from other scholars. He studied the Qur'an, language, law, reasoning and many other subjects.",
-    "He worked hard and wrote many books. Students and scholars learned from his knowledge."
-  ]},
-  {title:"Knowledge Must Bring Goodness",paragraphs:[
-    "Allama Hilli's life reminds us that learning takes patience. A person grows by asking questions, listening to teachers, reading carefully and checking what is true.",
-    "Knowledge should not make us proud or unkind. It should help us understand our duties and serve people better.",
-    "Akhlaq lesson: respect teachers, keep learning, think carefully and use knowledge to help others."
-  ]},
-  {title:"A Question in Sheikh Ali's Heart",paragraphs:[
-    "Long ago, in the Iraqi city of Hilla, there lived a devoted man named Sheikh Ali Hallaawi. He often wondered: “If Imam al-Mahdi has 313 special companions, why has he not reappeared? Surely there are many good people in the world.”",
-    "According to a traditional devotional account, one day a stranger approached Sheikh Ali and revealed that he was Imam al-Mahdi. The Imam told him that, in Hilla, only Sheikh Ali and a local butcher were truly ready to stand beside him.",
-    "The Imam asked Sheikh Ali to invite forty people he considered especially pious to his home on Thursday night. He also asked him to invite the butcher and prepare two goats on the roof. Sheikh Ali was excited and followed the instructions."
-  ]},
-  {title:"The Forty Guests and the 313 Companions",paragraphs:[
-    "After the night prayer, the forty guests gathered in Sheikh Ali's courtyard. They remembered Allah and sent blessings upon the Prophet Muhammad and his family. The butcher went up to the roof with his knife.",
-    "The butcher was asked to slaughter the first goat. Its blood flowed down through the roof's rainwater pipe into the courtyard. The guests could not see what had happened above them. They feared that the butcher had been killed.",
-    "Then Sheikh Ali was called upstairs. The second goat was slaughtered, and more blood flowed down. The guests now feared that Sheikh Ali had been killed too. Frightened that they might be next, all forty hurried away. Not one stayed.",
-    "Sheikh Ali returned to find an empty courtyard. The Imam explained that the guests had spoken of love and loyalty, but fear had made them run. In this retelling, the Imam explains that he has been waiting nearly 1,200 years for 313 companions with genuine faith, love, courage and loyalty. When such companions are ready together, it becomes necessary for him to reappear by Allah's permission—not merely because 313 names have been counted, but because their hearts and actions are truly ready.",
-    "The lesson is not to count other people or judge their hearts. It is to prepare our own hearts: be truthful, brave, loyal, patient and ready to help others."
-  ]},
+  {
+    "title": "When Sami Felt Angry",
+    "paragraphs": [
+      "Sami was building a tower of blocks. His younger sister accidentally knocked it over. Sami felt very angry and wanted to shout at her.",
+      "He remembered the Qur'an's description of people who restrain their anger and pardon others. He also remembered the teaching of Imam al-Baqir that real strength includes holding back anger.",
+      "Sami stopped himself from shouting. He did not pretend that he was not upset; he chose not to hurt his sister with his words."
+    ]
+  },
+  {
+    "title": "The Stronger Choice",
+    "paragraphs": [
+      "When Sami was ready, he explained calmly that he was upset. His sister apologised, and he forgave her. If the problem had continued or someone had been hurt, he would have asked an adult for help.",
+      "The Qur'an praises those who restrain anger and pardon people (3:134). A narration from Imam al-Baqir in al-Kafi teaches that a person who restrains anger despite being able to act on it is promised a special reward.",
+      "Feeling anger is not the same as choosing to do wrong. The lesson is to control what we do when anger comes."
+    ]
+  },
+  {
+    "title": "The World Is Not the Final Goal",
+    "paragraphs": [
+      "Allah has given us a world in which we can work, learn, eat, build homes, care for our families and help others. The Qur'an tells us not to forget our share of this world while seeking the Hereafter.",
+      "Imam al-Sadiq explains that worldly resources can be used to help us reach the Hereafter. Wealth and possessions are not automatically bad; what matters is how we earn and use them."
+    ]
+  },
+  {
+    "title": "Use Allah's Gifts Well",
+    "paragraphs": [
+      "Mariam noticed that the tap was left running and that good food was being thrown away. She turned off the tap, took only the food she needed and shared what she could with someone in need.",
+      "The Qur'an tells us not to waste and to do good with what Allah has given us (7:31; 28:77). These verses guide how we use the gifts around us.",
+      "Our lesson is to use what Allah provides in ways that please Him and help us prepare for the Hereafter."
+    ]
+  },
+  {
+    "title": "The Struggle Within",
+    "paragraphs": [
+      "Ali wanted to win every game. When he lost, he felt like blaming his friends. He knew what was fair, but doing it was not always easy.",
+      "The Qur'an teaches that Allah has shown the soul its way toward right and wrong, and that the one who purifies the soul succeeds (91:7–10). It also praises the person who restrains the self from wrongful desires (79:40–41).",
+      "This effort to obey Allah when our own desires pull us elsewhere is often called jihad al-nafs: striving against the self."
+    ]
+  },
+  {
+    "title": "A Small Victory",
+    "paragraphs": [
+      "One day Ali lost a game. He wanted to blame the winner, but he stopped and admitted that the other child had played well. Then he congratulated the winner.",
+      "Ali had not defeated another person. He had worked to overcome an unfair impulse inside himself.",
+      "The Qur'an teaches that success is connected to purifying the soul (91:9–10). A narration reported from Imam al-Sadiq, from the Prophet, describes the struggle against the self as the greater struggle. This is a struggle to obey Allah—not permission to harm anyone."
+    ]
+  },
+  {
+    "title": "Why We Pray",
+    "paragraphs": [
+      "Before school, Zahra prepared for prayer with her mother. She learned the words and movements carefully and stood to worship Allah.",
+      "Allah tells Prophet Muhammad that He is Allah and that prayer should be established for His remembrance (Qur'an 20:14). Prayer is worship directed to Allah alone.",
+      "Zahra's mother helped her learn the prayer step by step. When Zahra was unsure about a movement or a rule, she asked her mother rather than guessing."
+    ]
+  },
+  {
+    "title": "Prayer and Our Choices",
+    "paragraphs": [
+      "The Qur'an says that prayer restrains a person from indecency and wrongdoing (29:45). This gives Zahra something to think about after she finishes praying.",
+      "She tried to be truthful, avoid hurting others and remember Allah during the day. She knew that prayer is worship that should shape how she lives.",
+      "Imam Ali's advice to his sons tells them to remain mindful of prayer, describing it as the pillar of religion (Nahj al-Balagha, Letter 47)."
+    ]
+  },
+  {
+    "title": "What Do We Know About the Soul?",
+    "paragraphs": [
+      "We can see our bodies, but the soul is not something we can examine with our eyes. The Qur'an teaches that human knowledge about the spirit is limited.",
+      "When the Prophet was asked about the spirit, he was told to say that the spirit belongs to the command of Allah and that people have been given only a little knowledge about it (Qur'an 17:85).",
+      "So we should not invent details about the soul or claim to know what Allah has not taught us."
+    ]
+  },
+  {
+    "title": "Purifying the Self",
+    "paragraphs": [
+      "The Qur'an also speaks about the soul in Surah al-Shams. Allah says that He inspired the soul with an awareness of its wickedness and its righteousness, and that the one who purifies it succeeds (91:7–10).",
+      "This means our choices matter. We should try to leave wrong actions and practise what Allah has taught us.",
+      "Imam al-Sadiq explains in al-Kafi that a sincere heart turns toward Allah. We can ask Allah to help us make our intentions and actions sincere."
+    ]
+  },
+  {
+    "title": "Learning Is a Duty",
+    "paragraphs": [
+      "Imam Ja'far al-Sadiq taught that seeking knowledge is a duty. Learning helps us recognise what Allah asks of us and understand how to act.",
+      "Imam al-Sadiq also taught that knowledge should be joined with forbearance, dignity and humility. A learner should be humble toward both the people from whom they learn and the people they teach.",
+      "These teachings are recorded in the Book of the Merit of Knowledge in al-Kafi."
+    ]
+  },
+  {
+    "title": "Knowledge Should Change Us",
+    "paragraphs": [
+      "Zaynab learned a new lesson at school. Instead of showing off, she listened carefully, asked a question politely and tried to use what she had learned.",
+      "Learning is not only collecting facts. In a narration recorded in al-Kafi, the Prophet describes knowledge as listening, learning, acting upon it and then sharing it.",
+      "The lesson from these narrations is clear: seek knowledge sincerely, remain humble and put what is good into practice."
+    ]
+  },
+  {
+    "title": "The First Companions",
+    "paragraphs": [
+      "Shia hadith literature contains reports about the special companions who gather to support Imam al-Mahdi when the Qa'im rises. Several narrations mention a group of 313 companions gathering in Mecca.",
+      "One report in Kitab al-Ghayba by al-Nu'mani quotes Imam al-Baqir and connects the gathering of these companions with the Qur'anic words: “Wherever you are, Allah will bring you all together” (2:148).",
+      "This is a teaching about the companions described in those narrations. It does not say that people can force the reappearance by simply counting to 313."
+    ]
+  },
+  {
+    "title": "What Should We Prepare?",
+    "paragraphs": [
+      "The Qur'an tells believers to be with the truthful (9:119), to keep their trusts and promises (23:8), and to seek help through patience (2:153). These are qualities we should practise in our own lives.",
+      "Shia narrations describe a special group of 313 companions who gather in Mecca. These reports describe the companions; they do not say that people can force the reappearance by counting to 313.",
+      "The reports do not give us a date to calculate. Our responsibility is to obey Allah, follow the guidance of the Ahl al-Bayt, and practise truthfulness, patience and justice today."
+    ]
+  },
   {title:"Surah Al-Asr: Time Is Precious",paragraphs:[
     "Surah Al-Asr is the 103rd chapter of the Qur'an. It is very short, but it gives us a powerful reminder about time and the way we live.",
     "The surah teaches that people need faith, good actions, truth and patience. These are not just words to remember. They are qualities to practise.",
@@ -126,17 +165,108 @@ storyPages.push(
 );
 
 const readingChapters = [
-  {title:"A Special Dream",icon:"🌌",subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling inspired by Surah Yusuf 12:4–6; not a direct translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
-  {title:"Anger: Pause and Choose",icon:"💛",subtitle:"A small pause can help us make a better choice.",source:"Original educational story; Akhlaq lesson.",art:"anger",takeaway:"Pause, breathe, speak kindly and ask for help when needed.",start:3,end:4},
-  {title:"The World Is a Trust",icon:"🌍",subtitle:"Enjoy Allah's gifts and care for the world around you.",source:"Original educational story; reflection on gratitude and responsibility.",art:"world",takeaway:"Be thankful, avoid waste and care for living things.",start:5,end:6},
-  {title:"Jihad al-Nafs: The Inner Struggle",icon:"🌱",subtitle:"The courage to choose what is right inside ourselves.",source:"Original educational story explaining the ethical idea of striving against the self; not a call to violence.",art:"growth",takeaway:"Choose honesty, self-control, fairness and helpful actions.",start:7,end:8},
-  {title:"Namaz: A Meeting with Allah",icon:"🕌",subtitle:"Prayer helps us remember Allah and carry goodness into our day.",source:"Original educational story; learn prayer details from a trusted parent or teacher.",art:"prayer",takeaway:"Worship Allah alone and let prayer improve your character.",start:9,end:10},
-  {title:"The Soul: Our Inner Self",icon:"✨",subtitle:"Care for the part of us that thinks, loves and chooses.",source:"Original age-appropriate reflection; details of the soul are not fully known to us.",art:"soul",takeaway:"Feed your inner self with faith, truth, learning and kindness.",start:11,end:12},
-  {title:"Allama Hilli: A Love of Learning",icon:"📚",subtitle:"Meet a great scholar who dedicated his life to knowledge.",source:"Child-friendly biography based on the Allama Hilli biography at Al-Islam.org.",art:"book",takeaway:"Learn with patience and use knowledge to serve others.",start:13,end:14},
-  {title:"Sheikh Ali Hallaawi: The Forty Guests",icon:"🌙",subtitle:"A traditional devotional account about sincerity, courage and the 313 special companions.",source:"Traditional devotional account associated with Sheikh Ali Hallaawi of Hilla and reported in Al-Abqari al-Hisan by Allama Ali Akbar Nahavandi. Details differ between retellings; the 313-companion and nearly 1,200-year ending is paraphrased here, not presented as a verified verbatim quotation.",art:"courtyard",takeaway:"Love for Imam al-Mahdi should appear in our actions: sincere faith, courage, loyalty, patience and service.",start:15,end:16},
-  {title:"Qur'an: Surah Al-Asr",icon:"⏳",subtitle:"A short surah with a big lesson about time, faith and patience.",source:"Qur'an 103; original child-friendly explanation, not a formal translation.",art:"time",takeaway:"Use time for faith, good actions, truth and patience.",start:17,end:18},
-  {title:"Qur'an: Surah Al-Kawthar",icon:"🌸",subtitle:"Remember Allah's blessings and respond with gratitude.",source:"Qur'an 108; original child-friendly explanation, not a formal translation.",art:"flower",takeaway:"Thank Allah through worship, kindness and responsible use of blessings.",start:19,end:20},
-  {title:"Qur'an: Al-Falaq and An-Nas",icon:"🌅",subtitle:"Two short surahs that teach us to seek Allah's protection.",source:"Qur'an 113–114; original child-friendly explanations, not formal translations.",art:"moon",takeaway:"Turn to Allah, make safe choices and seek help from trusted adults.",start:21,end:22}
+  {title:"A Special Dream",icon:"🌌",subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling based on Surah Yusuf 12:4–6; the patience lesson also draws on 12:18 and 12:90. Not a verbatim translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
+  {
+    "title": "Anger: Control Is Strength",
+    "icon": "💛",
+    "subtitle": "What the Qur'an and the Ahl al-Bayt teach about anger.",
+    "source": "Qur'an 3:134; al-Kafi, vol. 2, p. 110, hadith 7 (Imam al-Baqir on restraining anger); al-Kafi, vol. 2, p. 303, hadith 3 (Imam al-Sadiq: anger is a key to evil); Tuhaf al-'Uqul, no. 286 (Imam al-Baqir: no strength like restraining anger).",
+    "art": "anger",
+    "takeaway": "Restrain anger and pardon others, as praised in Qur'an 3:134.",
+    "start": 3,
+    "end": 4
+  },
+  {
+    "title": "Use This World for Good",
+    "icon": "🌍",
+    "subtitle": "The Qur'an and Imam al-Sadiq teach us how to use worldly blessings.",
+    "source": "Qur'an 7:31, 28:77 and 6:141; al-Kafi, vol. 5, Book 2, Chapter 3, hadiths 8–10.",
+    "art": "world",
+    "takeaway": "Use what Allah gives you for good and do not waste it.",
+    "start": 5,
+    "end": 6
+  },
+  {
+    "title": "Jihad al-Nafs: The Inner Struggle",
+    "icon": "🌱",
+    "subtitle": "Striving to obey Allah when our desires pull us elsewhere.",
+    "source": "Qur'an 91:7–10 and 79:40–41; report of the Prophet's greater jihad transmitted through Imam al-Sadiq in al-Kafi (al-Sukuni report).",
+    "art": "growth",
+    "takeaway": "Purify the self and restrain it from wrongful desires.",
+    "start": 7,
+    "end": 8
+  },
+  {
+    "title": "Namaz: Remembering Allah",
+    "icon": "🕌",
+    "subtitle": "The Qur'an and Imam Ali teach the importance of prayer.",
+    "source": "Qur'an 20:14 and 29:45; Nahj al-Balagha, Letter 47 (Imam Ali's counsel concerning prayer).",
+    "art": "prayer",
+    "takeaway": "Establish prayer for Allah's remembrance and let it restrain wrongdoing.",
+    "start": 9,
+    "end": 10
+  },
+  {
+    "title": "The Soul: What We Know",
+    "icon": "✨",
+    "subtitle": "What the Qur'an says—and what it says we do not know.",
+    "source": "Qur'an 17:85 and 91:7–10; al-Kafi, vol. 3, Book 3, Chapter 91 (reports about the souls of believers; hadith grading varies).",
+    "art": "soul",
+    "takeaway": "Do not claim knowledge of the soul beyond what Allah and His proofs have taught.",
+    "start": 11,
+    "end": 12
+  },
+  {
+    "title": "Learning with Humility",
+    "icon": "📚",
+    "subtitle": "The teachings of Imam al-Sadiq about seeking and using knowledge.",
+    "source": "Al-Kafi, Book of the Merit of Knowledge (Kitab Fadl al-'Ilm), reports 4/38 and 8/65; see the cited narrations from Imam al-Sadiq.",
+    "art": "book",
+    "takeaway": "Seek knowledge, remain humble and act upon what is good.",
+    "start": 13,
+    "end": 14
+  },
+  {
+    "title": "The First 313 Companions",
+    "icon": "🌙",
+    "subtitle": "What Shia narrations report about the companions of Imam al-Mahdi.",
+    "source": "Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8; Qur'an 2:148 as cited in one report; Qur'an 9:119, 23:8 and 2:153 for the qualities discussed. The Hilla forty-guests anecdote and the '1,200 years' wording are not established by these reports and are not presented here as hadith.",
+    "art": "stars",
+    "takeaway": "Prepare through faith, truth, patience and obedience; do not turn the number 313 into a countdown.",
+    "start": 15,
+    "end": 16
+  },
+  {
+    "title": "Qur'an: Surah Al-Asr",
+    "icon": "⏳",
+    "subtitle": "The Qur'an's own teaching about faith, good deeds, truth and patience.",
+    "source": "Qur'an 103:1–3. Child-friendly explanation of the surah.",
+    "art": "time",
+    "takeaway": "Faith, good deeds, truth and patience belong together.",
+    "start": 17,
+    "end": 18
+  },
+  {
+    "title": "Qur'an: Surah Al-Kawthar",
+    "icon": "🌸",
+    "subtitle": "A short surah about Allah's gift and worship directed to Him.",
+    "source": "Qur'an 108:1–3. For the interpretation of al-Kawthar, consult a recognised Shia tafsir.",
+    "art": "flower",
+    "takeaway": "Respond to Allah's gifts with worship directed to Him.",
+    "start": 19,
+    "end": 20
+  },
+  {
+    "title": "Qur'an: Al-Falaq and An-Nas",
+    "icon": "🌅",
+    "subtitle": "Two surahs teaching us to seek refuge in Allah.",
+    "source": "Qur'an 113:1–5 and 114:1–6. Child-friendly explanation of the surahs.",
+    "art": "moon",
+    "takeaway": "Seek Allah's protection from the harms named in these surahs.",
+    "start": 21,
+    "end": 22
+  },
+
 ];
 readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
