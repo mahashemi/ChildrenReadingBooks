@@ -23,6 +23,13 @@
       <button class="nav-link" data-view="reading">Reading</button>
       <button class="nav-link" data-view="quran">Qur’an corner</button>
       <button class="nav-link" data-view="speak">My speech stage</button>
+      <div class="nav-dropdown" id="flagsNav">
+        <button class="nav-link flags-nav-trigger" id="flagsNavButton" type="button" aria-haspopup="true" aria-expanded="false">Flags <span aria-hidden="true">▾</span></button>
+        <div class="nav-submenu" id="flagsSubmenu">
+          <button class="nav-submenu-link" data-view="flagSpotter" type="button"><span>🎯</span><span><b>Flag Spotter</b><small>Look, remember and find</small></span></button>
+          <button class="nav-submenu-link" data-view="flagMemorizer" type="button"><span>🌍</span><span><b>Flag Memorizer</b><small>Learn countries and flags</small></span></button>
+        </div>
+      </div>
     </nav>
     <button class="parent-button" id="parentButton">For grown-ups <span>↗</span></button>
     <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
@@ -99,6 +106,52 @@
       <section class="after-reading"><div><span class="mini-icon">🧠</span><div><b>Think about the story</b><small>Who did Yusuf speak to about his dream?</small></div></div><button class="text-button" data-go="values">Explore the lesson →</button></section>
     </section>
 
+    <section class="view" id="flagSpotterView">
+      <div class="page-heading"><div><div class="eyebrow">LOOK · REMEMBER · FIND</div><h1>Flag <span>spotter</span></h1><p>Look carefully, remember the flags, then find every one in the picture pool.</p></div><span class="heading-emoji">🎯</span></div>
+      <div class="flag-intro-strip"><span>🧠</span><div><b>Train your visual memory</b><small>Remember the flags first. Then choose all the matching flags from the larger set.</small></div></div>
+      <div class="flag-settings-panel">
+        <div class="flag-settings-heading"><div><span class="eyebrow">MAKE YOUR OWN CHALLENGE</span><h2>Game settings</h2></div><button class="button button-outline" id="easyFlagSettings" type="button">Easy</button><button class="button button-outline" id="mediumFlagSettings" type="button">Medium</button><button class="button button-outline" id="hardFlagSettings" type="button">Hard</button></div>
+        <div class="flag-settings-grid">
+          <label>Flags to remember<select id="flagTargetCount"><option value="1">1 flag</option><option value="2">2 flags</option><option value="3" selected>3 flags</option><option value="4">4 flags</option><option value="5">5 flags</option></select></label>
+          <label>Flags in the pool<select id="flagPoolSize"><option value="5">5 flags</option><option value="8">8 flags</option><option value="10" selected>10 flags</option><option value="15">15 flags</option><option value="20">20 flags</option></select></label>
+          <label>Remember for<select id="flagShowSeconds"><option value="3">3 seconds</option><option value="5" selected>5 seconds</option><option value="8">8 seconds</option><option value="10">10 seconds</option><option value="15">15 seconds</option></select></label>
+          <label>Country collection<select id="flagGameCollection"><option value="countries" selected>195 countries</option><option value="all">Countries + territories</option></select></label>\n          <label>Reading level<select id="flagGameReadingLevel"><option value="beginner">Beginner</option><option value="developing" selected>Developing</option><option value="confident">Confident</option></select></label>
+        </div>
+        <button class="button button-primary" id="startFlagGame" type="button">Start a new challenge →</button>
+      </div>
+      <div class="flag-game-panel" id="flagGamePanel">
+        <div class="flag-game-topline"><span class="tag tag-green" id="flagGamePhase">READY TO PLAY</span><span class="page-count" id="flagGameTimer">5 seconds</span></div>
+        <h2 id="flagGameTitle">Ready to test your memory?</h2>
+        <p id="flagGameInstruction">Choose your settings, then start. You will see the target flags before they disappear.</p>
+        <div class="flag-target-grid" id="flagTargets" aria-live="polite"></div>
+        <div class="flag-pool-wrap" id="flagPoolWrap" hidden>
+          <div class="flag-pool-heading"><div><b>Find all the flags you just saw</b><small id="flagSelectionCount">0 selected</small></div><span class="tag tag-gold" id="flagTargetBadge">3 to find</span></div>
+          <div class="flag-choice-grid" id="flagChoicePool"></div>
+          <div class="flag-game-actions"><button class="button button-outline" id="clearFlagChoices" type="button">Clear choices</button><button class="button button-primary" id="checkFlagAnswers" type="button" disabled>Check my answers ✓</button></div>
+        </div>
+        <div class="flag-result" id="flagGameResult" aria-live="polite"></div>
+        <button class="button button-primary" id="nextFlagRound" type="button" hidden>Play another round →</button>
+      </div>
+      <div class="flag-learning-note"><b>Every click is a learning moment.</b><span>When a child selects a flag, the narrator says the country name and the name appears beneath that flag, with syllables shown when reviewed for the selected reading level.</span></div>
+    </section>
+
+    <section class="view" id="flagMemorizerView">
+      <div class="page-heading"><div><div class="eyebrow">EXPLORE · LISTEN · REMEMBER</div><h1>Flag <span>memorizer</span></h1><p>Meet the countries of the world, one flag and one name at a time.</p></div><span class="heading-emoji">🌍</span></div>
+      <div class="flag-progress-panel">
+        <div><span class="eyebrow">YOUR WORLD EXPLORER PROGRESS</span><h2 id="flagProgressTitle">Your flag-learning journey</h2><p id="flagProgressSummary">Every country you explore brings you one step closer to remembering the world.</p></div>
+        <div class="flag-progress-stats"><div><strong id="flagSeenCount">0</strong><small>explored</small></div><div><strong id="flagKnownCount">0</strong><small>remembered</small></div><div><strong id="flagTotalCount">195</strong><small>countries</small></div></div>
+      </div>
+      <div class="flag-library-toolbar">
+        <label class="flag-search-label"><span>⌕</span><input id="flagSearch" type="search" placeholder="Find a country..." autocomplete="off"></label>
+        <label>Region<select id="flagContinentFilter"><option value="all">All regions</option><option>Africa</option><option>Asia</option><option>Europe</option><option>North America</option><option>South America</option><option>Oceania</option><option value="territories">Territories & special status</option></select></label>
+        <label>Reading level<select id="flagReadingLevel"><option value="beginner">Beginner</option><option value="developing" selected>Developing</option><option value="confident">Confident</option></select></label>
+        <label class="flag-toggle-label"><input id="flagTestMode" type="checkbox"> Hide names for practice</label>
+      </div>
+      <div class="flag-library-meta"><span id="flagLibraryCount">195 countries</span><span>Tap a flag to hear its country name.</span></div>
+      <div class="flag-library-grid" id="flagLibraryGrid"></div>
+      <div class="flag-collection-note"><b>About this collection:</b> The collection contains 221 entries: 195 sovereign states (193 UN members, the Holy See and the State of Palestine), plus 26 separately labelled territories and special-status places. This helps children learn the wider set of flags without confusing territories with sovereign countries.</div>
+    </section>
+
     <section class="view" id="quranView">
       <div class="page-heading"><div><div class="eyebrow">LISTEN · READ · REFLECT · REMEMBER</div><h1>Qur’an <span>corner</span></h1><p>Small surahs, beautiful meanings and a little practice every day.</p></div><span class="heading-emoji">🌙</span></div>
       <div class="quran-feature">
@@ -138,7 +191,9 @@
     </section>
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <div class="modal-backdrop" id="parentModal" hidden><div class="parent-modal"><button class="modal-close" id="closeModal">×</button><span class="modal-icon">🌼</span><h2>A note for grown-ups</h2><p>Little Lanterns is an early visual prototype. Stories, syllable annotations, Qur’anic translations, audio and assessments will go through editorial review before being treated as finished learning material.</p><p>Children should use the site with an appropriate parent or teacher. The first version stores no child accounts or personal data.</p><button class="button button-primary" id="gotIt">Got it</button></div></div>
+  <div class="modal-backdrop" id="parentModal" hidden><div class="parent-modal"><button class="modal-close" id="closeModal">×</button><span class="modal-icon">🌼</span><h2>A note for grown-ups</h2><p>Little Lanterns is an early visual prototype. Stories, syllable annotations, Qur’anic translations, audio and assessments will go through editorial review before being treated as finished learning material.</p><p>Children should use the site with an appropriate parent or teacher. Little Lanterns does not create child accounts or send learning progress to a server. Flag-learning progress is saved only in this browser on this device. The site does not record a child’s voice.</p><button class="button button-primary" id="gotIt">Got it</button></div></div>
   <script src="./app.js"></script>
+  <script src="./flags-data.js"></script>
+  <script src="./flags.js"></script>
 </body>
 </html>
