@@ -303,3 +303,73 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
 @keyframes flagTimerPulse{0%,100%{transform:scale(1);box-shadow:0 5px 0 #d8b76b,0 8px 18px rgba(105,77,25,.16)}50%{transform:scale(1.035);box-shadow:0 5px 0 #d8b76b,0 10px 22px rgba(105,77,25,.23)}}
 @media(prefers-reduced-motion:reduce){.flag-countdown.is-counting{animation:none}}
 @media(max-width:480px){.flag-countdown{min-width:122px;padding:9px 12px;font-size:20px}}
+
+
+/* Reading library: distinct, comfortable word cards for early readers. */
+.story-text .story-word{
+  display:inline-block;
+  position:relative;
+  padding:.015em .24em .055em;
+  margin:0 .055em .12em;
+  border:1px solid #dce8d8;
+  border-radius:7px;
+  background:#fffefa;
+  box-shadow:0 1px 0 rgba(73,105,77,.06);
+  line-height:1.55;
+  vertical-align:baseline;
+  color:#34463a;
+  text-decoration:none;
+}
+.story-text .story-word:hover,.story-text .story-word:focus-visible{
+  background:#fff1cc;border-color:#e5c982;outline:2px solid #f0d99f;outline-offset:1px;
+}
+.story-text .story-word.syllabified,.story-text .story-word.mixed-word{
+  color:#47785a;font-weight:800;
+}
+.story-text .story-word.is-speaking{background:#dff1d8;border-color:#78a779;box-shadow:0 0 0 3px #dff1d880}
+.story-library{display:grid;gap:8px;max-height:65vh;overflow:auto;padding:0 2px 4px}
+.story-library .story-choice{min-height:58px}
+.story-library .story-choice.selected{background:#edf6e9;border-color:#b9d2b8;box-shadow:inset 3px 0 #6f9a72}
+.story-library .story-choice small{line-height:1.35}
+.story-art .art-illustration{
+  position:absolute;z-index:2;left:50%;top:48%;transform:translate(-50%,-50%);
+  display:grid;place-items:center;width:96px;height:96px;border-radius:30px;
+  background:#fffdf0d9;border:1px solid #fff9e8;box-shadow:0 12px 28px #56634b20;
+  font-size:58px;line-height:1;
+}
+.story-art[data-art="anger"]{background:linear-gradient(120deg,#fce8d9,#fff2d8 55%,#eaf0df)}
+.story-art[data-art="world"]{background:linear-gradient(120deg,#dceef0,#e9f2d9 58%,#fff0d7)}
+.story-art[data-art="growth"]{background:linear-gradient(120deg,#e5f0df,#f4f0d9 58%,#e7f1e8)}
+.story-art[data-art="prayer"]{background:linear-gradient(120deg,#dce9e6,#f2e8d8 58%,#e9e2f2)}
+.story-art[data-art="soul"]{background:linear-gradient(120deg,#e9e2f5,#fff0d8 58%,#e4f0e8)}
+.story-art[data-art="book"]{background:linear-gradient(120deg,#f5e6d5,#e8efdf 58%,#f4eadc)}
+.story-art[data-art="stars"]{background:linear-gradient(120deg,#dce5f3,#eee8f6 58%,#f8ecd8)}
+.story-art[data-art="time"]{background:linear-gradient(120deg,#f8ebd7,#e9efdf 58%,#f5e6d6)}
+.story-art[data-art="flower"]{background:linear-gradient(120deg,#f7e5e6,#f8f0d9 58%,#e5f0e3)}
+.story-art[data-art="moon"]{background:linear-gradient(120deg,#dfe7f2,#e9e4f3 58%,#e4efdf)}
+.surah-library{margin-top:28px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.surah-library .section-heading{margin-bottom:17px}
+.surah-library .section-heading h2{font-size:23px}
+.surah-learning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.surah-learning-card{position:relative;min-width:0;padding:18px;border:1px solid #e8eadf;border-radius:16px;background:#fbfcf8}
+.surah-learning-card>div:first-of-type{display:flex;flex-direction:column;gap:2px;padding-left:48px;min-height:40px;justify-content:center}
+.surah-learning-card b{font-size:15px;color:#35483b}
+.surah-learning-card small{font-size:10px;color:#8a958a;font-weight:800}
+.surah-card-icon{position:absolute;left:17px;top:17px;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#fff;font-size:23px}
+.surah-learning-card p{font-size:12px;line-height:1.55;color:#738075;margin:12px 0}
+.surah-arabic{padding:12px 14px;border-radius:12px;background:#fff;border:1px solid #eee9dd;color:#345c45;font-family:Amiri,serif;font-size:23px;line-height:2.1;text-align:center}
+.surah-asr{background:#f4f8ef}.surah-kawthar{background:#fff7f1}.surah-falaq{background:#f2f7fa}.surah-nas{background:#f6f3fa}
+@media(max-width:720px){
+  .story-library{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}
+  .story-library .story-choice{padding:8px;align-items:flex-start}
+  .story-library .story-thumb{flex:0 0 32px;width:32px;height:32px}
+  .story-library .story-choice b{font-size:10px}
+  .story-library .story-choice small{font-size:8px}
+  .surah-learning-grid{grid-template-columns:1fr}
+  .surah-library{padding:16px}
+  .story-art .art-illustration{width:78px;height:78px;font-size:47px}
+}
+@media(max-width:460px){
+  .story-library{grid-template-columns:1fr}
+  .story-text .story-word{padding:.02em .2em .06em;margin-right:.035em}
+}
