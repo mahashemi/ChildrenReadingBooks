@@ -64,7 +64,7 @@ const meanings = {
   moon:"The bright object we see at night; it travels around Earth.", bow:"To bend your head or body forward to show respect.",
   warned:"Told someone about danger so they could be careful.", feared:"Felt afraid that something bad might happen.",
   plan:"An idea about what someone intends to do.", safe:"Free from danger or harm.", wise:"Good at making thoughtful choices.",
-  kind:"Caring and gentle towards others.", trust:"To feel sure that someone is good, honest or reliable.",
+  kind:"Caring and gentle toward others.", trust:"To feel sure that someone is good, honest or reliable.",
   life:"The time during which a person is alive.", grow:"To become bigger, older or more developed.",
   shared:"Gave or told something to another person.", care:"Kind attention; looking after someone or something.",
   best:"The very finest or most helpful.", words:"Things we say or write; parts of language.", night:"The dark part of each day when the sun is not visible."
@@ -90,7 +90,7 @@ const imagination = {
   harmful:"Imagine a sharp thorn that can hurt your finger.",
   wise:"Imagine stopping to think before choosing the kindest action.",
   trust:"Imagine holding someone's hand because you know they will help you.",
-  safe:"Imagine being cosy indoors while rain falls outside.",
+  safe:"Imagine being cozy indoors while rain falls outside.",
   grow:"Imagine a tiny seed becoming a tall green plant.",
   remain:"Imagine keeping a smile even when a task is difficult.",
   challenges:"Imagine climbing a hill: each step is hard, but you keep going.",
