@@ -104,19 +104,38 @@ style.textContent=`
 .flag-celebration strong{display:block;color:#705b32;font-size:clamp(20px,3vw,27px);font-weight:900}
 .flag-celebration span{display:block;margin-top:4px;color:#887b60;font-size:12px;font-weight:800}
 .flag-celebration .yay-spark{position:absolute;font-size:22px;animation:flagSparkle 1.1s ease-in-out infinite alternate}
-.flag-celebration .yay-spark:nth-child(1){left:9%;top:12%}.flag-celebration .yay-spark:nth-child(2){right:10%;top:18%;animation-delay:.2s}.flag-celebration .yay-spark:nth-child(3){left:18%;bottom:8%;animation-delay:.4s}.flag-celebration .yay-spark:nth-child(4){right:19%;bottom:8%;animation-delay:.1s}
+.flag-celebration .yay-spark:nth-child(1){left:9%;top:12%}.flag-celebration .yay-spark:nth-child(2){right:10%;top:18%}.flag-celebration .yay-spark:nth-child(3){left:18%;bottom:8%}.flag-celebration .yay-spark:nth-child(4){right:19%;bottom:8%}
+.flag-page-sparkles{position:fixed;inset:0;z-index:1000;overflow:hidden;pointer-events:none}
+.flag-page-sparkles span{position:absolute;display:block;color:#d5a94f;text-shadow:0 2px 9px #e8c77b80;will-change:transform,opacity;animation:flagPageSparkle var(--spark-duration,2.8s) ease-out var(--spark-delay,0s) both}
 @keyframes flagYayPop{from{opacity:0;transform:scale(.88) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes flagSparkle{from{transform:scale(.7) rotate(-15deg);opacity:.55}to{transform:scale(1.2) rotate(18deg);opacity:1}}
-@media(prefers-reduced-motion:reduce){.flag-celebration,.flag-celebration .yay-spark{animation:none!important}}
+@keyframes flagPageSparkle{0%{opacity:0;transform:translate3d(0,22px,0) rotate(-25deg) scale(.35)}18%{opacity:1}72%{opacity:.9}100%{opacity:0;transform:translate3d(var(--spark-drift,0px),-85px,0) rotate(45deg) scale(1.25)}}
+@media(prefers-reduced-motion:reduce){.flag-celebration,.flag-celebration .yay-spark,.flag-page-sparkles span{animation:none!important}}
 `;
 document.head.appendChild(style);
+}
+function showerPageSparkles(){
+ if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const old=document.querySelector(".flag-page-sparkles");if(old)old.remove();
+ const layer=document.createElement("div");layer.className="flag-page-sparkles";layer.setAttribute("aria-hidden","true");
+ const symbols=["✦","✧","✨","⭐","✺","⋆"];
+ for(let i=0;i<42;i++){
+  const spark=document.createElement("span");spark.textContent=symbols[i%symbols.length];
+  spark.style.left=(3+Math.random()*94)+"%";spark.style.top=(5+Math.random()*88)+"%";
+  spark.style.fontSize=(13+Math.random()*19)+"px";
+  spark.style.setProperty("--spark-duration",(2.1+Math.random()*1.7)+"s");
+  spark.style.setProperty("--spark-delay",(Math.random()*.38)+"s");
+  spark.style.setProperty("--spark-drift",((Math.random()-.5)*90)+"px");
+  layer.appendChild(spark);
+ }
+ document.body.appendChild(layer);window.setTimeout(()=>layer.remove(),4300);
 }
 function celebrateFlagWin(perfect,hits,total){
 addCelebrationStyles();
 const old=$("flagCelebration");if(old)old.remove();
 const banner=document.createElement("div");banner.id="flagCelebration";banner.className="flag-celebration";banner.setAttribute("role","status");banner.setAttribute("aria-live","polite");
 banner.innerHTML='<span class="yay-spark" aria-hidden="true">✨</span><span class="yay-spark" aria-hidden="true">⭐</span><span class="yay-spark" aria-hidden="true">🎉</span><span class="yay-spark" aria-hidden="true">💫</span><strong>'+(perfect?'YAAAAY! 🎊':'Great spotting! 🌟')+'</strong><span>'+(perfect?'You found all '+total+' flags. What a brilliant memory!': 'You found '+hits+' out of '+total+' flags. Keep shining!')+'</span>';
-$("flagGameResult").before(banner);
+$("flagGameResult").before(banner);showerPageSparkles();
 }
 function updateSelection(){
 $("flagSelectionCount").textContent=selected.size+" of "+targetCount+" selected";
@@ -132,7 +151,7 @@ $("flagChoicePool").innerHTML=pool.map(x=>card(x,"flag-option-card",false)).join
 updateSelection();
 }
 function startGame(){
-stopTimer();selected.clear();
+stopTimer();selected.clear();$("startFlagGame").hidden=true;
 const list=source(),n=Math.min(Number($("flagTargetCount").value),list.length),size=Math.min(Math.max(n,Number($("flagPoolSize").value)),list.length);
 targetCount=n;targets=shuffle(list).slice(0,n);targets.forEach(x=>addUnique(progress.seen,x.code));save();updateProgress();
 pool=shuffle(targets.concat(shuffle(list.filter(x=>!targets.some(t=>t.code===x.code))).slice(0,size-n)));
