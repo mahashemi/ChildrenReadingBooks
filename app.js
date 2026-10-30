@@ -47,7 +47,7 @@ storyPages.push(
   {
     "title": "Use Allah's Gifts Well",
     "paragraphs": [
-      "Mariam and her grandfather planted a tree. They watered it and cared for it. Mariam also learned not to waste food or water and to share what she could with people in need.",
+      "Mariam noticed that the tap was left running and that good food was being thrown away. She turned off the tap, took only the food she needed and shared what she could with someone in need.",
       "The Qur'an tells us not to waste and to do good with what Allah has given us (7:31; 28:77). These verses guide how we use the gifts around us.",
       "Our lesson is to use what Allah provides in ways that please Him and help us prepare for the Hereafter."
     ]
@@ -127,9 +127,9 @@ storyPages.push(
   {
     "title": "What Should We Prepare?",
     "paragraphs": [
-      "The Qur'an praises people who are truthful, patient and faithful to their promises. These are qualities we should try to practise in our own lives.",
-      "Shia narrations describe the 313 as the first special group of companions of the Qa'im. Other reports discuss a larger group who will join the movement. The narrations should be read carefully rather than reduced to a slogan.",
-      "We do not know the time of the reappearance. Our responsibility is to obey Allah, follow the guidance of the Ahl al-Bayt, and practise truthfulness, patience and justice today."
+      "The Qur'an tells believers to be with the truthful (9:119), to keep their trusts and promises (23:8), and to seek help through patience (2:153). These are qualities we should practise in our own lives.",
+      "Shia narrations describe a special group of 313 companions who gather in Mecca. These reports describe the companions; they do not say that people can force the reappearance by counting to 313.",
+      "The reports do not give us a date to calculate. Our responsibility is to obey Allah, follow the guidance of the Ahl al-Bayt, and practise truthfulness, patience and justice today."
     ]
   },
   {title:"Surah Al-Asr: Time Is Precious",paragraphs:[
@@ -170,7 +170,7 @@ const readingChapters = [
     "title": "Anger: Control Is Strength",
     "icon": "💛",
     "subtitle": "What the Qur'an and the Ahl al-Bayt teach about anger.",
-    "source": "Qur'an 3:134; al-Kafi, vol. 2, p. 110, hadith 7 (Imam al-Baqir on restraining anger); al-Kafi, vol. 2, p. 303, hadith 3 (Imam al-Sadiq: anger is a key to evil).",
+    "source": "Qur'an 3:134; al-Kafi, vol. 2, p. 110, hadith 7 (Imam al-Baqir on restraining anger); al-Kafi, vol. 2, p. 303, hadith 3 (Imam al-Sadiq: anger is a key to evil); Tuhaf al-'Uqul, no. 286 (Imam al-Baqir: no strength like restraining anger).",
     "art": "anger",
     "takeaway": "Restrain anger and pardon others, as praised in Qur'an 3:134.",
     "start": 3,
@@ -230,7 +230,7 @@ const readingChapters = [
     "title": "The First 313 Companions",
     "icon": "🌙",
     "subtitle": "What Shia narrations report about the companions of Imam al-Mahdi.",
-    "source": "Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8; Qur'an 2:148 as cited in one report. The Hilla forty-guests anecdote and the '1,200 years' wording are not established by these reports and are not presented here as hadith.",
+    "source": "Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8; Qur'an 2:148 as cited in one report; Qur'an 9:119, 23:8 and 2:153 for the qualities discussed. The Hilla forty-guests anecdote and the '1,200 years' wording are not established by these reports and are not presented here as hadith.",
     "art": "courtyard",
     "takeaway": "Prepare through faith, truth, patience and obedience; do not turn the number 313 into a countdown.",
     "start": 15,
