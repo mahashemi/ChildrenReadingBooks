@@ -31,7 +31,7 @@ const syllables = {
   loving:["lov","ing"], many:["man","y"], matters:["mat","ters"],
   meaning:["mean","ing"], morning:["morn","ing"], others:["oth","ers"], patience:["pa","tience"], people:["peo","ple"],
   patient:["pa","tient"], peaceful:["peace","ful"], remain:["re","main"],
-  remembered:["re","mem","bered"], reminds:["re","minds"], secret:["se","cret"], shaytan:["Shay","tan"],
+  remembered:["re","mem","bered"], reminded:["re","mind","ed"], reminds:["re","minds"], secret:["se","cret"], shaytan:["Shay","tan"],
   special:["spe","cial"], story:["sto","ry"], something:["some","thing"],
   teaches:["teach","es"], truthful:["truth","ful"], understand:["un","der","stand"],
   understood:["un","der","stood"], unhappy:["un","hap","py"], wanted:["want","ed"],
@@ -87,7 +87,7 @@ const meanings = {
 };
 Object.assign(meanings, {
   long:"Lasting for a lot of time, or measuring a great distance.",
-  lived:"Was alive and made a home in a place.", boy:"A male child.",
+  lived:"Stayed in a place; made a home there.", boy:"A male child.",
   named:"Gave someone or something a name.", saw:"Looked at something with your eyes.",
   seemed:"Looked or felt as if something were true.", told:"Said something to another person.",
   went:"Moved from one place to another.", might:"Could possibly happen.",
