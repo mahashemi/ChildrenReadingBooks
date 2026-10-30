@@ -40,6 +40,22 @@ const syllables = {
 const oneSyllable = new Set((
   "a an and be best bow boy bring but care close could did dream dreams feared feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long loved make might named night not of one or our plan safe saw see seemed shared should some stars sun teach tell that the them there they things to told trust us warned was we went what with wise words would"
 ).split(/\s+/).filter(Boolean));
+const soundGuides = {
+  lived: "One beat. Short i, as in sit; finish with a d sound.",
+  loved: "One beat. Finish with a d sound.",
+  feared: "One beat. Finish with a d sound.",
+  seemed: "One beat. Hold the ee sound, then finish with d.",
+  named: "One beat. Hold the a sound, then finish with d.",
+  warned: "One beat. Finish with a d sound.",
+  helped: "One beat. Finish with a t sound.",
+  asked: "One beat. Finish with a t sound.",
+  shared: "One beat. Finish with a d sound.",
+  listened: "Two beats. The -ed ending sounds like a soft id.",
+  wanted: "Two beats. Here, -ed adds another beat: want + id.",
+  decided: "Three beats. The -ed ending adds an id sound.",
+  reminded: "Three beats. The -ed ending adds an id sound.",
+  remembered: "Three beats. The -ed ending adds an id sound."
+};
 const meanings = {
   wonderful:"Very special or amazing.", excitement:"A happy, eager feeling when something important happens.",
   carefully:"With attention, so you do something thoughtfully.", understood:"Knew what something meant.",
@@ -71,7 +87,7 @@ const meanings = {
 };
 Object.assign(meanings, {
   long:"Lasting for a lot of time, or measuring a great distance.",
-  lived:"Made a home and spent time in a place.", boy:"A male child.",
+  lived:"Was alive and made a home in a place.", boy:"A male child.",
   named:"Gave someone or something a name.", saw:"Looked at something with your eyes.",
   seemed:"Looked or felt as if something were true.", told:"Said something to another person.",
   went:"Moved from one place to another.", might:"Could possibly happen.",
@@ -112,33 +128,6 @@ Object.assign(meanings, {
   teach:"To help someone learn.",
   title:"The name of a story, book, or piece of writing."
 });
-const imagination = {
-  wonderful:"Imagine seeing a rainbow after the rain. It feels wonderful!",
-  excitement:"Imagine the happy feeling just before your birthday party.",
-  carefully:"Imagine carrying a full glass of water without spilling a drop.",
-  understood:"Imagine when a puzzle finally makes sense. Now you have understood it!",
-  secret:"Imagine a surprise gift you keep quiet about until the right time.",
-  jealous:"Imagine wishing you had your friend's new ball. That feeling can be jealousy.",
-  peaceful:"Imagine sitting in a quiet garden and hearing birds sing.",
-  advice:"Imagine someone showing you the safest way to cross a road.",
-  patience:"Imagine planting a seed and waiting as it slowly grows.",
-  truthful:"Imagine telling your teacher honestly what happened, even when it is difficult.",
-  dream:"Imagine a little film playing in your mind while you sleep.",
-  stars:"Imagine tiny lamps shining in a huge, dark sky.",
-  sun:"Imagine a warm lamp in the sky that lights our day.",
-  moon:"Imagine a bright silver circle in the night sky.",
-  bow:"Imagine gently bending your head to show respect.",
-  enemy:"Imagine someone trying to stop you from doing something good.",
-  plan:"Imagine drawing steps on paper before building a tower.",
-  harmful:"Imagine a sharp thorn that can hurt your finger.",
-  wise:"Imagine stopping to think before choosing the kindest action.",
-  trust:"Imagine holding someone's hand because you know they will help you.",
-  safe:"Imagine being cozy indoors while rain falls outside.",
-  grow:"Imagine a tiny seed becoming a tall green plant.",
-  remain:"Imagine keeping a smile even when a task is difficult.",
-  challenges:"Imagine climbing a hill: each step is hard, but you keep going.",
-  hopeful:"Imagine looking at the sunrise and expecting a bright new day."
-};
 let page=0, mode="syllables", fontSize=19;
 const $=id=>document.getElementById(id);
 const storyText=$("storyText");
@@ -178,11 +167,10 @@ function renderParagraph(paragraph){
     const isMulti=!!parts&&parts.length>1;
     const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=6):false;
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
-    const breakdown=parts?parts.join("-")+(possessive?"'s":""):isKnownOne?"One syllable":"Review needed";
+    const breakdown=parts?parts.join("-")+(possessive?"'s":""):soundGuides[base.toLowerCase()]||"";
     const meaning=meanings[base.toLowerCase()]||"Meaning not added yet.";
-    const imagine=imagination[base.toLowerCase()]||"";
     const className=shouldBreak?(mode==="mixed"?"mixed-word":"syllabified"):"";
-    return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" data-imagine="'+escapeHtml(imagine)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
+    return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
   }).join("");
 }
 function renderStory(){
@@ -195,15 +183,14 @@ function renderStory(){
   $("nextPage").textContent=page===storyPages.length-1?"Finish story ✓":"Next page →";
   $("progressDots").innerHTML=storyPages.map((_,i)=>'<i class="'+(i===page?"on":"")+'"></i>').join("");
   $("wordPanel").hidden=true;
-  $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it, explore its meaning and imagine it.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to explore it.":"Read in ordinary English spelling. Tap a word to explore it.";
+  $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it and see what it means.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and see what it means.":"Read in ordinary English spelling. Tap a word to explore it.";
 }
 function selectWord(target){
   $("wordDisplay").textContent=target.dataset.word;
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
-  $("wordImagine").textContent=target.dataset.imagine;
-  document.querySelector(".imagination-section").hidden=!target.dataset.imagine;
   $("wordPanel").hidden=false;
+  speakText(target.dataset.word,.78);
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
@@ -223,9 +210,6 @@ function speakText(text,rate=.82){
   utterance.rate=rate;
   window.speechSynthesis.speak(utterance);
 }
-$("wordSound").addEventListener("click",()=>speakText($("wordDisplay").textContent,.78));
-$("meaningSound").addEventListener("click",()=>speakText($("wordMeaning").textContent,.84));
-$("imagineSound").addEventListener("click",()=>speakText($("wordImagine").textContent,.84));
 $("readAloud").addEventListener("click",()=>speakText(storyPages[page].paragraphs.join(" "),.82));
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
 function navigate(view){
