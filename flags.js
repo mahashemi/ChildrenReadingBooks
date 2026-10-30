@@ -21,6 +21,10 @@ AR:"Ar-gen-ti-na",BO:"Bo-liv-i-a",BR:"Bra-zil",CL:"Chi-le",CO:"Co-lom-bi-a",EC:"
 AU:"Aus-tral-i-a",FJ:"Fi-ji",KI:"Kir-i-ba-ti",MH:"Mar-shall Is-lands",FM:"Mi-cro-ne-sia",NR:"Nau-ru",NZ:"New Zea-land",PW:"Pa-lau",PG:"Pa-pu-a New Guin-e-a",WS:"Sa-mo-a",SB:"Sol-o-mon Is-lands",TO:"Ton-ga",TV:"Tu-va-lu",VU:"Van-u-a-tu"
 };
 const level=()=>$("flagReadingLevel").value;
+function flagMarkup(entry){
+return '<img class="flag-image" src="https://flagcdn.com/w160/'+entry.code.toLowerCase()+'.png" alt="'+escapeHtml(entry.name)+' flag" loading="lazy"><span class="flag-emoji" hidden>'+emoji(entry.code)+'</span>';
+}
+document.addEventListener("error",e=>{if(e.target&&e.target.classList&&e.target.classList.contains("flag-image")){e.target.hidden=true;if(e.target.nextElementSibling)e.target.nextElementSibling.hidden=false;}},true);
 function nameHtml(entry){
 const split=syllables[entry.code],mode=level();
 if(mode==="confident"||!split)return '<span class="flag-name">'+escapeHtml(entry.name)+'</span>';
@@ -38,7 +42,7 @@ function updateProgress(){
 $("flagSeenCount").textContent=progress.seen.length;
 $("flagKnownCount").textContent=progress.known.length;
 $("flagTotalCount").textContent=countries.length;
-$("flagProgressSummary").textContent="You have explored "+progress.seen.length+" of "+countries.length+" countries and marked "+progress.known.length+" as remembered. Keep going a little each day!";
+$("flagProgressSummary").textContent="You have explored "+progress.seen.filter(code=>countries.some(x=>x.code===code)).length+" of "+countries.length+" countries and marked "+progress.known.filter(code=>countries.some(x=>x.code===code)).length+" as remembered. Keep going a little each day!";
 }
 function seen(entry){addUnique(progress.seen,entry.code);progress.clicks++;save();updateProgress();}
 function markKnown(entry){
@@ -57,7 +61,7 @@ $("flagLibraryGrid").innerHTML=list.map(entry=>{
 const known=progress.known.includes(entry.code),show=!hide||revealed.has(entry.code);
 const label=show?nameHtml(entry):'<span class="flag-hidden-name">Tap to reveal name</span>';
 const kind=entry.status==="country"?"":' · '+(entry.status==="territory"?"territory":"special status");
-return '<article class="flag-library-card '+(known?"is-known":"")+'"><button class="flag-card-open" type="button" data-code="'+entry.code+'" aria-label="Hear and reveal '+escapeHtml(entry.name)+'"><span class="flag-emoji">'+emoji(entry.code)+'</span>'+label+'<span class="flag-region">'+entry.continent+kind+'</span></button><button class="flag-mark-known" type="button" data-known="'+entry.code+'">'+(known?"✓ Remembered":"I know this flag")+'</button></article>';
+return '<article class="flag-library-card '+(known?"is-known":"")+'"><button class="flag-card-open" type="button" data-code="'+entry.code+'" aria-label="Hear and reveal '+escapeHtml(entry.name)+'">'+flagMarkup(entry)+''+label+'<span class="flag-region">'+entry.continent+kind+'</span></button><button class="flag-mark-known" type="button" data-known="'+entry.code+'">'+(known?"✓ Remembered":"I know this flag")+'</button></article>';
 }).join("")||'<p class="flag-empty">No countries match that search. Try another name.</p>';
 }
 $("flagLibraryGrid").addEventListener("click",e=>{
@@ -139,7 +143,7 @@ $("flagGameTitle").textContent=perfect?"Brilliant remembering!":"Good effort —
 $("flagGameInstruction").textContent="You found "+hits.length+" of "+targets.length+" target flags"+(misses.length?" and chose "+misses.length+" extra flags.":".");
 $("flagChoicePool").innerHTML=pool.map(x=>{
 const correct=targetCodes.has(x.code),chosen=selected.has(x.code);
-return '<div class="flag-option-card '+(correct?"correct":chosen?"incorrect":"")+'"><span class="flag-emoji">'+emoji(x.code)+'</span>'+nameHtml(x)+'<span class="flag-name-whole">'+(correct?"✓ One of the flags to remember":chosen?"Not in this round":"")+'</span></div>';
+return '<div class="flag-option-card '+(correct?"correct":chosen?"incorrect":"")+'">'+flagMarkup(x)+''+nameHtml(x)+'<span class="flag-name-whole">'+(correct?"✓ One of the flags to remember":chosen?"Not in this round":"")+'</span></div>';
 }).join("");
 $("flagSelectionCount").textContent=hits.length+" / "+targets.length+" correct";
 $("checkFlagAnswers").disabled=true;$("clearFlagChoices").disabled=true;
