@@ -176,7 +176,8 @@ return '<div class="flag-option-card '+(correct?"correct":chosen?"incorrect":"")
 }).join("");
 $("flagSelectionCount").textContent=hits.length+" / "+targets.length+" correct";
 $("checkFlagAnswers").disabled=true;$("clearFlagChoices").disabled=true;
-if(hits.length>0)celebrateFlagWin(perfect,hits.length,targets.length);\n$("flagGameResult").textContent=perfect?"You remembered every flag. Well done!":"The flags to remember were: "+targets.map(x=>x.name).join(", ")+". Try another round and see if you can remember them all.";
+if(hits.length>0)celebrateFlagWin(perfect,hits.length,targets.length);
+$("flagGameResult").textContent=perfect?"You remembered every flag. Well done!":"The flags to remember were: "+targets.map(x=>x.name).join(", ")+". Try another round and see if you can remember them all.";
 $("nextFlagRound").hidden=false;
 });
 $("nextFlagRound").addEventListener("click",startGame);
