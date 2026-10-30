@@ -171,13 +171,21 @@ $("nextPage").addEventListener("click",()=>{if(page<storyPages.length-1){page++;
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
-$("wordSound").addEventListener("click",()=>{if(!("speechSynthesis" in window)){showToast("Sound is not available in this browser.");return;}speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance($("wordDisplay").textContent);utterance.lang="en-GB";utterance.rate=.78;speechSynthesis.speak(utterance);});
-$("readAloud").addEventListener("click",()=>{
-  if(!("speechSynthesis" in window)){showToast("Read-aloud is not available in this browser.");return;}
+function speakText(text,rate=.82){
+  if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
   window.speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(storyPages[page].paragraphs.join(" "));
-  utterance.lang="en-GB";utterance.rate=.82;window.speechSynthesis.speak(utterance);
-});
+  const utterance=new SpeechSynthesisUtterance(text);
+  utterance.lang="en-US";
+  utterance.rate=rate;
+  const voices=window.speechSynthesis.getVoices();
+  const usVoice=voices.find(voice=>/^en-US$/i.test(voice.lang))||voices.find(voice=>/^en[-_]US/i.test(voice.lang));
+  if(usVoice)utterance.voice=usVoice;
+  window.speechSynthesis.speak(utterance);
+}
+$("wordSound").addEventListener("click",()=>speakText($("wordDisplay").textContent,.72));
+$("meaningSound").addEventListener("click",()=>speakText($("wordMeaning").textContent,.84));
+$("imagineSound").addEventListener("click",()=>speakText($("wordImagine").textContent,.84));
+$("readAloud").addEventListener("click",()=>speakText(storyPages[page].paragraphs.join(" "),.82));
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
 function navigate(view){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
