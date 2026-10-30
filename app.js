@@ -101,6 +101,17 @@ Object.assign(meanings, {
   learn:"To get knowledge or a new skill.", tell:"To say something or give information.",
   are:"A word used to describe people or things now.", one:"The number 1; a single person or thing."
 });
+Object.assign(meanings, {
+  knows:"Has learned or understands something.",
+  loved:"Cared for someone very much.",
+  many:"A large number of people or things.",
+  much:"A large amount.",
+  remember:"To keep something in your mind, or bring it back to your mind.",
+  that:"A word used to point to a particular person, thing, or idea.",
+  with:"Together with; having or using something.",
+  teach:"To help someone learn.",
+  title:"The name of a story, book, or piece of writing."
+});
 const imagination = {
   wonderful:"Imagine seeing a rainbow after the rain. It feels wonderful!",
   excitement:"Imagine the happy feeling just before your birthday party.",
