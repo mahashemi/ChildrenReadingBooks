@@ -79,7 +79,7 @@ storyPages.push(
   {title:"Knowledge Must Bring Goodness",paragraphs:[
     "Allama Hilli's life reminds us that learning takes patience. A person grows by asking questions, listening to teachers, reading carefully and checking what is true.",
     "Knowledge should not make us proud or unkind. It should help us understand our duties and serve people better.",
-    "Akhlaq lesson: respect teachers, keep learning, think carefully and use knowledge to help others. This is a child-friendly biography, not a retelling of a single miracle story."
+    "Akhlaq lesson: respect teachers, keep learning, think carefully and use knowledge to help others."
   ]},
   {title:"A Question in Sheikh Ali's Heart",paragraphs:[
     "Long ago, in the Iraqi city of Hilla, there lived a devoted man named Sheikh Ali Hallaawi. He often wondered: “If Imam al-Mahdi has 313 special companions, why has he not reappeared? Surely there are many good people in the world.”",
@@ -90,7 +90,7 @@ storyPages.push(
     "After the night prayer, the forty guests gathered in Sheikh Ali's courtyard. They remembered Allah and sent blessings upon the Prophet Muhammad and his family. The butcher went up to the roof with his knife.",
     "The butcher was asked to slaughter the first goat. Its blood flowed down through the roof's rainwater pipe into the courtyard. The guests could not see what had happened above them. They feared that the butcher had been killed.",
     "Then Sheikh Ali was called upstairs. The second goat was slaughtered, and more blood flowed down. The guests now feared that Sheikh Ali had been killed too. Frightened that they might be next, all forty hurried away. Not one stayed.",
-    "Sheikh Ali returned to find an empty courtyard. The Imam explained that the guests had spoken of love and loyalty, but fear had made them run. In the version of the story remembered by many people, the Imam then explains that if 313 people with genuine faith, love, courage and loyalty were ready together, it would become necessary for him to reappear by Allah's permission. He had been waiting nearly 1,200 years for such companions—not merely people who said they loved him.",
+    "Sheikh Ali returned to find an empty courtyard. The Imam explained that the guests had spoken of love and loyalty, but fear had made them run. In this retelling, the Imam explains that he has been waiting nearly 1,200 years for 313 companions with genuine faith, love, courage and loyalty. When such companions are ready together, it becomes necessary for him to reappear by Allah's permission—not merely because 313 names have been counted, but because their hearts and actions are truly ready.",
     "The lesson is not to count other people or judge their hearts. It is to prepare our own hearts: be truthful, brave, loyal, patient and ready to help others."
   ]},
   {title:"Surah Al-Asr: Time Is Precious",paragraphs:[
@@ -133,7 +133,7 @@ const readingChapters = [
   {title:"Namaz: A Meeting with Allah",icon:"🕌",subtitle:"Prayer helps us remember Allah and carry goodness into our day.",source:"Original educational story; learn prayer details from a trusted parent or teacher.",art:"prayer",takeaway:"Worship Allah alone and let prayer improve your character.",start:9,end:10},
   {title:"The Soul: Our Inner Self",icon:"✨",subtitle:"Care for the part of us that thinks, loves and chooses.",source:"Original age-appropriate reflection; details of the soul are not fully known to us.",art:"soul",takeaway:"Feed your inner self with faith, truth, learning and kindness.",start:11,end:12},
   {title:"Allama Hilli: A Love of Learning",icon:"📚",subtitle:"Meet a great scholar who dedicated his life to knowledge.",source:"Child-friendly biography based on the Allama Hilli biography at Al-Islam.org.",art:"book",takeaway:"Learn with patience and use knowledge to serve others.",start:13,end:14},
-  {title:"Sheikh Ali Hallaawi: The Forty Guests",icon:"🌙",subtitle:"A traditional devotional account about sincerity, courage and the 313 special companions.",source:"Traditional devotional account associated with Sheikh Ali Hallaawi of Hilla and reported in later compilations, including Al-Abqari al-Hisan. Details differ between retellings; the 313-companion and nearly 1,200-year ending is paraphrased here, not presented as a verified verbatim quotation.",art:"courtyard",takeaway:"Love for Imam al-Mahdi should appear in our actions: sincere faith, courage, loyalty, patience and service.",start:15,end:16},
+  {title:"Sheikh Ali Hallaawi: The Forty Guests",icon:"🌙",subtitle:"A traditional devotional account about sincerity, courage and the 313 special companions.",source:"Traditional devotional account associated with Sheikh Ali Hallaawi of Hilla and reported in Al-Abqari al-Hisan by Allama Ali Akbar Nahavandi. Details differ between retellings; the 313-companion and nearly 1,200-year ending is paraphrased here, not presented as a verified verbatim quotation.",art:"courtyard",takeaway:"Love for Imam al-Mahdi should appear in our actions: sincere faith, courage, loyalty, patience and service.",start:15,end:16},
   {title:"Qur'an: Surah Al-Asr",icon:"⏳",subtitle:"A short surah with a big lesson about time, faith and patience.",source:"Qur'an 103; original child-friendly explanation, not a formal translation.",art:"time",takeaway:"Use time for faith, good actions, truth and patience.",start:17,end:18},
   {title:"Qur'an: Surah Al-Kawthar",icon:"🌸",subtitle:"Remember Allah's blessings and respond with gratitude.",source:"Qur'an 108; original child-friendly explanation, not a formal translation.",art:"flower",takeaway:"Thank Allah through worship, kindness and responsible use of blessings.",start:19,end:20},
   {title:"Qur'an: Al-Falaq and An-Nas",icon:"🌅",subtitle:"Two short surahs that teach us to seek Allah's protection.",source:"Qur'an 113–114; original child-friendly explanations, not formal translations.",art:"moon",takeaway:"Turn to Allah, make safe choices and seek help from trusted adults.",start:21,end:22}
@@ -263,20 +263,6 @@ let page=0, mode="normal", fontSize=19, showWordBorders=false;
 const $=id=>document.getElementById(id);
 const storyText=$("storyText");
 function escapeHtml(value){return value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function suggestedSyllables(word){
-  const w=word.toLowerCase();
-  if(w.length<5)return null;
-  if(/(t|d)ed$/.test(w))return [w.slice(0,-2),"ed"];
-  if(/(s|x|z|ch|sh)es$/.test(w))return [w.slice(0,-2),"es"];
-  const suffixes=["ation","ition","ment","ness","less","ful","able","ible","ing","er","est","ly","ous","ive"];
-  for(const suffix of suffixes){if(w.endsWith(suffix)&&w.length>suffix.length+2)return [w.slice(0,-suffix.length),suffix];}
-  const nuclei=[...w.matchAll(/[aeiouy]+/g)].map(m=>({start:m.index,end:m.index+m[0].length}));
-  if(nuclei.length<2)return null;
-  const cuts=[];for(let i=0;i<nuclei.length-1;i++){const a=nuclei[i],b=nuclei[i+1],gap=w.slice(a.end,b.start);cuts.push(gap.length>=2?b.start-1:a.end);}
-  const out=[];let start=0;for(const cut of cuts){if(cut>start){out.push(w.slice(start,cut));start=cut;}}out.push(w.slice(start));
-  return out.length>1?out:null;
-}
-
 function tokenInfo(token){
   const match=token.match(/[A-Za-z]+(?:'[A-Za-z]+)?/);
   if(!match)return null;
@@ -365,7 +351,7 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);r
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
-let speechRate=.2, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
+let speechRate=1.0, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
 function updateSpeechRate(){
   $("speechRate").textContent=speechRate.toFixed(1)+"×";
 }
