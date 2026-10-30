@@ -105,37 +105,71 @@ style.textContent=`
 .flag-celebration span{display:block;margin-top:4px;color:#887b60;font-size:12px;font-weight:800}
 .flag-celebration .yay-spark{position:absolute;font-size:22px;animation:flagSparkle 1.1s ease-in-out infinite alternate}
 .flag-celebration .yay-spark:nth-child(1){left:9%;top:12%}.flag-celebration .yay-spark:nth-child(2){right:10%;top:18%}.flag-celebration .yay-spark:nth-child(3){left:18%;bottom:8%}.flag-celebration .yay-spark:nth-child(4){right:19%;bottom:8%}
-.flag-page-sparkles{position:fixed;inset:0;z-index:1000;overflow:hidden;pointer-events:none}
-.flag-page-sparkles span{position:absolute;display:block;color:#d5a94f;text-shadow:0 2px 9px #e8c77b80;will-change:transform,opacity;animation:flagPageSparkle var(--spark-duration,2.8s) ease-out var(--spark-delay,0s) both}
+.flag-win-overlay{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:22px;background:rgba(16,35,27,.76);backdrop-filter:blur(7px);overflow:hidden;isolation:isolate;animation:flagOverlayIn .35s ease-out both}
+.flag-win-card{position:relative;z-index:4;width:min(92vw,520px);padding:clamp(30px,5vw,54px) 26px;text-align:center;border:2px solid #ffe6a1;border-radius:28px;background:linear-gradient(145deg,#fffdf2,#fff4dc 58%,#f9edff);box-shadow:0 24px 90px #0006;animation:flagWinCardPop .55s cubic-bezier(.16,1,.3,1) both}
+.flag-win-card .win-trophy{display:block;font-size:clamp(48px,9vw,76px);line-height:1.1;margin-bottom:12px;filter:drop-shadow(0 5px 8px #d9a43b55)}
+.flag-win-card h2{margin:0;color:#315c42;font-size:clamp(30px,6vw,46px);font-weight:1000;letter-spacing:-1.5px}
+.flag-win-card p{margin:12px auto 24px;max-width:360px;color:#74664c;font-size:15px;line-height:1.6;font-weight:700}
+.flag-win-again{min-width:210px;padding:15px 26px;border:0;border-radius:999px;background:linear-gradient(110deg,#28764c,#3e9b65);color:#fff;font:900 16px Nunito,system-ui,sans-serif;box-shadow:0 9px 22px #28764c45;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.flag-win-again:hover{transform:translateY(-3px);box-shadow:0 13px 28px #28764c55}.flag-win-again:focus-visible{outline:4px solid #e3b84e;outline-offset:4px}
+.flag-fireworks{position:absolute;inset:0;z-index:1;pointer-events:none}
+.flag-firework{position:absolute;left:var(--fx);top:var(--fy);width:8px;height:8px;border-radius:50%;background:transparent;box-shadow:0 0 0 0 transparent;animation:flagFirework 1.65s ease-out var(--fd) infinite}
+.flag-firework i{position:absolute;left:0;top:0;width:7px;height:7px;border-radius:50%;background:var(--fc);box-shadow:0 0 9px var(--fc);transform:rotate(var(--fa)) translateY(-5px);animation:flagFireworkParticle 1.65s ease-out var(--fd) infinite}
+.flag-win-sparkles{position:absolute;inset:0;z-index:2;pointer-events:none}
+.flag-win-sparkles span{position:absolute;left:var(--sx);top:var(--sy);color:#fff4b0;font-size:var(--ss);text-shadow:0 0 12px #fff,0 0 24px #ffd65e;animation:flagWinTwinkle var(--sd) ease-in-out var(--delay) infinite alternate}
 @keyframes flagYayPop{from{opacity:0;transform:scale(.88) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes flagSparkle{from{transform:scale(.7) rotate(-15deg);opacity:.55}to{transform:scale(1.2) rotate(18deg);opacity:1}}
-@keyframes flagPageSparkle{0%{opacity:0;transform:translate3d(0,22px,0) rotate(-25deg) scale(.35)}18%{opacity:1}72%{opacity:.9}100%{opacity:0;transform:translate3d(var(--spark-drift,0px),-85px,0) rotate(45deg) scale(1.25)}}
-@media(prefers-reduced-motion:reduce){.flag-celebration,.flag-celebration .yay-spark,.flag-page-sparkles span{animation:none!important}}
+@keyframes flagOverlayIn{from{opacity:0}to{opacity:1}}
+@keyframes flagWinCardPop{0%{opacity:0;transform:scale(.55) translateY(35px) rotate(-3deg)}75%{transform:scale(1.04) translateY(-4px) rotate(1deg)}100%{opacity:1;transform:scale(1) translateY(0) rotate(0)}}
+@keyframes flagFirework{0%{opacity:0;transform:scale(.1)}12%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.1)}}
+@keyframes flagFireworkParticle{0%{opacity:0;transform:rotate(var(--fa)) translateY(-5px) scale(.4)}18%{opacity:1}100%{opacity:0;transform:rotate(var(--fa)) translateY(var(--fr)) scale(.1)}}
+@keyframes flagWinTwinkle{from{opacity:.25;transform:scale(.55) rotate(-20deg)}to{opacity:1;transform:scale(1.25) rotate(25deg)}}
+@media(prefers-reduced-motion:reduce){.flag-celebration,.flag-celebration .yay-spark,.flag-win-overlay,.flag-win-card,.flag-firework,.flag-firework i,.flag-win-sparkles span{animation:none!important}.flag-win-card{opacity:1;transform:none}}
 `;
 document.head.appendChild(style);
 }
-function showerPageSparkles(){
- if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
- const old=document.querySelector(".flag-page-sparkles");if(old)old.remove();
- const layer=document.createElement("div");layer.className="flag-page-sparkles";layer.setAttribute("aria-hidden","true");
- const symbols=["✦","✧","✨","⭐","✺","⋆"];
- for(let i=0;i<42;i++){
-  const spark=document.createElement("span");spark.textContent=symbols[i%symbols.length];
-  spark.style.left=(3+Math.random()*94)+"%";spark.style.top=(5+Math.random()*88)+"%";
-  spark.style.fontSize=(13+Math.random()*19)+"px";
-  spark.style.setProperty("--spark-duration",(2.1+Math.random()*1.7)+"s");
-  spark.style.setProperty("--spark-delay",(Math.random()*.38)+"s");
-  spark.style.setProperty("--spark-drift",((Math.random()-.5)*90)+"px");
-  layer.appendChild(spark);
+function closeWinOverlay(){
+const overlay=document.querySelector(".flag-win-overlay");if(overlay)overlay.remove();
+}
+function showPerfectWinOverlay(total){
+closeWinOverlay();
+const overlay=document.createElement("div");overlay.className="flag-win-overlay";overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");overlay.setAttribute("aria-labelledby","flagWinTitle");
+const fireworks=document.createElement("div");fireworks.className="flag-fireworks";fireworks.setAttribute("aria-hidden","true");
+const colors=["#ffe36e","#ff8b6b","#8ee8c1","#a9a0ff","#fff1a8","#ff9acb"];
+for(let burst=0;burst<5;burst++){
+ const centerX=[12,88,50,28,73][burst],centerY=[25,30,12,72,78][burst];
+ for(let p=0;p<22;p++){
+  const firework=document.createElement("span");firework.className="flag-firework";
+  firework.style.setProperty("--fx",centerX+"%");firework.style.setProperty("--fy",centerY+"%");
+  firework.style.setProperty("--fd",(burst*.22+(p%5)*.035)+"s");
+  const particle=document.createElement("i");particle.style.setProperty("--fc",colors[(p+burst)%colors.length]);
+  particle.style.setProperty("--fa",(p*360/22)+"deg");particle.style.setProperty("--fr",(65+(p%4)*22)+"px");
+  firework.appendChild(particle);fireworks.appendChild(firework);
  }
- document.body.appendChild(layer);window.setTimeout(()=>layer.remove(),4300);
+}
+const sparkles=document.createElement("div");sparkles.className="flag-win-sparkles";sparkles.setAttribute("aria-hidden","true");
+const symbols=["✦","✧","✨","⋆","✺","⭐"];
+for(let i=0;i<54;i++){
+ const sparkle=document.createElement("span");sparkle.textContent=symbols[i%symbols.length];
+ sparkle.style.setProperty("--sx",(2+Math.random()*96)+"%");sparkle.style.setProperty("--sy",(3+Math.random()*94)+"%");
+ sparkle.style.setProperty("--ss",(12+Math.random()*23)+"px");sparkle.style.setProperty("--sd",(0.55+Math.random()*1.1)+"s");
+ sparkle.style.setProperty("--delay",(Math.random()*1.2)+"s");sparkles.appendChild(sparkle);
+ }
+const card=document.createElement("div");card.className="flag-win-card";
+card.innerHTML='<span class="win-trophy" aria-hidden="true">🏆🎆</span><h2 id="flagWinTitle">YAAAAY! PERFECT!</h2><p>You remembered all '+total+' flags! What an amazing memory. Ready for another challenge?</p><button class="flag-win-again" type="button">Play again ✨</button>';
+overlay.append(fireworks,sparkles,card);document.body.appendChild(overlay);
+const again=card.querySelector(".flag-win-again");
+again.addEventListener("click",()=>{closeWinOverlay();startGame();});
+again.focus();
+overlay.addEventListener("click",e=>{if(e.target===overlay){/* Keep the celebration open until Play again is chosen. */}});
 }
 function celebrateFlagWin(perfect,hits,total){
 addCelebrationStyles();
 const old=$("flagCelebration");if(old)old.remove();
+if(perfect){showPerfectWinOverlay(total);return;}
 const banner=document.createElement("div");banner.id="flagCelebration";banner.className="flag-celebration";banner.setAttribute("role","status");banner.setAttribute("aria-live","polite");
-banner.innerHTML='<span class="yay-spark" aria-hidden="true">✨</span><span class="yay-spark" aria-hidden="true">⭐</span><span class="yay-spark" aria-hidden="true">🎉</span><span class="yay-spark" aria-hidden="true">💫</span><strong>'+(perfect?'YAAAAY! 🎊':'Great spotting! 🌟')+'</strong><span>'+(perfect?'You found all '+total+' flags. What a brilliant memory!': 'You found '+hits+' out of '+total+' flags. Keep shining!')+'</span>';
-$("flagGameResult").before(banner);showerPageSparkles();
+banner.innerHTML='<span class="yay-spark" aria-hidden="true">✨</span><span class="yay-spark" aria-hidden="true">⭐</span><span class="yay-spark" aria-hidden="true">🎉</span><span class="yay-spark" aria-hidden="true">💫</span><strong>Great spotting! 🌟</strong><span>You found '+hits+' out of '+total+' flags. Keep shining!</span>';
+$("flagGameResult").before(banner);
 }
 function updateSelection(){
 $("flagSelectionCount").textContent=selected.size+" of "+targetCount+" selected";
@@ -151,7 +185,7 @@ $("flagChoicePool").innerHTML=pool.map(x=>card(x,"flag-option-card",false)).join
 updateSelection();
 }
 function startGame(){
-stopTimer();selected.clear();$("startFlagGame").hidden=true;
+stopTimer();closeWinOverlay();const oldBanner=$("flagCelebration");if(oldBanner)oldBanner.remove();selected.clear();$("startFlagGame").hidden=true;
 const list=source(),n=Math.min(Number($("flagTargetCount").value),list.length),size=Math.min(Math.max(n,Number($("flagPoolSize").value)),list.length);
 targetCount=n;targets=shuffle(list).slice(0,n);targets.forEach(x=>addUnique(progress.seen,x.code));save();updateProgress();
 pool=shuffle(targets.concat(shuffle(list.filter(x=>!targets.some(t=>t.code===x.code))).slice(0,size-n)));
@@ -195,7 +229,7 @@ return '<div class="flag-option-card '+(correct?"correct":chosen?"incorrect":"")
 }).join("");
 $("flagSelectionCount").textContent=hits.length+" / "+targets.length+" correct";
 $("checkFlagAnswers").disabled=true;$("clearFlagChoices").disabled=true;
-if(hits.length>0)celebrateFlagWin(perfect,hits.length,targets.length);
+if(perfect)celebrateFlagWin(true,hits.length,targets.length);else if(hits.length>0)celebrateFlagWin(false,hits.length,targets.length);
 $("flagGameResult").textContent=perfect?"You remembered every flag. Well done!":"The flags to remember were: "+targets.map(x=>x.name).join(", ")+". Try another round and see if you can remember them all.";
 $("nextFlagRound").hidden=false;
 });
