@@ -22,3 +22,6 @@
 .speech-speed span{min-width:34px;text-align:center;font-size:10px;font-weight:900;font-variant-numeric:tabular-nums}
 .story-word.is-speaking{background:#ffe29a!important;color:#3d513f!important;box-shadow:0 0 0 2px #f2c96f;border-radius:5px}
 .story-text p.is-speaking-paragraph{background:linear-gradient(90deg,#fffaf0,transparent);border-radius:7px}
+
+/* Give early readers a little more visual room between words. */
+.story-text{word-spacing:.18em;}
