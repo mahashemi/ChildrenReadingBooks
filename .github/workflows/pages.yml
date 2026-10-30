@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -23,6 +23,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Download and vendor flag SVGs
+        run: node scripts/vendor-flags.mjs
+      - name: Commit local flag assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/flags
+          if ! git diff --cached --quiet; then
+            git commit -m "Vendor local flag SVG assets"
+            git push
+          fi
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
