@@ -190,7 +190,7 @@ function selectWord(target){
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
   $("wordPanel").hidden=false;
-  speakText(target.dataset.word,.72);
+  speakText(target.dataset.word);
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
@@ -202,16 +202,16 @@ $("nextPage").addEventListener("click",()=>{if(page<storyPages.length-1){page++;
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
-$("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent,.84));
-function speakText(text,rate=.82){
+$("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
+function speakText(text){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
   if(window.speechSynthesis.speaking||window.speechSynthesis.pending)window.speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(text);
-  utterance.lang="en-GB";
-  utterance.rate=rate;
+  // Leave voice, language and rate unset so the browser uses its default system voice and settings.
+  const cleanText=String(text).replace(/\\s+/g," ").trim();
+  const utterance=new SpeechSynthesisUtterance(cleanText);
   window.speechSynthesis.speak(utterance);
 }
-$("readAloud").addEventListener("click",()=>speakText(storyPages[page].paragraphs.join(" "),.82));
+$("readAloud").addEventListener("click",()=>speakText(storyPages[page].paragraphs.join(" ")));
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
 function navigate(view){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
