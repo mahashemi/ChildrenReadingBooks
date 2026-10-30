@@ -12,3 +12,6 @@
 
 .meaning-audio-button{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:7px 10px;border:1px solid #dfe9dc!important;border-radius:9px;background:#edf4ec!important;color:#55785a!important;font-size:10px!important;font-weight:900;}
 .meaning-audio-button:hover{background:#e3eee1!important;}
+
+/* Keep a syllabified word together so its two halves cannot wrap onto separate lines. */
+.story-word.syllabified,.story-word.mixed-word{display:inline-block;white-space:nowrap;}
