@@ -15,3 +15,10 @@
 
 /* Keep a syllabified word together so its two halves cannot wrap onto separate lines. */
 .story-word.syllabified,.story-word.mixed-word{display:inline-block;white-space:nowrap;}
+
+/* Live read-aloud feedback and adjustable speech speed */
+.speech-speed{display:inline-flex;align-items:center;gap:7px;padding:3px 5px;border:1px solid #e9ece5;border-radius:9px;background:#fff;color:#607563}
+.speech-speed button{width:25px;height:25px;padding:0!important;border:0!important;border-radius:6px;background:#edf4ec!important;color:#55785a!important;font-size:16px!important;line-height:1}
+.speech-speed span{min-width:34px;text-align:center;font-size:10px;font-weight:900;font-variant-numeric:tabular-nums}
+.story-word.is-speaking{background:#ffe29a!important;color:#3d513f!important;box-shadow:0 0 0 2px #f2c96f;border-radius:5px}
+.story-text p.is-speaking-paragraph{background:linear-gradient(90deg,#fffaf0,transparent);border-radius:7px}
