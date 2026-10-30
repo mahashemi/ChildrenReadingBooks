@@ -186,6 +186,7 @@ function renderStory(){
   $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it and see what it means.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and see what it means.":"Read in ordinary English spelling. Tap a word to hear it and see what it means.";
 }
 function selectWord(target){
+  if(isReadingStory)stopReading();
   $("wordDisplay").textContent=target.dataset.word;
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
@@ -195,23 +196,104 @@ function selectWord(target){
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
 document.querySelectorAll(".mode-button").forEach(btn=>btn.addEventListener("click",()=>{
-  mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
+  if(isReadingStory)stopReading();mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
 }));
-$("previousPage").addEventListener("click",()=>{if(page>0){page--;renderStory();}});
-$("nextPage").addEventListener("click",()=>{if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished the story. 🌟");page=0;renderStory();}});
+$("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page>0){page--;renderStory();}});
+$("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished the story. 🌟");page=0;renderStory();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
+
+let speechRate=1, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
+function updateSpeechRate(){
+  $("speechRate").textContent=speechRate.toFixed(1)+"×";
+}
+function clearSpeechHighlight(){
+  storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
+}
+function stopReading(){
+  storyReadToken++;
+  isReadingStory=false;
+  if("speechSynthesis" in window)window.speechSynthesis.cancel();
+  clearSpeechHighlight();
+  $("readAloud").textContent="🔊 Listen";
+  $("readAloud").setAttribute("title","Read this page aloud");
+}
 function speakText(text){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
-  if(window.speechSynthesis.speaking||window.speechSynthesis.pending)window.speechSynthesis.cancel();
-  // Leave voice, language and rate unset so the browser uses its default system voice and settings.
-  const cleanText=String(text).replace(/\\s+/g," ").trim();
+  window.speechSynthesis.cancel();
+  const cleanText=String(text).replace(/\s+/g," ").trim();
   const utterance=new SpeechSynthesisUtterance(cleanText);
+  utterance.rate=speechRate;
+  // Voice and language remain unset: the browser chooses its own default voice.
   window.speechSynthesis.speak(utterance);
 }
-$("readAloud").addEventListener("click",()=>speakText(storyPages[page].paragraphs.join(" ")));
+function highlightSpokenWord(paragraphIndex,charIndex){
+  clearSpeechHighlight();
+  const paragraph=storyPages[page].paragraphs[paragraphIndex];
+  const tokens=[...paragraph.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)];
+  const tokenIndex=tokens.findIndex(match=>charIndex>=match.index&&charIndex<match.index+match[0].length);
+  const paragraphNode=storyText.children[paragraphIndex];
+  if(!paragraphNode)return;
+  paragraphNode.classList.add("is-speaking-paragraph");
+  if(tokenIndex<0)return;
+  const wordNodes=paragraphNode.querySelectorAll(".story-word");
+  const active=wordNodes[tokenIndex];
+  if(active)active.classList.add("is-speaking");
+}
+function speakStoryParagraph(token,paragraphIndex){
+  if(token!==storyReadToken||!isReadingStory)return;
+  const paragraphs=storyPages[page].paragraphs;
+  if(paragraphIndex>=paragraphs.length){
+    isReadingStory=false;
+    clearSpeechHighlight();
+    $("readAloud").textContent="🔊 Listen";
+    $("readAloud").setAttribute("title","Read this page aloud");
+    return;
+  }
+  currentSpeechParagraph=paragraphIndex;
+  const paragraphText=paragraphs[paragraphIndex];
+  const utterance=new SpeechSynthesisUtterance(paragraphText);
+  utterance.rate=speechRate;
+  // Do not set voice or language; allow the browser to choose its default.
+  utterance.onboundary=event=>{
+    if(token!==storyReadToken||!isReadingStory)return;
+    if(typeof event.charIndex==="number")highlightSpokenWord(paragraphIndex,event.charIndex);
+  };
+  utterance.onend=()=>speakStoryParagraph(token,paragraphIndex+1);
+  utterance.onerror=event=>{
+    if(token!==storyReadToken)return;
+    isReadingStory=false;
+    clearSpeechHighlight();
+    $("readAloud").textContent="🔊 Listen";
+    if(event.error!=="canceled"&&event.error!=="interrupted")showToast("The reader could not finish speaking.");
+  };
+  window.speechSynthesis.speak(utterance);
+}
+function startStoryReading(){
+  if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
+  window.speechSynthesis.cancel();
+  clearSpeechHighlight();
+  storyReadToken++;
+  isReadingStory=true;
+  currentSpeechParagraph=0;
+  $("readAloud").textContent="⏹ Stop";
+  $("readAloud").setAttribute("title","Stop reading");
+  speakStoryParagraph(storyReadToken,0);
+}
+$("readAloud").addEventListener("click",()=>isReadingStory?stopReading():startStoryReading());
+$("slowerSpeech").addEventListener("click",()=>{
+  speechRate=Math.max(.6,Math.round((speechRate-.1)*10)/10);
+  updateSpeechRate();
+  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
+});
+$("fasterSpeech").addEventListener("click",()=>{
+  speechRate=Math.min(1.5,Math.round((speechRate+.1)*10)/10);
+  updateSpeechRate();
+  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
+});
+updateSpeechRate();
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
 function navigate(view){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
