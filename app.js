@@ -81,15 +81,17 @@ storyPages.push(
     "Knowledge should not make us proud or unkind. It should help us understand our duties and serve people better.",
     "Akhlaq lesson: respect teachers, keep learning, think carefully and use knowledge to help others. This is a child-friendly biography, not a retelling of a single miracle story."
   ]},
-  {title:"Forty Friends Make a Promise",paragraphs:[
-    "This is an imaginative story for learning; it is not a hadith or a report of a historical event.",
-    "In a small town, forty children formed a group called the Friends of Justice. They loved Imam al-Mahdi (may Allah hasten his reappearance) and wanted to become people who would support truth.",
-    "They made a promise: each child would practise honesty, help someone, learn something useful and stand beside a person who was treated unfairly."
+  {title:"A Question in Sheikh Ali's Heart",paragraphs:[
+    "Long ago, in the Iraqi city of Hilla, there lived a devoted man named Sheikh Ali Hallaawi. He often wondered: “If Imam al-Mahdi has 313 special companions, why has he not reappeared? Surely there are many good people in the world.”",
+    "According to a traditional devotional account, one day a stranger approached Sheikh Ali and revealed that he was Imam al-Mahdi. The Imam told him that, in Hilla, only Sheikh Ali and a local butcher were truly ready to stand beside him.",
+    "The Imam asked Sheikh Ali to invite forty people he considered especially pious to his home on Thursday night. He also asked him to invite the butcher and prepare two goats on the roof. Sheikh Ali was excited and followed the instructions."
   ]},
-  {title:"Ready Hearts, Helpful Hands",paragraphs:[
-    "The children discovered that preparing for a just world begins with today's choices. One returned something that was lost. Another stopped a cruel joke. Others cared for an elderly neighbour.",
-    "They learned that narrations speak of 313 special companions of Imam al-Mahdi, but we must not claim that reaching this number by itself makes the reappearance happen. The full matter belongs to Allah and includes conditions we cannot control.",
-    "Aqa'id and Akhlaq lesson: love for the Imam should make us more truthful, fair, brave, knowledgeable and helpful. We prepare ourselves by doing good now."
+  {title:"The Forty Guests and the 313 Companions",paragraphs:[
+    "After the night prayer, the forty guests gathered in Sheikh Ali's courtyard. They remembered Allah and sent blessings upon the Prophet Muhammad and his family. The butcher went up to the roof with his knife.",
+    "The butcher was asked to slaughter the first goat. Its blood flowed down through the roof's rainwater pipe into the courtyard. The guests could not see what had happened above them. They feared that the butcher had been killed.",
+    "Then Sheikh Ali was called upstairs. The second goat was slaughtered, and more blood flowed down. The guests now feared that Sheikh Ali had been killed too. Frightened that they might be next, all forty hurried away. Not one stayed.",
+    "Sheikh Ali returned to find an empty courtyard. The Imam explained that the guests had spoken of love and loyalty, but fear had made them run. In the version of the story remembered by many people, the Imam then explains that if 313 people with genuine faith, love, courage and loyalty were ready together, it would become necessary for him to reappear by Allah's permission. He had been waiting nearly 1,200 years for such companions—not merely people who said they loved him.",
+    "The lesson is not to count other people or judge their hearts. It is to prepare our own hearts: be truthful, brave, loyal, patient and ready to help others."
   ]},
   {title:"Surah Al-Asr: Time Is Precious",paragraphs:[
     "Surah Al-Asr is the 103rd chapter of the Qur'an. It is very short, but it gives us a powerful reminder about time and the way we live.",
@@ -98,7 +100,7 @@ storyPages.push(
   ]},
   {title:"Make Your Time Shine",paragraphs:[
     "A minute can be used to comfort a friend, read a page, say a prayer or help at home. Time is a gift that we cannot bring back.",
-    "Surah Al-Asr connects belief with good actions, encouraging one another toward truth and patience. This is a child-friendly summary, not a verbatim translation.",
+    "Surah Al-Asr connects belief with good actions, encouraging one another toward truth and patience.",
     "Akhlaq lesson: use your time well. Be faithful, do good, tell the truth and stay patient."
   ]},
   {title:"Surah Al-Kawthar: A Gift from Allah",paragraphs:[
@@ -108,7 +110,7 @@ storyPages.push(
   ]},
   {title:"A Thankful Heart",paragraphs:[
     "Hassan was grateful for his food, his family and the chance to learn. He decided not to waste his lunch and to share with a friend who had forgotten theirs.",
-    "Surah Al-Kawthar teaches us to turn toward Allah in worship and gratitude. The explanation here is a simple meaning summary, not a translation.",
+    "Surah Al-Kawthar teaches us to turn toward Allah in worship and gratitude.",
     "Aqa'id and Akhlaq lesson: Allah is the giver of blessings. Thank Him through prayer, kindness and using what you have responsibly."
   ]},
   {title:"Surah Al-Falaq: Ask for Protection",paragraphs:[
@@ -119,7 +121,7 @@ storyPages.push(
   {title:"Surah An-Nas: Allah Is Our Lord",paragraphs:[
     "Surah An-Nas is the 114th and final chapter of the Qur'an. It teaches us to seek refuge in Allah, the Lord and Creator of people.",
     "It reminds us that whispers can invite people toward wrong choices. We can ask Allah for help, remember what is right and choose good company.",
-    "Aqa'id lesson: Allah cares for His creation and is the One we turn to for protection. These are child-friendly summaries, not verbatim translations."
+    "Aqa'id lesson: Allah cares for His creation and is the One we turn to for protection."
   ]}
 );
 
@@ -131,10 +133,10 @@ const readingChapters = [
   {title:"Namaz: A Meeting with Allah",icon:"🕌",subtitle:"Prayer helps us remember Allah and carry goodness into our day.",source:"Original educational story; learn prayer details from a trusted parent or teacher.",art:"prayer",takeaway:"Worship Allah alone and let prayer improve your character.",start:9,end:10},
   {title:"The Soul: Our Inner Self",icon:"✨",subtitle:"Care for the part of us that thinks, loves and chooses.",source:"Original age-appropriate reflection; details of the soul are not fully known to us.",art:"soul",takeaway:"Feed your inner self with faith, truth, learning and kindness.",start:11,end:12},
   {title:"Allama Hilli: A Love of Learning",icon:"📚",subtitle:"Meet a great scholar who dedicated his life to knowledge.",source:"Child-friendly biography based on the Allama Hilli biography at Al-Islam.org.",art:"book",takeaway:"Learn with patience and use knowledge to serve others.",start:13,end:14},
-  {title:"Forty Friends of the Imam",icon:"⭐",subtitle:"An imaginative story about preparing ourselves for justice.",source:"Original imaginative story—not a hadith or historical report. 313 companions are mentioned in Shia narrations; their number alone is not a guarantee or countdown to reappearance.",art:"stars",takeaway:"Show love for Imam al-Mahdi through truth, fairness, courage and service.",start:15,end:16},
-  {title:"Qur'an: Surah Al-Asr",icon:"⏳",subtitle:"A short surah with a big lesson about time, faith and patience.",source:"Qur'an 103. Child-friendly meaning summary, not a verbatim translation.",art:"time",takeaway:"Use time for faith, good actions, truth and patience.",start:17,end:18},
-  {title:"Qur'an: Surah Al-Kawthar",icon:"🌸",subtitle:"Remember Allah's blessings and respond with gratitude.",source:"Qur'an 108. Child-friendly meaning summary, not a verbatim translation.",art:"flower",takeaway:"Thank Allah through worship, kindness and responsible use of blessings.",start:19,end:20},
-  {title:"Qur'an: Al-Falaq and An-Nas",icon:"🌅",subtitle:"Two short surahs that teach us to seek Allah's protection.",source:"Qur'an 113–114. Child-friendly meaning summaries, not verbatim translations.",art:"moon",takeaway:"Turn to Allah, make safe choices and seek help from trusted adults.",start:21,end:22}
+  {title:"Sheikh Ali Hallaawi: The Forty Guests",icon:"🌙",subtitle:"A traditional devotional account about sincerity, courage and the 313 special companions.",source:"Traditional devotional account associated with Sheikh Ali Hallaawi of Hilla and reported in later compilations, including Al-Abqari al-Hisan. Details differ between retellings; the 313-companion and nearly 1,200-year ending is paraphrased here, not presented as a verified verbatim quotation.",art:"courtyard",takeaway:"Love for Imam al-Mahdi should appear in our actions: sincere faith, courage, loyalty, patience and service.",start:15,end:16},
+  {title:"Qur'an: Surah Al-Asr",icon:"⏳",subtitle:"A short surah with a big lesson about time, faith and patience.",source:"Qur'an 103; original child-friendly explanation, not a formal translation.",art:"time",takeaway:"Use time for faith, good actions, truth and patience.",start:17,end:18},
+  {title:"Qur'an: Surah Al-Kawthar",icon:"🌸",subtitle:"Remember Allah's blessings and respond with gratitude.",source:"Qur'an 108; original child-friendly explanation, not a formal translation.",art:"flower",takeaway:"Thank Allah through worship, kindness and responsible use of blessings.",start:19,end:20},
+  {title:"Qur'an: Al-Falaq and An-Nas",icon:"🌅",subtitle:"Two short surahs that teach us to seek Allah's protection.",source:"Qur'an 113–114; original child-friendly explanations, not formal translations.",art:"moon",takeaway:"Turn to Allah, make safe choices and seek help from trusted adults.",start:21,end:22}
 ];
 readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
@@ -257,7 +259,7 @@ Object.assign(meanings, {
   teach:"To help someone learn.",
   title:"The name of a story, book, or piece of writing."
 });
-let page=0, mode="syllables", fontSize=19;
+let page=0, mode="normal", fontSize=19, showWordBorders=false;
 const $=id=>document.getElementById(id);
 const storyText=$("storyText");
 function escapeHtml(value){return value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -281,7 +283,7 @@ function tokenInfo(token){
   const original=match[0], possessive=/'s$/i.test(original);
   const base=possessive?original.slice(0,-2):original;
   const reviewed=syllables[base.toLowerCase()]||null;
-  const parts=reviewed||(!oneSyllable.has(base.toLowerCase())?suggestedSyllables(base):null);
+  const parts=reviewed;
   const isKnownOne=oneSyllable.has(base.toLowerCase());
   return {original,base,possessive,parts,isKnownOne,reviewed:!!reviewed,known:!!reviewed||isKnownOne};
 }
@@ -323,6 +325,7 @@ function renderStory(){
   $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
   storyText.style.fontSize=fontSize+"px";
   storyText.innerHTML=current.paragraphs.map(p=>"<p>"+renderParagraph(p)+"</p>").join("");
+  storyText.classList.toggle("word-borders-visible",showWordBorders);
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
   $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
@@ -345,6 +348,13 @@ function selectWord(target){
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
+$("toggleWordBorders").addEventListener("click",()=>{
+  showWordBorders=!showWordBorders;
+  storyText.classList.toggle("word-borders-visible",showWordBorders);
+  $("toggleWordBorders").textContent=showWordBorders?"Borders: On":"Borders: Off";
+  $("toggleWordBorders").setAttribute("aria-pressed",String(showWordBorders));
+  $("toggleWordBorders").setAttribute("aria-label",showWordBorders?"Hide word borders":"Show word borders");
+});
 document.querySelectorAll(".mode-button").forEach(btn=>btn.addEventListener("click",()=>{
   if(isReadingStory)stopReading();mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
 }));
