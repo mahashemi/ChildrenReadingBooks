@@ -4,7 +4,7 @@
 
 Every religious teaching, moral conclusion, or statement about belief in a reading chapter must be traceable to the Qur'an or to a named Shia hadith source. A source note must identify the surah and verses, or the hadith collection and location. Child-friendly paraphrases must never be presented as verbatim translations or quotations.
 
-A fictional child and an everyday situation may be used only as an illustration of a teaching already established by the Qur'an or a Shia hadith. The fictional scene is not evidence for the teaching. Do not invent dialogue for a Prophet or an Imam.
+Fictional child characters and everyday situations may be used only as illustrations of teachings already established by the Qur'an or a Shia hadith. Such scenes must be understood as fictional examples, not evidence for the teaching. Do not invent dialogue for a Prophet or an Imam. Historical biographies and devotional anecdotes must be clearly identified as such and must never be used as proof of a religious claim.
 
 When a report's chain or grading is disputed, say so or avoid relying on it as a definitive proof. A citation to a hadith collection does not, by itself, mean every report in that collection is authentic.
 
