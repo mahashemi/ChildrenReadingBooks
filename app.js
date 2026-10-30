@@ -41,20 +41,20 @@ const oneSyllable = new Set((
   "a an and be best bow boy bring but care close could did dream dreams feared feel felt for from good grow had he hearts him his in is it keep kind knew knows learn life lived long loved make might named night not of one or our plan safe saw see seemed shared should some stars sun teach tell that the them there they things to told trust us warned was we went what with wise words would"
 ).split(/\s+/).filter(Boolean));
 const soundGuides = {
-  lived: "One beat. Short i, as in sit; finish with a d sound.",
-  loved: "One beat. Finish with a d sound.",
-  feared: "One beat. Finish with a d sound.",
-  seemed: "One beat. Hold the ee sound, then finish with d.",
-  named: "One beat. Hold the a sound, then finish with d.",
-  warned: "One beat. Finish with a d sound.",
-  helped: "One beat. Finish with a t sound.",
-  asked: "One beat. Finish with a t sound.",
-  shared: "One beat. Finish with a d sound.",
-  listened: "Two beats. The -ed ending sounds like a soft id.",
-  wanted: "Two beats. Here, -ed adds another beat: want + id.",
-  decided: "Three beats. The -ed ending adds an id sound.",
-  reminded: "Three beats. The -ed ending adds an id sound.",
-  remembered: "Three beats. The -ed ending adds an id sound."
+  lived: "Short i, as in sit; finish with a d sound.",
+  loved: "Short u, as in sun; finish with a d sound.",
+  feared: "The vowel sounds like ear in hear; finish with d.",
+  seemed: "Hold the ee sound, then finish with d.",
+  named: "The a says its name; finish with d.",
+  warned: "The vowel sounds like or; finish with d.",
+  helped: "The ending is a t sound.",
+  asked: "The ending is a t sound.",
+  shared: "The vowel sounds like air; finish with d.",
+  listened: "The -ed ending sounds like d; it does not add a syllable.",
+  wanted: "Here, -ed sounds like id and adds a syllable.",
+  decided: "The -ed ending sounds like id and adds a syllable.",
+  reminded: "The -ed ending sounds like id and adds a syllable.",
+  remembered: "The -ed ending sounds like id and adds a syllable."
 };
 const meanings = {
   wonderful:"Very special or amazing.", excitement:"A happy, eager feeling when something important happens.",
@@ -167,7 +167,7 @@ function renderParagraph(paragraph){
     const isMulti=!!parts&&parts.length>1;
     const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=6):false;
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
-    const breakdown=parts?parts.join("-")+(possessive?"'s":""):soundGuides[base.toLowerCase()]||"";
+    const breakdown=parts?parts.join("-")+(possessive?"'s":"")+(soundGuides[base.toLowerCase()]?" · "+soundGuides[base.toLowerCase()]:""):soundGuides[base.toLowerCase()]||"";
     const meaning=meanings[base.toLowerCase()]||"Meaning not added yet.";
     const className=shouldBreak?(mode==="mixed"?"mixed-word":"syllabified"):"";
     return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
@@ -183,7 +183,7 @@ function renderStory(){
   $("nextPage").textContent=page===storyPages.length-1?"Finish story ✓":"Next page →";
   $("progressDots").innerHTML=storyPages.map((_,i)=>'<i class="'+(i===page?"on":"")+'"></i>').join("");
   $("wordPanel").hidden=true;
-  $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it and see what it means.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and see what it means.":"Read in ordinary English spelling. Tap a word to explore it.";
+  $("modeHint").textContent=mode==="syllables"?"Multisyllabic words are divided. Tap any word to hear it and see what it means.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and see what it means.":"Read in ordinary English spelling. Tap a word to hear it and see what it means.";
 }
 function selectWord(target){
   $("wordDisplay").textContent=target.dataset.word;
