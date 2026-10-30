@@ -69,6 +69,38 @@ const meanings = {
   shared:"Gave or told something to another person.", care:"Kind attention; looking after someone or something.",
   best:"The very finest or most helpful.", words:"Things we say or write; parts of language.", night:"The dark part of each day when the sun is not visible."
 };
+Object.assign(meanings, {
+  long:"Lasting for a lot of time, or measuring a great distance.",
+  lived:"Made a home and spent time in a place.", boy:"A male child.",
+  named:"Gave someone or something a name.", saw:"Looked at something with your eyes.",
+  seemed:"Looked or felt as if something were true.", told:"Said something to another person.",
+  went:"Moved from one place to another.", might:"Could possibly happen.",
+  make:"To create or do something.", feared:"Was afraid that something bad might happen.",
+  reminded:"Helped someone remember something.", knew:"Already understood or had information.",
+  felt:"Had a feeling or emotion.", decided:"Made a choice after thinking.",
+  some:"A number or amount, but not all.", dreams:"Pictures and events your mind experiences while you sleep.",
+  bring:"To carry or take something with you.", lesson:"Something useful that we learn.",
+  cannot:"Are not able to do something.", see:"To notice something with your eyes.",
+  keep:"To continue having or doing something.", hearts:"The organs in our chests; also a word for our feelings.",
+  close:"Near to someone or something.", good:"Kind, helpful, or right.",
+  there:"In that place.", what:"A word used to ask about a thing or idea.",
+  be:"To exist or have a particular state.", is:"A word that tells what someone or something is.",
+  was:"The past form of 'is' or 'am'.", had:"Owned, held, or experienced something in the past.",
+  his:"Belonging to a boy or man.", him:"A word used when talking about a boy or man.",
+  he:"A word used instead of a boy's or man's name.", it:"A word used for a thing or animal.",
+  they:"A word used for two or more people or things.", us:"A word meaning 'you and me' or 'our group'.",
+  we:"A word meaning 'you and me' or 'our group'.", our:"Belonging to us.",
+  an:"A word used before a word that begins with a vowel sound.",
+  a:"A word used before one person or thing.", the:"A word used for a particular person or thing.",
+  and:"A word that joins words or ideas.", but:"A word that shows a difference between two ideas.",
+  not:"A word that makes a statement negative.", in:"Inside or within something.",
+  of:"A word that shows belonging or connection.", to:"A word that can show direction or purpose.",
+  for:"A word that can show who receives or benefits from something.",
+  would:"A word used to talk about what may happen in a situation.",
+  should:"A word used to say what is a good or right thing to do.",
+  learn:"To get knowledge or a new skill.", tell:"To say something or give information.",
+  are:"A word used to describe people or things now.", one:"The number 1; a single person or thing."
+});
 const imagination = {
   wonderful:"Imagine seeing a rainbow after the rain. It feels wonderful!",
   excitement:"Imagine the happy feeling just before your birthday party.",
@@ -136,8 +168,8 @@ function renderParagraph(paragraph){
     const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=6):false;
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
     const breakdown=parts?parts.join("-")+(possessive?"'s":""):isKnownOne?"One syllable":"Review needed";
-    const meaning=meanings[base.toLowerCase()]||"A word used in this story. Listen to it, read the sentence again and ask what it tells you.";
-    const imagine=imagination[base.toLowerCase()]||"Picture the moment in the story when this word is used. What would you see, hear or feel?";
+    const meaning=meanings[base.toLowerCase()]||"Meaning not added yet.";
+    const imagine=imagination[base.toLowerCase()]||"";
     const className=shouldBreak?(mode==="mixed"?"mixed-word":"syllabified"):"";
     return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" data-imagine="'+escapeHtml(imagine)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
   }).join("");
@@ -159,6 +191,7 @@ function selectWord(target){
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
   $("wordImagine").textContent=target.dataset.imagine;
+  document.querySelector(".imagination-section").hidden=!target.dataset.imagine;
   $("wordPanel").hidden=false;
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
@@ -173,16 +206,13 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);r
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 function speakText(text,rate=.82){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
-  window.speechSynthesis.cancel();
+  if(window.speechSynthesis.speaking||window.speechSynthesis.pending)window.speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(text);
   utterance.lang="en-US";
   utterance.rate=rate;
-  const voices=window.speechSynthesis.getVoices();
-  const usVoice=voices.find(voice=>/^en-US$/i.test(voice.lang))||voices.find(voice=>/^en[-_]US/i.test(voice.lang));
-  if(usVoice)utterance.voice=usVoice;
   window.speechSynthesis.speak(utterance);
 }
-$("wordSound").addEventListener("click",()=>speakText($("wordDisplay").textContent,.72));
+$("wordSound").addEventListener("click",()=>speakText($("wordDisplay").textContent,.78));
 $("meaningSound").addEventListener("click",()=>speakText($("wordMeaning").textContent,.84));
 $("imagineSound").addEventListener("click",()=>speakText($("wordImagine").textContent,.84));
 $("readAloud").addEventListener("click",()=>speakText(storyPages[page].paragraphs.join(" "),.82));
