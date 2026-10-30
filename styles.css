@@ -9,3 +9,9 @@
 .word-explorer-section b{display:block;font-size:10px;color:#536d57}
 .word-explorer-section p{font-size:12px;line-height:1.6;color:#657468;margin:5px 0 0}
 .imagination-section{background:#fff8e9}
+
+
+/* Audio controls in the word explorer */
+.explorer-audio-button{display:inline-flex;align-items:center;gap:6px;margin-top:8px;border:1px solid #dce9d9;background:#fff;border-radius:9px;padding:7px 10px;color:#47785a;font-size:10px;font-weight:900;cursor:pointer}
+.explorer-audio-button:hover{background:#f2f8ef}
+.word-explorer-actions button:focus-visible,.explorer-audio-button:focus-visible{outline:3px solid #d9b66a;outline-offset:2px}
