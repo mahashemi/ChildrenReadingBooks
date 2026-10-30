@@ -190,7 +190,7 @@ function selectWord(target){
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
   $("wordPanel").hidden=false;
-  speakText(target.dataset.word,.78);
+  speakText(target.dataset.word,.72);
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
@@ -202,11 +202,12 @@ $("nextPage").addEventListener("click",()=>{if(page<storyPages.length-1){page++;
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
+$("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent,.84));
 function speakText(text,rate=.82){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
   if(window.speechSynthesis.speaking||window.speechSynthesis.pending)window.speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(text);
-  utterance.lang="en-US";
+  utterance.lang="en-GB";
   utterance.rate=rate;
   window.speechSynthesis.speak(utterance);
 }
