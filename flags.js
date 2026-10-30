@@ -6,6 +6,9 @@ const $=id=>document.getElementById(id);
 const countries=entries.filter(x=>x.status==="country");
 const extras=entries.filter(x=>x.status!=="country");
 const storageKey="littleLanterns.flagProgress.v1";
+const gridColumnsKey="littleLanterns.flagGridColumns.v1";
+let gridColumns=5;
+try{const savedColumns=Number(localStorage.getItem(gridColumnsKey));if([3,4,5].includes(savedColumns))gridColumns=savedColumns;}catch(e){}
 let progress={seen:[],known:[],clicks:0,rounds:0,correct:0};
 try{const saved=JSON.parse(localStorage.getItem(storageKey)||"null");if(saved&&Array.isArray(saved.seen)&&Array.isArray(saved.known))progress=Object.assign(progress,saved);}catch(e){}
 const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(progress));}catch(e){}};
@@ -57,6 +60,8 @@ if(region!=="all"&&region!=="territories")list=list.filter(x=>x.continent===regi
 if(q)list=list.filter(x=>x.name.toLowerCase().includes(q)||x.code.toLowerCase().includes(q));
 $("flagLibraryCount").textContent=list.length+" "+(region==="territories"?"territories & special-status places":"countries");
 const hide=$("flagTestMode").checked;
+$("flagGridColumns").value=String(gridColumns);
+$("flagLibraryGrid").style.setProperty("--flag-grid-columns",String(gridColumns));
 $("flagLibraryGrid").innerHTML=list.map(entry=>{
 const known=progress.known.includes(entry.code),show=!hide||revealed.has(entry.code);
 const label=show?nameHtml(entry):'<span class="flag-hidden-name">Tap to reveal name</span>';
@@ -75,6 +80,7 @@ $("flagContinentFilter").addEventListener("change",renderLibrary);
 $("flagReadingLevel").addEventListener("change",()=>{$("flagGameReadingLevel").value=$("flagReadingLevel").value;renderLibrary();});
 $("flagGameReadingLevel").addEventListener("change",()=>{$("flagReadingLevel").value=$("flagGameReadingLevel").value;renderLibrary();});
 $("flagTestMode").addEventListener("change",renderLibrary);
+$("flagGridColumns").addEventListener("change",()=>{const value=Number($("flagGridColumns").value);if(![3,4,5].includes(value))return;gridColumns=value;try{localStorage.setItem(gridColumnsKey,String(gridColumns));}catch(e){}renderLibrary();});
 
 function card(entry,cls,showName){
 return '<button type="button" class="'+cls+'" data-code="'+entry.code+'" aria-label="'+(showName?escapeHtml(entry.name):"Flag option")+'">'+flagMarkup(entry)+(showName?nameHtml(entry):"")+'</button>';
