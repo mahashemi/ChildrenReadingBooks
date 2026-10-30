@@ -165,7 +165,7 @@ storyPages.push(
 );
 
 const readingChapters = [
-  {title:"A Special Dream",icon:"🌌",subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling inspired by Surah Yusuf 12:4–6; not a direct translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
+  {title:"A Special Dream",icon:"🌌",subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling based on Surah Yusuf 12:4–6; the patience lesson also draws on 12:18 and 12:90. Not a verbatim translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
   {
     "title": "Anger: Control Is Strength",
     "icon": "💛",
