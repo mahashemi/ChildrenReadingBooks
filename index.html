@@ -126,13 +126,14 @@
             <label>Country collection<select id="flagGameCollection"><option value="countries" selected>195 countries</option><option value="all">Countries + territories</option></select></label>
             <label>Reading level<select id="flagGameReadingLevel"><option value="beginner">Beginner</option><option value="developing" selected>Developing</option><option value="confident">Confident</option></select></label>
           </div>
-          <button class="button button-primary flag-start-button" id="startFlagGame" type="button">Start a new challenge →</button>
+          
         </aside>
         <div class="workspace-main">
           <div class="flag-game-panel" id="flagGamePanel">
             <div class="flag-game-topline"><span class="tag tag-green" id="flagGamePhase">READY TO PLAY</span><span class="flag-countdown" id="flagGameTimer" role="timer" aria-live="off">5 seconds</span></div>
             <h2 id="flagGameTitle">Ready to test your memory?</h2>
             <p id="flagGameInstruction">Choose your settings, then start. You will see the target flags before they disappear.</p>
+            <button class="button button-primary flag-start-button" id="startFlagGame" type="button">Start a new challenge →</button>
             <div class="flag-target-grid" id="flagTargets" aria-live="polite"></div>
             <div class="flag-pool-wrap" id="flagPoolWrap" hidden>
               <div class="flag-pool-heading"><div><b>Find all the flags you just saw</b><small id="flagSelectionCount">0 selected</small></div><span class="tag tag-gold" id="flagTargetBadge">3 to find</span></div>
