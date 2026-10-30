@@ -205,7 +205,7 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);r
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
-let speechRate=.4, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
+let speechRate=.2, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
 function updateSpeechRate(){
   $("speechRate").textContent=speechRate.toFixed(1)+"×";
 }
