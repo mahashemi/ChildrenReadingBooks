@@ -20,6 +20,7 @@ When a report's chain or grading is disputed, say so or avoid relying on it as a
 - Qur'an 3:134: those who restrain anger and pardon people.
 - Al-Kafi, vol. 2, p. 110, hadith 7: report from Imam al-Baqir on restraining anger while able to act on it.
 - Al-Kafi, vol. 2, p. 303, hadith 3: Imam al-Sadiq's statement that anger is a key to evil.
+- Tuhaf al-'Uqul, no. 286: Imam al-Baqir's teaching that there is no strength like restraining anger.
 - Reference guide with Arabic and citations: [Mizan al-Hikmah — Anger](https://al-islam.org/mizan-al-hikmah-scale-wisdom/anger).
 - The Sami-and-sister situation is a fictional illustration. The lesson is restraint and pardon; no breathing technique or unsupported psychological claim is taught as a religious instruction.
 
@@ -53,6 +54,7 @@ When a report's chain or grading is disputed, say so or avoid relying on it as a
 - Al-Kafi, Book of the Merit of Knowledge, report 8/65: Imam al-Sadiq teaches that knowledge should be accompanied by forbearance, dignity and humility.
 - Reference with Arabic and citations: [Selections from Usul al-Kafi — The Book of the Merit of Knowledge](https://al-islam.org/al-tawhid/general-al-tawhid/selections-usul-al-kafi-al-kulayni/2-book-merit-knowledge-kitab-fadl-al-ilm).
 - The Zaynab classroom scene is a fictional illustration, not a historical report.
+- Al-Kafi, vol. 1, p. 48, hadith 4 (as cited in Mizan al-Hikmah, Knowledge): the stages of knowledge include listening, learning, acting upon it and sharing it.
 
 ### 8. The First 313 Companions
 - Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8: reports about 313 companions gathering in Mecca.
