@@ -16,7 +16,7 @@ TD|Chad|Africa|country
 KM|Comoros|Africa|country
 CG|Republic of the Congo|Africa|country
 CD|Democratic Republic of the Congo|Africa|country
-CI|Cote d'Ivoire|Africa|country
+CI|Côte d’Ivoire|Africa|country
 DJ|Djibouti|Africa|country
 EG|Egypt|Africa|country
 GQ|Equatorial Guinea|Africa|country
@@ -43,7 +43,7 @@ NA|Namibia|Africa|country
 NE|Niger|Africa|country
 NG|Nigeria|Africa|country
 RW|Rwanda|Africa|country
-ST|Sao Tome and Principe|Africa|country
+ST|São Tomé and Príncipe|Africa|country
 SN|Senegal|Africa|country
 SC|Seychelles|Africa|country
 SL|Sierra Leone|Africa|country
@@ -205,7 +205,7 @@ BM|Bermuda|North America|territory
 VG|British Virgin Islands|North America|territory
 KY|Cayman Islands|North America|territory
 CK|Cook Islands|Oceania|territory
-CW|Curacao|North America|territory
+CW|Curaçao|North America|territory
 FO|Faroe Islands|Europe|territory
 PF|French Polynesia|Oceania|territory
 GL|Greenland|North America|territory
