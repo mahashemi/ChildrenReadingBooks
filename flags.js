@@ -25,7 +25,7 @@ AU:"Aus-tral-i-a",FJ:"Fi-ji",KI:"Kir-i-ba-ti",MH:"Mar-shall Is-lands",FM:"Mi-cro
 };
 const level=()=>$("flagGameReadingLevel").value||$("flagReadingLevel").value;
 function flagMarkup(entry){
-return '<img class="flag-image" src="https://flagcdn.com/w160/'+entry.code.toLowerCase()+'.png" alt="'+escapeHtml(entry.name)+' flag" loading="lazy"><span class="flag-emoji" hidden>'+emoji(entry.code)+'</span>';
+return '<img class="flag-image" src="assets/flags/'+entry.code.toLowerCase()+'.svg" alt="'+escapeHtml(entry.name)+' flag" loading="lazy"><span class="flag-emoji" hidden>'+emoji(entry.code)+'</span>';
 }
 document.addEventListener("error",e=>{if(e.target&&e.target.classList&&e.target.classList.contains("flag-image")){e.target.hidden=true;if(e.target.nextElementSibling)e.target.nextElementSibling.hidden=false;}},true);
 function nameHtml(entry){
@@ -126,7 +126,7 @@ function showPool(){
 stopTimer();phase="choose";$("flagGamePhase").textContent="FIND THE FLAGS";
 $("flagGameTitle").textContent="Which flags did you see?";
 $("flagGameInstruction").textContent="Tap every flag you remember. The country name will be spoken and shown beneath each flag you select.";
-$("flagGameTimer").textContent=targetCount+" to find";$("flagTargets").innerHTML="";
+$("flagGameTimer").textContent=targetCount+" to find";$("flagGameTimer").classList.remove("is-counting");$("flagTargets").innerHTML="";
 $("flagPoolWrap").hidden=false;$("flagTargetBadge").textContent=targetCount+" to find";
 $("flagChoicePool").innerHTML=pool.map(x=>card(x,"flag-option-card",false)).join("");
 updateSelection();
@@ -139,7 +139,7 @@ pool=shuffle(targets.concat(shuffle(list.filter(x=>!targets.some(t=>t.code===x.c
 left=Number($("flagShowSeconds").value);phase="memorise";
 $("flagGamePhase").textContent="MEMORISE THESE FLAGS";$("flagGameTitle").textContent="Look carefully!";
 $("flagGameInstruction").textContent="Remember all "+n+" flags. They will disappear when the timer reaches zero.";
-$("flagGameTimer").textContent=left+" seconds";
+$("flagGameTimer").textContent=left+" seconds";$("flagGameTimer").classList.add("is-counting");
 $("flagTargets").innerHTML=targets.map(x=>card(x,"flag-target-card",false)).join("");
 $("flagPoolWrap").hidden=true;$("flagChoicePool").innerHTML="";$("flagGameResult").textContent="";
 $("nextFlagRound").hidden=true;$("checkFlagAnswers").disabled=true;$("clearFlagChoices").disabled=false;
