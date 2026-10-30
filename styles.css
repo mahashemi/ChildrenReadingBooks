@@ -101,7 +101,7 @@
 .flag-toggle-label input{accent-color:#719675;width:15px;height:15px}
 .flag-library-meta{display:flex;justify-content:space-between;gap:10px;color:#89948a;font-size:10px;margin:10px 3px}
 .flag-library-meta span:first-child{font-weight:900;color:#607d64}
-.flag-library-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px}
+.flag-library-grid{display:grid;grid-template-columns:repeat(var(--flag-grid-columns,5),minmax(0,1fr));gap:11px}
 .flag-library-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:135px;padding:12px 8px;cursor:pointer;position:relative}
 .flag-library-card:hover{border-color:#c4d4bf;background:#fbfdf9}
 .flag-library-card .flag-name{font-size:11px;line-height:1.45;color:#526b56;font-weight:900;margin-top:8px;min-height:16px}
