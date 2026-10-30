@@ -52,25 +52,40 @@ let page=0, mode="syllables", fontSize=19;
 const $=id=>document.getElementById(id);
 const storyText=$("storyText");
 function escapeHtml(value){return value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function suggestedSyllables(word){
+  const w=word.toLowerCase();
+  if(w.length<5)return null;
+  if(/(t|d)ed$/.test(w))return [w.slice(0,-2),"ed"];
+  if(/(s|x|z|ch|sh)es$/.test(w))return [w.slice(0,-2),"es"];
+  const suffixes=["ation","ition","ment","ness","less","ful","able","ible","ing","er","est","ly","ous","ive"];
+  for(const suffix of suffixes){if(w.endsWith(suffix)&&w.length>suffix.length+2)return [w.slice(0,-suffix.length),suffix];}
+  const nuclei=[...w.matchAll(/[aeiouy]+/g)].map(m=>({start:m.index,end:m.index+m[0].length}));
+  if(nuclei.length<2)return null;
+  const cuts=[];for(let i=0;i<nuclei.length-1;i++){const a=nuclei[i],b=nuclei[i+1],gap=w.slice(a.end,b.start);cuts.push(gap.length>=2?b.start-1:a.end);}
+  const out=[];let start=0;for(const cut of cuts){if(cut>start){out.push(w.slice(start,cut));start=cut;}}out.push(w.slice(start));
+  return out.length>1?out:null;
+}
+
 function tokenInfo(token){
   const match=token.match(/[A-Za-z]+(?:'[A-Za-z]+)?/);
   if(!match)return null;
   const original=match[0], possessive=/'s$/i.test(original);
   const base=possessive?original.slice(0,-2):original;
-  const parts=syllables[base.toLowerCase()]||null;
+  const reviewed=syllables[base.toLowerCase()]||null;
+  const parts=reviewed||(!oneSyllable.has(base.toLowerCase())?suggestedSyllables(base):null);
   const isKnownOne=oneSyllable.has(base.toLowerCase());
-  return {original,base,possessive,parts,isKnownOne,known:!!parts||isKnownOne};
+  return {original,base,possessive,parts,isKnownOne,reviewed:!!reviewed,known:!!reviewed||isKnownOne};
 }
 function renderParagraph(paragraph){
   return paragraph.split(/(\s+)/).map(piece=>{
     if(/^\s+$/.test(piece))return piece;
     const info=tokenInfo(piece);
     if(!info)return escapeHtml(piece);
-    const {original,base,possessive,parts,known,isKnownOne}=info;
+    const {original,base,possessive,parts,known,isKnownOne,reviewed}=info;
     const before=piece.slice(0,piece.indexOf(original));
     const after=piece.slice(piece.indexOf(original)+original.length);
     const isMulti=!!parts&&parts.length>1;
-    const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=7):false;
+    const shouldBreak=mode==="syllables"?isMulti:mode==="mixed"?(isMulti&&base.length>=6):false;
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
     const breakdown=parts?parts.join("-")+(possessive?"'s":""):isKnownOne?"One syllable":"Review needed";
     const meaning=meanings[base.toLowerCase()]||"Explore this word in the story. Its child-friendly definition can be added to the vocabulary guide.";
@@ -138,7 +153,7 @@ window.littleLanternsQA={
   inspect(text){
     return text.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g)?.map(word=>{
       const info=tokenInfo(word);
-      return {word,syllables:info.parts?info.parts.join("-")+(info.possessive?"'s":""):info.isKnownOne?"1":null,status:info.known?"reviewed":"REVIEW"};
+      return {word,syllables:info.parts?info.parts.join("-")+(info.possessive?"'s":""):info.isKnownOne?"1":null,status:info.reviewed||info.isKnownOne?"reviewed":info.parts?"suggested — check pronunciation":"REVIEW"};
     })||[];
   },
   storyAudit(){
