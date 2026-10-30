@@ -101,7 +101,7 @@
 .flag-toggle-label input{accent-color:#719675;width:15px;height:15px}
 .flag-library-meta{display:flex;justify-content:space-between;gap:10px;color:#89948a;font-size:10px;margin:10px 3px}
 .flag-library-meta span:first-child{font-weight:900;color:#607d64}
-.flag-library-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px}
+.flag-library-grid{display:grid;grid-template-columns:repeat(var(--flag-grid-columns,5),minmax(0,1fr));gap:11px}
 .flag-library-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:135px;padding:12px 8px;cursor:pointer;position:relative}
 .flag-library-card:hover{border-color:#c4d4bf;background:#fbfdf9}
 .flag-library-card .flag-name{font-size:11px;line-height:1.45;color:#526b56;font-weight:900;margin-top:8px;min-height:16px}
@@ -114,7 +114,7 @@
 .flag-library-card .flag-hidden-name{font-size:9px;color:#9da69d;margin-top:8px}
 .flag-collection-note{margin:16px 2px 0;padding:12px 14px;background:#f7f6f0;border-radius:11px;color:#899087;font-size:9px;line-height:1.6}
 .flag-collection-note b{color:#68776a}
-@media(max-width:900px){.flag-settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flag-library-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.flag-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.flag-target-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:900px){.flag-settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flag-library-grid{grid-template-columns:repeat(var(--flag-grid-columns,4),minmax(0,1fr))}.flag-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.flag-target-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:650px){
   .nav-dropdown{display:block;width:100%}.flags-nav-trigger{width:100%;justify-content:space-between}
   .nav-submenu{position:static;min-width:0;box-shadow:none;border:0;border-radius:10px;background:#f8faf6;margin:3px 0 5px;padding:5px 8px}
@@ -132,7 +132,7 @@
   .flag-library-toolbar{gap:9px;padding:11px}
   .flag-search-label{flex-basis:100%}
   .flag-library-toolbar>label:not(.flag-search-label){flex:1 1 42%;min-width:0}
-  .flag-library-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .flag-library-grid{grid-template-columns:repeat(var(--flag-grid-columns,3),minmax(0,1fr));gap:7px}
   .flag-library-card{min-height:119px;padding:9px 5px}
   .flag-library-card .flag-emoji{font-size:36px}
   .flag-library-card .flag-name{font-size:10px}
