@@ -630,8 +630,9 @@ function syncReadingRoute(replace=false){
   else if(location.hash!==next)history.pushState({view:"reading"},"",next);
 }
 function applyLocationRoute(){
-  const raw=location.hash.slice(1).replace(/^\\/+ /,"").trim();
-  const [path,query=""]=raw.split("?");
+  const raw=location.hash.slice(1);
+  const clean=raw.startsWith("/")?raw.slice(1):raw;
+  const [path,query=""]=clean.split("?");
   const parts=path.split("/").filter(Boolean);
   const route=parts[0]||"home";
   if(route==="reading"){
