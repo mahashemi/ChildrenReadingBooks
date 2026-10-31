@@ -599,7 +599,7 @@ $("fasterSpeech").addEventListener("click",()=>{
 updateSpeechRate();
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
 function lessonSlug(chapter){
-  return chapter.title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  return chapter.title.toLowerCase().replace(/[’\']/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 }
 function currentLessonRoute(){
   const current=storyPages[page];
