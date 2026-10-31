@@ -619,6 +619,7 @@ function activateView(view,scroll=true){
   if(scroll)window.scrollTo({top:0,behavior:"auto"});
 }
 function navigate(view,options={}){
+  if(view==="reading")renderStory();
   activateView(view,options.scroll!==false);
   const next=routeForView(view);
   if(options.replace)history.replaceState({view},"",next);
@@ -663,6 +664,7 @@ $("copyPrompt").addEventListener("click",async()=>{
   const text="Good morning, everyone. Today I would like to talk about kindness. I think kindness is important because…";
   try{await navigator.clipboard.writeText(text);showToast("Speech starter copied!");}catch(e){showToast("Select and copy the speech starter above.");}
 });
+renderStory();
 applyLocationRoute();
 
 // Editorial QA: every token is classified as reviewed syllables, known one-syllable,
