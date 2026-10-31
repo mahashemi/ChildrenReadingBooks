@@ -27,6 +27,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check flags.js
+          node --check flags-data.js
+          node --check scripts/vendor-flags.mjs
       - name: Download and vendor flag SVGs
         run: node scripts/vendor-flags.mjs
       - name: Commit local flag assets
