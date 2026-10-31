@@ -433,6 +433,23 @@ $("storyLibrary")?.addEventListener("click",event=>{
   page=chapter.start;
   renderStory();
 });
+function quranAyahUrl(surah,ayah){
+  return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
+}
+function linkQuranReferences(rendered,paragraph,current){
+  const refs=[...paragraph.matchAll(/\\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\\b/g)];
+  let linked=rendered.replace(/\\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\\b/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
+  if(!refs.length && /Qur['’]an|Surah/i.test(paragraph)){
+    const sourceRefs=[...(current.chapterSource||"").matchAll(/\\b(\\d{1,3}):(\\d{1,3})/g)];
+    if(sourceRefs.length){
+      const [,surah,ayah]=sourceRefs[0];
+      const link='<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">';
+      linked=linked.replace(/(<span class="story-word[^"]*"[^>]*>Qur['’]an<\\/span>)/i,link+'$1</a>');
+      if(linked===rendered) linked=linked.replace(/(<span class="story-word[^"]*"[^>]*>Surah<\\/span>)/i,link+'$1</a>');
+    }
+  }
+  return linked;
+}
 function renderStory(){
   const current=storyPages[page];
   $("storyTitle").textContent=current.chapterTitle||current.title;
@@ -440,7 +457,7 @@ function renderStory(){
   $("readerTag").textContent="READING CHAPTER "+String(current.chapterIndex+1).padStart(2,"0");
   $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
   storyText.style.fontSize=fontSize+"px";
-  storyText.innerHTML=current.paragraphs.map(p=>"<p>"+renderParagraph(p)+"</p>").join("");
+  storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("");
   storyText.classList.toggle("word-borders-visible",showWordBorders);
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
