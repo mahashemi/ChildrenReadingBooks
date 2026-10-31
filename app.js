@@ -655,6 +655,7 @@ function applyLocationRoute(){
 document.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.view)));
 document.querySelectorAll("[data-go]").forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.go)));
 window.addEventListener("popstate",applyLocationRoute);
+window.addEventListener("hashchange",applyLocationRoute);
 $("mobileMenu").addEventListener("click",()=>document.querySelector(".main-nav").classList.toggle("open"));
 $("parentButton").addEventListener("click",()=>$("parentModal").hidden=false);
 $("closeModal").addEventListener("click",()=>$("parentModal").hidden=true);
