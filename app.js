@@ -442,8 +442,11 @@ function linkQuranReferences(rendered,paragraph,current){
   let linked=rendered.replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
   if(!refs.length && /Qur['’]an|Surah/i.test(paragraph)){
     const sourceRefs=[...(current.chapterSource||"").matchAll(/([0-9]{1,3}):([0-9]{1,3})/g)];
-    if(sourceRefs.length){
-      const [,surah,ayah]=sourceRefs[0];
+    const namedSurahs=[["an-nas",114],["al-falaq",113],["al-kawthar",108],["al-asr",103],["al-shams",91],["yusuf",12]];
+    const namedSurah=namedSurahs.find(([name])=>paragraph.toLowerCase().includes(name));
+    const selectedRef=namedSurah?sourceRefs.find(ref=>Number(ref[1])===namedSurah[1]):sourceRefs[0];
+    if(selectedRef){
+      const [,surah,ayah]=selectedRef;
       const link='<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">';
       linked=linked.replace(/(<span[^>]*>Qur['’]an<\/span>)/i,link+'$1</a>');
       if(linked===rendered)linked=linked.replace(/(<span[^>]*>Surah<\/span>)/i,link+'$1</a>');
