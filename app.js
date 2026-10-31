@@ -450,6 +450,9 @@ function linkQuranReferences(rendered,paragraph,current){
   }
   return linked;
 }
+function linkQuranSourceNote(source){
+  return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/\\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\\b/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
+}
 function renderStory(){
   const current=storyPages[page];
   $("storyTitle").textContent=current.chapterTitle||current.title;
@@ -462,7 +465,7 @@ function renderStory(){
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
   $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
-  $("sourceNoteText").textContent=current.chapterSource||"Educational retelling; see the chapter note.";
+  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);
   $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
   $("storyArt").dataset.art=current.chapterArt||"dream";
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
