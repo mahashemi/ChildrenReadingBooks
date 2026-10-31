@@ -438,21 +438,21 @@ function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
 }
 function linkQuranReferences(rendered,paragraph,current){
-  const refs=[...paragraph.matchAll(/\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\b/g)];
-  let linked=rendered.replace(/\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\b/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
+  const refs=[...paragraph.matchAll(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g)];
+  let linked=rendered.replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
   if(!refs.length && /Qur['’]an|Surah/i.test(paragraph)){
-    const sourceRefs=[...(current.chapterSource||"").matchAll(/\b(\\d{1,3}):(\\d{1,3})/g)];
+    const sourceRefs=[...(current.chapterSource||"").matchAll(/([0-9]{1,3}):([0-9]{1,3})/g)];
     if(sourceRefs.length){
       const [,surah,ayah]=sourceRefs[0];
       const link='<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">';
-      linked=linked.replace(/(<span class="story-word[^"]*"[^>]*>Qur['’]an<\/span>)/i,link+'$1</a>');
-      if(linked===rendered) linked=linked.replace(/(<span class="story-word[^"]*"[^>]*>Surah<\/span>)/i,link+'$1</a>');
+      linked=linked.replace(/(<span[^>]*>Qur['’]an<\/span>)/i,link+'$1</a>');
+      if(linked===rendered)linked=linked.replace(/(<span[^>]*>Surah<\/span>)/i,link+'$1</a>');
     }
   }
   return linked;
 }
 function linkQuranSourceNote(source){
-  return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\b/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
+  return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
 }
 function renderStory(){
   const current=storyPages[page];
@@ -599,7 +599,7 @@ $("fasterSpeech").addEventListener("click",()=>{
 updateSpeechRate();
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
 function lessonSlug(chapter){
-  return chapter.title.toLowerCase().normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  return chapter.title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 }
 function currentLessonRoute(){
   const current=storyPages[page];
@@ -630,7 +630,7 @@ function syncReadingRoute(replace=false){
   else if(location.hash!==next)history.pushState({view:"reading"},"",next);
 }
 function applyLocationRoute(){
-  const raw=location.hash.replace(/^#\\/?/,"");
+  const raw=location.hash.slice(1).replace(/^\\/+ /,"").trim();
   const [path,query=""]=raw.split("?");
   const parts=path.split("/").filter(Boolean);
   const route=parts[0]||"home";
