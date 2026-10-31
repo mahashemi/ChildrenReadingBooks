@@ -378,3 +378,12 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
 
 .story-art .art-illustration svg{width:100%;height:100%;overflow:visible}
 .story-art .art-illustration svg use{width:100%;height:100%}
+
+/* Shareable lesson routes and listening links. */
+.reader-route-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.lesson-link-button{border:1px solid #dfe9dc;background:#f4f8f1;color:#55775a;border-radius:9px;padding:7px 10px;font:800 10px Nunito,system-ui,sans-serif}
+.lesson-link-button:hover{background:#eaf3e7;border-color:#bfd3bb}
+.story-text .quran-ayah-link,.source-note a.quran-ayah-link{color:#3e7650;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:900;border-radius:3px}
+.story-text .quran-ayah-link:hover,.source-note a.quran-ayah-link:hover{background:#eaf4e8;outline:2px solid #eaf4e8}
+.story-text .quran-ayah-link:focus-visible,.lesson-link-button:focus-visible{outline:3px solid #d6b76f;outline-offset:2px}
+@media(max-width:520px){.reader-route-actions{gap:7px}.lesson-link-button{padding:6px 8px;font-size:9px}}

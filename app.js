@@ -432,26 +432,30 @@ $("storyLibrary")?.addEventListener("click",event=>{
   const chapter=readingChapters[Number(button.dataset.chapter)];
   page=chapter.start;
   renderStory();
+  syncReadingRoute();
 });
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
 }
 function linkQuranReferences(rendered,paragraph,current){
-  const refs=[...paragraph.matchAll(/\\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\\b/g)];
-  let linked=rendered.replace(/\\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\\b/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
+  const refs=[...paragraph.matchAll(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g)];
+  let linked=rendered.replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
   if(!refs.length && /Qur['’]an|Surah/i.test(paragraph)){
-    const sourceRefs=[...(current.chapterSource||"").matchAll(/\\b(\\d{1,3}):(\\d{1,3})/g)];
-    if(sourceRefs.length){
-      const [,surah,ayah]=sourceRefs[0];
+    const sourceRefs=[...(current.chapterSource||"").matchAll(/([0-9]{1,3}):([0-9]{1,3})/g)];
+    const namedSurahs=[["an-nas",114],["al-falaq",113],["al-kawthar",108],["al-asr",103],["al-shams",91],["yusuf",12]];
+    const namedSurah=namedSurahs.find(([name])=>paragraph.toLowerCase().includes(name));
+    const selectedRef=namedSurah?sourceRefs.find(ref=>Number(ref[1])===namedSurah[1]):sourceRefs[0];
+    if(selectedRef){
+      const [,surah,ayah]=selectedRef;
       const link='<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">';
-      linked=linked.replace(/(<span class="story-word[^"]*"[^>]*>Qur['’]an<\\/span>)/i,link+'$1</a>');
-      if(linked===rendered) linked=linked.replace(/(<span class="story-word[^"]*"[^>]*>Surah<\\/span>)/i,link+'$1</a>');
+      linked=linked.replace(/(<span[^>]*>Qur['’]an<\/span>)/i,link+'$1</a>');
+      if(linked===rendered)linked=linked.replace(/(<span[^>]*>Surah<\/span>)/i,link+'$1</a>');
     }
   }
   return linked;
 }
 function linkQuranSourceNote(source){
-  return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/\\b(\\d{1,3}):(\\d{1,3})(?:[–-](\\d{1,3}))?\\b/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
+  return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
 }
 function renderStory(){
   const current=storyPages[page];
@@ -494,8 +498,8 @@ $("toggleWordBorders").addEventListener("click",()=>{
 document.querySelectorAll(".mode-button").forEach(btn=>btn.addEventListener("click",()=>{
   if(isReadingStory)stopReading();mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
 }));
-$("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page>0){page--;renderStory();}});
-$("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();}else{showToast("Wonderful reading! You finished every chapter. 🌟");page=0;renderStory();}});
+$("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page>0){page--;renderStory();syncReadingRoute();}});
+$("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();syncReadingRoute();}else{showToast("Wonderful reading! You finished every chapter. 🌟");page=0;renderStory();syncReadingRoute();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
@@ -580,6 +584,11 @@ function startStoryReading(){
   speakStoryParagraph(storyReadToken,0);
 }
 $("readAloud").addEventListener("click",()=>isReadingStory?stopReading():startStoryReading());
+$("copyLessonLink").addEventListener("click",async()=>{
+  const url=new URL(currentLessonRoute(),location.href).href;
+  try{await navigator.clipboard.writeText(url);showToast("Lesson link copied!");}
+  catch(error){showToast(url);}
+});
 $("slowerSpeech").addEventListener("click",()=>{
   speechRate=Math.max(.1,Math.round((speechRate-.1)*10)/10);
   updateSpeechRate();
@@ -592,14 +601,64 @@ $("fasterSpeech").addEventListener("click",()=>{
 });
 updateSpeechRate();
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
-function navigate(view){
+function lessonSlug(chapter){
+  return chapter.title.toLowerCase().replace(/[’\']/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+}
+function currentLessonRoute(){
+  const current=storyPages[page];
+  const chapter=readingChapters[current.chapterIndex]||readingChapters[0];
+  return "#/reading/"+lessonSlug(chapter)+(current.chapterPage>1?"?page="+current.chapterPage:"");
+}
+function routeForView(view){
+  if(view==="reading")return currentLessonRoute();
+  const routes={home:"home",speak:"speech",flagSpotter:"flag-spotter",flagMemorizer:"flag-memorizer",values:"values"};
+  return "#/"+(routes[view]||view);
+}
+function activateView(view,scroll=true){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   const target=$(view+"View");if(target)target.classList.add("active");
   document.querySelectorAll(".nav-link").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
-  document.querySelector(".main-nav").classList.remove("open");window.scrollTo({top:0,behavior:"smooth"});
+  document.querySelector(".main-nav").classList.remove("open");
+  if(scroll)window.scrollTo({top:0,behavior:"auto"});
+}
+function navigate(view,options={}){
+  if(view==="reading")renderStory();
+  activateView(view,options.scroll!==false);
+  const next=routeForView(view);
+  if(options.replace)history.replaceState({view},"",next);
+  else if(location.hash!==next)history.pushState({view},"",next);
+}
+function syncReadingRoute(replace=false){
+  const next=currentLessonRoute();
+  if(replace)history.replaceState({view:"reading"},"",next);
+  else if(location.hash!==next)history.pushState({view:"reading"},"",next);
+}
+function applyLocationRoute(){
+  const raw=location.hash.slice(1);
+  const clean=raw.startsWith("/")?raw.slice(1):raw;
+  const [path,query=""]=clean.split("?");
+  const parts=path.split("/").filter(Boolean);
+  const route=parts[0]||"home";
+  if(route==="reading"){
+    const slug=parts[1]||lessonSlug(readingChapters[0]);
+    const index=readingChapters.findIndex(chapter=>lessonSlug(chapter)===slug);
+    const chapter=readingChapters[index>=0?index:0];
+    const params=new URLSearchParams(query);
+    const requestedPage=Math.max(1,Math.min(chapter.end-chapter.start+1,Number(params.get("page"))||1));
+    page=chapter.start+requestedPage-1;
+    renderStory();
+    activateView("reading",false);
+    if(index<0)history.replaceState({view:"reading"},"",currentLessonRoute());
+    return;
+  }
+  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values"};
+  activateView(views[route]||"home",false);
+  if(!raw)history.replaceState({view:"home"},"","#/home");
 }
 document.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.view)));
 document.querySelectorAll("[data-go]").forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.go)));
+window.addEventListener("popstate",applyLocationRoute);
+window.addEventListener("hashchange",applyLocationRoute);
 $("mobileMenu").addEventListener("click",()=>document.querySelector(".main-nav").classList.toggle("open"));
 $("parentButton").addEventListener("click",()=>$("parentModal").hidden=false);
 $("closeModal").addEventListener("click",()=>$("parentModal").hidden=true);
@@ -610,6 +669,7 @@ $("copyPrompt").addEventListener("click",async()=>{
   try{await navigator.clipboard.writeText(text);showToast("Speech starter copied!");}catch(e){showToast("Select and copy the speech starter above.");}
 });
 renderStory();
+applyLocationRoute();
 
 // Editorial QA: every token is classified as reviewed syllables, known one-syllable,
 // or REVIEW. Possessives are checked against their base word without losing the suffix.
