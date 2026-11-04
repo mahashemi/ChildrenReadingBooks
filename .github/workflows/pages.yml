@@ -30,6 +30,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check app.js
+          node --check reading-enhancements.js
           node --check flags.js
           node --check flags-data.js
           node --check scripts/vendor-flags.mjs
