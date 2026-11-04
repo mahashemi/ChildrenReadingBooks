@@ -463,7 +463,7 @@
       const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
       return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +
         escapeHtml(original) + '" data-parts="' + escapeHtml(breakdown) + '" data-meaning="' + escapeHtml(meaning) +
-        '" aria-label="' + escapeHtml(original) + '">' + escapeHtml(displayed) + '</span>' + escapeHtml(after);
+        '" data-lookup="' + (localMeaning ? "false" : "true") + '" aria-label="' + escapeHtml(original) + '">' + escapeHtml(displayed) + '</span>' + escapeHtml(after);
     }).join("");
   }
   window.renderParagraph = renderParagraph;
