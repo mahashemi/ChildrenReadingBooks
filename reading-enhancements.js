@@ -1,6 +1,7 @@
 /* Little Lanterns reading improvements: richer vocabulary, syllables and searchable science library. */
 (function () {
   "use strict";
+  const initialLessonHash = window.__initialLessonHash || location.hash;
 
   const extraMeanings = {
     absorb:"To take something in, such as a sponge taking in water or a plant taking in light.",
@@ -595,9 +596,13 @@
     renderSearchableLibrary();
   });
 
-  // Ensure direct links to any new chapter work with the existing hash router.
+  // Restore the original URL after the base app has loaded, so new chapter deep links survive refresh.
+  if (initialLessonHash && initialLessonHash.indexOf("#/reading/") === 0) {
+    history.replaceState(null, "", initialLessonHash);
+  }
+  // Ensure direct links to every chapter work with the existing hash router.
   renderStoryLibrary();
-  renderStory();
+  applyLocationRoute();
 
   // Extend the QA helper with the fallback syllable suggestions, while marking them as suggestions.
   const previousInspect = window.littleLanternsQA && window.littleLanternsQA.inspect;
