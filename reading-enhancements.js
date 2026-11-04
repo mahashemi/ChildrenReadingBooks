@@ -458,7 +458,8 @@
       const guide = soundGuides[base] || "";
       const breakdown = (parts ? parts.join("-") + (lower.endsWith("'s") ? "'s" : "") : (isKnownOne ? "1 syllable" : ""))
         + (guide ? (parts ? " · " : "") + guide : "");
-      const meaning = meanings[base] || meaningFallback;
+      const localMeaning = meanings[base] || "";
+      const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
       const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
       return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +
         escapeHtml(original) + '" data-parts="' + escapeHtml(breakdown) + '" data-meaning="' + escapeHtml(meaning) +
@@ -466,6 +467,44 @@
     }).join("");
   }
   window.renderParagraph = renderParagraph;
+
+  // For words outside the local child-friendly glossary, look up a real definition on demand.
+  // Only the selected word is sent; no learner information is transmitted.
+  selectWord = function (target) {
+    if (isReadingStory) stopReading();
+    const word = target.dataset.word || "";
+    const lookupWord = word.replace(/'s$/i, "");
+    const meaningNode = document.getElementById("wordMeaning");
+    document.getElementById("wordDisplay").textContent = word;
+    document.getElementById("wordBreakdown").textContent = target.dataset.parts || "";
+    meaningNode.textContent = target.dataset.meaning || meaningFallback;
+    document.getElementById("wordPanel").hidden = false;
+    speakText(word);
+    if (target.dataset.lookup !== "true") return;
+    const requestWord = lookupWord.toLowerCase();
+    meaningNode.textContent = "Finding a simple dictionary definition…";
+    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + encodeURIComponent(requestWord))
+      .then(function (response) {
+        if (!response.ok) throw new Error("No dictionary entry");
+        return response.json();
+      })
+      .then(function (entries) {
+        const definition = entries.flatMap(function (entry) {
+          return (entry.meanings || []).flatMap(function (meaning) {
+            return meaning.definitions || [];
+          });
+        }).map(function (item) { return item.definition; }).find(Boolean);
+        if (!definition) throw new Error("No definition found");
+        if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
+          meaningNode.textContent = definition;
+        }
+      })
+      .catch(function () {
+        if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
+          meaningNode.textContent = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+        }
+      });
+  };
 
   // Add original, age-appropriate passages based on common primary/lower-secondary science themes.
   const newChapters = [
