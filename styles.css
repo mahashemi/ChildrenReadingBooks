@@ -716,3 +716,13 @@ body.reader-immersive #readingView.active .mode-hint{display:none}
   body.reader-immersive #readingView.active .story-reading-stage .story-text{font-size:clamp(19px,5vw,24px);line-height:1.9}
 }
 @media(prefers-reduced-motion:reduce){.immersive-toggle,.audio-speed-control button{transition:none}}
+
+/* Chapter catalogue taxonomy filters */
+.chapter-category-filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.category-filter{display:inline-flex;align-items:center;gap:5px;min-height:29px;padding:5px 8px;border:1px solid #e9e9df;border-radius:999px;background:#fff;color:#667268;font-size:9px;font-weight:800;line-height:1.2}
+.category-filter>span:last-child{display:inline-grid;place-items:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#f1f2ed;color:#788277;font-size:8px}
+.category-filter.active{border-color:#9ab99b;background:#edf5e9;color:#3f6d4d;box-shadow:0 1px 4px #3f6d4d12}
+.category-filter:disabled{opacity:.48;cursor:default}.category-filter-icon{font-size:12px}
+.category-blue{background:#f0f7fc;border-color:#dcecf7}.category-green{background:#f1f7ee;border-color:#dfecda}.category-lilac{background:#f5f1fb;border-color:#e9e1f5}.category-peach{background:#fff4ed;border-color:#f6e6da}.category-gold{background:#fff8e9;border-color:#f2ead2}.category-mint{background:#eef7f3;border-color:#dceee5}
+.story-choice-copy{min-width:0;flex:1}.story-category-label{display:inline-block;margin-top:4px;padding:2px 6px;border-radius:999px;background:#f2f4ee;color:#708071;font-size:8px!important;font-weight:800}
+@media(max-width:760px){.chapter-category-filters{gap:5px}.category-filter{font-size:8px;padding:5px 7px}}

@@ -164,10 +164,22 @@ storyPages.push(
   ]}
 );
 
+const chapterCategories = [
+ {id:"science",label:"Science & Nature",icon:"🔬",color:"blue"},
+ {id:"akhlaq",label:"Akhlaq",icon:"🌱",color:"green"},
+ {id:"aqaid",label:"Aqaid",icon:"🌙",color:"lilac"},
+ {id:"quran",label:"Qur'an & Ahlulbayt",icon:"📖",color:"peach"},
+ {id:"society",label:"People & Society",icon:"🤝",color:"gold"},
+ {id:"discovery",label:"Thinking & Discovery",icon:"💡",color:"mint"}
+];
+let activeChapterCategory = "all";
+
 const readingChapters = [
-  {title:"A Special Dream",icon:"🌌",subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling based on Surah Yusuf 12:4–6; the patience lesson also draws on 12:18 and 12:90. Not a verbatim translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
+  {title:"A Special Dream",icon:"🌌",category:"quran",tags:["prophets","patience","family"],subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling based on Surah Yusuf 12:4–6; the patience lesson also draws on 12:18 and 12:90. Not a verbatim translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
   {
     "title": "Anger: Control Is Strength",
+    "category": "akhlaq",
+    "tags": ["self-control", "kindness", "Quran"],
     "icon": "💛",
     "subtitle": "What the Qur'an and the Ahl al-Bayt teach about anger.",
     "source": "Qur'an 3:134; al-Kafi, vol. 2, p. 110, hadith 7 (Imam al-Baqir on restraining anger); al-Kafi, vol. 2, p. 303, hadith 3 (Imam al-Sadiq: anger is a key to evil); Tuhaf al-'Uqul, no. 286 (Imam al-Baqir: no strength like restraining anger).",
@@ -178,6 +190,8 @@ const readingChapters = [
   },
   {
     "title": "Use This World for Good",
+    "category": "akhlaq",
+    "tags": ["gratitude", "stewardship", "Quran"],
     "icon": "🌍",
     "subtitle": "The Qur'an and Imam al-Sadiq teach us how to use worldly blessings.",
     "source": "Qur'an 7:31, 28:77 and 6:141; al-Kafi, vol. 5, Book 2, Chapter 3, hadiths 8–10.",
@@ -188,6 +202,8 @@ const readingChapters = [
   },
   {
     "title": "Jihad al-Nafs: The Inner Struggle",
+    "category": "akhlaq",
+    "tags": ["self-discipline", "purification", "Quran"],
     "icon": "🌱",
     "subtitle": "Striving to obey Allah when our desires pull us elsewhere.",
     "source": "Qur'an 91:7–10 and 79:40–41; report of the Prophet's greater jihad transmitted through Imam al-Sadiq in al-Kafi (al-Sukuni report).",
@@ -198,6 +214,8 @@ const readingChapters = [
   },
   {
     "title": "Namaz: Remembering Allah",
+    "category": "quran",
+    "tags": ["prayer", "worship", "Imam Ali"],
     "icon": "🕌",
     "subtitle": "The Qur'an and Imam Ali teach the importance of prayer.",
     "source": "Qur'an 20:14 and 29:45; Nahj al-Balagha, Letter 47 (Imam Ali's counsel concerning prayer).",
@@ -208,6 +226,8 @@ const readingChapters = [
   },
   {
     "title": "The Soul: What We Know",
+    "category": "aqaid",
+    "tags": ["the soul", "human knowledge", "Quran"],
     "icon": "✨",
     "subtitle": "What the Qur'an says—and what it says we do not know.",
     "source": "Qur'an 17:85 and 91:7–10; al-Kafi, vol. 3, Book 3, Chapter 91 (reports about the souls of believers; hadith grading varies).",
@@ -218,6 +238,8 @@ const readingChapters = [
   },
   {
     "title": "Learning with Humility",
+    "category": "akhlaq",
+    "tags": ["knowledge", "humility", "Imam al-Sadiq"],
     "icon": "📚",
     "subtitle": "The teachings of Imam al-Sadiq about seeking and using knowledge.",
     "source": "Al-Kafi, Book of the Merit of Knowledge (Kitab Fadl al-'Ilm), reports 4/38 and 8/65; see the cited narrations from Imam al-Sadiq.",
@@ -228,6 +250,8 @@ const readingChapters = [
   },
   {
     "title": "The First 313 Companions",
+    "category": "aqaid",
+    "tags": ["Imam al-Mahdi", "faith", "Shia narrations"],
     "icon": "🌙",
     "subtitle": "What Shia narrations report about the companions of Imam al-Mahdi.",
     "source": "Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8; Qur'an 2:148 as cited in one report; Qur'an 9:119, 23:8 and 2:153 for the qualities discussed. The Hilla forty-guests anecdote and the '1,200 years' wording are not established by these reports and are not presented here as hadith.",
@@ -239,6 +263,8 @@ const readingChapters = [
   {
     "title": "Qur'an: Surah Al-Asr",
     "icon": "⏳",
+    "category": "quran",
+    "tags": ["time", "truth", "patience"],
     "subtitle": "The Qur'an's own teaching about faith, good deeds, truth and patience.",
     "source": "Qur'an 103:1–3. Child-friendly explanation of the surah.",
     "art": "time",
@@ -249,6 +275,8 @@ const readingChapters = [
   {
     "title": "Qur'an: Surah Al-Kawthar",
     "icon": "🌸",
+    "category": "quran",
+    "tags": ["gratitude", "worship", "blessings"],
     "subtitle": "A short surah about Allah's gift and worship directed to Him.",
     "source": "Qur'an 108:1–3. For the interpretation of al-Kawthar, consult a recognised Shia tafsir.",
     "art": "flower",
@@ -259,6 +287,8 @@ const readingChapters = [
   {
     "title": "Qur'an: Al-Falaq and An-Nas",
     "icon": "🌅",
+    "category": "quran",
+    "tags": ["protection", "trust in Allah", "Quran"],
     "subtitle": "Two surahs teaching us to seek refuge in Allah.",
     "source": "Qur'an 113:1–5 and 114:1–6. Child-friendly explanation of the surahs.",
     "art": "moon",
@@ -423,14 +453,25 @@ function renderParagraph(paragraph){
     return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
   }).join("");
 }
-function renderStoryLibrary(){
-  const host=$("storyLibrary");
-  if(!host)return;
-  const query=($("chapterSearch")?.value||"").trim().toLowerCase();
-  const matches=readingChapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>!query||[chapter.title,chapter.subtitle,chapter.source,chapter.takeaway].join(" ").toLowerCase().includes(query));
-  const count=$("chapterSearchCount");if(count)count.textContent=query?`${matches.length} of ${readingChapters.length} chapters`:`${readingChapters.length} chapters`;
-  host.innerHTML=matches.length?matches.map(({chapter,index})=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join(""):'<div class="reading-no-results">No chapters match that search. Try another word.</div>';
+function renderChapterCategoryFilters(){
+ const host=$("chapterCategoryFilters");if(!host)return;
+ const counts=Object.fromEntries(chapterCategories.map(category=>[category.id,readingChapters.filter(chapter=>chapter.category===category.id).length]));
+ host.innerHTML='<button class="category-filter '+(activeChapterCategory==="all"?"active":"")+'" data-category="all" type="button" aria-pressed="'+(activeChapterCategory==="all")+'">All <span>'+readingChapters.length+'</span></button>'+
+ chapterCategories.map(category=>'<button class="category-filter category-'+category.color+' '+(activeChapterCategory===category.id?"active":"")+'" data-category="'+category.id+'" type="button" aria-pressed="'+(activeChapterCategory===category.id)+'" '+(counts[category.id]===0?'disabled title="More chapters coming soon"':'')+'><span class="category-filter-icon">'+category.icon+'</span>'+escapeHtml(category.label)+' <span>'+counts[category.id]+'</span></button>').join("");
 }
+function renderStoryLibrary(){
+ const host=$("storyLibrary");if(!host)return;
+ renderChapterCategoryFilters();
+ const query=($("chapterSearch")?.value||"").trim().toLowerCase();
+ const matches=readingChapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>(activeChapterCategory==="all"||chapter.category===activeChapterCategory)&&(!query||[chapter.title,chapter.subtitle,chapter.source,chapter.takeaway,...(chapter.tags||[])].join(" ").toLowerCase().includes(query)));
+ const count=$("chapterSearchCount");
+ if(count){const category=chapterCategories.find(item=>item.id===activeChapterCategory);count.textContent=matches.length+" of "+readingChapters.length+" chapters"+(category?" · "+category.label:"");}
+ host.innerHTML=matches.length?matches.map(({chapter,index})=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span class="story-choice-copy"><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small><small class="story-category-label">'+escapeHtml(chapterCategories.find(item=>item.id===chapter.category)?.label||"")+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join(""):'<div class="reading-no-results">'+(activeChapterCategory!=="all"&&!readingChapters.some(chapter=>chapter.category===activeChapterCategory)?"More adventures in this collection are coming soon.":"No chapters match that search. Try another word.")+'</div>';
+}
+$("chapterCategoryFilters")?.addEventListener("click",event=>{
+ const button=event.target.closest("[data-category]");if(!button||button.disabled)return;
+ activeChapterCategory=button.dataset.category;renderChapterCategoryFilters();renderStoryLibrary();
+});
 $("chapterSearch")?.addEventListener("input",renderStoryLibrary);
 $("storyLibrary")?.addEventListener("click",event=>{
   const button=event.target.closest("[data-chapter]");
