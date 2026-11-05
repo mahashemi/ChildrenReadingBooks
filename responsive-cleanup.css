@@ -118,6 +118,22 @@ button,input,select,textarea{max-width:100%}
 }
 
 
+
+
+/* Desktop: both sidebars are fixed off-canvas drawers, so the reader must
+   occupy the full grid rather than retaining the legacy 235px sidebar track. */
+@media(min-width:761px){
+  #readingView.active>.reader-layout{
+    grid-template-columns:minmax(0,1fr);
+    gap:0;
+  }
+  #readingView.active>.reader-layout>.reader-card{
+    grid-column:1 / -1;
+    width:100%;
+    max-width:none;
+  }
+}
+
 /* Keep the settings drawer closed unless its explicit open state is active.
    The aria state is the source of truth as well as the JS body class, so the
    desktop drawer cannot remain visible after its close control is activated. */
