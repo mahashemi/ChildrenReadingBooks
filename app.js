@@ -558,7 +558,8 @@ $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
 let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
-  storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null,activeUtterance=null;
+  storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,
+  currentSpeechOffset=0,currentSpeechWordStart=0,selectedSpeechVoice=null,activeUtterance=null;
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
 function isPreferredEnglishVoice(voice){return /^en([_-]|$)/i.test(voice.lang)&&!/^en[-_]NG/i.test(voice.lang);}
 function defaultSpeechVoice(voices=availableSpeechVoices()){
@@ -588,11 +589,7 @@ function populateSpeechVoices(){
   else select.value="";
   selectedSpeechVoice=voices.find(v=>v.voiceURI===select.value)||null;
   const us=voices.some(v=>/^en[-_]US/i.test(v.lang));
-  $("voiceHelp").textContent=us
-    ?"US English is available. Automatic mode prefers it. Nigerian English is never chosen automatically."
-    :voices.length
-      ?"No US English voice is listed. Automatic mode will use another available English voice, but never Nigerian English. Install an en-US voice for the closest match."
-      :"Firefox has not exposed a suitable English voice. Install an English (United States) voice in your system speech settings, then reload this page.";
+  $("voiceHelp").textContent="Automatic mode prefers US English when available, then another available English voice. You can choose any listed narrator.";
 }
 function resolveSpeechVoice(){
   const voices=availableSpeechVoices().filter(isPreferredEnglishVoice);
@@ -601,9 +598,14 @@ function resolveSpeechVoice(){
 }
 function applySpeechVoice(utterance){
   const chosen=resolveSpeechVoice();
-  if(!chosen)return false;
-  utterance.voice=chosen;
-  utterance.lang=chosen.lang||"en-US";
+  if(chosen){
+    utterance.voice=chosen;
+    utterance.lang=chosen.lang||"en-US";
+  }else{
+    // Let the browser use its system default voice; do not block narration
+    // simply because its voice list is empty or delayed.
+    utterance.lang="en-US";
+  }
   return true;
 }
 $("speechVoice").addEventListener("change",()=>{
@@ -654,92 +656,104 @@ function speakText(text){
 let lastAutoScrollAt=0;
 function keepSpeakingWordVisible(element){
   if(!element||!autoScrollEnabled)return;
-  const rect=element.getBoundingClientRect();
-  const topLimit=105,bottomLimit=Math.max(topLimit+100,window.innerHeight-145);
-  let delta=0;
-  if(rect.top<topLimit)delta=rect.top-topLimit;
-  else if(rect.bottom>bottomLimit)delta=rect.bottom-bottomLimit;
-  if(!delta)return;
   const now=Date.now();
-  if(now-lastAutoScrollAt<260)return;
+  if(now-lastAutoScrollAt<180)return;
   lastAutoScrollAt=now;
-  window.scrollBy({top:delta,behavior:"smooth"});
+  element.scrollIntoView({block:"nearest",inline:"nearest",behavior:"smooth"});
 }
 let autoScrollEnabled=(()=>{try{return localStorage.getItem("littleLanternsAutoScroll")!=="false";}catch(e){return true;}})();
 const autoScrollToggle=$("autoScrollToggle");
 if(autoScrollToggle){autoScrollToggle.checked=autoScrollEnabled;autoScrollToggle.addEventListener("change",()=>{autoScrollEnabled=autoScrollToggle.checked;try{localStorage.setItem("littleLanternsAutoScroll",String(autoScrollEnabled));}catch(e){}});}
 function highlightSpokenWord(paragraphIndex,charIndex){
-  clearSpeechHighlight();
   const paragraph=storyPages[page].paragraphs[paragraphIndex];
   const tokens=[...paragraph.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)];
-  const tokenIndex=tokens.findIndex(match=>charIndex>=match.index&&charIndex<match.index+match[0].length);
+  let tokenIndex=tokens.findIndex(match=>charIndex>=match.index&&charIndex<match.index+match[0].length);
+  if(tokenIndex<0)tokenIndex=tokens.findIndex(match=>match.index>=charIndex);
   const paragraphNode=storyText.children[paragraphIndex];
   if(!paragraphNode)return;
+  clearSpeechHighlight();
   paragraphNode.classList.add("is-speaking-paragraph");
   if(tokenIndex<0)return;
   const wordNodes=paragraphNode.querySelectorAll(".story-word");
   const active=wordNodes[tokenIndex];
   if(active){active.classList.add("is-speaking");keepSpeakingWordVisible(active);}
 }
-function speakStoryParagraph(token,paragraphIndex){
+function speakStoryParagraph(token,paragraphIndex,startOffset=0){
   if(token!==storyReadToken||!isReadingStory)return;
   const paragraphs=storyPages[page].paragraphs;
   if(paragraphIndex>=paragraphs.length){
-    isReadingStory=false;
-    isSpeechPaused=false;
-    clearSpeechHighlight();
-    updateAudioControls();
-    return;
+    isReadingStory=false;isSpeechPaused=false;currentSpeechOffset=0;currentSpeechWordStart=0;
+    clearSpeechHighlight();updateAudioControls();return;
   }
   currentSpeechParagraph=paragraphIndex;
   const paragraphText=paragraphs[paragraphIndex];
-  const utterance=new SpeechSynthesisUtterance(paragraphText);
-  if(!applySpeechVoice(utterance)){isReadingStory=false;isSpeechPaused=false;updateAudioControls();showToast("No suitable English voice is available. Install an English (United States) voice in Firefox system speech settings, then reload.");return;}
+  const utterance=new SpeechSynthesisUtterance(paragraphText.slice(startOffset));
+  applySpeechVoice(utterance);
   utterance.rate=speechRate;
   activeUtterance=utterance;
+  currentSpeechOffset=startOffset;
   utterance.onboundary=event=>{
-    if(token!==storyReadToken||!isReadingStory)return;
-    if(typeof event.charIndex==="number")highlightSpokenWord(paragraphIndex,event.charIndex);
+    if(token!==storyReadToken||!isReadingStory||typeof event.charIndex!=="number")return;
+    const absoluteIndex=startOffset+event.charIndex;
+    currentSpeechOffset=absoluteIndex;
+    const match=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)]
+      .find(item=>absoluteIndex>=item.index&&absoluteIndex<item.index+item[0].length)
+      ||[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)].find(item=>item.index>=absoluteIndex);
+    if(match)currentSpeechWordStart=match.index;
+    highlightSpokenWord(paragraphIndex,absoluteIndex);
   };
-  utterance.onend=()=>{if(token===storyReadToken&&!isSpeechPaused)speakStoryParagraph(token,paragraphIndex+1);};
+  utterance.onend=()=>{
+    if(token!==storyReadToken||isSpeechPaused)return;
+    currentSpeechOffset=0;currentSpeechWordStart=0;
+    speakStoryParagraph(token,paragraphIndex+1,0);
+  };
   utterance.onerror=event=>{
     if(token!==storyReadToken)return;
-    isReadingStory=false;
-    isSpeechPaused=false;
-    clearSpeechHighlight();
-    updateAudioControls();
-    if(event.error!=="canceled"&&event.error!=="interrupted")showToast("The reader could not finish speaking.");
+    if(event.error==="canceled"||event.error==="interrupted")return;
+    isReadingStory=false;isSpeechPaused=false;clearSpeechHighlight();updateAudioControls();
+    showToast("The reader could not finish speaking. You can try again.");
   };
   window.speechSynthesis.speak(utterance);
 }
-async function startStoryReading(){
+function startStoryReading(){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
   window.speechSynthesis.cancel();
   clearSpeechHighlight();
   const token=++storyReadToken;
-  isReadingStory=true;
-  currentSpeechParagraph=0;
-  isSpeechPaused=false;
+  isReadingStory=true;isSpeechPaused=false;currentSpeechParagraph=0;
+  currentSpeechOffset=0;currentSpeechWordStart=0;
+  updateAudioControls();speakStoryParagraph(token,0,0);
+}
+function pauseStoryReading(){
+  if(!isReadingStory||isSpeechPaused)return;
+  isSpeechPaused=true;
+  currentSpeechOffset=currentSpeechWordStart;
+  storyReadToken++;
+  window.speechSynthesis.cancel();
   updateAudioControls();
-  // Firefox can populate its voice list after the first user interaction.
-  for(let attempt=0;attempt<10&&!resolveSpeechVoice();attempt++){
-    await new Promise(resolve=>setTimeout(resolve,150));
-    if(token!==storyReadToken)return;
-  }
-  if(token!==storyReadToken)return;
-  if(!resolveSpeechVoice()){
-    isReadingStory=false;
-    updateAudioControls();
-    populateSpeechVoices();
-    showToast("Firefox has no suitable English voice available. Install an English (United States) voice in your system speech settings, then reload.");
-    return;
-  }
-  speakStoryParagraph(token,0);
+}
+function resumeStoryReading(){
+  if(!isSpeechPaused)return;
+  isSpeechPaused=false;
+  const token=++storyReadToken;
+  updateAudioControls();
+  speakStoryParagraph(token,currentSpeechParagraph,currentSpeechOffset);
+}
+function restartAtCurrentWord(){
+  if(!isReadingStory&&!isSpeechPaused)return;
+  const wasPaused=isSpeechPaused;
+  const offset=currentSpeechWordStart;
+  storyReadToken++;
+  window.speechSynthesis.cancel();
+  currentSpeechOffset=offset;
+  if(wasPaused){updateAudioControls();return;}
+  const token=storyReadToken;
+  speakStoryParagraph(token,currentSpeechParagraph,offset);
 }
 $("readAloud").addEventListener("click",()=>{
   if(!isReadingStory&&!isSpeechPaused){startStoryReading();return;}
-  if(isSpeechPaused){window.speechSynthesis.resume();isSpeechPaused=false;updateAudioControls();return;}
-  window.speechSynthesis.pause();isSpeechPaused=true;updateAudioControls();
+  if(isSpeechPaused){resumeStoryReading();return;}
+  pauseStoryReading();
 });
 $("stopSpeech").addEventListener("click",stopReading);
 function setImmersiveMode(enabled){
@@ -760,13 +774,11 @@ $("copyLessonLink").addEventListener("click",async()=>{
 });
 $("slowerSpeech").addEventListener("click",()=>{
   speechRate=Math.max(.1,Math.round((speechRate-.1)*10)/10);
-  updateSpeechRate();
-  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();isSpeechPaused=false;speakStoryParagraph(token,currentSpeechParagraph);}
+  updateSpeechRate();restartAtCurrentWord();
 });
 $("fasterSpeech").addEventListener("click",()=>{
   speechRate=Math.min(1.5,Math.round((speechRate+.1)*10)/10);
-  updateSpeechRate();
-  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();isSpeechPaused=false;speakStoryParagraph(token,currentSpeechParagraph);}
+  updateSpeechRate();restartAtCurrentWord();
 });
 updateSpeechRate();
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
