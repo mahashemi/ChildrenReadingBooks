@@ -423,8 +423,12 @@ function renderParagraph(paragraph){
 function renderStoryLibrary(){
   const host=$("storyLibrary");
   if(!host)return;
-  host.innerHTML=readingChapters.map((chapter,index)=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join("");
+  const query=($("chapterSearch")?.value||"").trim().toLowerCase();
+  const matches=readingChapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>!query||[chapter.title,chapter.subtitle,chapter.source,chapter.takeaway].join(" ").toLowerCase().includes(query));
+  const count=$("chapterSearchCount");if(count)count.textContent=query?`${matches.length} of ${readingChapters.length} chapters`:`${readingChapters.length} chapters`;
+  host.innerHTML=matches.length?matches.map(({chapter,index})=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join(""):'<div class="reading-no-results">No chapters match that search. Try another word.</div>';
 }
+$("chapterSearch")?.addEventListener("input",renderStoryLibrary);
 $("storyLibrary")?.addEventListener("click",event=>{
   const button=event.target.closest("[data-chapter]");
   if(!button)return;
@@ -504,12 +508,9 @@ function selectWord(target){
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
-$("toggleWordBorders").addEventListener("click",()=>{
-  showWordBorders=!showWordBorders;
+$("toggleWordBorders").addEventListener("change",()=>{
+  showWordBorders=$("toggleWordBorders").checked;
   storyText.classList.toggle("word-borders-visible",showWordBorders);
-  $("toggleWordBorders").textContent=showWordBorders?"Borders: On":"Borders: Off";
-  $("toggleWordBorders").setAttribute("aria-pressed",String(showWordBorders));
-  $("toggleWordBorders").setAttribute("aria-label",showWordBorders?"Hide word borders":"Show word borders");
 });
 document.querySelectorAll(".mode-button").forEach(btn=>btn.addEventListener("click",()=>{
   if(isReadingStory)stopReading();mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
@@ -521,16 +522,26 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);r
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
-let speechRate=(()=>{try{return Math.max(.5,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(), storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0, selectedSpeechVoice=null;
+let speechRate=(()=>{try{return Math.max(.5,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
+  speechVolume=(()=>{try{const v=Number(localStorage.getItem("littleLanternsSpeechVolume"));return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(e){return 1;}})(),
+  storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null;
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
+function isPreferredEnglishVoice(voice){return /^en([_-]|$)/i.test(voice.lang)&&!/^en[-_]NG/i.test(voice.lang);}
+function defaultSpeechVoice(voices=availableSpeechVoices()){
+  const eligible=voices.filter(isPreferredEnglishVoice);
+  const priorities=[/^en[-_]US/i,/^en[-_]GB/i,/^en[-_]CA/i,/^en[-_]AU/i,/^en[-_]IE/i,/^en[-_]IN/i];
+  for(const pattern of priorities){const found=eligible.find(v=>pattern.test(v.lang));if(found)return found;}
+  return eligible[0]||null;
+}
 function populateSpeechVoices(){
   const select=$("speechVoice");if(!select)return;
-  const voices=availableSpeechVoices().filter(voice=>/^en([_-]|$)/i.test(voice.lang));
+  const voices=availableSpeechVoices().filter(isPreferredEnglishVoice);
+  const saved=(()=>{try{return localStorage.getItem("littleLanternsSpeechVoice")||"";}catch(e){return "";}})();
   const previous=select.value;
-  select.innerHTML='<option value="">Automatic · prefer US English</option>';
+  select.innerHTML='<option value="">Automatic · US English preferred</option>';
   voices.sort((a,b)=>{
-    const au=/^en[-_]US/i.test(a.lang)?0:1,bu=/^en[-_]US/i.test(b.lang)?0:1;
-    return au-bu||a.name.localeCompare(b.name);
+    const rank=v=>/^en[-_]US/i.test(v.lang)?0:/^en[-_]GB/i.test(v.lang)?1:/^en[-_]CA/i.test(v.lang)?2:/^en[-_]AU/i.test(v.lang)?3:4;
+    return rank(a)-rank(b)||a.name.localeCompare(b.name);
   });
   voices.forEach(voice=>{
     const option=document.createElement("option");
@@ -538,62 +549,42 @@ function populateSpeechVoices(){
     option.textContent=voice.name+" · "+voice.lang+(voice.localService?" · on device":"");
     select.appendChild(option);
   });
-  let preferred=previous||(()=>{try{return localStorage.getItem("littleLanternsSpeechVoice")||"";}catch(e){return "";}})();
-  if(preferred&&voices.some(v=>v.voiceURI===preferred))select.value=preferred;
-  else if(!preferred){
-    const best=voices.find(v=>/^en[-_]US/i.test(v.lang));
-    if(best)select.value=best.voiceURI;
-  }
+  const wanted=previous||saved;
+  if(wanted&&voices.some(v=>v.voiceURI===wanted))select.value=wanted;
+  else select.value="";
   selectedSpeechVoice=voices.find(v=>v.voiceURI===select.value)||null;
-  const hasUsVoice=voices.some(v=>/^en[-_]US/i.test(v.lang));
-  $("voiceHelp").textContent=hasUsVoice
-    ?"Choose an English voice available on this device. US English is preferred by default."
+  const us=voices.some(v=>/^en[-_]US/i.test(v.lang));
+  $("voiceHelp").textContent=us
+    ?"US English is available. Automatic mode prefers it. Nigerian English is never chosen automatically."
     :voices.length
-      ?"No US English voice is currently installed. Choose a voice manually, or install English (United States) in your device text-to-speech settings."
-      :"No English voices are exposed yet. Install an English (United States) voice in your device text-to-speech settings, then reopen this menu.";
+      ?"No US English voice is listed. Automatic mode will use another available English voice, but never Nigerian English. Install an en-US voice for the closest match."
+      :"Firefox has not exposed a suitable English voice. Install an English (United States) voice in your system speech settings, then reload this page.";
+}
+function resolveSpeechVoice(){
+  const voices=availableSpeechVoices().filter(isPreferredEnglishVoice);
+  if(selectedSpeechVoice&&voices.some(v=>v.voiceURI===selectedSpeechVoice.voiceURI))return voices.find(v=>v.voiceURI===selectedSpeechVoice.voiceURI);
+  return defaultSpeechVoice(voices);
 }
 function applySpeechVoice(utterance){
-  utterance.lang="en-US";
-  const voices=availableSpeechVoices();
-  const chosen=voices.find(v=>v.voiceURI===selectedSpeechVoice?.voiceURI)
-    ||voices.find(v=>/^en[-_]US/i.test(v.lang));
-  if(chosen)utterance.voice=chosen;
+  const chosen=resolveSpeechVoice();
+  if(!chosen)return false;
+  utterance.voice=chosen;
+  utterance.lang=chosen.lang||"en-US";
+  utterance.volume=speechVolume;
+  return true;
 }
 $("speechVoice").addEventListener("change",()=>{
   const value=$("speechVoice").value;
   selectedSpeechVoice=availableSpeechVoices().find(v=>v.voiceURI===value)||null;
   try{localStorage.setItem("littleLanternsSpeechVoice",value);}catch(e){}
-  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
+  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();isSpeechPaused=false;setTimeout(()=>speakStoryParagraph(token,currentSpeechParagraph),80);}
+  populateSpeechVoices();
 });
 if("speechSynthesis" in window){
   populateSpeechVoices();
   window.speechSynthesis.addEventListener?.("voiceschanged",populateSpeechVoices);
-  setTimeout(populateSpeechVoices,500);
-}
-function updateSpeechRate(){
-  $("speechRate").textContent=speechRate.toFixed(1)+"×";
-  try{localStorage.setItem("littleLanternsSpeechRate",String(speechRate));}catch(e){}
-}
-function clearSpeechHighlight(){
-  storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
-}
-function stopReading(){
-  storyReadToken++;
-  isReadingStory=false;
-  if("speechSynthesis" in window)window.speechSynthesis.cancel();
-  clearSpeechHighlight();
-  $("readAloud").textContent="🔊 Listen";
-  $("readAloud").setAttribute("title","Read this page aloud");
-}
-function speakText(text){
-  if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
-  if(isReadingStory)stopReading();
-  window.speechSynthesis.cancel();
-  const cleanText=String(text).replace(/\s+/g," ").trim();
-  const utterance=new SpeechSynthesisUtterance(cleanText);
-  applySpeechVoice(utterance);
-  utterance.rate=speechRate;
-  window.speechSynthesis.speak(utterance);
+  setTimeout(populateSpeechVoices,350);
+  setTimeout(populateSpeechVoices,1200);
 }
 let lastAutoScrollAt=0;
 function keepSpeakingWordVisible(element){
@@ -630,26 +621,27 @@ function speakStoryParagraph(token,paragraphIndex){
   const paragraphs=storyPages[page].paragraphs;
   if(paragraphIndex>=paragraphs.length){
     isReadingStory=false;
+    isSpeechPaused=false;
     clearSpeechHighlight();
-    $("readAloud").textContent="🔊 Listen";
-    $("readAloud").setAttribute("title","Read this page aloud");
+    updateAudioControls();
     return;
   }
   currentSpeechParagraph=paragraphIndex;
   const paragraphText=paragraphs[paragraphIndex];
   const utterance=new SpeechSynthesisUtterance(paragraphText);
-  applySpeechVoice(utterance);
+  if(!applySpeechVoice(utterance)){isReadingStory=false;isSpeechPaused=false;updateAudioControls();showToast("No suitable English voice is available. Install an English (United States) voice in Firefox system speech settings, then reload.");return;}
   utterance.rate=speechRate;
   utterance.onboundary=event=>{
     if(token!==storyReadToken||!isReadingStory)return;
     if(typeof event.charIndex==="number")highlightSpokenWord(paragraphIndex,event.charIndex);
   };
-  utterance.onend=()=>speakStoryParagraph(token,paragraphIndex+1);
+  utterance.onend=()=>{if(token===storyReadToken&&!isSpeechPaused)speakStoryParagraph(token,paragraphIndex+1);};
   utterance.onerror=event=>{
     if(token!==storyReadToken)return;
     isReadingStory=false;
+    isSpeechPaused=false;
     clearSpeechHighlight();
-    $("readAloud").textContent="🔊 Listen";
+    updateAudioControls();
     if(event.error!=="canceled"&&event.error!=="interrupted")showToast("The reader could not finish speaking.");
   };
   window.speechSynthesis.speak(utterance);
@@ -661,11 +653,20 @@ function startStoryReading(){
   storyReadToken++;
   isReadingStory=true;
   currentSpeechParagraph=0;
-  $("readAloud").textContent="⏹ Stop";
-  $("readAloud").setAttribute("title","Stop reading");
+  isSpeechPaused=false;
+  updateAudioControls();
   speakStoryParagraph(storyReadToken,0);
 }
-$("readAloud").addEventListener("click",()=>isReadingStory?stopReading():startStoryReading());
+$("readAloud").addEventListener("click",()=>{
+  if(!isReadingStory&&!isSpeechPaused){startStoryReading();return;}
+  if(isSpeechPaused){window.speechSynthesis.resume();isSpeechPaused=false;updateAudioControls();return;}
+  window.speechSynthesis.pause();isSpeechPaused=true;updateAudioControls();
+});
+$("stopSpeech").addEventListener("click",stopReading);
+$("speechVolume").addEventListener("input",event=>updateSpeechVolume(event.target.value));
+$("volumeDown").addEventListener("click",()=>updateSpeechVolume(Math.round((speechVolume-.1)*10)/10));
+$("volumeUp").addEventListener("click",()=>updateSpeechVolume(Math.round((speechVolume+.1)*10)/10));
+updateSpeechVolume(speechVolume);
 $("copyLessonLink").addEventListener("click",async()=>{
   const url=new URL(currentLessonRoute(),location.href).href;
   try{await navigator.clipboard.writeText(url);showToast("Lesson link copied!");}
@@ -674,12 +675,12 @@ $("copyLessonLink").addEventListener("click",async()=>{
 $("slowerSpeech").addEventListener("click",()=>{
   speechRate=Math.max(.1,Math.round((speechRate-.1)*10)/10);
   updateSpeechRate();
-  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
+  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();isSpeechPaused=false;speakStoryParagraph(token,currentSpeechParagraph);}
 });
 $("fasterSpeech").addEventListener("click",()=>{
   speechRate=Math.min(1.5,Math.round((speechRate+.1)*10)/10);
   updateSpeechRate();
-  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
+  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();isSpeechPaused=false;speakStoryParagraph(token,currentSpeechParagraph);}
 });
 updateSpeechRate();
 function showToast(message){const toast=$("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2600);}
@@ -751,6 +752,9 @@ $("copyPrompt").addEventListener("click",async()=>{
   try{await navigator.clipboard.writeText(text);showToast("Speech starter copied!");}catch(e){showToast("Select and copy the speech starter above.");}
 });
 renderStory();
+$("toggleWordBorders").checked=showWordBorders;
+$("autoScrollToggle").checked=autoScrollEnabled;
+document.querySelectorAll(".mode-button").forEach(btn=>btn.classList.toggle("active",btn.dataset.mode===mode));
 applyLocationRoute();
 
 // Editorial QA: every token is classified as reviewed syllables, known one-syllable,
