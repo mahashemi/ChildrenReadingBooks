@@ -603,7 +603,7 @@ function applySpeechVoice(utterance){
   if(!chosen)return false;
   utterance.voice=chosen;
   utterance.lang=chosen.lang||"en-US";
-remove utterance volume  return true;
+  return true;
 }
 $("speechVoice").addEventListener("change",()=>{
   const value=$("speechVoice").value;
