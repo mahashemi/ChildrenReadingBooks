@@ -531,3 +531,80 @@ body.chapter-drawer-open .chapter-drawer-scrim{display:block}
  .story-sidebar .story-library{grid-template-columns:1fr;max-height:31vh;overflow-y:auto}
  .drawer-settings{margin:14px 0;padding:13px 11px}
 }
+
+
+/* Reader refresh: tabs in the drawer and a focused, full-height mobile reading surface. */
+.drawer-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;background:#f4f3eb;border:1px solid #e9e8df;border-radius:13px;margin:2px 0 15px}
+.drawer-tab{border:0;border-radius:9px;background:transparent;color:#788477;font:800 12px Nunito,sans-serif;padding:10px 8px;cursor:pointer}
+.drawer-tab.active{background:#fff;color:#426b4b;box-shadow:0 2px 8px #384b3012}
+.drawer-panel[hidden]{display:none!important}
+.drawer-panel{min-width:0}
+.drawer-settings{margin-top:0}
+.story-reading-stage{position:relative;isolation:isolate;min-height:220px;border-radius:16px;overflow:hidden;padding:clamp(14px,2vw,28px);background:#fbfaf4}
+.story-reading-stage .story-art{position:absolute;inset:0;z-index:-1;height:auto;margin:0;border-radius:0;opacity:.23;pointer-events:none}
+.story-reading-stage .story-art .art-illustration{opacity:.55;transform:translate(-50%,-50%) scale(1.25)}
+.story-reading-stage .story-text{position:relative;z-index:1;max-width:900px;margin:0 auto;text-shadow:0 1px 0 #fff9}
+.story-text .story-word.syllabified,.story-text .story-word.mixed-word{white-space:nowrap;display:inline-block;word-break:keep-all;overflow-wrap:normal;hyphens:none}
+.audio-toolbar-main{min-width:0;flex-wrap:nowrap}
+.audio-play-button{padding:7px 10px;min-width:58px;gap:5px}
+.audio-icon-button{width:30px;height:30px;min-width:30px}
+.audio-toolbar-divider{margin:0 5px}
+.audio-speed-control{gap:3px;white-space:nowrap}
+.audio-speed-control button,.audio-volume-control button{width:25px;height:28px;min-width:25px}
+.audio-volume-control{gap:3px;white-space:nowrap}
+.audio-volume-control input{width:clamp(42px,7vw,78px);min-width:38px}
+.audio-status{font-size:9px;white-space:nowrap}
+@media(max-width:650px){
+  body:has(#readingView.active){overflow:hidden}
+  body:has(#readingView.active) main{padding-top:0;padding-bottom:0;max-height:calc(100dvh - 70px);overflow:hidden}
+  #readingView.active{height:calc(100dvh - 70px);min-height:0;display:flex;flex-direction:column;overflow:hidden}
+  #readingView.active>.page-heading,#readingView.active>.after-reading{display:none}
+  #readingView.active>.reader-layout{flex:1;min-height:0;display:flex;flex-direction:column;gap:0;overflow:hidden}
+  #readingView.active .story-sidebar{position:fixed;z-index:1001;top:0;bottom:0;left:0;width:min(88vw,350px);max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;border-radius:0 18px 18px 0;padding:18px 15px;transform:translateX(-105%);transition:transform .24s ease;box-shadow:18px 0 50px #26332325}
+  body.chapter-drawer-open #readingView.active .story-sidebar{transform:translateX(0)}
+  #readingView.active .reader-card{flex:1;min-height:0;height:100%;display:flex;flex-direction:column;gap:0;padding:8px 11px 8px;border:0;border-radius:0;box-shadow:none;overflow:hidden}
+  #readingView.active .reader-drawer-toolbar{flex:0 0 auto;padding:2px 0 7px}
+  #readingView.active .reader-drawer-toolbar>span{display:none}
+  #readingView.active .reader-drawer-toolbar .button{padding:6px 10px;font-size:10px}
+  #readingView.active .reader-topline{flex:0 0 auto;margin:1px 0 5px}
+  #readingView.active .reader-topline .tag{font-size:7px;padding:4px 7px}
+  #readingView.active .reader-route-actions{gap:7px}
+  #readingView.active .page-count{font-size:8px}
+  #readingView.active .lesson-link-button{font-size:8px;padding:3px 5px}
+  #readingView.active .reader-title-row{flex:0 0 auto;margin:0 0 6px;min-height:0}
+  #readingView.active .reader-title-row h2{font-size:19px;line-height:1.15;margin:0}
+  #readingView.active .reader-title-row p{font-size:9px;line-height:1.25;margin:3px 0 0;max-width:75vw}
+  #readingView.active .reader-moon{font-size:16px;padding:4px}
+  #readingView.active .audio-toolbar{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-start;gap:5px;padding:6px 5px;margin:0 0 7px;border-radius:11px;min-width:0;overflow:hidden}
+  #readingView.active .audio-toolbar-main{width:100%;display:flex;align-items:center;justify-content:space-between;gap:3px}
+  #readingView.active .audio-play-button{font-size:9px;min-width:48px;padding:6px 7px;border-radius:8px}
+  #readingView.active .audio-play-icon{font-size:10px}
+  #readingView.active .audio-icon-button{width:25px;height:27px;min-width:25px;font-size:10px}
+  #readingView.active .audio-toolbar-divider{height:19px;margin:0 2px}
+  #readingView.active .audio-speed-control{gap:1px;font-size:9px}
+  #readingView.active .audio-speed-control button,#readingView.active .audio-volume-control button{width:21px;height:25px;min-width:21px;font-size:11px}
+  #readingView.active .audio-volume-control{gap:1px;font-size:10px}
+  #readingView.active .audio-volume-control input{width:clamp(34px,11vw,52px);min-width:30px;height:18px}
+  #readingView.active .audio-status{display:none}
+  #readingView.active .mode-hint{display:none}
+  #readingView.active .story-reading-stage{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:15px 12px;margin:0;border-radius:13px}
+  #readingView.active .story-reading-stage .story-text{font-size:clamp(18px,5vw,22px)!important;line-height:1.85;word-spacing:.12em}
+  #readingView.active .story-text p{margin:0 0 12px}
+  #readingView.active .story-art .art-illustration{width:150px;height:150px;opacity:.3}
+  #readingView.active .word-panel{position:absolute;z-index:5;left:10px;right:10px;bottom:66px;max-height:35%;overflow:auto}
+  #readingView.active .reader-bottom{flex:0 0 auto;display:flex;align-items:center;gap:8px;margin:7px 0 0;padding:7px 0 2px;border-top:1px solid #eeeae0}
+  #readingView.active .progress-dots{gap:4px;max-width:35%;overflow:hidden}
+  #readingView.active .progress-dots i{width:5px;height:5px;flex:0 0 auto}
+  #readingView.active .progress-dots i.on{width:14px}
+  #readingView.active .page-buttons{display:flex;flex:1;justify-content:space-between;gap:8px}
+  #readingView.active .page-buttons .button{flex:1;justify-content:center;padding:9px 8px;font-size:10px;min-height:36px}
+  #readingView.active .source-note{display:none}
+}
+@media(max-width:380px){
+  #readingView.active .audio-play-button{min-width:42px;padding:5px}
+  #readingView.active .audio-toolbar-main{gap:1px}
+  #readingView.active .audio-volume-control input{width:29px;min-width:26px}
+  #readingView.active .audio-toolbar-divider{margin:0 1px}
+  #readingView.active .audio-volume-control>span:first-child,#readingView.active .audio-volume-control>span:last-child{display:none}
+  #readingView.active .audio-speed-control button,#readingView.active .audio-volume-control button{width:19px;min-width:19px}
+}

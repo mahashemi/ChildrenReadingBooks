@@ -78,11 +78,20 @@
       <div class="page-heading"><div><div class="eyebrow">STORIES & WORDS</div><h1>Reading <span>adventures</span></h1><p>Take your time. Every page is a new discovery.</p></div><span class="heading-emoji">📚</span></div>
       <button class="chapter-drawer-scrim" id="chapterDrawerScrim" type="button" aria-label="Close chapter drawer"></button><div class="reader-layout">
         <aside class="story-sidebar" id="storySidebar" aria-label="Choose a reading chapter"><div class="drawer-heading"><b>Choose a story</b><button id="closeChapterDrawer" type="button" aria-label="Close chapter drawer">×</button></div>
+          <div class="drawer-tabs" role="tablist" aria-label="Reader drawer">
+            <button class="drawer-tab active" id="chaptersTab" type="button" role="tab" aria-selected="true" aria-controls="chaptersPanel" data-drawer-tab="chapters">Chapters</button>
+            <button class="drawer-tab" id="settingsTab" type="button" role="tab" aria-selected="false" aria-controls="settingsPanel" data-drawer-tab="settings">Settings</button>
+          </div>
+          <section class="drawer-panel active" id="chaptersPanel" role="tabpanel" aria-labelledby="chaptersTab">
           <div class="sidebar-title">YOUR STORYBOOK <span>01</span></div>
           <label class="reading-search-label" for="chapterSearch">FIND A CHAPTER</label>
           <div class="reading-search-control"><span aria-hidden="true">⌕</span><input id="chapterSearch" type="search" placeholder="Search stories and topics…" autocomplete="off"></div>
           <p class="reading-search-count" id="chapterSearchCount" aria-live="polite"></p>
           <div class="story-library" id="storyLibrary" aria-label="Reading chapters"></div>
+          
+          <div class="sidebar-tip"><span>💡</span><b>Reader tip</b><p>Try reading a sentence twice: first slowly, then smoothly.</p></div>
+          </section>
+          <section class="drawer-panel" id="settingsPanel" role="tabpanel" aria-labelledby="settingsTab" hidden>
           <div class="drawer-settings">
             <div class="drawer-section-heading"><span>⚙</span><div><b>Reading settings</b><small>Make the page comfortable for you</small></div></div>
             <div class="drawer-setting-group"><label class="drawer-setting-label">WORD DISPLAY</label>
@@ -95,9 +104,10 @@
             <label class="drawer-check"><input id="autoScrollToggle" type="checkbox" checked> Follow the highlighted word while listening</label>
             <div class="drawer-setting-group voice-preference"><label class="drawer-setting-label" for="speechVoice">NARRATOR VOICE</label><select id="speechVoice"><option value="">Automatic · US English preferred</option></select><small id="voiceHelp">Choose an English voice available in this browser. Nigerian English is not selected automatically.</small></div>
           </div>
-          <div class="sidebar-tip"><span>💡</span><b>Reader tip</b><p>Try reading a sentence twice: first slowly, then smoothly.</p></div>
+          
+          </section>
         </aside>
-        <article class="reader-card"><div class="reader-drawer-toolbar"><button class="button button-outline" id="chapterDrawerToggle" type="button" aria-controls="storySidebar" aria-expanded="false">☰ Chapters & settings</button><span>Choose a story, then enjoy reading.</span></div>
+        <article class="reader-card"><div class="reader-drawer-toolbar"><button class="button button-outline" id="chapterDrawerToggle" type="button" aria-controls="storySidebar" aria-expanded="false">☰ Chapters / Settings</button><span>Choose a story, then enjoy reading.</span></div>
           <div class="reader-topline"><span class="tag tag-green" id="readerTag">READING CHAPTER 01</span><div class="reader-route-actions"><span class="page-count" id="pageCount">PAGE 1 OF 3</span><button class="lesson-link-button" id="copyLessonLink" type="button" title="Copy a direct link to this lesson">↗ Copy lesson link</button></div></div>
           <div class="reader-title-row"><div><h2 id="storyTitle">A Special Dream</h2><p id="storySubtitle">A story inspired by the Qur’anic account of Prophet Yusuf (peace be upon him).</p></div><span class="reader-moon">🌙</span></div>
           <div class="audio-toolbar" role="region" aria-label="Audio reading controls">
@@ -112,8 +122,8 @@
             <span class="audio-status" id="audioStatus" aria-live="polite">Ready when you are</span>
           </div>
           <div class="mode-hint" id="modeHint">Read in ordinary English spelling. Tap any word to hear it and explore its meaning.</div>
-          <div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
-          <div class="story-text" id="storyText" aria-live="polite"></div>
+          <div class="story-reading-stage"><div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
+          <div class="story-text" id="storyText" aria-live="polite"></div></div>
           <div class="word-panel" id="wordPanel" hidden><div class="word-explorer-content"><small>WORD</small><strong id="wordDisplay"></strong><span id="wordBreakdown"></span><div class="word-explorer-section"><b>Meaning</b><p id="wordMeaning"></p><button id="hearMeaning" class="meaning-audio-button" type="button">▶ Hear meaning</button></div></div><button id="closeWord" aria-label="Close word explorer">×</button></div>
           <div class="reader-bottom"><span class="progress-dots" id="progressDots"><i class="on"></i><i></i><i></i></span><div class="page-buttons"><button class="button button-outline" id="previousPage" disabled>← Previous</button><button class="button button-primary" id="nextPage">Next page →</button></div></div>
           <div class="source-note"><span>📜</span><span><b>Source note:</b> <span id="sourceNoteText">Educational retelling inspired by Surah Yusuf 12:4–6; not a direct translation.</span> <a href="./SOURCES.md" target="_blank" rel="noopener">Full source register</a></span></div>
