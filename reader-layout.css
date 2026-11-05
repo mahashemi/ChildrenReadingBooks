@@ -331,3 +331,83 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
     min-width:0!important;font-size:clamp(8px,2.5vw,10px);
   }
 }
+
+
+/* Keep the text-size preference in charge of the actual reading font. */
+#readingView.active .story-reading-stage .story-text{
+  font-size:var(--reader-text-size, 19px)!important;
+}
+
+/* Clear, consistently enabled control groups in the narration dock. */
+#readingView.active .audio-toolbar-main{
+  grid-template-areas:"transport transport speed speed speed size size expand";
+}
+#readingView.active .audio-toolbar-main>.reader-transport-group{
+  grid-area:transport;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  min-width:0;
+  padding:2px;
+  border:1px solid #dce5d8;
+  border-radius:10px;
+  background:#fff;
+}
+#readingView.active .audio-toolbar-main>.reader-transport-group button{
+  box-sizing:border-box;
+  width:30px;
+  height:30px;
+  min-width:0;
+  max-width:none;
+  padding:0!important;
+  opacity:1;
+  cursor:pointer;
+}
+#readingView.active .audio-toolbar-main>.reader-transport-group #stopSpeech:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+#readingView.active .audio-toolbar-main>#readAloud,
+#readingView.active .audio-toolbar-main>#stopSpeech{grid-area:auto!important}
+#readingView.active .audio-toolbar-main>.audio-speed-control,
+#readingView.active .audio-toolbar-main>.reader-inline-text-size{
+  box-sizing:border-box;
+  padding:2px;
+  border:1px solid #dce5d8;
+  border-radius:10px;
+  background:#fff;
+}
+#readingView.active .audio-toolbar-main>.audio-speed-control button{
+  opacity:1!important;
+  color:#42694b!important;
+  background:#f1f6ee!important;
+  border:1px solid #d8e4d3!important;
+  cursor:pointer!important;
+}
+#readingView.active .audio-toolbar-main>.audio-speed-control button:hover{
+  background:#e4efdf!important;
+  border-color:#b9cfb2!important;
+}
+#readingView.active .audio-toolbar-main>.reader-inline-text-size button{
+  opacity:1!important;
+  color:#42694b!important;
+  background:#f1f6ee!important;
+  border:1px solid #d8e4d3!important;
+  cursor:pointer!important;
+}
+#readingView.active .audio-toolbar-main>.reader-inline-text-size button:hover{
+  background:#e4efdf!important;
+  border-color:#b9cfb2!important;
+}
+@media(max-width:760px){
+  #readingView.active .audio-toolbar-main>.reader-transport-group button{
+    width:clamp(26px,7.5vw,31px);
+    height:clamp(26px,7.5vw,31px);
+  }
+}
+@media(max-width:360px){
+  #readingView.active .audio-toolbar-main>.reader-transport-group button{
+    width:27px;height:28px;
+  }
+}
