@@ -149,3 +149,25 @@ button,input,select,textarea{max-width:100%}
 body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
   transform:translateX(0)!important;
 }
+
+/* Desktop reader placement: the reader is the first and only in-flow item.
+   Drawer panels are fixed overlays; explicitly pin the reader to grid row 1
+   so a preceding/hidden drawer can never leave a blank row above it. */
+@media(min-width:761px){
+  #readingView.active>.reader-layout{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-auto-rows:min-content;
+    align-items:start;
+  }
+  #readingView.active>.reader-layout>.reader-card{
+    grid-column:1;
+    grid-row:1;
+    align-self:start;
+    margin-top:0!important;
+  }
+  #readingView.active>.reader-layout>.story-sidebar,
+  #readingView.active>.reader-layout>.settings-sidebar{
+    position:fixed!important;
+  }
+}
