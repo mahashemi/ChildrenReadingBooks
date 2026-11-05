@@ -389,7 +389,10 @@ Object.assign(meanings, {
   teach:"To help someone learn.",
   title:"The name of a story, book, or piece of writing."
 });
-let page=0, mode="normal", fontSize=19, showWordBorders=false;
+let page=0,
+  mode=(()=>{try{const v=localStorage.getItem("littleLanternsReadingMode");return ["normal","mixed","syllables"].includes(v)?v:"normal";}catch(e){return "normal";}})(),
+  fontSize=(()=>{try{return Math.max(16,Math.min(28,Number(localStorage.getItem("littleLanternsFontSize"))||19));}catch(e){return 19;}})(),
+  showWordBorders=(()=>{try{return localStorage.getItem("littleLanternsWordBorders")==="true";}catch(e){return false;}})();
 const $=id=>document.getElementById(id);
 const storyText=$("storyText");
 function escapeHtml(value){return value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -510,15 +513,16 @@ storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word"
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
 $("toggleWordBorders").addEventListener("change",()=>{
   showWordBorders=$("toggleWordBorders").checked;
+  try{localStorage.setItem("littleLanternsWordBorders",String(showWordBorders));}catch(e){}
   storyText.classList.toggle("word-borders-visible",showWordBorders);
 });
 document.querySelectorAll(".mode-button").forEach(btn=>btn.addEventListener("click",()=>{
-  if(isReadingStory)stopReading();mode=btn.dataset.mode;document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
+  if(isReadingStory)stopReading();mode=btn.dataset.mode;try{localStorage.setItem("littleLanternsReadingMode",mode);}catch(e){}document.querySelectorAll(".mode-button").forEach(b=>b.classList.toggle("active",b===btn));renderStory();
 }));
 $("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page>0){page--;renderStory();syncReadingRoute();}});
 $("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();syncReadingRoute();}else{showToast("Wonderful reading! You finished every chapter. 🌟");page=0;renderStory();syncReadingRoute();}});
-$("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);renderStory();});
-$("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);renderStory();});
+$("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);try{localStorage.setItem("littleLanternsFontSize",String(fontSize));}catch(e){}renderStory();});
+$("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);try{localStorage.setItem("littleLanternsFontSize",String(fontSize));}catch(e){}renderStory();});
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
@@ -682,16 +686,29 @@ function speakStoryParagraph(token,paragraphIndex){
   };
   window.speechSynthesis.speak(utterance);
 }
-function startStoryReading(){
+async function startStoryReading(){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
   window.speechSynthesis.cancel();
   clearSpeechHighlight();
-  storyReadToken++;
+  const token=++storyReadToken;
   isReadingStory=true;
   currentSpeechParagraph=0;
   isSpeechPaused=false;
   updateAudioControls();
-  speakStoryParagraph(storyReadToken,0);
+  // Firefox can populate its voice list after the first user interaction.
+  for(let attempt=0;attempt<10&&!availableSpeechVoices().length;attempt++){
+    await new Promise(resolve=>setTimeout(resolve,150));
+    if(token!==storyReadToken)return;
+  }
+  if(token!==storyReadToken)return;
+  if(!resolveSpeechVoice()){
+    isReadingStory=false;
+    updateAudioControls();
+    populateSpeechVoices();
+    showToast("Firefox has no suitable English voice available. Install an English (United States) voice in your system speech settings, then reload.");
+    return;
+  }
+  speakStoryParagraph(token,0);
 }
 $("readAloud").addEventListener("click",()=>{
   if(!isReadingStory&&!isSpeechPaused){startStoryReading();return;}
