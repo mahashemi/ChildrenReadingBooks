@@ -1,0 +1,93 @@
+/* Focused reader layout: maximise the passage and keep controls on one line. */
+#readingView{min-height:calc(100svh - 86px)}
+#readingView>.page-heading{padding:12px 3px 10px}
+#readingView>.page-heading h1{font-size:clamp(25px,3vw,34px);margin:2px 0}
+#readingView>.page-heading p{font-size:11px}
+#readingView>.page-heading .heading-emoji{width:44px;height:44px;font-size:25px}
+.reader-layout{display:block!important;min-width:0}
+.reader-card{min-height:calc(100svh - 175px);height:calc(100svh - 175px);display:flex;flex-direction:column;gap:0;padding:clamp(12px,1.5vw,20px)!important;overflow:hidden}
+.reader-drawer-toolbar{flex:0 0 auto;min-height:36px;margin-bottom:7px}
+.reader-drawer-toolbar>span{font-size:10px}
+.reader-topline{flex:0 0 auto}
+.reader-title-row{flex:0 0 auto;margin:7px 0 9px}
+.reader-title-row h2{font-size:clamp(18px,2vw,23px)}
+.reader-title-row p{font-size:10px}
+.reader-moon{font-size:19px;padding:6px}
+.audio-toolbar{flex:0 0 auto;display:block;margin:0 0 7px;padding:5px 7px;border:1px solid #e8ede5;border-radius:12px;background:#f8faf6}
+.audio-toolbar-main{display:flex;align-items:center;justify-content:space-between;gap:clamp(2px,.7vw,8px);width:100%;min-width:0;flex-wrap:nowrap}
+.audio-toolbar-main>button,.audio-toolbar-main>.audio-speed-control,.audio-toolbar-main>.text-size-controls{flex:0 0 auto}
+.audio-toolbar .audio-status,.mode-hint{display:none!important}
+.audio-toolbar-divider{display:none}
+.audio-play-button,.audio-icon-button,.immersive-toggle,.audio-speed-control button,.reader-inline-text-size button{width:34px;height:34px;min-width:34px;padding:0!important;display:grid;place-items:center;border:1px solid #e2e9df;border-radius:9px;background:#fff;color:#55785a;font-size:16px;font-weight:900;line-height:1}
+.audio-play-button{background:#eaf3e9;border-color:#dce9d9}
+.audio-play-icon{font-size:17px}
+.audio-icon-button:disabled{opacity:.35}
+.audio-speed-control{display:flex;align-items:center;gap:2px;padding:0;border:0;background:transparent}
+.audio-speed-control button{font-size:18px!important}
+.audio-speed-control #speechRate{min-width:34px;text-align:center;font-size:10px;font-weight:900}
+.immersive-toggle{font-size:19px}
+.immersive-toggle span{display:none}
+.reader-inline-text-size{display:flex;align-items:center;gap:3px}
+.reader-inline-text-size button{font-family:Nunito,system-ui,sans-serif;font-size:17px}
+.reader-inline-text-size button:first-child{font-size:16px}
+.story-reading-stage{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden;margin:0!important;padding:clamp(12px,2vw,24px);border:1px solid #eee9df;border-radius:14px;background:#fffefa}
+.story-art{display:none!important}
+.story-text{width:100%;max-width:100%;flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:clamp(4px,1.3vw,16px) clamp(2px,2vw,22px);font-size:clamp(21px,2vw,29px)!important;line-height:1.95!important;scrollbar-gutter:stable}
+.story-text p{margin:0 0 1.15em}
+.story-text p:last-child{margin-bottom:0}
+.word-panel{flex:0 0 auto;max-height:25%;overflow:auto;margin:7px 0 0}
+.reader-bottom{flex:0 0 auto;margin-top:8px;padding-top:8px}
+.reader-bottom .progress-dots{display:none}
+.reader-bottom .page-buttons{width:100%;justify-content:space-between}
+.reader-bottom .page-buttons .button{padding:8px 12px}
+.source-note{flex:0 0 auto;margin-top:7px;padding:7px 10px;font-size:8px}
+.after-reading{margin-top:10px}
+.drawer-settings{padding:16px}
+.drawer-section-heading{margin-bottom:16px}
+.drawer-setting-group{margin-bottom:16px}
+.drawer-setting-group.voice-preference{margin-bottom:0}
+.drawer-setting-group .mode-switch{width:100%}
+.drawer-setting-group .mode-button{flex:1}
+.settings-sidebar .drawer-check,.settings-sidebar .drawer-setting-group:has(#smallerText){display:none!important}
+.settings-sidebar .drawer-section-heading small{font-size:10px}
+@media(max-width:760px){
+  #readingView{min-height:calc(100svh - 70px)}
+  #readingView>.page-heading{padding:5px 1px 8px}
+  #readingView>.page-heading .eyebrow{font-size:8px}
+  #readingView>.page-heading h1{font-size:23px;letter-spacing:-.8px}
+  #readingView>.page-heading p{display:none}
+  #readingView>.page-heading .heading-emoji{width:35px;height:35px;font-size:20px}
+  .reader-card{height:calc(100svh - 130px);min-height:470px;padding:10px!important;border-radius:15px}
+  .reader-drawer-toolbar{min-height:32px;margin-bottom:5px}
+  .reader-drawer-toolbar>span{display:none}
+  .chapter-toolbar-button{padding:7px 10px;font-size:10px}
+  .settings-toolbar-button{width:32px;height:32px}
+  .reader-topline .tag{padding:4px 7px;font-size:7px}
+  .reader-route-actions{gap:7px}
+  .reader-route-actions .lesson-link-button{font-size:8px}
+  .reader-title-row{margin:5px 0 7px}
+  .reader-title-row h2{font-size:18px}
+  .reader-title-row p{font-size:9px;line-height:1.35}
+  .reader-moon{display:none}
+  .audio-toolbar{margin-bottom:6px;padding:4px}
+  .audio-toolbar-main{gap:2px}
+  .audio-play-button,.audio-icon-button,.immersive-toggle,.audio-speed-control button,.reader-inline-text-size button{width:32px;height:32px;min-width:32px;border-radius:8px}
+  .audio-speed-control{gap:0}
+  .audio-speed-control #speechRate{min-width:30px;font-size:9px}
+  .reader-inline-text-size{gap:1px}
+  .reader-inline-text-size button{font-size:15px}
+  .story-reading-stage{padding:8px 6px;border-radius:11px}
+  .story-text{font-size:clamp(20px,5.5vw,26px)!important;line-height:1.85!important;padding:8px 7px}
+  .reader-bottom{margin-top:6px;padding-top:6px}
+  .reader-bottom .page-buttons .button{font-size:9px;padding:7px 10px}
+  .source-note{margin-top:5px;padding:6px 8px;font-size:7px;line-height:1.35}
+  .word-panel{padding:8px 10px}
+}
+@media(max-width:360px){
+  .audio-play-button,.audio-icon-button,.immersive-toggle,.audio-speed-control button,.reader-inline-text-size button{width:29px;height:30px;min-width:29px}
+  .audio-speed-control #speechRate{min-width:26px;font-size:8px}
+  .reader-route-actions .lesson-link-button{display:none}
+}
+body.reader-immersive #readingView{min-height:100svh}
+body.reader-immersive .reader-card{height:calc(100svh - 24px);min-height:0}
+body.reader-immersive .story-reading-stage{min-height:0}
