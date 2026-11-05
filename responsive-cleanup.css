@@ -116,3 +116,20 @@ button,input,select,textarea{max-width:100%}
   .view{animation:none!important}
   .learning-card,.button{transition:none!important}
 }
+
+
+/* Keep the settings drawer closed unless its explicit open state is active.
+   The aria state is the source of truth as well as the JS body class, so the
+   desktop drawer cannot remain visible after its close control is activated. */
+#readingView .settings-sidebar[aria-hidden="true"]{
+  transform:translateX(105%)!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+#readingView .settings-sidebar[aria-hidden="false"]{
+  visibility:visible;
+  pointer-events:auto;
+}
+body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
+  transform:translateX(0)!important;
+}
