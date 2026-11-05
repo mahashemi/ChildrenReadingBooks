@@ -85,3 +85,21 @@ When a report's chain or grading is disputed, say so or avoid relying on it as a
 - Replaced the Allama Hilli biography chapter with direct teachings on seeking knowledge from al-Kafi, so the chapter's teaching is not derived from an unsourced biography.
 - Replaced the Hilla forty-guests devotional anecdote with reports about the 313 companions from Kitab al-Ghayba. The Hilla anecdote and the exact 1,200-year wording are not established by the cited Qur'an or hadith reports, so they are not used as religious evidence.
 - Kept the Qur'anic chapters tied to the actual verses being explained.
+
+
+## Educational science and environment passages
+
+The following passages are original child-friendly explanations, not copied textbook extracts. Their science content is introductory and should be checked against the linked educational references during future editorial review.
+
+- **The Journey of a Raindrop** — NASA Earth Observatory, water cycle and Earth's water systems: https://science.nasa.gov/earth/earth-observatory/
+- **A Forest Is a Living Home** — National Geographic Education, ecosystems and biodiversity: https://education.nationalgeographic.org/
+- **The Secret Work of Bees** — Royal Botanic Gardens, Kew, pollination and plant science: https://www.kew.org/
+- **Why Do We Breathe?** — NHS health information and Britannica Kids biology: https://www.nhs.uk/ and https://kids.britannica.com/
+- **The Amazing Human Skeleton** — KidsHealth, anatomy and the human body: https://kidshealth.org/
+- **Can We Clean Dirty Water?** — US Environmental Protection Agency, drinking-water treatment and safety: https://www.epa.gov/ground-water-and-drinking-water
+- **The Power of the Sun** — US Department of Energy, solar energy: https://www.energy.gov/eere/solar
+- **From Seed to Plant** — Royal Horticultural Society, education and children's gardening: https://www.rhs.org.uk/education-learning
+- **The Problem with Plastic** — United Nations Environment Programme, Beat Plastic Pollution: https://www.unep.org/interactives/beat-plastic-pollution/
+- **Magnets: An Invisible Pull** — Exploratorium, hands-on science learning: https://www.exploratorium.edu/
+
+The reading text is independently written and simplified for children. Links identify topic references, not sources of verbatim passages. The water-filtering activity is a model only: children must never drink water from a classroom filtration experiment. The vocabulary and syllable annotations are educational aids, not a substitute for a learner's dictionary or a teacher's pronunciation review.

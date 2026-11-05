@@ -387,3 +387,60 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
 .story-text .quran-ayah-link:hover,.source-note a.quran-ayah-link:hover{background:#eaf4e8;outline:2px solid #eaf4e8}
 .story-text .quran-ayah-link:focus-visible,.lesson-link-button:focus-visible{outline:3px solid #d6b76f;outline-offset:2px}
 @media(max-width:520px){.reader-route-actions{gap:7px}.lesson-link-button{padding:6px 8px;font-size:9px}}
+
+
+/* Reading library search, richer passage labels and mobile-first reader refinements. */
+.reading-search-wrap{margin:0 0 13px;padding:0 3px}
+.reading-search-label{display:block;margin:0 0 7px;color:#718073;font-size:10px;font-weight:900;letter-spacing:.3px}
+.reading-search-control{display:flex;align-items:center;gap:8px;padding:0 11px;border:1px solid #e5eade;border-radius:11px;background:#fbfcf9}
+.reading-search-control:focus-within{border-color:#8eaf8d;box-shadow:0 0 0 3px #8eaf8d20}
+.reading-search-control>span{font-size:20px;color:#829283}
+.reading-search-control input{width:100%;min-width:0;height:42px;border:0;outline:0;background:transparent;color:#405244;font:700 11px Nunito,system-ui,sans-serif}
+.reading-search-control input::placeholder{color:#a0aaa0;font-weight:600}
+.reading-search-count{margin:6px 2px 0;color:#9aa397;font-size:9px}
+.story-choice{margin-bottom:7px;min-width:0}
+.story-choice-copy{min-width:0;flex:1}
+.story-choice-copy small{line-height:1.4}
+.reading-no-results{padding:13px 10px;border-radius:10px;background:#fff8e9;color:#8b826e;font-size:11px;line-height:1.6}
+.story-word:focus-visible{outline:2px solid #c69c4d;outline-offset:2px;background:#fff4d8}
+.story-word.syllabified,.story-word.mixed-word{letter-spacing:0;word-spacing:0}
+.story-word.syllabified{color:#356e4c}
+.story-word.mixed-word{color:#356e4c}
+.reader-route-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:760px){
+  .reader-layout{grid-template-columns:minmax(0,1fr);gap:12px}
+  .story-sidebar{padding:13px;position:static}
+  .story-sidebar .sidebar-title{padding-bottom:10px}
+  .story-library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;max-height:245px;overflow:auto;padding:2px 1px}
+  .story-choice{margin:0;align-items:flex-start;padding:9px;min-height:66px}
+  .story-thumb{flex:0 0 32px;width:32px;height:32px;font-size:17px}
+  .story-choice-copy b{font-size:10px;line-height:1.3}
+  .story-choice-copy small{font-size:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .reading-search-wrap{margin-bottom:9px}
+  .reader-card{padding:16px 14px}
+  .reader-tools{display:grid;grid-template-columns:1fr;gap:9px}
+  .mode-switch{width:max-content;max-width:100%}
+  .reader-controls{display:flex;flex-wrap:wrap;gap:6px}
+  .reader-controls button{min-height:36px;padding:8px 10px;font-size:10px}
+  .reader-controls .speech-speed{min-height:36px}
+  .story-text{max-width:none;font-size:clamp(18px,4.7vw,21px);line-height:1.9;word-spacing:.08em;overflow-wrap:anywhere}
+  .story-text p{margin-bottom:16px}
+  .story-word{padding:1px 0}
+  .story-word.syllabified,.story-word.mixed-word{white-space:normal;overflow-wrap:anywhere}
+  .reader-topline{align-items:flex-start;gap:8px;flex-wrap:wrap}
+  .reader-route-actions{gap:7px}
+  .lesson-link-button{font-size:9px}
+  .reader-title-row{align-items:flex-start}
+  .reader-bottom{gap:12px;flex-wrap:wrap}
+  .page-buttons{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .page-buttons .button{min-height:42px;font-size:11px}
+  .word-panel{position:sticky;bottom:8px;z-index:5;box-shadow:0 8px 28px #33433720}
+  .word-explorer-section p{font-size:13px}
+}
+@media(max-width:390px){
+  .story-library{grid-template-columns:1fr;max-height:220px}
+  .reader-card{padding:13px 11px}
+  .reader-controls button{padding:7px 8px}
+  .page-heading h1{font-size:30px}
+  .reader-title-row h2{font-size:21px}
+}
