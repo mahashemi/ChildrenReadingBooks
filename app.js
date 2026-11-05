@@ -541,7 +541,6 @@ $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
 let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
-  speechVolume=(()=>{try{const raw=localStorage.getItem("littleLanternsSpeechVolume");if(raw===null)return 1;const v=Number(raw);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(e){return 1;}})(),
   storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null,activeUtterance=null;
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
 function isPreferredEnglishVoice(voice){return /^en([_-]|$)/i.test(voice.lang)&&!/^en[-_]NG/i.test(voice.lang);}
@@ -588,8 +587,7 @@ function applySpeechVoice(utterance){
   if(!chosen)return false;
   utterance.voice=chosen;
   utterance.lang=chosen.lang||"en-US";
-  utterance.volume=speechVolume;
-  return true;
+remove utterance volume  return true;
 }
 $("speechVoice").addEventListener("change",()=>{
   const value=$("speechVoice").value;
@@ -609,16 +607,11 @@ function updateSpeechRate(){
   try{localStorage.setItem("littleLanternsSpeechRate",String(speechRate));}catch(e){}
 }
 function updateAudioControls(){
-  $("readAloud").innerHTML=isReadingStory&&!isSpeechPaused?'<span class="audio-play-icon">Ⅱ</span><span>Pause</span>':'<span class="audio-play-icon">▶</span><span>'+(isSpeechPaused?'Resume':'Play')+'</span>';
+  $("readAloud").innerHTML=isReadingStory&&!isSpeechPaused?'<span class="audio-play-icon">Ⅱ</span>':'<span class="audio-play-icon">▶</span>';
+  $("readAloud").setAttribute("aria-label",isReadingStory&&!isSpeechPaused?"Pause narration":isSpeechPaused?"Resume narration":"Start narration");
+  $("readAloud").title=isReadingStory&&!isSpeechPaused?"Pause narration":isSpeechPaused?"Resume narration":"Start narration";
   $("stopSpeech").disabled=!isReadingStory&&!isSpeechPaused;
   $("audioStatus").textContent=isReadingStory?(isSpeechPaused?"Paused · ready to continue":"Reading aloud"):"Ready when you are";
-}
-function updateSpeechVolume(value){
-  speechVolume=Math.max(0,Math.min(1,Number(value)));
-  $("speechVolume").value=String(speechVolume);
-  try{localStorage.setItem("littleLanternsSpeechVolume",String(speechVolume));}catch(e){}
-  if(activeUtterance)activeUtterance.volume=speechVolume;
-  $("audioStatus").textContent="Volume "+Math.round(speechVolume*100)+"%";
 }
 function clearSpeechHighlight(){
   storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
@@ -732,10 +725,6 @@ $("readAloud").addEventListener("click",()=>{
   window.speechSynthesis.pause();isSpeechPaused=true;updateAudioControls();
 });
 $("stopSpeech").addEventListener("click",stopReading);
-$("speechVolume").addEventListener("input",event=>updateSpeechVolume(event.target.value));
-$("volumeDown").addEventListener("click",()=>updateSpeechVolume(Math.round((speechVolume-.1)*10)/10));
-$("volumeUp").addEventListener("click",()=>updateSpeechVolume(Math.round((speechVolume+.1)*10)/10));
-updateSpeechVolume(speechVolume);
 $("copyLessonLink").addEventListener("click",async()=>{
   const url=new URL(currentLessonRoute(),location.href).href;
   try{await navigator.clipboard.writeText(url);showToast("Lesson link copied!");}
