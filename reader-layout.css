@@ -48,7 +48,7 @@
 .drawer-setting-group.voice-preference{margin-bottom:0}
 .drawer-setting-group .mode-switch{width:100%}
 .drawer-setting-group .mode-button{flex:1}
-.settings-sidebar .drawer-check,.settings-sidebar .drawer-setting-group:has(#smallerText){display:none!important}
+.settings-sidebar .drawer-setting-group:has(#smallerText){display:none!important}
 .settings-sidebar .drawer-section-heading small{font-size:10px}
 @media(max-width:760px){
   #readingView{min-height:calc(100svh - 70px)}
@@ -274,5 +274,61 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
   #readingView.active .audio-toolbar-main>.audio-speed-control button,
   #readingView.active .audio-toolbar-main>.reader-inline-text-size button{
     height:27px;border-radius:7px;font-size:13px;
+  }
+}
+
+
+/* Narration feedback and a stable three-part speed control. */
+.story-text .story-word.is-speaking{
+  position:relative;
+  z-index:1;
+  color:#294d37!important;
+  background:#ffe39a!important;
+  border-radius:5px;
+  outline:2px solid #e9bd62;
+  box-shadow:0 2px 8px #8b6b2630;
+  text-shadow:none;
+}
+.story-text p.is-speaking-paragraph{transition:background-color .15s ease}
+#readingView.active .audio-toolbar-main>.audio-speed-control{
+  display:grid;
+  grid-template-columns:32px minmax(34px,1fr) 32px;
+  align-items:center;
+  justify-items:stretch;
+  gap:3px;
+  min-width:0;
+}
+#readingView.active .audio-toolbar-main>.audio-speed-control button{
+  display:grid;
+  place-items:center;
+  width:32px!important;
+  min-width:32px!important;
+  max-width:32px!important;
+  padding:0!important;
+  flex:none;
+  font-size:20px!important;
+  line-height:1;
+}
+#readingView.active .audio-toolbar-main>.audio-speed-control #speechRate{
+  display:block;
+  width:100%;
+  min-width:0!important;
+  padding:0 2px;
+  text-align:center;
+  white-space:nowrap;
+  font-size:11px;
+  font-variant-numeric:tabular-nums;
+}
+@media(max-width:760px){
+  #readingView.active .audio-toolbar-main>.audio-speed-control{
+    grid-template-columns:clamp(25px,8vw,31px) minmax(27px,1fr) clamp(25px,8vw,31px);
+    gap:1px;
+  }
+  #readingView.active .audio-toolbar-main>.audio-speed-control button{
+    width:100%!important;min-width:0!important;max-width:none!important;
+    height:30px;padding:0!important;font-size:18px!important;
+  }
+  #readingView.active .audio-toolbar-main>.audio-speed-control #speechRate{
+    min-width:0!important;font-size:clamp(8px,2.5vw,10px);
   }
 }
