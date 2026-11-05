@@ -91,3 +91,121 @@
 body.reader-immersive #readingView{min-height:100svh}
 body.reader-immersive .reader-card{height:calc(100svh - 24px);min-height:0}
 body.reader-immersive .story-reading-stage{min-height:0}
+
+
+/* Premium reader composition: spacious passage first, narration dock below. */
+#readingView.active>.reader-layout{min-width:0}
+#readingView.active .reader-card{
+  display:flex;flex-direction:column;min-width:0;min-height:0;
+  gap:0;padding:clamp(14px,2vw,24px)!important;
+}
+#readingView.active .reader-drawer-toolbar{flex:0 0 auto;margin:0 0 10px;min-height:36px}
+#readingView.active .reader-topline{flex:0 0 auto;margin:0 0 5px}
+#readingView.active .reader-title-row{flex:0 0 auto;margin:4px 0 12px}
+#readingView.active .reader-title-row h2{font-size:clamp(20px,2vw,27px);letter-spacing:-.55px}
+#readingView.active .reader-title-row p{font-size:11px;line-height:1.45}
+#readingView.active .story-reading-stage{
+  position:relative;flex:1 1 auto;min-height:240px;min-width:0;
+  display:flex;flex-direction:column;overflow:hidden;
+  margin:0!important;padding:clamp(18px,3vw,38px);
+  border:1px solid #e9e6dc;border-radius:18px;
+  background:linear-gradient(145deg,#fffefa 0%,#faf8ef 100%);
+  box-shadow:inset 0 1px 0 #ffffff,0 8px 28px #35452d0a;
+}
+#readingView.active .story-reading-stage .story-art{
+  display:block!important;position:absolute;inset:0;z-index:0;
+  height:auto;margin:0;border-radius:0;opacity:.17;pointer-events:none;
+}
+#readingView.active .story-reading-stage .story-text{
+  position:relative;z-index:1;flex:1 1 auto;min-height:0;width:100%;
+  max-width:940px;margin:0 auto;overflow-y:auto;overscroll-behavior:contain;
+  padding:clamp(5px,1vw,14px) clamp(3px,1.4vw,18px);
+  font-size:clamp(22px,2.15vw,30px)!important;line-height:1.95!important;
+  color:#35443a;scrollbar-gutter:stable;text-shadow:0 1px 0 #fff9;
+}
+#readingView.active .story-reading-stage .story-art .art-illustration{opacity:.5}
+#readingView.active .word-panel{flex:0 0 auto;max-height:22%;overflow:auto;margin:8px 0 0}
+#readingView.active .audio-toolbar{
+  order:0;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  margin:12px 0 0;padding:8px 12px;min-height:54px;
+  border:1px solid #e5e9df;border-radius:15px;
+  background:rgba(249,251,247,.96);box-shadow:0 5px 18px #35452d0a;
+}
+#readingView.active .audio-toolbar-main{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;min-width:0;flex-wrap:nowrap;
+}
+#readingView.active .audio-play-button,
+#readingView.active .audio-icon-button,
+#readingView.active .immersive-toggle,
+#readingView.active .audio-speed-control button,
+#readingView.active .reader-inline-text-size button{
+  width:36px;height:36px;min-width:36px;padding:0!important;
+  display:grid;place-items:center;border:1px solid #e1e8dc;
+  border-radius:11px;background:#fff;color:#4e7054;
+  font-size:16px;font-weight:900;line-height:1;
+}
+#readingView.active .audio-play-button{background:#e9f2e7;border-color:#d9e7d6}
+#readingView.active .audio-speed-control{display:flex;align-items:center;gap:4px;padding:0;border:0;background:transparent}
+#readingView.active .audio-speed-control #speechRate{min-width:38px;text-align:center;font-size:11px;font-weight:900}
+#readingView.active .audio-speed-control button{font-size:18px}
+#readingView.active .reader-inline-text-size{display:flex;align-items:center;gap:4px}
+#readingView.active .reader-inline-text-size button{font-family:Nunito,system-ui,sans-serif;font-size:17px}
+#readingView.active .immersive-toggle{margin:0 0 0 4px;font-size:18px}
+#readingView.active .immersive-toggle span,
+#readingView.active .audio-status,
+#readingView.active .audio-toolbar-divider,
+#readingView.active .mode-hint{display:none!important}
+#readingView.active .reader-bottom{
+  flex:0 0 auto;display:flex;align-items:center;margin:10px 0 0;
+  padding:10px 0 0;border-top:1px solid #eeeee7;
+}
+#readingView.active .reader-bottom .progress-dots{display:none}
+#readingView.active .reader-bottom .page-buttons{width:100%;justify-content:space-between}
+#readingView.active .reader-bottom .page-buttons .button{min-width:112px;padding:9px 14px;border-radius:11px}
+#readingView.active .source-note{flex:0 0 auto;margin-top:7px;padding:7px 10px;font-size:8px}
+#readingView.active .settings-sidebar .drawer-check,
+#readingView.active .settings-sidebar .drawer-setting-group:has(#smallerText){display:none!important}
+@media(min-width:761px){
+  #readingView.active{min-height:calc(100svh - 100px)}
+  #readingView.active .reader-card{height:calc(100svh - 230px);min-height:540px;max-width:1180px;margin:0 auto}
+}
+@media(max-width:760px){
+  #readingView.active{height:calc(100dvh - 70px);min-height:0;display:flex;flex-direction:column;overflow:hidden}
+  #readingView.active>.page-heading,#readingView.active>.after-reading{display:none}
+  #readingView.active>.reader-layout{display:flex;flex:1;min-height:0;overflow:hidden}
+  #readingView.active .reader-card{height:100%;min-height:0;flex:1;padding:8px 11px!important;overflow:hidden}
+  #readingView.active .reader-drawer-toolbar{margin:0 0 7px;padding:0}
+  #readingView.active .reader-topline{margin:0 0 4px}
+  #readingView.active .reader-title-row{margin:3px 0 8px}
+  #readingView.active .reader-title-row h2{font-size:18px}
+  #readingView.active .reader-title-row p{font-size:9px;max-width:80vw}
+  #readingView.active .reader-moon{display:none}
+  #readingView.active .story-reading-stage{flex:1 1 auto;min-height:0;padding:12px 9px;border-radius:14px}
+  #readingView.active .story-reading-stage .story-text{
+    font-size:clamp(20px,5.2vw,26px)!important;line-height:1.9!important;padding:8px 7px;
+  }
+  #readingView.active .audio-toolbar{margin-top:8px;padding:5px 6px;min-height:44px;border-radius:13px}
+  #readingView.active .audio-toolbar-main{gap:clamp(2px,1vw,7px)}
+  #readingView.active .audio-play-button,
+  #readingView.active .audio-icon-button,
+  #readingView.active .immersive-toggle,
+  #readingView.active .audio-speed-control button,
+  #readingView.active .reader-inline-text-size button{width:32px;height:32px;min-width:32px;border-radius:9px}
+  #readingView.active .audio-speed-control #speechRate{min-width:31px;font-size:9px}
+  #readingView.active .reader-inline-text-size{gap:2px}
+  #readingView.active .reader-bottom{margin-top:7px;padding-top:7px}
+  #readingView.active .reader-bottom .page-buttons .button{min-width:0;flex:1;min-height:35px;padding:7px 10px;font-size:10px}
+  #readingView.active .source-note{display:none}
+}
+@media(max-width:360px){
+  #readingView.active .audio-toolbar-main{gap:1px}
+  #readingView.active .audio-play-button,
+  #readingView.active .audio-icon-button,
+  #readingView.active .immersive-toggle,
+  #readingView.active .audio-speed-control button,
+  #readingView.active .reader-inline-text-size button{width:29px;height:30px;min-width:29px}
+  #readingView.active .audio-speed-control #speechRate{min-width:27px;font-size:8px}
+}
+body.reader-immersive #readingView.active .reader-card{height:100%;min-height:0}
+body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height:0}
