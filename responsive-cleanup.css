@@ -1,0 +1,118 @@
+/* Cross-device layout contract. Loaded after the legacy stylesheets so each
+   viewport has one predictable layout instead of competing historical rules. */
+:root{--page-width:1480px}
+html,body{min-width:320px;max-width:100%;overflow-x:hidden}
+.site-header,main{width:100%;max-width:var(--page-width);margin-inline:auto}
+.site-header{padding-inline:clamp(20px,3vw,48px)}
+main{padding-inline:clamp(20px,3vw,48px)}
+.view:not(.active){display:none!important}
+.view.active{display:block;min-width:0}
+img,svg,video,canvas{max-width:100%}
+button,input,select,textarea{max-width:100%}
+.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);padding-inline:clamp(8px,2vw,28px)}
+.hero-copy,.hero-art,.workspace-main,.workspace-sidebar,.reader-card,.content-panel{min-width:0}
+.hero-art{height:clamp(330px,32vw,440px)}
+.learning-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.workspace-layout{grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:clamp(18px,2.2vw,32px);align-items:start}
+.flag-library-workspace{grid-template-columns:minmax(240px,280px) minmax(0,1fr)}
+.flag-library-workspace .flag-library-grid{grid-template-columns:repeat(var(--flag-grid-columns,5),minmax(0,1fr));gap:clamp(9px,1.2vw,16px)}
+.flag-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.quran-content-grid,.speech-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.values-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.page-heading{gap:20px}
+.page-heading>div{min-width:0}
+.site-footer{gap:14px;flex-wrap:wrap}
+.reader-layout{width:100%;min-width:0}
+#readingView.active{min-width:0}
+#readingView.active>.reader-layout{width:100%;min-width:0}
+#readingView.active .reader-card{box-sizing:border-box;width:100%;max-width:1320px}
+#readingView.active .story-reading-stage{min-width:0}
+#readingView.active .story-reading-stage .story-text{max-width:1000px}
+#readingView.active .audio-toolbar{max-width:100%}
+.reading-search-control,.flag-search-label{box-sizing:border-box;width:100%;min-width:0}
+.reading-search-control input,.flag-search-label input{box-sizing:border-box;min-width:0;width:100%}
+.islamic-reflection{max-width:940px;margin:28px auto 8px;padding:17px 20px;border:1px solid #dfe9d9;border-left:4px solid #719574;border-radius:13px;background:linear-gradient(110deg,#f1f7ee,#fffdf7);color:#526b55}
+.islamic-reflection>b{display:block;margin-bottom:7px;color:#45684b;font-size:clamp(12px,1vw,14px);font-weight:900}
+.islamic-reflection>p{margin:0!important;color:#56695a;font-size:clamp(15px,1.25vw,18px);line-height:1.8}
+.islamic-reflection .story-word{color:#426d4b}
+@media(min-width:761px){
+  #readingView.active{min-height:0}
+  #readingView.active .reader-card{height:clamp(500px,calc(100svh - 245px),900px);min-height:500px}
+  #readingView.active .story-reading-stage{min-height:0}
+  #readingView.active .reader-title-row{gap:20px}
+  #readingView.active .reader-title-row>div{min-width:0}
+}
+@media(min-width:761px) and (max-width:1080px){
+  .site-header{gap:14px}
+  .brand{min-width:175px}
+  .nav-link{padding-inline:8px;font-size:11px}
+  main{padding-inline:24px}
+  .workspace-layout{grid-template-columns:minmax(205px,235px) minmax(0,1fr);gap:18px}
+  .flag-library-workspace{grid-template-columns:minmax(205px,235px) minmax(0,1fr)}
+  .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .flag-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{gap:24px}
+  .hero h1{font-size:clamp(44px,5vw,62px)}
+  #readingView.active .reader-card{height:clamp(500px,calc(100svh - 225px),820px)}
+}
+@media(max-width:760px){
+  .site-header{height:70px;padding-inline:17px}
+  .main-nav{display:none!important}
+  .mobile-menu{display:inline-flex;align-items:center;justify-content:center}
+  main{padding:0 17px 30px}
+  .hero{grid-template-columns:minmax(0,1fr);min-height:0;gap:22px;padding:30px 2px 22px}
+  .hero h1{font-size:clamp(42px,9vw,62px);letter-spacing:-2.5px}
+  .hero-intro{font-size:15px;line-height:1.65}
+  .hero-art{height:clamp(220px,58vw,330px);border-radius:24px}
+  .welcome-strip{gap:12px;align-items:flex-start;padding:13px}
+  .welcome-strip>div:first-child{min-width:0}
+  .streak{min-width:0}
+  .section-block{padding:38px 0 30px}
+  .section-heading h2{font-size:23px}
+  .learning-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .learning-card{min-height:190px;padding:15px 13px}
+  .page-heading{padding:24px 1px 18px;align-items:center}
+  .page-heading h1{font-size:clamp(28px,6vw,38px);letter-spacing:-1.2px}
+  .page-heading p{font-size:12px;line-height:1.5}
+  .heading-emoji{flex:0 0 auto}
+  .workspace-layout,.flag-library-workspace{grid-template-columns:minmax(0,1fr);gap:14px}
+  .workspace-sidebar,.flag-library-workspace .flag-library-toolbar{position:static;min-width:0}
+  .flag-library-workspace .flag-library-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:14px}
+  .flag-library-workspace .flag-settings-heading,.flag-library-workspace .flag-search-label{grid-column:1/-1}
+  .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .flag-choice-grid,.flag-target-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .quran-content-grid,.speech-grid{grid-template-columns:minmax(0,1fr)}
+  .values-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .quran-feature,.speech-hero,.practice-panel{gap:14px;padding:20px}
+  .speech-mic{margin:0 10px;font-size:55px}
+  .site-footer{font-size:9px}
+  #readingView.active .reader-card{width:100%}
+  .islamic-reflection{margin:20px 0 4px;padding:13px 14px}
+  .islamic-reflection>p{font-size:15px;line-height:1.75}
+}
+@media(max-width:480px){
+  main{padding-inline:13px}
+  .site-header{padding-inline:13px}
+  .learning-grid,.values-grid{grid-template-columns:minmax(0,1fr)}
+  .learning-card{min-height:155px}
+  .welcome-strip{flex-direction:column}
+  .streak{margin-left:4px}
+  .page-heading{gap:10px}
+  .page-heading h1{font-size:29px}
+  .heading-emoji{width:48px;height:48px;font-size:28px}
+  .flag-library-workspace .flag-library-toolbar{grid-template-columns:minmax(0,1fr)}
+  .flag-library-workspace .flag-settings-heading,.flag-library-workspace .flag-search-label{grid-column:auto}
+  .flag-library-workspace .flag-library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-choice-grid,.flag-target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flag-game-panel{padding:15px 11px}
+  .quran-feature,.speech-hero{align-items:flex-start}
+  .quran-orbit{width:80px;min-width:80px;height:90px}
+  .orbit-moon{font-size:60px}
+  .practice-panel{flex-direction:column;align-items:stretch}
+  .site-footer{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  .view{animation:none!important}
+  .learning-card,.button{transition:none!important}
+}

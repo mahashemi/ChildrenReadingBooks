@@ -508,12 +508,12 @@
 
   // Add original, age-appropriate passages based on common primary/lower-secondary science themes.
   const newChapters = [
-    { title:"The Journey of a Raindrop", icon:"💧", category:"Environment", subtitle:"Follow water as it moves through the water cycle.", source:"Original educational passage. Science concepts checked against NASA Earth Observatory's water-cycle learning resources: https://science.nasa.gov/earth/earth-observatory/.", art:"world", takeaway:"Water moves around Earth again and again; use it carefully.", paragraphs:[
+    { title:"The Journey of a Raindrop", icon:"💧", category:"science", subtitle:"Follow water as it moves through the water cycle.", source:"Original educational passage. Science concepts checked against NASA Earth Observatory's water-cycle learning resources: https://science.nasa.gov/earth/earth-observatory/.", art:"world", takeaway:"Water moves around Earth again and again; use it carefully.", paragraphs:[
       "A tiny raindrop rested in a cloud above a green mountain. When the cloud became full of water droplets, rain began to fall. The raindrop landed in a stream and travelled towards a wide river.",
       "Later, sunlight warmed the river. Some water changed into an invisible gas called water vapour. This change is called evaporation. The vapour rose into cooler air and formed tiny droplets in clouds. This is condensation.",
       "When droplets joined and became heavy, they fell as rain or snow. This repeating journey is called the water cycle. Water is precious, so we should turn off taps and avoid wasting it."
     ]},
-    { title:"A Forest Is a Living Home", icon:"🌳", category:"Biology", subtitle:"Discover how plants, animals and fungi share a forest.", source:"Original educational passage. General ecology concepts adapted for children; see National Geographic Education's ecosystem resources: https://education.nationalgeographic.org/.", art:"growth", takeaway:"Every living thing has a role, and habitats need protection.", paragraphs:[
+    { title:"A Forest Is a Living Home", icon:"🌳", category:"science", subtitle:"Discover how plants, animals and fungi share a forest.", source:"Original educational passage. General ecology concepts adapted for children; see National Geographic Education's ecosystem resources: https://education.nationalgeographic.org/.", art:"growth", takeaway:"Every living thing has a role, and habitats need protection.", paragraphs:[
       "A forest is more than a group of trees. It is a living home for birds, insects, mammals, fungi and many tiny organisms. Each living thing depends on parts of its surroundings.",
       "Trees use sunlight, water and carbon dioxide to make food through photosynthesis. Their leaves provide food for some animals, while branches offer places to rest and build nests. Fallen leaves can become food for decomposers.",
       "Fungi and bacteria help break down dead plants and animals. Nutrients return to the soil, where new plants can use them. Protecting a forest means caring for this connected community."
@@ -533,7 +533,7 @@
       "The skull protects the brain. The ribs help protect the heart and lungs. The backbone supports the body and protects the spinal cord. Different bones have different shapes because they do different jobs.",
       "Bones do not work alone. Muscles pull on bones, and joints allow many parts to bend. Eating a balanced diet, being active and getting enough rest help keep the body healthy."
     ]},
-    { title:"Can We Clean Dirty Water?", icon:"🚰", category:"Science", subtitle:"Try a simple model to understand filtering and clean water.", source:"Original educational passage and safe classroom demonstration. Water-treatment concepts are introductory; see US EPA drinking-water resources: https://www.epa.gov/ground-water-and-drinking-water.", art:"world", takeaway:"Filtering can remove some dirt, but it does not make unsafe water safe to drink.", paragraphs:[
+    { title:"Can We Clean Dirty Water?", icon:"🚰", category:"science", subtitle:"Try a simple model to understand filtering and clean water.", source:"Original educational passage and safe classroom demonstration. Water-treatment concepts are introductory; see US EPA drinking-water resources: https://www.epa.gov/ground-water-and-drinking-water.", art:"world", takeaway:"Filtering can remove some dirt, but it does not make unsafe water safe to drink.", paragraphs:[
       "Imagine muddy water after heavy rain. It contains tiny pieces of soil and other material. A water-treatment plant uses several steps to make water suitable for people to use.",
       "In a simple classroom model, muddy water can pass through clean gravel, sand and filter paper. Larger pieces may be trapped, and the water may look clearer. This is called filtration.",
       "Clear-looking water is not always safe to drink. Germs and dissolved chemicals may still be present. Never drink water from a classroom experiment. Real drinking water needs proper treatment and testing."
@@ -591,48 +591,6 @@
       start: start,
       end: storyPages.length - 1
     });
-  });
-
-  // Add a searchable catalogue above the chapter list; existing chapter routes remain stable.
-  const library = document.getElementById("storyLibrary");
-  if (library && !document.getElementById("readingSearch")) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "reading-search-wrap";
-    wrapper.innerHTML = '<label class="reading-search-label" for="readingSearch">Search reading passages</label>' +
-      '<div class="reading-search-control"><span aria-hidden="true">⌕</span><input id="readingSearch" type="search" placeholder="Try science, plants, water..." autocomplete="off"></div>' +
-      '<p class="reading-search-count" id="readingSearchCount" aria-live="polite"></p>';
-    library.parentNode.insertBefore(wrapper, library);
-  }
-  let searchQuery = "";
-  function renderSearchableLibrary() {
-    const host = document.getElementById("storyLibrary");
-    if (!host) return;
-    const activeChapter = storyPages[page] ? storyPages[page].chapterIndex : 0;
-    const query = searchQuery.trim().toLowerCase();
-    const matches = readingChapters.map(function (chapter, index) {
-      return { chapter: chapter, index: index };
-    }).filter(function (item) {
-      const chapter = item.chapter;
-      const text = [chapter.title, chapter.subtitle, chapter.category, chapter.source].join(" ").toLowerCase();
-      return !query || text.includes(query);
-    });
-    host.innerHTML = matches.map(function (item) {
-      const chapter = item.chapter, index = item.index;
-      const selected = index === activeChapter;
-      return '<button class="story-choice ' + (selected ? "selected" : "") + '" data-chapter="' + index + '" type="button">' +
-        '<span class="story-thumb">' + escapeHtml(chapter.icon || "📖") + '</span><span class="story-choice-copy"><b>' +
-        escapeHtml(chapter.title) + '</b><small>' + escapeHtml(chapter.category || "Reading") + ' · ' + escapeHtml(chapter.subtitle) +
-        '</small></span>' + (selected ? '<span class="choice-check">✓</span>' : '') + '</button>';
-    }).join("");
-    const count = document.getElementById("readingSearchCount");
-    if (count) count.textContent = query ? (matches.length + " passage" + (matches.length === 1 ? "" : "s") + " found") : (readingChapters.length + " passages to explore");
-    if (!matches.length) host.innerHTML = '<p class="reading-no-results">No passages found. Try a topic such as “biology”, “water” or “science”.</p>';
-  }
-  window.renderStoryLibrary = renderSearchableLibrary;
-  const searchInput = document.getElementById("readingSearch");
-  if (searchInput) searchInput.addEventListener("input", function () {
-    searchQuery = searchInput.value;
-    renderSearchableLibrary();
   });
 
   // Restore the original URL after the base app has loaded, so new chapter deep links survive refresh.
