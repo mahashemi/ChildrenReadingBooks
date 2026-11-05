@@ -65,6 +65,10 @@ Distinguish Qur'anic narratives, historical reports, hadith-based material and o
 
 The initial public prototype has no accounts and stores no personal information. Any future student profiles, recording or progress features need a separate privacy and safeguarding design.
 
+## Islamic lens across every subject
+
+Little Lanterns teaches every subject through a Shia Islamic worldview—not only lessons labelled Islamic. Reading, mathematics, science, nature, communication and problem-solving should each include a meaningful Qur'anic or traceable Ahl al-Bayt connection, with accurate subject teaching and careful source attribution. This must never mean forcing a verse into a lesson or presenting a scientific claim as scripture. See [the curriculum editorial standard](docs/CURRICULUM-EDITORIAL-STANDARD.md) for the required lesson structure, subject-specific examples and source checklist.
+
 ## Planned curriculum
 
 Five progressive online learning levels, with separate digital handwriting and assessment resources. The learning pillars are reading, understanding, speaking, writing, and speech/presentation. Akhlaq, Aqa'id, Fitrat and Qur'an memorisation run throughout the curriculum.
