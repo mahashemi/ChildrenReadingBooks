@@ -448,6 +448,7 @@ $("chapterDrawerToggle").addEventListener("click",()=>{
   document.body.classList.contains("chapter-drawer-open")?closeChapterDrawer():openChapterDrawer();
 });
 $("closeChapterDrawer").addEventListener("click",closeChapterDrawer);
+$("chapterDrawerScrim").addEventListener("click",closeChapterDrawer);
 document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.body.classList.contains("chapter-drawer-open")){$("chapterDrawerToggle").focus();closeChapterDrawer();}});
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
@@ -544,16 +545,18 @@ function populateSpeechVoices(){
     if(best)select.value=best.voiceURI;
   }
   selectedSpeechVoice=voices.find(v=>v.voiceURI===select.value)||null;
-  $("voiceHelp").textContent=voices.length
-    ?"Choose an English voice available on this device. US English is selected when available."
-    :"No English voices are exposed yet. Install an English (United States) voice in your device's text-to-speech settings, then reopen this menu.";
+  const hasUsVoice=voices.some(v=>/^en[-_]US/i.test(v.lang));
+  $("voiceHelp").textContent=hasUsVoice
+    ?"Choose an English voice available on this device. US English is preferred by default."
+    :voices.length
+      ?"No US English voice is currently installed. Choose a voice manually, or install English (United States) in your device text-to-speech settings."
+      :"No English voices are exposed yet. Install an English (United States) voice in your device text-to-speech settings, then reopen this menu.";
 }
 function applySpeechVoice(utterance){
   utterance.lang="en-US";
   const voices=availableSpeechVoices();
   const chosen=voices.find(v=>v.voiceURI===selectedSpeechVoice?.voiceURI)
-    ||voices.find(v=>/^en[-_]US/i.test(v.lang))
-    ||voices.find(v=>/^en/i.test(v.lang));
+    ||voices.find(v=>/^en[-_]US/i.test(v.lang));
   if(chosen)utterance.voice=chosen;
 }
 $("speechVoice").addEventListener("change",()=>{
@@ -590,7 +593,6 @@ function speakText(text){
   const utterance=new SpeechSynthesisUtterance(cleanText);
   applySpeechVoice(utterance);
   utterance.rate=speechRate;
-  // Voice and language remain unset: the browser chooses its own default voice.
   window.speechSynthesis.speak(utterance);
 }
 let lastAutoScrollAt=0;
@@ -638,7 +640,6 @@ function speakStoryParagraph(token,paragraphIndex){
   const utterance=new SpeechSynthesisUtterance(paragraphText);
   applySpeechVoice(utterance);
   utterance.rate=speechRate;
-  // Do not set voice or language; allow the browser to choose its default.
   utterance.onboundary=event=>{
     if(token!==storyReadToken||!isReadingStory)return;
     if(typeof event.charIndex==="number")highlightSpokenWord(paragraphIndex,event.charIndex);
