@@ -443,34 +443,50 @@ $("storyLibrary")?.addEventListener("click",event=>{
   closeChapterDrawer();
 });
 function openChapterDrawer(){
+  closeSettingsDrawer(false);
   document.body.classList.add("chapter-drawer-open");
+  $("storySidebar").setAttribute("aria-hidden","false");
   $("chapterDrawerToggle").setAttribute("aria-expanded","true");
+  $("settingsDrawerToggle").setAttribute("aria-expanded","false");
   $("closeChapterDrawer").focus();
 }
-function closeChapterDrawer(){
+function closeChapterDrawer(restoreFocus=true){
   document.body.classList.remove("chapter-drawer-open");
+  $("storySidebar").setAttribute("aria-hidden","true");
   $("chapterDrawerToggle").setAttribute("aria-expanded","false");
+  if(restoreFocus)$("chapterDrawerToggle").focus();
+}
+function openSettingsDrawer(){
+  closeChapterDrawer(false);
+  document.body.classList.add("settings-drawer-open");
+  $("settingsSidebar").setAttribute("aria-hidden","false");
+  $("settingsDrawerToggle").setAttribute("aria-expanded","true");
+  $("chapterDrawerToggle").setAttribute("aria-expanded","false");
+  $("closeSettingsDrawer").focus();
+}
+function closeSettingsDrawer(restoreFocus=true){
+  document.body.classList.remove("settings-drawer-open");
+  $("settingsSidebar").setAttribute("aria-hidden","true");
+  $("settingsDrawerToggle").setAttribute("aria-expanded","false");
+  if(restoreFocus)$("settingsDrawerToggle").focus();
 }
 $("chapterDrawerToggle").addEventListener("click",()=>{
   document.body.classList.contains("chapter-drawer-open")?closeChapterDrawer():openChapterDrawer();
 });
-$("closeChapterDrawer").addEventListener("click",closeChapterDrawer);
-$("chapterDrawerScrim").addEventListener("click",closeChapterDrawer);
-document.querySelectorAll("[data-drawer-tab]").forEach(tab=>tab.addEventListener("click",()=>{
-  const selected=tab.dataset.drawerTab;
-  document.querySelectorAll("[data-drawer-tab]").forEach(item=>{
-    const active=item===tab;
-    item.classList.toggle("active",active);
-    item.setAttribute("aria-selected",String(active));
-  });
-  document.querySelectorAll(".drawer-panel").forEach(panel=>{
-    const active=panel.id===(selected==="chapters"?"chaptersPanel":"settingsPanel");
-    panel.classList.toggle("active",active);
-    panel.hidden=!active;
-  });
-}));
-
-document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.body.classList.contains("chapter-drawer-open")){$("chapterDrawerToggle").focus();closeChapterDrawer();}});
+$("settingsDrawerToggle").addEventListener("click",()=>{
+  document.body.classList.contains("settings-drawer-open")?closeSettingsDrawer():openSettingsDrawer();
+});
+$("closeChapterDrawer").addEventListener("click",()=>closeChapterDrawer());
+$("closeSettingsDrawer").addEventListener("click",()=>closeSettingsDrawer());
+$("readerDrawerScrim").addEventListener("click",()=>{
+  closeChapterDrawer(false);
+  closeSettingsDrawer(false);
+});
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Escape")return;
+  if(document.body.classList.contains("chapter-drawer-open"))closeChapterDrawer();
+  else if(document.body.classList.contains("settings-drawer-open"))closeSettingsDrawer();
+});
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
 }
@@ -541,7 +557,6 @@ $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
 let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
-  speechVolume=(()=>{try{const raw=localStorage.getItem("littleLanternsSpeechVolume");if(raw===null)return 1;const v=Number(raw);return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(e){return 1;}})(),
   storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null,activeUtterance=null;
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
 function isPreferredEnglishVoice(voice){return /^en([_-]|$)/i.test(voice.lang)&&!/^en[-_]NG/i.test(voice.lang);}
@@ -588,7 +603,6 @@ function applySpeechVoice(utterance){
   if(!chosen)return false;
   utterance.voice=chosen;
   utterance.lang=chosen.lang||"en-US";
-  utterance.volume=speechVolume;
   return true;
 }
 $("speechVoice").addEventListener("change",()=>{
@@ -609,16 +623,11 @@ function updateSpeechRate(){
   try{localStorage.setItem("littleLanternsSpeechRate",String(speechRate));}catch(e){}
 }
 function updateAudioControls(){
-  $("readAloud").innerHTML=isReadingStory&&!isSpeechPaused?'<span class="audio-play-icon">Ⅱ</span><span>Pause</span>':'<span class="audio-play-icon">▶</span><span>'+(isSpeechPaused?'Resume':'Play')+'</span>';
+  $("readAloud").innerHTML=isReadingStory&&!isSpeechPaused?'<span class="audio-play-icon">Ⅱ</span>':'<span class="audio-play-icon">▶</span>';
+  $("readAloud").setAttribute("aria-label",isReadingStory&&!isSpeechPaused?"Pause narration":isSpeechPaused?"Resume narration":"Start narration");
+  $("readAloud").title=isReadingStory&&!isSpeechPaused?"Pause narration":isSpeechPaused?"Resume narration":"Start narration";
   $("stopSpeech").disabled=!isReadingStory&&!isSpeechPaused;
   $("audioStatus").textContent=isReadingStory?(isSpeechPaused?"Paused · ready to continue":"Reading aloud"):"Ready when you are";
-}
-function updateSpeechVolume(value){
-  speechVolume=Math.max(0,Math.min(1,Number(value)));
-  $("speechVolume").value=String(speechVolume);
-  try{localStorage.setItem("littleLanternsSpeechVolume",String(speechVolume));}catch(e){}
-  if(activeUtterance)activeUtterance.volume=speechVolume;
-  $("audioStatus").textContent="Volume "+Math.round(speechVolume*100)+"%";
 }
 function clearSpeechHighlight(){
   storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
@@ -732,10 +741,6 @@ $("readAloud").addEventListener("click",()=>{
   window.speechSynthesis.pause();isSpeechPaused=true;updateAudioControls();
 });
 $("stopSpeech").addEventListener("click",stopReading);
-$("speechVolume").addEventListener("input",event=>updateSpeechVolume(event.target.value));
-$("volumeDown").addEventListener("click",()=>updateSpeechVolume(Math.round((speechVolume-.1)*10)/10));
-$("volumeUp").addEventListener("click",()=>updateSpeechVolume(Math.round((speechVolume+.1)*10)/10));
-updateSpeechVolume(speechVolume);
 $("copyLessonLink").addEventListener("click",async()=>{
   const url=new URL(currentLessonRoute(),location.href).href;
   try{await navigator.clipboard.writeText(url);showToast("Lesson link copied!");}
