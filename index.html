@@ -76,13 +76,13 @@
 
     <section class="view" id="readingView">
       <div class="page-heading"><div><div class="eyebrow">STORIES & WORDS</div><h1>Reading <span>adventures</span></h1><p>Take your time. Every page is a new discovery.</p></div><span class="heading-emoji">📚</span></div>
-      <div class="reader-layout">
-        <aside class="story-sidebar">
+      <button class="chapter-drawer-scrim" id="chapterDrawerScrim" type="button" aria-label="Close chapter drawer"></button><div class="reader-layout">
+        <aside class="story-sidebar" id="storySidebar" aria-label="Choose a reading chapter"><div class="drawer-heading"><b>Choose a story</b><button id="closeChapterDrawer" type="button" aria-label="Close chapter drawer">×</button></div>
           <div class="sidebar-title">YOUR STORYBOOK <span>01</span></div>
           <div class="story-library" id="storyLibrary" aria-label="Reading chapters"></div>
           <div class="sidebar-tip"><span>💡</span><b>Reader tip</b><p>Try reading a sentence twice: first slowly, then smoothly.</p></div>
         </aside>
-        <article class="reader-card">
+        <article class="reader-card"><div class="reader-drawer-toolbar"><button class="button button-outline" id="chapterDrawerToggle" type="button" aria-controls="storySidebar" aria-expanded="false">☰ Chapters</button><span>Choose a story, then enjoy reading.</span></div>
           <div class="reader-topline"><span class="tag tag-green" id="readerTag">READING CHAPTER 01</span><div class="reader-route-actions"><span class="page-count" id="pageCount">PAGE 1 OF 3</span><button class="lesson-link-button" id="copyLessonLink" type="button" title="Copy a direct link to this lesson">↗ Copy lesson link</button></div></div>
           <div class="reader-title-row"><div><h2 id="storyTitle">A Special Dream</h2><p id="storySubtitle">A story inspired by the Qur’anic account of Prophet Yusuf (peace be upon him).</p></div><span class="reader-moon">🌙</span></div>
           <div class="reader-tools">
@@ -90,6 +90,7 @@
               <button class="mode-button" data-mode="syllables">Syllables</button><button class="mode-button" data-mode="mixed">Mixed</button><button class="mode-button active" data-mode="normal">Normal</button>
             </div>
             <div class="reader-controls"><button id="smallerText" aria-label="Decrease text size">A−</button><button id="largerText" aria-label="Increase text size">A+</button><button id="readAloud" class="audio-button" title="Read this page aloud">🔊 Listen</button><div class="speech-speed" role="group" aria-label="Speech speed"><button id="slowerSpeech" type="button" aria-label="Speak slower" title="Speak slower">−</button><span id="speechRate" aria-live="polite">1.0×</span><button id="fasterSpeech" type="button" aria-label="Speak faster" title="Speak faster">+</button></div><button id="toggleWordBorders" type="button" aria-pressed="false" aria-label="Show word borders" title="Show or hide word borders">Borders: Off</button></div>
+            <details class="voice-settings"><summary>⚙ Voice settings</summary><div class="voice-settings-fields"><label for="speechVoice">Narrator voice</label><select id="speechVoice"><option value="">Automatic · prefer US English</option></select><small id="voiceHelp">Choose an English voice available on this device. US English is preferred when available.</small><label class="auto-scroll-option"><input id="autoScrollToggle" type="checkbox" checked> Follow the highlighted word while listening</label></div></details>
           </div>
           <div class="mode-hint" id="modeHint">Read in ordinary English spelling. Tap any word to hear it and explore its meaning.</div>
           <div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
