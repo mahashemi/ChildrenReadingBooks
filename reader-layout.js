@@ -12,6 +12,16 @@ size.setAttribute("aria-label","Reading text size");
 
 const originalSizeGroup=document.querySelector(".drawer-setting-group:has(#smallerText)");
 if(originalSizeGroup)originalSizeGroup.style.display="none";
+const transport=document.createElement("div");
+transport.className="reader-transport-group";
+transport.setAttribute("role","group");
+transport.setAttribute("aria-label","Playback controls");
+const play=$("readAloud"),stop=$("stopSpeech");
+if(play&&stop){
+  toolbar.insertBefore(transport,play);
+  transport.append(play,stop);
+}
+
 const smaller=$("smallerText"),larger=$("largerText");
 if(smaller&&larger){
   size.append(smaller,larger);
