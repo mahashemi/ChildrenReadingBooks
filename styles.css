@@ -590,7 +590,7 @@ body.chapter-drawer-open .chapter-drawer-scrim{display:block}
 @media(max-width:380px){
   #readingView.active .audio-play-button{min-width:42px;padding:5px}
   #readingView.active .audio-toolbar-main{gap:1px}
-        #readingView.active .audio-speed-control button,}
+  #readingView.active .audio-speed-control button{display:inline-flex;align-items:center;justify-content:center;}
 
 
 /* Independent reader drawers: chapters enter from the left, settings from the right. */
@@ -635,3 +635,84 @@ body.settings-drawer-open .chapter-drawer-scrim{display:block}
   .reader-drawer-toolbar>span{display:none}
 }
 @media(prefers-reduced-motion:reduce){.story-sidebar,.settings-sidebar{transition:none}}
+
+
+/* Polished narration dock and immersive reading mode. */
+.audio-toolbar-main{width:100%;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.audio-speed-control{display:inline-flex;align-items:center;gap:6px;padding:4px;border:1px solid #e3eadd;border-radius:11px;background:#fff}
+.audio-speed-control button{
+  min-height:32px;padding:0 10px;border:0;border-radius:8px;background:#f1f5ee;
+  color:#496b50;font:800 10px Nunito,system-ui,sans-serif;cursor:pointer;
+}
+.audio-speed-control button:hover{background:#e4eee0}
+.audio-speed-control span{min-width:38px;font-size:11px}
+.audio-icon-button{display:inline-grid;place-items:center;border:1px solid #e1e8dc;border-radius:9px;background:#fff;color:#55705a;opacity:1;cursor:pointer}
+.audio-icon-button:disabled{opacity:.35;cursor:not-allowed}
+.immersive-toggle{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;
+  margin-left:auto;padding:0 11px;border:1px solid #dce7d8;border-radius:10px;
+  background:#edf4e9;color:#42694b;font:900 10px Nunito,system-ui,sans-serif;white-space:nowrap;cursor:pointer;
+}
+.immersive-toggle:hover{background:#e2efde;border-color:#bfd2b9}
+.immersive-toggle:focus-visible,.audio-speed-control button:focus-visible{outline:3px solid #d6b76f;outline-offset:2px}
+@media(max-width:650px){
+  #readingView.active .audio-toolbar-main{justify-content:flex-start;flex-wrap:nowrap;gap:5px}
+  #readingView.active .audio-speed-control{display:inline-flex;gap:3px}
+  #readingView.active .audio-speed-control button{display:inline-flex;align-items:center;justify-content:center;min-height:29px;padding:0 6px;font-size:9px}
+  #readingView.active .audio-speed-control span{min-width:31px;font-size:9px}
+  #readingView.active .immersive-toggle{margin-left:auto;min-height:30px;padding:0 7px;font-size:9px}
+  #readingView.active .immersive-toggle span{display:none}
+}
+@media(max-width:380px){
+  #readingView.active .audio-toolbar-main{gap:3px}
+  #readingView.active .audio-play-button{min-width:38px}
+  #readingView.active .audio-speed-control button{padding:0 4px;font-size:8px}
+}
+
+/* Immersive mode keeps the narration dock and page navigation anchored while
+   the passage becomes the only independently scrolling surface. */
+body.reader-immersive{overflow:hidden}
+body.reader-immersive .site-header{display:none!important}
+body.reader-immersive main{
+  position:fixed;inset:0;z-index:1000;width:100%;height:100dvh;max-height:none!important;
+  margin:0;padding:0!important;overflow:hidden!important;background:#fffefa;
+}
+body.reader-immersive #readingView.active{
+  display:flex;height:100%;min-height:0;max-height:100%;flex-direction:column;overflow:hidden;
+  padding:0;margin:0;background:#fffefa;
+}
+body.reader-immersive #readingView.active>.page-heading,
+body.reader-immersive #readingView.active>.after-reading{display:none!important}
+body.reader-immersive #readingView.active>.reader-layout{
+  display:flex;flex:1;min-height:0;overflow:hidden;margin:0;padding:0;
+}
+body.reader-immersive #readingView.active .reader-card{
+  display:flex;flex:1;flex-direction:column;min-width:0;min-height:0;width:100%;height:100%;
+  max-width:none;margin:0;padding:clamp(10px,2vw,24px);overflow:hidden;border:0;border-radius:0;box-shadow:none;
+}
+body.reader-immersive #readingView.active .reader-drawer-toolbar,
+body.reader-immersive #readingView.active .reader-topline,
+body.reader-immersive #readingView.active .reader-title-row,
+body.reader-immersive #readingView.active .audio-toolbar,
+body.reader-immersive #readingView.active .reader-bottom{flex:0 0 auto}
+body.reader-immersive #readingView.active .audio-toolbar{margin-bottom:10px}
+body.reader-immersive #readingView.active .story-reading-stage{
+  flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  margin:0;padding:clamp(16px,3vw,38px);scrollbar-gutter:stable;
+}
+body.reader-immersive #readingView.active .story-reading-stage .story-text{
+  max-width:980px;margin:0 auto;font-size:clamp(20px,2.1vw,28px);line-height:1.95;
+}
+body.reader-immersive #readingView.active .reader-bottom{
+  margin-top:9px;padding:10px 0 2px;border-top:1px solid #eeeae0;background:#fffefa;
+}
+body.reader-immersive #readingView.active .source-note{display:none}
+body.reader-immersive #readingView.active .mode-hint{display:none}
+@media(max-width:650px){
+  body.reader-immersive #readingView.active .reader-card{padding:7px 10px}
+  body.reader-immersive #readingView.active .reader-topline .tag{font-size:7px}
+  body.reader-immersive #readingView.active .reader-title-row h2{font-size:18px}
+  body.reader-immersive #readingView.active .story-reading-stage{padding:14px 12px}
+  body.reader-immersive #readingView.active .story-reading-stage .story-text{font-size:clamp(19px,5vw,24px);line-height:1.9}
+}
+@media(prefers-reduced-motion:reduce){.immersive-toggle,.audio-speed-control button{transition:none}}
