@@ -443,34 +443,50 @@ $("storyLibrary")?.addEventListener("click",event=>{
   closeChapterDrawer();
 });
 function openChapterDrawer(){
+  closeSettingsDrawer(false);
   document.body.classList.add("chapter-drawer-open");
+  $("storySidebar").setAttribute("aria-hidden","false");
   $("chapterDrawerToggle").setAttribute("aria-expanded","true");
+  $("settingsDrawerToggle").setAttribute("aria-expanded","false");
   $("closeChapterDrawer").focus();
 }
-function closeChapterDrawer(){
+function closeChapterDrawer(restoreFocus=true){
   document.body.classList.remove("chapter-drawer-open");
+  $("storySidebar").setAttribute("aria-hidden","true");
   $("chapterDrawerToggle").setAttribute("aria-expanded","false");
+  if(restoreFocus)$("chapterDrawerToggle").focus();
+}
+function openSettingsDrawer(){
+  closeChapterDrawer(false);
+  document.body.classList.add("settings-drawer-open");
+  $("settingsSidebar").setAttribute("aria-hidden","false");
+  $("settingsDrawerToggle").setAttribute("aria-expanded","true");
+  $("chapterDrawerToggle").setAttribute("aria-expanded","false");
+  $("closeSettingsDrawer").focus();
+}
+function closeSettingsDrawer(restoreFocus=true){
+  document.body.classList.remove("settings-drawer-open");
+  $("settingsSidebar").setAttribute("aria-hidden","true");
+  $("settingsDrawerToggle").setAttribute("aria-expanded","false");
+  if(restoreFocus)$("settingsDrawerToggle").focus();
 }
 $("chapterDrawerToggle").addEventListener("click",()=>{
   document.body.classList.contains("chapter-drawer-open")?closeChapterDrawer():openChapterDrawer();
 });
-$("closeChapterDrawer").addEventListener("click",closeChapterDrawer);
-$("chapterDrawerScrim").addEventListener("click",closeChapterDrawer);
-document.querySelectorAll("[data-drawer-tab]").forEach(tab=>tab.addEventListener("click",()=>{
-  const selected=tab.dataset.drawerTab;
-  document.querySelectorAll("[data-drawer-tab]").forEach(item=>{
-    const active=item===tab;
-    item.classList.toggle("active",active);
-    item.setAttribute("aria-selected",String(active));
-  });
-  document.querySelectorAll(".drawer-panel").forEach(panel=>{
-    const active=panel.id===(selected==="chapters"?"chaptersPanel":"settingsPanel");
-    panel.classList.toggle("active",active);
-    panel.hidden=!active;
-  });
-}));
-
-document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.body.classList.contains("chapter-drawer-open")){$("chapterDrawerToggle").focus();closeChapterDrawer();}});
+$("settingsDrawerToggle").addEventListener("click",()=>{
+  document.body.classList.contains("settings-drawer-open")?closeSettingsDrawer():openSettingsDrawer();
+});
+$("closeChapterDrawer").addEventListener("click",()=>closeChapterDrawer());
+$("closeSettingsDrawer").addEventListener("click",()=>closeSettingsDrawer());
+$("readerDrawerScrim").addEventListener("click",()=>{
+  closeChapterDrawer(false);
+  closeSettingsDrawer(false);
+});
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Escape")return;
+  if(document.body.classList.contains("chapter-drawer-open"))closeChapterDrawer();
+  else if(document.body.classList.contains("settings-drawer-open"))closeSettingsDrawer();
+});
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
 }
