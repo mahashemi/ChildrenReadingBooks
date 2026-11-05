@@ -612,7 +612,7 @@ $("speechVoice").addEventListener("change",()=>{
   const value=$("speechVoice").value;
   selectedSpeechVoice=availableSpeechVoices().find(v=>v.voiceURI===value)||null;
   try{localStorage.setItem("littleLanternsSpeechVoice",value);}catch(e){}
-  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();isSpeechPaused=false;setTimeout(()=>speakStoryParagraph(token,currentSpeechParagraph),80);}
+  if(isReadingStory)restartAtCurrentWord();
   populateSpeechVoices();
 });
 if("speechSynthesis" in window){
@@ -648,7 +648,7 @@ function speakText(text){
   if(isReadingStory)stopReading();
   window.speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(String(text).replace(/\\s+/g," ").trim());
-  if(!applySpeechVoice(utterance)){showToast("No suitable English voice is available. Install an English (United States) voice in Firefox system speech settings, then reload.");return;}
+  applySpeechVoice(utterance);
   utterance.rate=speechRate;
   activeUtterance=utterance;
   window.speechSynthesis.speak(utterance);
@@ -692,6 +692,12 @@ function speakStoryParagraph(token,paragraphIndex,startOffset=0){
   utterance.rate=speechRate;
   activeUtterance=utterance;
   currentSpeechOffset=startOffset;
+  utterance.onstart=()=>{
+    if(token!==storyReadToken||!isReadingStory)return;
+    const first=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)]
+      .find(item=>item.index>=startOffset);
+    if(first){currentSpeechWordStart=first.index;highlightSpokenWord(paragraphIndex,first.index);}
+  };
   utterance.onboundary=event=>{
     if(token!==storyReadToken||!isReadingStory||typeof event.charIndex!=="number")return;
     const absoluteIndex=startOffset+event.charIndex;
