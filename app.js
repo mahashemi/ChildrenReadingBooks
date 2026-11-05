@@ -607,7 +607,9 @@ function keepSpeakingWordVisible(element){
   lastAutoScrollAt=now;
   window.scrollBy({top:delta,behavior:"smooth"});
 }
-let autoScrollEnabled=true;
+let autoScrollEnabled=(()=>{try{return localStorage.getItem("littleLanternsAutoScroll")!=="false";}catch(e){return true;}})();
+const autoScrollToggle=$("autoScrollToggle");
+if(autoScrollToggle){autoScrollToggle.checked=autoScrollEnabled;autoScrollToggle.addEventListener("change",()=>{autoScrollEnabled=autoScrollToggle.checked;try{localStorage.setItem("littleLanternsAutoScroll",String(autoScrollEnabled));}catch(e){}});}
 function highlightSpokenWord(paragraphIndex,charIndex){
   clearSpeechHighlight();
   const paragraph=storyPages[page].paragraphs[paragraphIndex];
