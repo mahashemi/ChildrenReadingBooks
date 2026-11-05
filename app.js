@@ -639,6 +639,8 @@ function stopReading(){
   storyReadToken++;
   isReadingStory=false;
   isSpeechPaused=false;
+  currentSpeechOffset=0;
+  currentSpeechWordStart=0;
   if("speechSynthesis" in window)window.speechSynthesis.cancel();
   clearSpeechHighlight();
   updateAudioControls();
