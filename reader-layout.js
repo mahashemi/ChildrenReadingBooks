@@ -3,7 +3,8 @@
 "use strict";
 const $=id=>document.getElementById(id),toolbar=document.querySelector(".audio-toolbar-main"),play=$("readAloud");
 if(!toolbar||!play)return;
-const size=document.createElement("div");size.className="reader-inline-text-size";size.setAttribute("role","group");size.setAttribute("aria-label","Reading text size");\nconst originalSizeGroup=document.querySelector(".drawer-setting-group:has(#smallerText)");if(originalSizeGroup)originalSizeGroup.style.display="none";
+const size=document.createElement("div");size.className="reader-inline-text-size";size.setAttribute("role","group");size.setAttribute("aria-label","Reading text size");;
+const originalSizeGroup=document.querySelector(".drawer-setting-group:has(#smallerText)");if(originalSizeGroup)originalSizeGroup.style.display="none";
 const smaller=$("smallerText"),larger=$("largerText");
 if(smaller&&larger){size.append(smaller,larger);toolbar.insertBefore(size,$("toggleImmersive"));smaller.textContent="A−";larger.textContent="A+";smaller.title="Smaller text";larger.title="Larger text";}
 const settings=$("settingsSidebar");
@@ -53,7 +54,8 @@ $("stopSpeech").addEventListener("click",e=>{e.preventDefault();e.stopImmediateP
 ["slowerSpeech","fasterSpeech"].forEach(id=>$(id).addEventListener("click",e=>{
  e.preventDefault();e.stopImmediatePropagation();rate=Math.max(.1,Math.min(1.5,Math.round((rate+(id==="slowerSpeech"?-.1:.1))*10)/10));$("speechRate").textContent=rate.toFixed(1)+"×";if(active&&!paused){pause();resume();}
 },true));
-["previousPage","nextPage","chapterDrawerToggle","storyLibrary"].forEach(id=>$(id).addEventListener("click",stop,true));\n$("storyText").addEventListener("click",e=>{if(e.target.closest(".story-word"))stop();},true);
+["previousPage","nextPage","chapterDrawerToggle","storyLibrary"].forEach(id=>$(id).addEventListener("click",stop,true));
+$("storyText").addEventListener("click",e=>{if(e.target.closest(".story-word"))stop();},true);
 document.querySelectorAll(".mode-button").forEach(b=>b.addEventListener("click",()=>{if(active||paused)stop();}));
 $("toggleImmersive").addEventListener("click",()=>{const on=document.body.classList.contains("reader-immersive");expand.innerHTML=on?"⛶":"↙";expand.title=on?"Expand the reader":"Exit immersive reading";expand.setAttribute("aria-label",expand.title);});
 window.addEventListener("beforeunload",stop);controls();
