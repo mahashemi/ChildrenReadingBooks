@@ -461,6 +461,7 @@ function renderChapterCategoryFilters(){
 }
 function renderStoryLibrary(){
  const host=$("storyLibrary");if(!host)return;
+ renderChapterCategoryFilters();
  const query=($("chapterSearch")?.value||"").trim().toLowerCase();
  const matches=readingChapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>(activeChapterCategory==="all"||chapter.category===activeChapterCategory)&&(!query||[chapter.title,chapter.subtitle,chapter.source,chapter.takeaway,...(chapter.tags||[])].join(" ").toLowerCase().includes(query)));
  const count=$("chapterSearchCount");
