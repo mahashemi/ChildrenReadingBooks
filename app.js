@@ -698,7 +698,7 @@ async function startStoryReading(){
   isSpeechPaused=false;
   updateAudioControls();
   // Firefox can populate its voice list after the first user interaction.
-  for(let attempt=0;attempt<10&&!availableSpeechVoices().length;attempt++){
+  for(let attempt=0;attempt<10&&!resolveSpeechVoice();attempt++){
     await new Promise(resolve=>setTimeout(resolve,150));
     if(token!==storyReadToken)return;
   }
