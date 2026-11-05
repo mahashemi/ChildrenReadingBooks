@@ -528,7 +528,7 @@ $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textCon
 
 let speechRate=(()=>{try{return Math.max(.5,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
   speechVolume=(()=>{try{const v=Number(localStorage.getItem("littleLanternsSpeechVolume"));return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(e){return 1;}})(),
-  storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null;
+  storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null,activeUtterance=null;
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
 function isPreferredEnglishVoice(voice){return /^en([_-]|$)/i.test(voice.lang)&&!/^en[-_]NG/i.test(voice.lang);}
 function defaultSpeechVoice(voices=availableSpeechVoices()){
@@ -593,7 +593,6 @@ if("speechSynthesis" in window){
 function updateSpeechRate(){
   $("speechRate").textContent=speechRate.toFixed(1)+"×";
   try{localStorage.setItem("littleLanternsSpeechRate",String(speechRate));}catch(e){}
-  if(isReadingStory&&!isSpeechPaused){const token=++storyReadToken;window.speechSynthesis.cancel();setTimeout(()=>speakStoryParagraph(token,currentSpeechParagraph),70);}
 }
 function updateAudioControls(){
   $("readAloud").innerHTML=isReadingStory&&!isSpeechPaused?'<span class="audio-play-icon">Ⅱ</span><span>Pause</span>':'<span class="audio-play-icon">▶</span><span>'+(isSpeechPaused?'Resume':'Play')+'</span>';
@@ -604,6 +603,7 @@ function updateSpeechVolume(value){
   speechVolume=Math.max(0,Math.min(1,Number(value)));
   $("speechVolume").value=String(speechVolume);
   try{localStorage.setItem("littleLanternsSpeechVolume",String(speechVolume));}catch(e){}
+  if(activeUtterance)activeUtterance.volume=speechVolume;
   $("audioStatus").textContent="Volume "+Math.round(speechVolume*100)+"%";
 }
 function clearSpeechHighlight(){
@@ -624,6 +624,7 @@ function speakText(text){
   const utterance=new SpeechSynthesisUtterance(String(text).replace(/\\s+/g," ").trim());
   if(!applySpeechVoice(utterance)){showToast("No suitable English voice is available. Install an English (United States) voice in Firefox system speech settings, then reload.");return;}
   utterance.rate=speechRate;
+  activeUtterance=utterance;
   window.speechSynthesis.speak(utterance);
 }
 let lastAutoScrollAt=0;
@@ -671,6 +672,7 @@ function speakStoryParagraph(token,paragraphIndex){
   const utterance=new SpeechSynthesisUtterance(paragraphText);
   if(!applySpeechVoice(utterance)){isReadingStory=false;isSpeechPaused=false;updateAudioControls();showToast("No suitable English voice is available. Install an English (United States) voice in Firefox system speech settings, then reload.");return;}
   utterance.rate=speechRate;
+  activeUtterance=utterance;
   utterance.onboundary=event=>{
     if(token!==storyReadToken||!isReadingStory)return;
     if(typeof event.charIndex==="number")highlightSpokenWord(paragraphIndex,event.charIndex);
