@@ -444,3 +444,38 @@ main{max-width:var(--page-width);padding-left:30px;padding-right:30px}
   .page-heading h1{font-size:30px}
   .reader-title-row h2{font-size:21px}
 }
+
+
+/* Reader-first chapter drawer and narration follow mode. */
+.reader-layout{display:block;position:relative}
+.story-sidebar{
+  position:fixed!important;z-index:1200;left:0;top:0;bottom:0;width:min(390px,88vw);
+  max-height:100dvh;overflow-y:auto;margin:0!important;padding:22px!important;
+  border:0!important;border-right:1px solid #e5e9df!important;border-radius:0 20px 20px 0!important;
+  background:#fffefa!important;box-shadow:18px 0 50px #26372b24!important;
+  transform:translateX(-110%);visibility:hidden;transition:transform .24s ease,visibility .24s;
+}
+body.chapter-drawer-open .story-sidebar{transform:translateX(0);visibility:visible}
+body.chapter-drawer-open::before{
+  content:"";position:fixed;inset:0;z-index:1190;background:rgba(28,39,31,.38);
+}
+.drawer-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #e9eee5}
+.drawer-heading b{font-size:17px;color:#34483a}
+.drawer-heading button{width:38px;height:38px;border:0;border-radius:12px;background:#edf3eb;color:#476c50;font-size:25px}
+.reader-drawer-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.reader-drawer-toolbar>span{font-size:11px;color:#89948a}
+.reader-drawer-toolbar .button{padding:9px 13px}
+.voice-settings{width:100%;margin-top:8px;border:1px solid #e6ecdf;border-radius:11px;background:#fbfcf8}
+.voice-settings summary{padding:9px 11px;color:#56715b;font-size:11px;font-weight:900;cursor:pointer}
+.voice-settings-fields{display:grid;gap:6px;padding:0 11px 11px}
+.voice-settings-fields label{font-size:10px;font-weight:900;color:#728174}
+.voice-settings-fields select{width:100%;min-height:38px;border:1px solid #dfe8dc;border-radius:8px;background:#fff;color:#425648;padding:7px;font:700 11px Nunito,system-ui,sans-serif}
+.voice-settings-fields small{font-size:9px;line-height:1.5;color:#8b958b}
+@media(max-width:760px){
+  .reader-layout{grid-template-columns:minmax(0,1fr)}
+  .story-sidebar{position:fixed!important;top:0;bottom:0;max-height:100dvh;width:min(350px,88vw);padding:17px!important}
+  .story-sidebar .story-library{display:grid;grid-template-columns:1fr;max-height:none;overflow:visible}
+  .story-sidebar .story-choice{min-height:62px;padding:10px}
+  .reader-drawer-toolbar{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.story-sidebar{transition:none}}
