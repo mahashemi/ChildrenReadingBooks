@@ -433,7 +433,22 @@ $("storyLibrary")?.addEventListener("click",event=>{
   page=chapter.start;
   renderStory();
   syncReadingRoute();
+  closeChapterDrawer();
 });
+function openChapterDrawer(){
+  document.body.classList.add("chapter-drawer-open");
+  $("chapterDrawerToggle").setAttribute("aria-expanded","true");
+  $("closeChapterDrawer").focus();
+}
+function closeChapterDrawer(){
+  document.body.classList.remove("chapter-drawer-open");
+  $("chapterDrawerToggle").setAttribute("aria-expanded","false");
+}
+$("chapterDrawerToggle").addEventListener("click",()=>{
+  document.body.classList.contains("chapter-drawer-open")?closeChapterDrawer():openChapterDrawer();
+});
+$("closeChapterDrawer").addEventListener("click",closeChapterDrawer);
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.body.classList.contains("chapter-drawer-open")){$("chapterDrawerToggle").focus();closeChapterDrawer();}});
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
 }
@@ -505,9 +520,56 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);r
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
-let speechRate=1.0, storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0;
+let speechRate=(()=>{try{return Math.max(.5,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(), storyReadToken=0, isReadingStory=false, currentSpeechParagraph=0, selectedSpeechVoice=null;
+function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
+function populateSpeechVoices(){
+  const select=$("speechVoice");if(!select)return;
+  const voices=availableSpeechVoices().filter(voice=>/^en([_-]|$)/i.test(voice.lang));
+  const previous=select.value;
+  select.innerHTML='<option value="">Automatic · prefer US English</option>';
+  voices.sort((a,b)=>{
+    const au=/^en[-_]US/i.test(a.lang)?0:1,bu=/^en[-_]US/i.test(b.lang)?0:1;
+    return au-bu||a.name.localeCompare(b.name);
+  });
+  voices.forEach(voice=>{
+    const option=document.createElement("option");
+    option.value=voice.voiceURI;
+    option.textContent=voice.name+" · "+voice.lang+(voice.localService?" · on device":"");
+    select.appendChild(option);
+  });
+  let preferred=previous||(()=>{try{return localStorage.getItem("littleLanternsSpeechVoice")||"";}catch(e){return "";}})();
+  if(preferred&&voices.some(v=>v.voiceURI===preferred))select.value=preferred;
+  else if(!preferred){
+    const best=voices.find(v=>/^en[-_]US/i.test(v.lang));
+    if(best)select.value=best.voiceURI;
+  }
+  selectedSpeechVoice=voices.find(v=>v.voiceURI===select.value)||null;
+  $("voiceHelp").textContent=voices.length
+    ?"Choose an English voice available on this device. US English is selected when available."
+    :"No English voices are exposed yet. Install an English (United States) voice in your device's text-to-speech settings, then reopen this menu.";
+}
+function applySpeechVoice(utterance){
+  utterance.lang="en-US";
+  const voices=availableSpeechVoices();
+  const chosen=voices.find(v=>v.voiceURI===selectedSpeechVoice?.voiceURI)
+    ||voices.find(v=>/^en[-_]US/i.test(v.lang))
+    ||voices.find(v=>/^en/i.test(v.lang));
+  if(chosen)utterance.voice=chosen;
+}
+$("speechVoice").addEventListener("change",()=>{
+  const value=$("speechVoice").value;
+  selectedSpeechVoice=availableSpeechVoices().find(v=>v.voiceURI===value)||null;
+  try{localStorage.setItem("littleLanternsSpeechVoice",value);}catch(e){}
+  if(isReadingStory){const token=++storyReadToken;window.speechSynthesis.cancel();speakStoryParagraph(token,currentSpeechParagraph);}
+});
+if("speechSynthesis" in window){
+  populateSpeechVoices();
+  window.speechSynthesis.addEventListener?.("voiceschanged",populateSpeechVoices);
+  setTimeout(populateSpeechVoices,500);
+}
 function updateSpeechRate(){
   $("speechRate").textContent=speechRate.toFixed(1)+"×";
+  try{localStorage.setItem("littleLanternsSpeechRate",String(speechRate));}catch(e){}
 }
 function clearSpeechHighlight(){
   storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
@@ -526,10 +588,26 @@ function speakText(text){
   window.speechSynthesis.cancel();
   const cleanText=String(text).replace(/\s+/g," ").trim();
   const utterance=new SpeechSynthesisUtterance(cleanText);
+  applySpeechVoice(utterance);
   utterance.rate=speechRate;
   // Voice and language remain unset: the browser chooses its own default voice.
   window.speechSynthesis.speak(utterance);
 }
+let lastAutoScrollAt=0;
+function keepSpeakingWordVisible(element){
+  if(!element||!autoScrollEnabled)return;
+  const rect=element.getBoundingClientRect();
+  const topLimit=105,bottomLimit=Math.max(topLimit+100,window.innerHeight-145);
+  let delta=0;
+  if(rect.top<topLimit)delta=rect.top-topLimit;
+  else if(rect.bottom>bottomLimit)delta=rect.bottom-bottomLimit;
+  if(!delta)return;
+  const now=Date.now();
+  if(now-lastAutoScrollAt<260)return;
+  lastAutoScrollAt=now;
+  window.scrollBy({top:delta,behavior:"smooth"});
+}
+let autoScrollEnabled=true;
 function highlightSpokenWord(paragraphIndex,charIndex){
   clearSpeechHighlight();
   const paragraph=storyPages[page].paragraphs[paragraphIndex];
@@ -541,7 +619,7 @@ function highlightSpokenWord(paragraphIndex,charIndex){
   if(tokenIndex<0)return;
   const wordNodes=paragraphNode.querySelectorAll(".story-word");
   const active=wordNodes[tokenIndex];
-  if(active)active.classList.add("is-speaking");
+  if(active){active.classList.add("is-speaking");keepSpeakingWordVisible(active);}
 }
 function speakStoryParagraph(token,paragraphIndex){
   if(token!==storyReadToken||!isReadingStory)return;
@@ -556,6 +634,7 @@ function speakStoryParagraph(token,paragraphIndex){
   currentSpeechParagraph=paragraphIndex;
   const paragraphText=paragraphs[paragraphIndex];
   const utterance=new SpeechSynthesisUtterance(paragraphText);
+  applySpeechVoice(utterance);
   utterance.rate=speechRate;
   // Do not set voice or language; allow the browser to choose its default.
   utterance.onboundary=event=>{
