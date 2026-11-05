@@ -456,6 +456,20 @@ $("chapterDrawerToggle").addEventListener("click",()=>{
 });
 $("closeChapterDrawer").addEventListener("click",closeChapterDrawer);
 $("chapterDrawerScrim").addEventListener("click",closeChapterDrawer);
+document.querySelectorAll("[data-drawer-tab]").forEach(tab=>tab.addEventListener("click",()=>{
+  const selected=tab.dataset.drawerTab;
+  document.querySelectorAll("[data-drawer-tab]").forEach(item=>{
+    const active=item===tab;
+    item.classList.toggle("active",active);
+    item.setAttribute("aria-selected",String(active));
+  });
+  document.querySelectorAll(".drawer-panel").forEach(panel=>{
+    const active=panel.id===(selected==="chapters"?"chaptersPanel":"settingsPanel");
+    panel.classList.toggle("active",active);
+    panel.hidden=!active;
+  });
+}));
+
 document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.body.classList.contains("chapter-drawer-open")){$("chapterDrawerToggle").focus();closeChapterDrawer();}});
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
