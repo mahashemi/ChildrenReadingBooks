@@ -517,7 +517,7 @@ function renderStory(){
   $("storySubtitle").textContent=current.chapterSubtitle||"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).";
   $("readerTag").textContent="READING CHAPTER "+String(current.chapterIndex+1).padStart(2,"0");
   $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
-  storyText.style.fontSize=fontSize+"px";
+  storyText.style.setProperty("font-size",fontSize+"px","important");
   storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("");
   storyText.classList.toggle("word-borders-visible",showWordBorders);
   $("previousPage").disabled=page===0;
