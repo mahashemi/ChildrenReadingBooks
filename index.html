@@ -105,6 +105,10 @@
         <article class="reader-card"><div class="reader-drawer-toolbar"><button class="button button-outline chapter-toolbar-button" id="chapterDrawerToggle" type="button" aria-controls="storySidebar" aria-expanded="false">☰ Chapters</button><span>Choose a story, then enjoy reading.</span><button class="settings-toolbar-button" id="settingsDrawerToggle" type="button" aria-label="Open reading settings" title="Reading settings" aria-controls="settingsSidebar" aria-expanded="false">⚙</button></div>
           <div class="reader-topline"><span class="tag tag-green" id="readerTag">READING CHAPTER 01</span><div class="reader-route-actions"><span class="page-count" id="pageCount">PAGE 1 OF 3</span><button class="lesson-link-button" id="copyLessonLink" type="button" title="Copy a direct link to this lesson">↗ Copy lesson link</button></div></div>
           <div class="reader-title-row"><div><h2 id="storyTitle">A Special Dream</h2><p id="storySubtitle">A story inspired by the Qur’anic account of Prophet Yusuf (peace be upon him).</p></div><span class="reader-moon">🌙</span></div>
+          <div class="mode-hint" id="modeHint">Read in ordinary English spelling. Tap any word to hear it and explore its meaning.</div>
+          <div class="story-reading-stage"><div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
+          <div class="story-text" id="storyText" aria-live="polite"></div></div>
+          <div class="word-panel" id="wordPanel" hidden><div class="word-explorer-content"><small>WORD</small><strong id="wordDisplay"></strong><span id="wordBreakdown"></span><div class="word-explorer-section"><b>Meaning</b><p id="wordMeaning"></p><button id="hearMeaning" class="meaning-audio-button" type="button">▶ Hear meaning</button></div></div><button id="closeWord" aria-label="Close word explorer">×</button></div>
           <div class="audio-toolbar" role="region" aria-label="Audio reading controls">
             <div class="audio-toolbar-main">
               <button id="readAloud" class="audio-play-button" type="button" title="Start narration" aria-label="Start narration"><span class="audio-play-icon">▶</span></button>
@@ -114,10 +118,6 @@
             </div>
             <span class="audio-status" id="audioStatus" aria-live="polite">Ready when you are</span>
           </div>
-          <div class="mode-hint" id="modeHint">Read in ordinary English spelling. Tap any word to hear it and explore its meaning.</div>
-          <div class="story-reading-stage"><div class="story-art" id="storyArt"><span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span></div>
-          <div class="story-text" id="storyText" aria-live="polite"></div></div>
-          <div class="word-panel" id="wordPanel" hidden><div class="word-explorer-content"><small>WORD</small><strong id="wordDisplay"></strong><span id="wordBreakdown"></span><div class="word-explorer-section"><b>Meaning</b><p id="wordMeaning"></p><button id="hearMeaning" class="meaning-audio-button" type="button">▶ Hear meaning</button></div></div><button id="closeWord" aria-label="Close word explorer">×</button></div>
           <div class="reader-bottom"><span class="progress-dots" id="progressDots"><i class="on"></i><i></i><i></i></span><div class="page-buttons"><button class="button button-outline" id="previousPage" disabled>← Previous</button><button class="button button-primary" id="nextPage">Next page →</button></div></div>
           <div class="source-note"><span>📜</span><span><b>Source note:</b> <span id="sourceNoteText">Educational retelling inspired by Surah Yusuf 12:4–6; not a direct translation.</span> <a href="./SOURCES.md" target="_blank" rel="noopener">Full source register</a></span></div>
         </article>
