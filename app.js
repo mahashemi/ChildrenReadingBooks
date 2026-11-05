@@ -526,7 +526,7 @@ $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);t
 $("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
-let speechRate=(()=>{try{return Math.max(.5,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
+let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
   speechVolume=(()=>{try{const v=Number(localStorage.getItem("littleLanternsSpeechVolume"));return Number.isFinite(v)?Math.max(0,Math.min(1,v)):1;}catch(e){return 1;}})(),
   storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,selectedSpeechVoice=null,activeUtterance=null;
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
