@@ -486,6 +486,7 @@ document.addEventListener("keydown",event=>{
   if(event.key!=="Escape")return;
   if(document.body.classList.contains("chapter-drawer-open"))closeChapterDrawer();
   else if(document.body.classList.contains("settings-drawer-open"))closeSettingsDrawer();
+  else if(document.body.classList.contains("reader-immersive"))setImmersiveMode(false);
 });
 function quranAyahUrl(surah,ayah){
   return "https://mahashemi.github.io/QuranMemorizer/#/surah/"+surah+"/ayah/"+ayah;
@@ -741,6 +742,17 @@ $("readAloud").addEventListener("click",()=>{
   window.speechSynthesis.pause();isSpeechPaused=true;updateAudioControls();
 });
 $("stopSpeech").addEventListener("click",stopReading);
+function setImmersiveMode(enabled){
+  document.body.classList.toggle("reader-immersive",enabled);
+  const button=$("toggleImmersive");
+  if(!button)return;
+  button.setAttribute("aria-pressed",String(enabled));
+  button.title=enabled?"Exit immersive reading":"Expand the reader";
+  button.innerHTML=enabled?'↙ <span>Exit focus</span>':'⛶ <span>Expand</span>';
+}
+$("toggleImmersive").addEventListener("click",()=>{
+  setImmersiveMode(!document.body.classList.contains("reader-immersive"));
+});
 $("copyLessonLink").addEventListener("click",async()=>{
   const url=new URL(currentLessonRoute(),location.href).href;
   try{await navigator.clipboard.writeText(url);showToast("Lesson link copied!");}
