@@ -411,3 +411,26 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
     width:27px;height:28px;
   }
 }
+/* Match Play's minimum height to its explicit dimensions. The legacy
+   .audio-play-button rule carries min-height:42px, which otherwise survives
+   the compact reader sizing and makes Play taller than Stop and the other controls. */
+#readingView.active .audio-toolbar-main>.reader-transport-group #readAloud{
+  min-height:30px;
+  box-shadow:none;
+}
+#readingView.active .audio-toolbar-main>.reader-transport-group #readAloud:hover{
+  transform:none;
+  background:#e4efdf;
+  border-color:#b9cfb2;
+}
+@media(max-width:760px){
+  #readingView.active .audio-toolbar-main>.reader-transport-group #readAloud{
+    min-height:clamp(26px,7.5vw,31px);
+  }
+}
+@media(max-width:360px){
+  #readingView.active .audio-toolbar-main>.reader-transport-group #readAloud{
+    min-height:28px;
+  }
+}
+
