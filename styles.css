@@ -590,7 +590,7 @@ body.chapter-drawer-open .chapter-drawer-scrim{display:block}
 @media(max-width:380px){
   #readingView.active .audio-play-button{min-width:42px;padding:5px}
   #readingView.active .audio-toolbar-main{gap:1px}
-        #readingView.active .audio-speed-control button,}
+  #readingView.active .audio-speed-control button{display:inline-flex;align-items:center;justify-content:center;}
 
 
 /* Independent reader drawers: chapters enter from the left, settings from the right. */
