@@ -171,3 +171,10 @@ body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
     position:fixed!important;
   }
 }
+
+/* Keep the right-hand settings drawer above the reading surface.
+   The backdrop sits below both drawers, so the panel slides in from the
+   viewport edge instead of appearing underneath the reader card. */
+#readingView .settings-sidebar{z-index:1302!important}
+#readingView .story-sidebar{z-index:1301!important}
+#readingView .chapter-drawer-scrim{z-index:1290!important}
