@@ -209,3 +209,70 @@ body.reader-immersive .story-reading-stage{min-height:0}
 }
 body.reader-immersive #readingView.active .reader-card{height:100%;min-height:0}
 body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height:0}
+
+
+/* Responsive control dock: allocate space by control group, never by fixed flex widths. */
+#readingView.active .audio-toolbar{
+  box-sizing:border-box;width:100%;max-width:100%;min-width:0;overflow:hidden;
+}
+#readingView.active .audio-toolbar-main{
+  box-sizing:border-box;display:grid;
+  grid-template-columns:repeat(8,minmax(0,36px));
+  grid-template-areas:"play stop speed speed speed size size expand";
+  justify-content:center;align-items:center;gap:4px;
+  width:100%;max-width:100%;min-width:0;
+}
+#readingView.active .audio-toolbar-main>#readAloud{grid-area:play}
+#readingView.active .audio-toolbar-main>#stopSpeech{grid-area:stop}
+#readingView.active .audio-toolbar-main>.audio-speed-control{
+  grid-area:speed;display:flex;width:100%;min-width:0;max-width:100%;
+  justify-content:space-between;gap:2px;
+}
+#readingView.active .audio-toolbar-main>.reader-inline-text-size{
+  grid-area:size;display:flex;width:100%;min-width:0;max-width:100%;
+  justify-content:space-between;gap:3px;
+}
+#readingView.active .audio-toolbar-main>#toggleImmersive{grid-area:expand}
+#readingView.active .audio-toolbar-main>.audio-toolbar-divider{display:none!important}
+#readingView.active .audio-toolbar-main>#readAloud,
+#readingView.active .audio-toolbar-main>#stopSpeech,
+#readingView.active .audio-toolbar-main>#toggleImmersive,
+#readingView.active .audio-toolbar-main>.audio-speed-control button,
+#readingView.active .audio-toolbar-main>.reader-inline-text-size button{
+  box-sizing:border-box;width:100%;min-width:0;max-width:100%;
+}
+#readingView.active .audio-toolbar-main>.audio-speed-control #speechRate{
+  box-sizing:border-box;flex:1 1 0;min-width:0;width:auto;
+}
+@media(max-width:760px){
+  #readingView.active .audio-toolbar-main{
+    grid-template-columns:repeat(8,minmax(0,1fr));
+    gap:clamp(2px,.7vw,4px);
+  }
+  #readingView.active .audio-toolbar-main>#readAloud,
+  #readingView.active .audio-toolbar-main>#stopSpeech,
+  #readingView.active .audio-toolbar-main>#toggleImmersive,
+  #readingView.active .audio-toolbar-main>.audio-speed-control button,
+  #readingView.active .audio-toolbar-main>.reader-inline-text-size button{
+    width:100%;height:clamp(28px,8vw,34px);min-width:0;
+    padding:0!important;border-radius:8px;font-size:clamp(13px,4vw,16px);
+  }
+  #readingView.active .audio-toolbar-main>.audio-speed-control{
+    gap:1px;
+  }
+  #readingView.active .audio-toolbar-main>.audio-speed-control #speechRate{
+    min-width:0;font-size:clamp(8px,2.5vw,10px);
+  }
+  #readingView.active .audio-toolbar-main>.reader-inline-text-size{gap:2px}
+}
+@media(max-width:320px){
+  #readingView.active .audio-toolbar{padding:4px}
+  #readingView.active .audio-toolbar-main{gap:2px}
+  #readingView.active .audio-toolbar-main>#readAloud,
+  #readingView.active .audio-toolbar-main>#stopSpeech,
+  #readingView.active .audio-toolbar-main>#toggleImmersive,
+  #readingView.active .audio-toolbar-main>.audio-speed-control button,
+  #readingView.active .audio-toolbar-main>.reader-inline-text-size button{
+    height:27px;border-radius:7px;font-size:13px;
+  }
+}
