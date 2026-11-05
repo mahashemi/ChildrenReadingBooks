@@ -586,6 +586,42 @@ if("speechSynthesis" in window){
   setTimeout(populateSpeechVoices,350);
   setTimeout(populateSpeechVoices,1200);
 }
+function updateSpeechRate(){
+  $("speechRate").textContent=speechRate.toFixed(1)+"×";
+  try{localStorage.setItem("littleLanternsSpeechRate",String(speechRate));}catch(e){}
+  if(isReadingStory&&!isSpeechPaused){const token=++storyReadToken;window.speechSynthesis.cancel();setTimeout(()=>speakStoryParagraph(token,currentSpeechParagraph),70);}
+}
+function updateAudioControls(){
+  $("readAloud").innerHTML=isReadingStory&&!isSpeechPaused?'<span class="audio-play-icon">Ⅱ</span><span>Pause</span>':'<span class="audio-play-icon">▶</span><span>'+(isSpeechPaused?'Resume':'Play')+'</span>';
+  $("stopSpeech").disabled=!isReadingStory&&!isSpeechPaused;
+  $("audioStatus").textContent=isReadingStory?(isSpeechPaused?"Paused · ready to continue":"Reading aloud"):"Ready when you are";
+}
+function updateSpeechVolume(value){
+  speechVolume=Math.max(0,Math.min(1,Number(value)));
+  $("speechVolume").value=String(speechVolume);
+  try{localStorage.setItem("littleLanternsSpeechVolume",String(speechVolume));}catch(e){}
+  $("audioStatus").textContent="Volume "+Math.round(speechVolume*100)+"%";
+}
+function clearSpeechHighlight(){
+  storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
+}
+function stopReading(){
+  storyReadToken++;
+  isReadingStory=false;
+  isSpeechPaused=false;
+  if("speechSynthesis" in window)window.speechSynthesis.cancel();
+  clearSpeechHighlight();
+  updateAudioControls();
+}
+function speakText(text){
+  if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
+  if(isReadingStory)stopReading();
+  window.speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(String(text).replace(/\\s+/g," ").trim());
+  if(!applySpeechVoice(utterance)){showToast("No suitable English voice is available. Install an English (United States) voice in Firefox system speech settings, then reload.");return;}
+  utterance.rate=speechRate;
+  window.speechSynthesis.speak(utterance);
+}
 let lastAutoScrollAt=0;
 function keepSpeakingWordVisible(element){
   if(!element||!autoScrollEnabled)return;
