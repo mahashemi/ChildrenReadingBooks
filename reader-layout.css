@@ -164,7 +164,6 @@ body.reader-immersive .story-reading-stage{min-height:0}
 #readingView.active .reader-bottom .page-buttons{width:100%;justify-content:space-between}
 #readingView.active .reader-bottom .page-buttons .button{min-width:112px;padding:9px 14px;border-radius:11px}
 #readingView.active .source-note{flex:0 0 auto;margin-top:7px;padding:7px 10px;font-size:8px}
-#readingView.active .settings-sidebar .drawer-check,
 #readingView.active .settings-sidebar .drawer-setting-group:has(#smallerText){display:none!important}
 @media(min-width:761px){
   #readingView.active{min-height:calc(100svh - 100px)}
