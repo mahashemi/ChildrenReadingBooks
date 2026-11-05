@@ -175,7 +175,7 @@ const chapterCategories = [
 let activeChapterCategory = "all";
 
 const readingChapters = [
-  {title:"A Special Dream",icon:"🌌",category:"quran",tags:["prophets","patience","family"],subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling based on Surah Yusuf 12:4–6; the patience lesson also draws on 12:18 and 12:90. Not a verbatim translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah." ,start:0,end:2},
+  {title:"A Special Dream",icon:"🌌",category:"quran",tags:["prophets","patience","family"],subtitle:"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).",source:"Educational retelling based on Surah Yusuf 12:4–6; the patience lesson also draws on 12:18 and 12:90. Not a verbatim translation.",art:"dream",takeaway:"Listen to wise advice, be patient and trust Allah.", reflection: "The Qur’an shows us that patience and doing good matter even when life is difficult (Qur’an 12:90)." ,start:0,end:2},
   {
     "title": "Anger: Control Is Strength",
     "category": "akhlaq",
@@ -184,7 +184,7 @@ const readingChapters = [
     "subtitle": "What the Qur'an and the Ahl al-Bayt teach about anger.",
     "source": "Qur'an 3:134; al-Kafi, vol. 2, p. 110, hadith 7 (Imam al-Baqir on restraining anger); al-Kafi, vol. 2, p. 303, hadith 3 (Imam al-Sadiq: anger is a key to evil); Tuhaf al-'Uqul, no. 286 (Imam al-Baqir: no strength like restraining anger).",
     "art": "anger",
-    "takeaway": "Restrain anger and pardon others, as praised in Qur'an 3:134.",
+    "takeaway": "Restrain anger and pardon others, as praised in Qur'an 3:134.", reflection: "The Qur’an praises those who restrain anger and pardon others (Qur’an 3:134). Imam al-Baqir teaches that real strength includes restraining anger (Tuhaf al-'Uqul, no. 286).",
     "start": 3,
     "end": 4
   },
@@ -196,7 +196,7 @@ const readingChapters = [
     "subtitle": "The Qur'an and Imam al-Sadiq teach us how to use worldly blessings.",
     "source": "Qur'an 7:31, 28:77 and 6:141; al-Kafi, vol. 5, Book 2, Chapter 3, hadiths 8–10.",
     "art": "world",
-    "takeaway": "Use what Allah gives you for good and do not waste it.",
+    "takeaway": "Use what Allah gives you for good and do not waste it.", reflection: "The Qur’an tells us to use Allah’s gifts for good and not to waste (Qur’an 28:77; 7:31).",
     "start": 5,
     "end": 6
   },
@@ -208,7 +208,7 @@ const readingChapters = [
     "subtitle": "Striving to obey Allah when our desires pull us elsewhere.",
     "source": "Qur'an 91:7–10 and 79:40–41; report of the Prophet's greater jihad transmitted through Imam al-Sadiq in al-Kafi (al-Sukuni report).",
     "art": "growth",
-    "takeaway": "Purify the self and restrain it from wrongful desires.",
+    "takeaway": "Purify the self and restrain it from wrongful desires.", reflection: "The Qur’an teaches that success comes through purifying the soul and restraining wrongful desires (Qur’an 91:9–10; 79:40–41).",
     "start": 7,
     "end": 8
   },
@@ -220,7 +220,7 @@ const readingChapters = [
     "subtitle": "The Qur'an and Imam Ali teach the importance of prayer.",
     "source": "Qur'an 20:14 and 29:45; Nahj al-Balagha, Letter 47 (Imam Ali's counsel concerning prayer).",
     "art": "prayer",
-    "takeaway": "Establish prayer for Allah's remembrance and let it restrain wrongdoing.",
+    "takeaway": "Establish prayer for Allah's remembrance and let it restrain wrongdoing.", reflection: "Allah tells us to establish prayer for His remembrance (Qur’an 20:14). Imam Ali also reminds us to remain mindful of prayer (Nahj al-Balagha, Letter 47).",
     "start": 9,
     "end": 10
   },
@@ -232,7 +232,7 @@ const readingChapters = [
     "subtitle": "What the Qur'an says—and what it says we do not know.",
     "source": "Qur'an 17:85 and 91:7–10; al-Kafi, vol. 3, Book 3, Chapter 91 (reports about the souls of believers; hadith grading varies).",
     "art": "soul",
-    "takeaway": "Do not claim knowledge of the soul beyond what Allah and His proofs have taught.",
+    "takeaway": "Do not claim knowledge of the soul beyond what Allah and His proofs have taught.", reflection: "The Qur’an reminds us that human knowledge of the spirit is limited (Qur’an 17:85). A careful believer does not invent what Allah has not taught.",
     "start": 11,
     "end": 12
   },
@@ -244,7 +244,7 @@ const readingChapters = [
     "subtitle": "The teachings of Imam al-Sadiq about seeking and using knowledge.",
     "source": "Al-Kafi, Book of the Merit of Knowledge (Kitab Fadl al-'Ilm), reports 4/38 and 8/65; see the cited narrations from Imam al-Sadiq.",
     "art": "book",
-    "takeaway": "Seek knowledge, remain humble and act upon what is good.",
+    "takeaway": "Seek knowledge, remain humble and act upon what is good.", reflection: "Imam al-Sadiq teaches that seeking knowledge is a duty and that knowledge should be joined with humility (al-Kafi, Book of the Merit of Knowledge, reports 4/38 and 8/65).",
     "start": 13,
     "end": 14
   },
@@ -256,7 +256,7 @@ const readingChapters = [
     "subtitle": "What Shia narrations report about the companions of Imam al-Mahdi.",
     "source": "Kitab al-Ghayba by al-Nu'mani, Book 2, Chapter 20, reports 5–8; Qur'an 2:148 as cited in one report; Qur'an 9:119, 23:8 and 2:153 for the qualities discussed. The Hilla forty-guests anecdote and the '1,200 years' wording are not established by these reports and are not presented here as hadith.",
     "art": "stars",
-    "takeaway": "Prepare through faith, truth, patience and obedience; do not turn the number 313 into a countdown.",
+    "takeaway": "Prepare through faith, truth, patience and obedience; do not turn the number 313 into a countdown.", reflection: "The Qur’an asks believers to be with the truthful, keep their trusts and seek help through patience (Qur’an 9:119; 23:8; 2:153).",
     "start": 15,
     "end": 16
   },
@@ -268,7 +268,7 @@ const readingChapters = [
     "subtitle": "The Qur'an's own teaching about faith, good deeds, truth and patience.",
     "source": "Qur'an 103:1–3. Child-friendly explanation of the surah.",
     "art": "time",
-    "takeaway": "Faith, good deeds, truth and patience belong together.",
+    "takeaway": "Faith, good deeds, truth and patience belong together.", reflection: "Surah Al-Asr teaches that faith, good deeds, truth and patience belong together (Qur’an 103:1–3).",
     "start": 17,
     "end": 18
   },
@@ -280,7 +280,7 @@ const readingChapters = [
     "subtitle": "A short surah about Allah's gift and worship directed to Him.",
     "source": "Qur'an 108:1–3. For the interpretation of al-Kawthar, consult a recognised Shia tafsir.",
     "art": "flower",
-    "takeaway": "Respond to Allah's gifts with worship directed to Him.",
+    "takeaway": "Respond to Allah's gifts with worship directed to Him.", reflection: "Surah Al-Kawthar connects Allah’s gift to worship directed to Him (Qur’an 108:1–3).",
     "start": 19,
     "end": 20
   },
@@ -292,7 +292,7 @@ const readingChapters = [
     "subtitle": "Two surahs teaching us to seek refuge in Allah.",
     "source": "Qur'an 113:1–5 and 114:1–6. Child-friendly explanation of the surahs.",
     "art": "moon",
-    "takeaway": "Seek Allah's protection from the harms named in these surahs.",
+    "takeaway": "Seek Allah's protection from the harms named in these surahs.", reflection: "Surah Al-Falaq and Surah An-Nas teach us to seek refuge in Allah (Qur’an 113:1–5; 114:1–6).",
     "start": 21,
     "end": 22
   },
@@ -302,7 +302,7 @@ readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
     Object.assign(storyPages[i],{
       chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
-      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,
+      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,
       chapterIndex:index,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
       chapterLength:chapter.end-chapter.start+1
     });
@@ -465,7 +465,7 @@ function renderStoryLibrary(){
  const query=($("chapterSearch")?.value||"").trim().toLowerCase();
  const matches=readingChapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>(activeChapterCategory==="all"||chapter.category===activeChapterCategory)&&(!query||[chapter.title,chapter.subtitle,chapter.source,chapter.takeaway,...(chapter.tags||[])].join(" ").toLowerCase().includes(query)));
  const count=$("chapterSearchCount");
- if(count){const category=chapterCategories.find(item=>item.id===activeChapterCategory);count.textContent=matches.length+" of "+readingChapters.length+" chapters"+(category?" · "+category.label:"");}
+ if(count){const category=chapterCategories.find(item=>item.id===activeChapterCategory);count.textContent=query?matches.length+" passage"+(matches.length===1?"":"s")+" found":activeChapterCategory==="all"?readingChapters.length+" passages to explore":matches.length+" passages · "+(category?category.label:"");}
  host.innerHTML=matches.length?matches.map(({chapter,index})=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span class="story-choice-copy"><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small><small class="story-category-label">'+escapeHtml(chapterCategories.find(item=>item.id===chapter.category)?.label||"")+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join(""):'<div class="reading-no-results">'+(activeChapterCategory!=="all"&&!readingChapters.some(chapter=>chapter.category===activeChapterCategory)?"More adventures in this collection are coming soon.":"No chapters match that search. Try another word.")+'</div>';
 }
 $("chapterCategoryFilters")?.addEventListener("click",event=>{
@@ -559,7 +559,8 @@ function renderStory(){
   $("readerTag").textContent="READING CHAPTER "+String(current.chapterIndex+1).padStart(2,"0");
   $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
   storyText.style.setProperty("font-size",fontSize+"px","important");
-  storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("");
+  const reflectionHtml=current.chapterReflection&&current.chapterPage===current.chapterLength?'<aside class="islamic-reflection"><b>Think with the Qur’an and Ahlulbayt</b><p>'+linkQuranReferences(renderParagraph(current.chapterReflection),current.chapterReflection,current)+'</p></aside>':'';
+  storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("")+reflectionHtml;
   storyText.classList.toggle("word-borders-visible",showWordBorders);
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";

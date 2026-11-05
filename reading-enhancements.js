@@ -508,52 +508,52 @@
 
   // Add original, age-appropriate passages based on common primary/lower-secondary science themes.
   const newChapters = [
-    { title:"The Journey of a Raindrop", icon:"💧", category:"Environment", subtitle:"Follow water as it moves through the water cycle.", source:"Original educational passage. Science concepts checked against NASA Earth Observatory's water-cycle learning resources: https://science.nasa.gov/earth/earth-observatory/.", art:"world", takeaway:"Water moves around Earth again and again; use it carefully.", paragraphs:[
+    { title:"The Journey of a Raindrop", icon:"💧", category:"science", subtitle:"Follow water as it moves through the water cycle.", source:"Original educational passage. Science concepts checked against NASA Earth Observatory's water-cycle learning resources: https://science.nasa.gov/earth/earth-observatory/.", art:"world", takeaway:"Water moves around Earth again and again; use it carefully.", reflection:"The Qur’an invites us to notice how rain brings life to the earth (Qur’an 16:10–11; 21:30). We should be grateful for water and avoid wasting it.", paragraphs:[
       "A tiny raindrop rested in a cloud above a green mountain. When the cloud became full of water droplets, rain began to fall. The raindrop landed in a stream and travelled towards a wide river.",
       "Later, sunlight warmed the river. Some water changed into an invisible gas called water vapour. This change is called evaporation. The vapour rose into cooler air and formed tiny droplets in clouds. This is condensation.",
       "When droplets joined and became heavy, they fell as rain or snow. This repeating journey is called the water cycle. Water is precious, so we should turn off taps and avoid wasting it."
     ]},
-    { title:"A Forest Is a Living Home", icon:"🌳", category:"Biology", subtitle:"Discover how plants, animals and fungi share a forest.", source:"Original educational passage. General ecology concepts adapted for children; see National Geographic Education's ecosystem resources: https://education.nationalgeographic.org/.", art:"growth", takeaway:"Every living thing has a role, and habitats need protection.", paragraphs:[
+    { title:"A Forest Is a Living Home", icon:"🌳", category:"science", subtitle:"Discover how plants, animals and fungi share a forest.", source:"Original educational passage. General ecology concepts adapted for children; see National Geographic Education's ecosystem resources: https://education.nationalgeographic.org/.", art:"growth", takeaway:"Every living thing has a role, and habitats need protection.", reflection:"The Qur’an invites us to reflect on the plants and fruits Allah brings forth from the earth (Qur’an 6:99). We can show gratitude by caring for living things.", paragraphs:[
       "A forest is more than a group of trees. It is a living home for birds, insects, mammals, fungi and many tiny organisms. Each living thing depends on parts of its surroundings.",
       "Trees use sunlight, water and carbon dioxide to make food through photosynthesis. Their leaves provide food for some animals, while branches offer places to rest and build nests. Fallen leaves can become food for decomposers.",
       "Fungi and bacteria help break down dead plants and animals. Nutrients return to the soil, where new plants can use them. Protecting a forest means caring for this connected community."
     ]},
-    { title:"The Secret Work of Bees", icon:"🐝", category:"Biology", subtitle:"Learn how bees help flowering plants reproduce.", source:"Original educational passage. Pollination concepts checked against Royal Botanic Gardens, Kew learning resources: https://www.kew.org/.", art:"flower", takeaway:"Small animals can do important work in nature.", paragraphs:[
+    { title:"The Secret Work of Bees", icon:"🐝", category:"Biology", subtitle:"Learn how bees help flowering plants reproduce.", source:"Original educational passage. Pollination concepts checked against Royal Botanic Gardens, Kew learning resources: https://www.kew.org/.", art:"flower", takeaway:"Small animals can do important work in nature.", reflection:"The Qur’an tells us to notice the bee and the provision Allah brings through it (Qur’an 16:68–69). We can learn to appreciate even small creatures.", paragraphs:[
       "A bee flies from its hive to visit a bright flower. It drinks sweet nectar for energy. Tiny grains of pollen stick to the bee's body as it moves around the flower.",
       "When the bee visits another flower of the same kind, some pollen may rub off. This helps the plant make seeds. The movement of pollen from one flower to another is called pollination.",
       "Bees are not the only pollinators. Butterflies, moths, birds and even some bats can carry pollen. Flowers and pollinators need one another, so gardens with different flowers can provide helpful food and shelter."
     ]},
-    { title:"Why Do We Breathe?", icon:"🫁", category:"Biology", subtitle:"Explore the lungs and the job of oxygen in the body.", source:"Original educational passage. Basic human-biology explanation; see NHS Healthier Families and Britannica Kids biology resources: https://www.nhs.uk/ and https://kids.britannica.com/.", art:"soul", takeaway:"Breathing brings oxygen into the body; movement and rest both matter.", paragraphs:[
+    { title:"Why Do We Breathe?", icon:"🫁", category:"Biology", subtitle:"Explore the lungs and the job of oxygen in the body.", source:"Original educational passage. Basic human-biology explanation; see NHS Healthier Families and Britannica Kids biology resources: https://www.nhs.uk/ and https://kids.britannica.com/.", art:"soul", takeaway:"Breathing brings oxygen into the body; movement and rest both matter.", reflection:"The Qur’an reminds us to reflect on Allah’s signs in creation and the gifts we often take for granted (Qur’an 2:164). Breathing is one of those gifts.", paragraphs:[
       "Every time you breathe in, air travels through your nose or mouth and down a tube called the windpipe. The air then moves into the lungs, which sit inside your chest.",
       "Inside the lungs are millions of tiny air sacs. Oxygen passes from these sacs into the blood. The blood carries oxygen around the body, where cells use it to release energy from food.",
       "When you breathe out, your body removes carbon dioxide, a waste gas. Your breathing becomes faster when you run because your muscles need more oxygen and produce more carbon dioxide."
     ]},
-    { title:"The Amazing Human Skeleton", icon:"🦴", category:"Biology", subtitle:"Find out how bones support and protect your body.", source:"Original educational passage. Basic anatomy checked against KidsHealth anatomy learning resources: https://kidshealth.org/.", art:"book", takeaway:"Bones protect organs and work with muscles to help us move.", paragraphs:[
+    { title:"The Amazing Human Skeleton", icon:"🦴", category:"Biology", subtitle:"Find out how bones support and protect your body.", source:"Original educational passage. Basic anatomy checked against KidsHealth anatomy learning resources: https://kidshealth.org/.", art:"book", takeaway:"Bones protect organs and work with muscles to help us move.", reflection:"The Qur’an describes stages of human development, including bones and their covering (Qur’an 23:14). Our bodies are worthy of care and gratitude.", paragraphs:[
       "Your skeleton is the framework of bones inside your body. It gives your body shape and helps you stand, sit and move. An adult human usually has 206 bones.",
       "The skull protects the brain. The ribs help protect the heart and lungs. The backbone supports the body and protects the spinal cord. Different bones have different shapes because they do different jobs.",
       "Bones do not work alone. Muscles pull on bones, and joints allow many parts to bend. Eating a balanced diet, being active and getting enough rest help keep the body healthy."
     ]},
-    { title:"Can We Clean Dirty Water?", icon:"🚰", category:"Science", subtitle:"Try a simple model to understand filtering and clean water.", source:"Original educational passage and safe classroom demonstration. Water-treatment concepts are introductory; see US EPA drinking-water resources: https://www.epa.gov/ground-water-and-drinking-water.", art:"world", takeaway:"Filtering can remove some dirt, but it does not make unsafe water safe to drink.", paragraphs:[
+    { title:"Can We Clean Dirty Water?", icon:"🚰", category:"science", subtitle:"Try a simple model to understand filtering and clean water.", source:"Original educational passage and safe classroom demonstration. Water-treatment concepts are introductory; see US EPA drinking-water resources: https://www.epa.gov/ground-water-and-drinking-water.", art:"world", takeaway:"Filtering can remove some dirt, but it does not make unsafe water safe to drink.", reflection:"The Qur’an describes rain as water sent down from the sky (Qur’an 25:48). Clean water is a blessing, and we should protect it and use it responsibly.", paragraphs:[
       "Imagine muddy water after heavy rain. It contains tiny pieces of soil and other material. A water-treatment plant uses several steps to make water suitable for people to use.",
       "In a simple classroom model, muddy water can pass through clean gravel, sand and filter paper. Larger pieces may be trapped, and the water may look clearer. This is called filtration.",
       "Clear-looking water is not always safe to drink. Germs and dissolved chemicals may still be present. Never drink water from a classroom experiment. Real drinking water needs proper treatment and testing."
     ]},
-    { title:"The Power of the Sun", icon:"☀️", category:"Science", subtitle:"See how sunlight supports life and can produce electricity.", source:"Original educational passage. Solar-energy concepts checked against US Department of Energy learning resources: https://www.energy.gov/eere/solar.", art:"time", takeaway:"Sunlight is a renewable energy source, and using energy wisely matters.", paragraphs:[
+    { title:"The Power of the Sun", icon:"☀️", category:"Science", subtitle:"See how sunlight supports life and can produce electricity.", source:"Original educational passage. Solar-energy concepts checked against US Department of Energy learning resources: https://www.energy.gov/eere/solar.", art:"time", takeaway:"Sunlight is a renewable energy source, and using energy wisely matters.", reflection:"The Qur’an invites us to notice the Sun as one of Allah’s signs (Qur’an 10:5). We can use the light and energy around us thoughtfully and gratefully.", paragraphs:[
       "The Sun is a star at the centre of our solar system. It gives Earth light and warmth. Plants use sunlight to make food, and the Sun helps drive the water cycle.",
       "Solar panels contain special materials that can turn sunlight into electricity. This electricity can power lights, computers and other devices. Solar energy is renewable because sunlight is naturally supplied again and again.",
       "Solar panels do not work equally well in every condition. Clouds, shade, the time of day and the direction of a panel can affect how much electricity it produces. Saving energy is helpful too."
     ]},
-    { title:"From Seed to Plant", icon:"🌱", category:"Biology", subtitle:"Follow a seed as it germinates and grows.", source:"Original educational passage. Plant-growth concepts checked against Royal Horticultural Society children's gardening resources: https://www.rhs.org.uk/education-learning.", art:"growth", takeaway:"Plants need suitable conditions, water and light to grow well.", paragraphs:[
+    { title:"From Seed to Plant", icon:"🌱", category:"Biology", subtitle:"Follow a seed as it germinates and grows.", source:"Original educational passage. Plant-growth concepts checked against Royal Horticultural Society children's gardening resources: https://www.rhs.org.uk/education-learning.", art:"growth", takeaway:"Plants need suitable conditions, water and light to grow well.", reflection:"The Qur’an invites us to reflect on seeds and the growth of plants (Qur’an 6:95; 6:99). Planting and caring for life can be an act of responsibility.", paragraphs:[
       "A seed may look small and quiet, but it contains a tiny young plant and stored food. When it has enough water, warmth and oxygen, germination can begin.",
       "The seed coat softens and a root grows down into the soil. A shoot grows upwards. Soon, the first leaves open and begin to collect light for photosynthesis.",
       "As the plant grows, its roots take in water and minerals from the soil. Its leaves make food. Different plants need different conditions, but all green plants need light to make their own food."
     ]},
-    { title:"The Problem with Plastic", icon:"♻️", category:"Environment", subtitle:"Understand how plastic waste can affect land and sea.", source:"Original educational passage. Waste and marine-litter concepts checked against UNEP educational resources: https://www.unep.org/interactives/beat-plastic-pollution/.", art:"world", takeaway:"Reduce, reuse and recycle where possible; put rubbish in the right place.", paragraphs:[
+    { title:"The Problem with Plastic", icon:"♻️", category:"Environment", subtitle:"Understand how plastic waste can affect land and sea.", source:"Original educational passage. Waste and marine-litter concepts checked against UNEP educational resources: https://www.unep.org/interactives/beat-plastic-pollution/.", art:"world", takeaway:"Reduce, reuse and recycle where possible; put rubbish in the right place.", reflection:"The Qur’an warns against spreading corruption on the earth (Qur’an 7:56; 30:41). We can help by reducing waste and keeping land and water clean.", paragraphs:[
       "Plastic is useful because it can be light, strong and shaped into many things. We use it in bottles, food containers, toys and bags. But some plastic items are used only once and then thrown away.",
       "Plastic rubbish can remain in the environment for a very long time. It may be carried by wind or rain into rivers and oceans. Animals can become trapped in plastic or mistake small pieces for food.",
       "We can help by using reusable bags and bottles, choosing less packaging when possible and sorting waste for recycling where local services allow it. The best choice is often to avoid creating unnecessary waste."
     ]},
-    { title:"Magnets: An Invisible Pull", icon:"🧲", category:"Science", subtitle:"Investigate which materials a magnet can attract.", source:"Original educational passage. Introductory magnetism concepts; see Exploratorium science activities: https://www.exploratorium.edu/.", art:"book", takeaway:"Make a prediction, test it fairly and record what you observe.", paragraphs:[
+    { title:"Magnets: An Invisible Pull", icon:"🧲", category:"Science", subtitle:"Investigate which materials a magnet can attract.", source:"Original educational passage. Introductory magnetism concepts; see Exploratorium science activities: https://www.exploratorium.edu/.", art:"book", takeaway:"Make a prediction, test it fairly and record what you observe.", reflection:"The Qur’an encourages reflection on the signs within creation (Qur’an 3:190–191). Careful observation and honest experiments help us learn about the world.", paragraphs:[
       "A magnet can pull on certain materials without touching them. This invisible push or pull is called a magnetic force. Iron and many kinds of steel are attracted to magnets.",
       "Try testing a paper clip, a wooden pencil, a plastic ruler and a coin with a classroom magnet. First, predict which objects will be attracted. Then test each object and record what happens.",
       "A good experiment changes one thing at a time and uses careful observations. Not every metal is magnetic, so a magnet will not attract every object made of metal."
@@ -574,6 +574,7 @@
         chapterArt: chapter.art,
         chapterIcon: chapter.icon,
         chapterTakeaway: chapter.takeaway,
+        chapterReflection: chapter.reflection,
         chapterIndex: chapterIndex,
         chapterStart: pageIndex === 0,
         chapterPage: pageIndex + 1,
@@ -591,48 +592,6 @@
       start: start,
       end: storyPages.length - 1
     });
-  });
-
-  // Add a searchable catalogue above the chapter list; existing chapter routes remain stable.
-  const library = document.getElementById("storyLibrary");
-  if (library && !document.getElementById("readingSearch")) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "reading-search-wrap";
-    wrapper.innerHTML = '<label class="reading-search-label" for="readingSearch">Search reading passages</label>' +
-      '<div class="reading-search-control"><span aria-hidden="true">⌕</span><input id="readingSearch" type="search" placeholder="Try science, plants, water..." autocomplete="off"></div>' +
-      '<p class="reading-search-count" id="readingSearchCount" aria-live="polite"></p>';
-    library.parentNode.insertBefore(wrapper, library);
-  }
-  let searchQuery = "";
-  function renderSearchableLibrary() {
-    const host = document.getElementById("storyLibrary");
-    if (!host) return;
-    const activeChapter = storyPages[page] ? storyPages[page].chapterIndex : 0;
-    const query = searchQuery.trim().toLowerCase();
-    const matches = readingChapters.map(function (chapter, index) {
-      return { chapter: chapter, index: index };
-    }).filter(function (item) {
-      const chapter = item.chapter;
-      const text = [chapter.title, chapter.subtitle, chapter.category, chapter.source].join(" ").toLowerCase();
-      return !query || text.includes(query);
-    });
-    host.innerHTML = matches.map(function (item) {
-      const chapter = item.chapter, index = item.index;
-      const selected = index === activeChapter;
-      return '<button class="story-choice ' + (selected ? "selected" : "") + '" data-chapter="' + index + '" type="button">' +
-        '<span class="story-thumb">' + escapeHtml(chapter.icon || "📖") + '</span><span class="story-choice-copy"><b>' +
-        escapeHtml(chapter.title) + '</b><small>' + escapeHtml(chapter.category || "Reading") + ' · ' + escapeHtml(chapter.subtitle) +
-        '</small></span>' + (selected ? '<span class="choice-check">✓</span>' : '') + '</button>';
-    }).join("");
-    const count = document.getElementById("readingSearchCount");
-    if (count) count.textContent = query ? (matches.length + " passage" + (matches.length === 1 ? "" : "s") + " found") : (readingChapters.length + " passages to explore");
-    if (!matches.length) host.innerHTML = '<p class="reading-no-results">No passages found. Try a topic such as “biology”, “water” or “science”.</p>';
-  }
-  window.renderStoryLibrary = renderSearchableLibrary;
-  const searchInput = document.getElementById("readingSearch");
-  if (searchInput) searchInput.addEventListener("input", function () {
-    searchQuery = searchInput.value;
-    renderSearchableLibrary();
   });
 
   // Restore the original URL after the base app has loaded, so new chapter deep links survive refresh.
