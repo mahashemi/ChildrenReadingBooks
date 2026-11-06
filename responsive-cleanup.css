@@ -178,3 +178,68 @@ body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
 #readingView .settings-sidebar{z-index:1302!important}
 #readingView .story-sidebar{z-index:1301!important}
 #readingView .chapter-drawer-scrim{z-index:1290!important}
+
+/* Desktop reader controls: keep the two actions at opposite ends of the
+   toolbar, with the helper copy centered between them. */
+@media(min-width:761px){
+  #readingView.active .reader-drawer-toolbar{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    align-items:center;
+    column-gap:clamp(18px,3vw,42px);
+  }
+  #readingView.active .reader-drawer-toolbar>span{
+    min-width:0;
+    text-align:center;
+  }
+  #readingView.active .chapter-toolbar-button{justify-self:start}
+  #readingView.active .settings-toolbar-button{justify-self:end}
+
+  /* On desktop, chapters and settings are centered modal panels rather than
+     edge drawers. Mobile keeps the existing left/right slide-in interaction. */
+  #readingView .story-sidebar,
+  #readingView .settings-sidebar{
+    position:fixed!important;
+    top:50%!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:50%!important;
+    width:min(760px,calc(100vw - 64px))!important;
+    max-height:min(820px,calc(100dvh - 72px))!important;
+    height:auto!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    border:1px solid #e8e8df!important;
+    border-radius:24px!important;
+    padding:24px!important;
+    background:#fffefa!important;
+    box-shadow:0 24px 80px rgba(25,38,29,.28)!important;
+    transform:translate(-50%,-48%) scale(.985)!important;
+    opacity:0;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+    z-index:1301!important;
+  }
+  #readingView .settings-sidebar{
+    width:min(540px,calc(100vw - 64px))!important;
+  }
+  #readingView .story-sidebar[aria-hidden="false"],
+  #readingView .settings-sidebar[aria-hidden="false"]{
+    transform:translate(-50%,-50%) scale(1)!important;
+    opacity:1;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+  #readingView .chapter-drawer-scrim{
+    position:fixed!important;
+    inset:0!important;
+    z-index:1300!important;
+    background:rgba(25,36,28,.48)!important;
+    backdrop-filter:blur(3px);
+  }
+  #readingView .story-sidebar .story-library{
+    max-height:min(48vh,440px);
+    overflow-y:auto;
+  }
+}
