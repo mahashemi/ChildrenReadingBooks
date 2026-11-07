@@ -243,3 +243,126 @@ body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
     overflow-y:auto;
   }
 }
+
+
+/* Desktop reader dialogs: override the legacy right-drawer transform with a
+   true centered modal state. Mobile intentionally retains edge drawers. */
+@media(min-width:761px){
+  #readingView .story-sidebar,
+  #readingView .settings-sidebar{
+    box-sizing:border-box;
+    display:block;
+    inset:auto;
+    top:50%!important;
+    left:50%!important;
+    right:auto!important;
+    bottom:auto!important;
+    transform:translate(-50%,-48%) scale(.985)!important;
+    opacity:0;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+  }
+  #readingView .story-sidebar[aria-hidden="false"],
+  #readingView .settings-sidebar[aria-hidden="false"]{
+    transform:translate(-50%,-50%) scale(1)!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+  /* The older settings-drawer selector has greater specificity. Neutralise
+     its horizontal slide so it cannot pull the desktop dialog off-centre. */
+  body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
+    transform:translate(-50%,-50%) scale(1)!important;
+  }
+  body.chapter-drawer-open #readingView .story-sidebar[aria-hidden="false"]{
+    transform:translate(-50%,-50%) scale(1)!important;
+  }
+
+  #readingView .story-sidebar{
+    width:min(820px,calc(100vw - 64px))!important;
+    max-height:min(860px,calc(100dvh - 64px))!important;
+    padding:26px 30px!important;
+    border-radius:24px!important;
+  }
+  #readingView .settings-sidebar{
+    width:min(560px,calc(100vw - 64px))!important;
+    max-height:min(760px,calc(100dvh - 64px))!important;
+    padding:26px 30px!important;
+    border-radius:24px!important;
+  }
+  #readingView .story-sidebar .drawer-heading,
+  #readingView .settings-sidebar .drawer-heading{
+    position:sticky;
+    top:-26px;
+    z-index:2;
+    margin:-26px -30px 20px;
+    padding:20px 30px 15px;
+    background:#fffefa;
+    border-radius:24px 24px 0 0;
+  }
+  #readingView .story-sidebar .sidebar-title{padding:0 2px 10px;font-size:10px}
+  #readingView .story-sidebar .reading-search-label{display:block;margin:4px 0 7px;font-size:10px}
+  #readingView .story-sidebar .reading-search-control{min-height:44px;border-radius:12px}
+  #readingView .story-sidebar .reading-search-control input{font-size:13px}
+  #readingView .story-sidebar .reading-search-count{margin:10px 2px 8px;font-size:11px}
+
+  /* Keep the mobile taxonomy colours, but give desktop filters enough room
+     to read as a colourful category picker rather than tiny inline tags. */
+  #readingView .chapter-category-filters{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+    gap:9px;
+    margin:12px 0 16px;
+  }
+  #readingView .category-filter{
+    box-sizing:border-box;
+    width:100%;
+    min-height:48px;
+    justify-content:flex-start;
+    gap:8px;
+    padding:9px 11px;
+    border-width:1px;
+    border-radius:13px;
+    font-size:11px;
+    line-height:1.25;
+    text-align:left;
+    white-space:normal;
+    box-shadow:0 2px 7px rgba(45,65,48,.035);
+  }
+  #readingView .category-filter .category-filter-icon{font-size:17px;flex:0 0 auto}
+  #readingView .category-filter>span:last-child{margin-left:auto;min-width:20px;height:20px;font-size:9px}
+  #readingView .category-filter.active{box-shadow:0 0 0 2px #fff,0 0 0 3px #84a989,0 4px 12px rgba(63,109,77,.12)}
+  #readingView .story-sidebar .story-library{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+    max-height:min(36vh,330px);
+    padding:2px 3px 4px 0;
+    overflow-y:auto;
+  }
+  #readingView .story-sidebar .story-choice{
+    min-height:76px;
+    padding:11px;
+    gap:11px;
+    border-radius:14px;
+    text-align:left;
+  }
+  #readingView .story-sidebar .story-thumb{width:42px;height:42px;flex:0 0 42px;font-size:21px}
+  #readingView .story-sidebar .story-choice-copy b{font-size:12px;line-height:1.35}
+  #readingView .story-sidebar .story-choice-copy small{font-size:10px;line-height:1.4}
+  #readingView .story-sidebar .story-choice-copy .story-category-label{font-size:9px!important}
+  #readingView .settings-sidebar .drawer-settings{padding:2px 0}
+  #readingView .settings-sidebar .drawer-section-heading{padding:14px;border-radius:14px;background:#f5f8f1}
+  #readingView .settings-sidebar .drawer-setting-group{margin:0 0 20px;padding:0 2px}
+  #readingView .settings-sidebar .drawer-setting-label{font-size:10px;letter-spacing:.08em}
+  #readingView .settings-sidebar .mode-switch{min-height:44px}
+  #readingView .settings-sidebar .mode-button{font-size:12px}
+  #readingView .settings-sidebar .drawer-check{display:flex!important;align-items:center;gap:10px;margin:12px 0;padding:12px;border:1px solid #e7ecdf;border-radius:12px;background:#fbfcf8;font-size:12px}
+  #readingView .settings-sidebar .voice-preference select{width:100%;min-height:44px;font-size:12px}
+  #readingView .settings-sidebar .voice-preference small{display:block;margin-top:8px;font-size:10px;line-height:1.5}
+}
+@media(min-width:761px) and (max-width:900px){
+  #readingView .chapter-category-filters{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #readingView .story-sidebar .story-library{grid-template-columns:minmax(0,1fr)}
+}
