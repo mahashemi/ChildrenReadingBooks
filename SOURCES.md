@@ -103,3 +103,16 @@ The following passages are original child-friendly explanations, not copied text
 - **Magnets: An Invisible Pull** — Exploratorium, hands-on science learning: https://www.exploratorium.edu/
 
 The reading text is independently written and simplified for children. Links identify topic references, not sources of verbatim passages. The water-filtering activity is a model only: children must never drink water from a classroom filtration experiment. The vocabulary and syllable annotations are educational aids, not a substitute for a learner's dictionary or a teacher's pronunciation review.
+
+
+## Sahifa al-Sajjadiyya learning section
+
+The Sahifa section uses selected Arabic excerpts and original child-friendly explanations. It does not reproduce the copyrighted English translation from the cited edition. The English summaries are educational paraphrases, not verbatim translations.
+
+- **Dua 1 — Praise of God:** Arabic excerpt and chapter heading checked against the Al-Islam.org edition of *As-Sahifa al-Kamilah al-Sajjadiyya*. Learning connections: Tawhid and Allah's beginninglessness/endlessness; gratitude. Qur'an 57:3 and 14:7.
+- **Dua 20 — Noble Moral Traits:** Arabic excerpt checked against the same edition. Learning connections: faith and certainty (Aqa'id), intention and good character (Akhlaq), and acting upon divine guidance (Ahkam). The lesson does not treat the supplication as a standalone legal ruling.
+- **Dua 24 — For One's Parents:** Arabic excerpt checked against the dedicated chapter. Learning connections: respectful speech and kindness (Akhlaq); parental rights and the Qur'anic limit on obedience when asked to disobey Allah (Ahkam context). Qur'an 17:23–24 and 31:14–15.
+- **Dua 25 — For One's Children:** Arabic excerpt checked against the dedicated chapter. Learning connections: reliance upon Allah (Aqa'id), good upbringing (Akhlaq), and family responsibility (Ahkam context). Qur'an 31:13–19 and 66:6.
+- The categories are teaching connections, not claims that each dua is a fiqh source. Detailed legal rulings must be sourced to recognised Shia jurisprudence and the learner's marja'.
+
+Primary text: [As-Sahifa al-Kamilah al-Sajjadiyya](https://al-islam.org/book/export/html/18815). Dedicated chapters: [Dua 24](https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/24-his-supplication-his-parents-upon-two) and [Dua 25](https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/25-his-supplication-his-children).

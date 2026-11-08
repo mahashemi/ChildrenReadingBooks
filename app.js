@@ -842,7 +842,7 @@ function currentLessonRoute(){
 }
 function routeForView(view){
   if(view==="reading")return currentLessonRoute();
-  const routes={home:"home",speak:"speech",flagSpotter:"flag-spotter",flagMemorizer:"flag-memorizer",values:"values"};
+  const routes={home:"home",speak:"speech",flagSpotter:"flag-spotter",flagMemorizer:"flag-memorizer",values:"values",sahifa:"sahifa"};
   return "#/"+(routes[view]||view);
 }
 function activateView(view,scroll=true){
@@ -882,7 +882,7 @@ function applyLocationRoute(){
     if(index<0)history.replaceState({view:"reading"},"",currentLessonRoute());
     return;
   }
-  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values"};
+  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values","sahifa":"sahifa"};
   activateView(views[route]||"home",false);
   if(!raw)history.replaceState({view:"home"},"","#/home");
 }
