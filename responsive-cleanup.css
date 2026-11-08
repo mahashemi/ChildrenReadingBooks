@@ -366,3 +366,153 @@ body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
   #readingView .chapter-category-filters{grid-template-columns:repeat(3,minmax(0,1fr))}
   #readingView .story-sidebar .story-library{grid-template-columns:minmax(0,1fr)}
 }
+
+
+/* Desktop reading canvas: give the passage the visual weight of a real
+   reading environment while keeping the mobile composition untouched. */
+@media(min-width:761px){
+  #readingView.active>.reader-layout{
+    width:100%;
+    max-width:100%;
+  }
+  #readingView.active>.reader-layout>.reader-card{
+    box-sizing:border-box;
+    width:100%;
+    max-width:none;
+    height:clamp(620px,calc(100svh - 190px),980px);
+    min-height:620px;
+    padding:clamp(24px,2.6vw,40px)!important;
+    border:1px solid #e6e8dc;
+    border-radius:30px;
+    background:
+      radial-gradient(ellipse at 8% 0%,rgba(231,241,224,.58),transparent 36%),
+      linear-gradient(145deg,#fffefa 0%,#fbfcf7 52%,#f7f8f1 100%);
+    box-shadow:
+      0 20px 60px rgba(42,59,43,.10),
+      0 3px 10px rgba(42,59,43,.045),
+      inset 0 1px 0 rgba(255,255,255,.95);
+  }
+  #readingView.active .reader-drawer-toolbar{
+    min-height:42px;
+    margin-bottom:clamp(14px,1.4vw,20px);
+  }
+  #readingView.active .reader-drawer-toolbar>span{
+    color:#7a8779;
+    font-size:12px;
+    letter-spacing:.015em;
+  }
+  #readingView.active .chapter-toolbar-button,
+  #readingView.active .settings-toolbar-button{
+    min-height:42px;
+    border-radius:12px;
+  }
+  #readingView.active .reader-topline{
+    margin-bottom:9px;
+  }
+  #readingView.active .reader-title-row{
+    align-items:center;
+    margin:5px 0 clamp(16px,1.7vw,24px);
+    padding-inline:clamp(4px,.7vw,10px);
+  }
+  #readingView.active .reader-title-row h2{
+    color:#2f4937;
+    font-size:clamp(25px,2.25vw,34px);
+    line-height:1.2;
+    letter-spacing:-.8px;
+  }
+  #readingView.active .reader-title-row p{
+    max-width:760px;
+    margin-top:7px;
+    color:#7a8478;
+    font-size:13px;
+    line-height:1.6;
+  }
+  #readingView.active .reader-moon{
+    display:grid;
+    place-items:center;
+    width:54px;
+    height:54px;
+    border:1px solid #e8eadf;
+    border-radius:17px;
+    background:linear-gradient(145deg,#fff,#f4f6ed);
+    box-shadow:0 5px 16px rgba(50,70,48,.07);
+    font-size:25px;
+  }
+  #readingView.active .story-reading-stage{
+    flex:1 1 0;
+    min-height:300px;
+    padding:clamp(30px,3.2vw,54px);
+    border:1px solid #e5e3d8;
+    border-radius:25px;
+    background:
+      radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.98),rgba(255,254,249,.94) 55%,rgba(248,247,237,.98) 100%);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.95),
+      inset 0 0 0 5px rgba(255,255,255,.32),
+      0 12px 34px rgba(47,62,43,.075);
+  }
+  #readingView.active .story-reading-stage .story-art{
+    opacity:.10;
+  }
+  #readingView.active .story-reading-stage .story-text{
+    box-sizing:border-box;
+    width:100%;
+    max-width:1080px;
+    padding:clamp(16px,1.8vw,28px) clamp(18px,2.6vw,42px);
+    color:#35483a;
+    line-height:2.05!important;
+    letter-spacing:.005em;
+  }
+  #readingView.active .story-reading-stage .story-text p{
+    margin-bottom:1.25em;
+  }
+  #readingView.active .audio-toolbar{
+    align-self:center;
+    width:min(100%,680px);
+    margin-top:clamp(14px,1.5vw,20px);
+    padding:10px 18px;
+    min-height:62px;
+    border:1px solid #e1e8dc;
+    border-radius:17px;
+    background:linear-gradient(180deg,#fff 0%,#f7faf4 100%);
+    box-shadow:0 8px 24px rgba(48,67,46,.075),inset 0 1px 0 #fff;
+  }
+  #readingView.active .audio-toolbar-main{
+    gap:7px;
+  }
+  #readingView.active .reader-bottom{
+    margin-top:clamp(14px,1.4vw,19px);
+    padding-top:clamp(12px,1.1vw,16px);
+    border-top:1px solid #e9ece4;
+  }
+  #readingView.active .reader-bottom .page-buttons .button{
+    min-width:138px;
+    min-height:42px;
+    border-radius:12px;
+    font-size:12px;
+  }
+  #readingView.active .source-note{
+    margin-top:9px;
+    color:#899084;
+    font-size:9px;
+  }
+}
+@media(min-width:761px) and (max-height:760px){
+  #readingView.active>.reader-layout>.reader-card{
+    height:calc(100svh - 150px);
+    min-height:560px;
+    padding:20px!important;
+  }
+  #readingView.active .story-reading-stage{
+    padding:22px;
+    min-height:250px;
+  }
+  #readingView.active .reader-title-row{
+    margin-bottom:12px;
+  }
+  #readingView.active .audio-toolbar{
+    margin-top:10px;
+    min-height:54px;
+    padding:7px 14px;
+  }
+}
