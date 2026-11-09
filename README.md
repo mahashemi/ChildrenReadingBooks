@@ -76,3 +76,12 @@ Five progressive online learning levels, with separate digital handwriting and a
 ## Current status
 
 This is the first visual and functional prototype, not a completed or source-approved curriculum. Content, syllable annotations, Arabic typesetting, translations, audio and assessments will receive further review before release.
+
+
+## Sahifa al-Sajjadiyya — complete core text
+
+The Reading library imports the 54 core supplications in full from the English-only edition hosted by duas.org. The credited edition identifies The Rashed Foundation as distributor, and individual duas.org pages include an Al-Islam.org courtesy credit. Reproduction permission has been confirmed by the project maintainer; see the About & Sources tab.
+
+The build generates and commits `data/sahifa/core.json` (canonical structured corpus for indexing/RAG) and `sahifa-content.js` (browser reader data). To regenerate locally, install `poppler-utils` and run `node scripts/import-sahifa.mjs`. The importer requires exactly 54 sequential, non-empty supplications.
+
+See [PROJECT-ROADMAP.md](PROJECT-ROADMAP.md) for status and priorities.
