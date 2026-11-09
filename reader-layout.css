@@ -442,8 +442,8 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
 @media(min-width:761px){
   body.reader-immersive .site-header{display:none!important}
   body.reader-immersive main{
-    width:100%!important;max-width:none!important;
-    min-height:100dvh;padding:12px 28px!important;
+    box-sizing:border-box;width:100%!important;max-width:none!important;
+    height:100dvh;min-height:100dvh;padding:12px 28px!important;
   }
   body.reader-immersive #readingView.active{
     display:flex;flex-direction:column;
