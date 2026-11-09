@@ -444,3 +444,46 @@ body.settings-drawer-open #readingView .settings-sidebar[aria-hidden="false"]{
   #readingView.active .chapter-toolbar-button{justify-self:auto}
   #readingView.active .settings-toolbar-button{justify-self:auto}
 }
+
+
+/* One authoritative mobile navigation state. The open menu must override the
+   cross-device hidden rule and remain above page content and touch overlays. */
+@media(max-width:760px){
+  .site-header{position:relative;z-index:1500}
+  .mobile-menu{
+    display:inline-flex!important;position:relative;z-index:1502;
+    align-items:center;justify-content:center;min-width:44px;min-height:44px;
+    padding:8px 12px;border:1px solid #e4e9df;border-radius:12px;
+    background:#fffefa;color:#45664b;font-size:22px;line-height:1;
+    cursor:pointer;touch-action:manipulation;pointer-events:auto;
+  }
+  .main-nav{
+    display:none!important;position:absolute!important;
+    top:calc(100% + 7px)!important;left:12px!important;right:12px!important;
+    z-index:1501!important;max-height:calc(100dvh - 90px);overflow-y:auto;
+    padding:10px!important;border:1px solid #e8ebdf;border-radius:16px;
+    background:#fffefa;box-shadow:0 16px 44px rgba(34,49,37,.18);
+    flex-direction:column;align-items:stretch;gap:3px;
+  }
+  .main-nav.open{display:flex!important}
+  .main-nav>.nav-link,.main-nav .flags-nav-trigger{
+    display:flex;align-items:center;width:100%;min-height:46px;
+    padding:11px 13px!important;border-radius:10px;text-align:left;
+    font-size:14px;
+  }
+  .main-nav .nav-dropdown{width:100%}
+  .main-nav .nav-submenu{position:static;width:100%;box-shadow:none}
+  .main-nav .nav-submenu-link{width:100%;min-height:46px}
+  .site-footer{align-items:center}
+  .footer-about-link{
+    padding:7px 10px;border:1px solid #e4e9df;border-radius:9px;
+    background:#fffefa;color:#55775b;font:800 10px Nunito,system-ui,sans-serif;
+    cursor:pointer;
+  }
+}
+.footer-about-link{
+  padding:7px 10px;border:1px solid #e4e9df;border-radius:9px;
+  background:#fffefa;color:#55775b;font:800 10px Nunito,system-ui,sans-serif;
+  cursor:pointer;
+}
+.footer-about-link:hover{background:#edf5e9}

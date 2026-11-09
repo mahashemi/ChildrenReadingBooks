@@ -908,6 +908,9 @@ function activateView(view,scroll=true){
   const target=$(view+"View");if(target)target.classList.add("active");
   document.querySelectorAll(".nav-link").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
   document.querySelector(".main-nav").classList.remove("open");
+  $("mobileMenu").setAttribute("aria-expanded","false");
+  $("mobileMenu").setAttribute("aria-label","Open menu");
+  $("mobileMenu").textContent="☰";
   if(scroll)window.scrollTo({top:0,behavior:"auto"});
 }
 function navigate(view,options={}){
@@ -949,7 +952,14 @@ document.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("clic
 document.querySelectorAll("[data-go]").forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.go)));
 window.addEventListener("popstate",applyLocationRoute);
 window.addEventListener("hashchange",applyLocationRoute);
-$("mobileMenu").addEventListener("click",()=>document.querySelector(".main-nav").classList.toggle("open"));
+$("mobileMenu").addEventListener("click",()=>{
+  const nav=document.querySelector(".main-nav");
+  const opening=!nav.classList.contains("open");
+  nav.classList.toggle("open",opening);
+  $("mobileMenu").setAttribute("aria-expanded",String(opening));
+  $("mobileMenu").setAttribute("aria-label",opening?"Close menu":"Open menu");
+  $("mobileMenu").textContent=opening?"×":"☰";
+});
 $("parentButton").addEventListener("click",()=>$("parentModal").hidden=false);
 $("closeModal").addEventListener("click",()=>$("parentModal").hidden=true);
 $("gotIt").addEventListener("click",()=>$("parentModal").hidden=true);
