@@ -1,0 +1,18 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+const PDF_URL="https://www.duas.org/pdfs/Sahifa-Sajjadiya-simple-english.pdf";
+const response=await fetch(PDF_URL,{headers:{"user-agent":"LittleLanterns-Sahifa-Importer/1.0"}});
+if(!response.ok)throw new Error("Could not download credited Sahifa PDF: HTTP "+response.status);
+const bytes=Buffer.from(await response.arrayBuffer());
+if(bytes.length<100000||bytes.subarray(0,4).toString()!=="%PDF")throw new Error("Source download is not a valid PDF.");
+const pdfPath=join(tmpdir(),"little-lanterns-sahifa.pdf");await writeFile(pdfPath,bytes);
+const extracted=execFileSync("pdftotext",["-layout",pdfPath,"-"],{encoding:"utf8",maxBuffer:30*1024*1024});
+const headings=[...extracted.matchAll(/^\s*S\s*0?(\d{1,2})\s*[-–]\s*(.+?)\s*$/gm)];
+if(headings.length!==54)throw new Error("Expected 54 core supplications; found "+headings.length+". Refusing incomplete content.");
+const clean=raw=>raw.replace(/\r/g,"").replace(/\f/g,"\n\n").split(/\n\s*\n/).map(block=>block.split("\n").map(line=>line.replace(/\s+/g," ").trim()).filter(line=>line&&!/^\d{1,4}$/.test(line)&&!/^SAHIFA SAJJADIYA/i.test(line)).join(" ").trim()).filter(Boolean).filter((p,i)=>!(i===0&&/^(When he |After this |In this |It is reported |He would )/i.test(p)));
+const duas=headings.map((h,i)=>{const number=Number(h[1]);if(number!==i+1)throw new Error("Unexpected supplication number "+number);const start=h.index+h[0].length,end=i+1<headings.length?headings[i+1].index:extracted.length;const paragraphs=clean(extracted.slice(start,end));if(!paragraphs.length)throw new Error("Dua "+number+" has no text.");return{id:"sahifa-core-"+String(number).padStart(3,"0"),collection:"al-sahifa-al-sajjadiyya",number,title:h[2].replace(/\s+/g," ").trim(),language:"en",textType:"complete-english-translation",paragraphs,text:paragraphs.join("\n\n"),wordCount:paragraphs.join(" ").split(/\s+/).filter(Boolean).length,sourcePageUrl:"https://www.duas.org/s"+String(number).padStart(2,"0")+".htm",sourcePdfUrl:PDF_URL,translationAttribution:"English translation source: duas.org; English-only PDF distributed by The Rashed Foundation; individual duas.org pages credit Al-Islam.org.",reproductionPermission:"Permission confirmed by the project maintainer.",chunks:paragraphs.map((text,j)=>({id:"sahifa-core-"+String(number).padStart(3,"0")+"-p"+String(j+1).padStart(3,"0"),ordinal:j+1,text}))};});
+const corpus={schemaVersion:"1.0.0",collectionId:"al-sahifa-al-sajjadiyya-core",title:"Al-Sahifa al-Sajjadiyya — 54 Core Supplications",author:"Imam Ali ibn al-Husayn Zayn al-Abidin (peace be upon him)",language:"en",contentType:"complete-translation",sourceEdition:{pdfUrl:PDF_URL,websiteIndex:"https://www.duas.org/sajjadiya.htm",translationSource:"duas.org",distributor:"The Rashed Foundation",courtesyCredit:"Al-Islam.org (as credited on individual duas.org pages)",permissionStatus:"Permission confirmed by the project maintainer."},attribution:"Reproduced with permission. Please retain source and distributor credits.",count:duas.length,duas};
+await mkdir("data/sahifa",{recursive:true});await writeFile("data/sahifa/core.json",JSON.stringify(corpus,null,2)+"\n");await writeFile("sahifa-content.js","window.LITTLE_LANTERNS_SAHIFA = "+JSON.stringify(corpus)+";\n");
+console.log("Imported and validated "+duas.length+" supplications ("+duas.reduce((sum,d)=>sum+d.wordCount,0)+" words).");

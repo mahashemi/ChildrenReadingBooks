@@ -26,9 +26,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Import and validate the 54 core Sahifa supplications
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          node scripts/import-sahifa.mjs
       - name: Check JavaScript syntax
         run: |
           node --check app.js
+          node --check sahifa-content.js
+          node --check sahifa-experience.js
+          node --check scripts/import-sahifa.mjs
           node --check reading-enhancements.js
           node --check reader-layout.js
           node --check flags.js
@@ -62,7 +70,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/flags
+          git add assets/flags data/sahifa/core.json sahifa-content.js
           if ! git diff --cached --quiet; then
             git commit -m "Vendor local flag SVG assets"
             git push
