@@ -116,3 +116,12 @@ The Sahifa section uses selected Arabic excerpts and original child-friendly exp
 - The categories are teaching connections, not claims that each dua is a fiqh source. Detailed legal rulings must be sourced to recognised Shia jurisprudence and the learner's marja'.
 
 Primary text: [As-Sahifa al-Kamilah al-Sajjadiyya](https://al-islam.org/book/export/html/18815). Dedicated chapters: [Dua 24](https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/24-his-supplication-his-parents-upon-two) and [Dua 25](https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/25-his-supplication-his-children).
+
+
+## Sahifa al-Sajjadiyya reading-library lessons
+
+The Sahifa lessons are presented through the same reading pane as the other Little Lanterns passages. The four initial learning entries are Dua 1 (Praise of God), Dua 20 (Noble Moral Traits), Dua 24 (For One's Parents), and Dua 25 (For One's Children). Each English passage is an original child-friendly educational summary, not a translation or a quotation from the Imam. A short memory rhyme is separately labelled as an original Little Lanterns learning aid.
+
+Each passage links to the corresponding Arabic supplication in the Al-Islam.org edition. The Arabic text is intentionally not reproduced in the reader at this stage. Qur'anic connections and any future hadith references must be checked individually and clearly distinguished from the supplication itself. A dua is not presented as a standalone fiqh ruling.
+
+The long-term curriculum target is the complete 54-supplication core of *Al-Sahifa al-Sajjadiyya*, followed by clearly distinguished supplementary collections such as the weekday supplications and the 15 whispered prayers (Munajaat). Do not label supplementary material as one of the core 54. Each item must have its number, verified title, source link, original child-friendly explanation, and separately labelled memory rhyme. Expand the collection only after source verification.
