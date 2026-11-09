@@ -30,10 +30,10 @@ if(headings.length!==54)throw new Error("Expected 54 core supplications; found "
 const extractSection=raw=>{
  const lines=raw.replace(/\r/g,"").replace(/\f/g,"\n\n").split("\n")
   .map(line=>line.replace(/\s+/g," ").trim())
-  .filter(line=>line&&!/^\d{1,4}$/.test(line)&&!/^SAHIFA SAJJADIYA/i.test(line));
+  .filter(line=>!line||(!/^\d{1,4}$/.test(line)&&!/^SAHIFA SAJJADIYA/i.test(line)));
  const prayerStart=/^(?:Praise\b|O\b|My\b|I\b|We\b|To You\b|You\b|Glory\b|Bless\b|Lord\b|God\b|Give\b|Make\b|Keep\b|Take\b|Have\b|Let\b|May\b|Grant\b|Forgive\b|Preserve\b|Protect\b|Deliver\b|Help\b|Save\b|Guide\b|Accept\b|Bestow\b|Hear\b|Answer\b|Turn\b|Bring\b|Place\b|Set\b|Remove\b|And God bless\b)/i;
  const start=lines.findIndex(line=>prayerStart.test(line));
- const editorialIntroduction=start>0?lines.slice(0,start).join(" ").trim():"";
+ const editorialIntroduction=start>0?lines.slice(0,start).filter(Boolean).join(" ").trim():"";
  const bodyLines=start>0?lines.slice(start):lines;
  const paragraphs=bodyLines.join("\n").split(/\n\s*\n/)
   .map(block=>block.split("\n").map(line=>line.trim()).filter(Boolean).join(" ").trim())
