@@ -14,7 +14,7 @@ const validateCorpus=corpus=>{
 if(!forceRefresh){
  try{
   const stored=validateCorpus(JSON.parse(await readFile("data/sahifa/core.json","utf8")));
-  await writeFile("sahifa-content.js","window.LITTLE_LANTERNS_SAHIFA = "+JSON.stringify(stored)+";\\n");
+  await writeFile("sahifa-content.js","window.LITTLE_LANTERNS_SAHIFA = "+JSON.stringify(stored)+";\n");
   console.log("Validated stored corpus: "+stored.count+" supplications ("+stored.duas.reduce((sum,d)=>sum+(d.wordCount||0),0)+" words). Use --refresh to re-import the source PDF.");
   process.exit(0);
  }catch(error){if(error.code!=="ENOENT")throw error;}
