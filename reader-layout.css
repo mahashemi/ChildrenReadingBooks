@@ -465,3 +465,10 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
 
 /* Preserve the line breaks in original Little Lanterns memory rhymes. */
 .islamic-reflection>p{white-space:pre-line}
+
+@media (min-width:761px) and (hover:hover) and (pointer:fine){
+#readingView.active .story-reading-stage.has-word-panel{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(250px,310px);align-items:stretch;gap:22px}
+#readingView.active .story-reading-stage.has-word-panel .story-text{max-width:none;width:100%;margin:0}
+#readingView.active .story-reading-stage.has-word-panel .word-panel{display:flex;align-self:stretch;width:100%;max-height:none;min-height:0;margin:0;overflow:auto;border:1px solid #e6e8dc;border-radius:16px;background:rgba(255,255,255,.94);box-shadow:0 8px 24px rgba(49,64,47,.07)}
+#readingView.active .story-reading-stage.has-word-panel .word-explorer-content{padding:18px}
+}

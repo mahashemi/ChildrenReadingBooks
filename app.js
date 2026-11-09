@@ -333,18 +333,32 @@ const readingChapters = [
     "start": 21,
     "end": 22
   },
-  {title:"Sahifa Sajjadiya · Dua 1: Praise of Allah",icon:"🌙",category:"sahifa",tags:["tawhid","gratitude","praise"],subtitle:"Discover how Imam Sajjad teaches us to know and praise Allah.",source:"Al-Sahifa al-Sajjadiyya, Supplication 1. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"stars",takeaway:"Know Allah, praise Him, and thank Him for His gifts.",reflection:"Allah made the stars and skies above;\nWe thank Him with a heart of love.\nFor every gift, both great and small,\nWe praise our Lord, the source of all.",start:23,end:24},
-  {title:"Sahifa Sajjadiya · Dua 20: Noble Moral Traits",icon:"💛",category:"sahifa",tags:["akhlaq","good character","patience","faith"],subtitle:"Learn about the beautiful character Imam Sajjad asks Allah to help us build.",source:"Al-Sahifa al-Sajjadiyya, Supplication 20. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"growth",takeaway:"Ask Allah for good character, then practise it every day.",reflection:"Be kind in all you say and do;\nLet truth and patience shine in you.\nA gentle heart, a helping hand,\nCan spread goodness through the land.",start:25,end:26},
-  {title:"Sahifa Sajjadiya · Dua 24: For Parents",icon:"🏡",category:"sahifa",tags:["parents","family","akhlaq","gratitude"],subtitle:"Explore Imam Sajjad's prayer for kindness and gratitude toward parents.",source:"Al-Sahifa al-Sajjadiyya, Supplication 24. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"family",takeaway:"Show gratitude through gentle words and helpful actions.",reflection:"For caring words and loving ways,\nI thank my parents every day.\nWith gentle words and deeds that show,\nMy love and gratitude can grow.",start:27,end:28},
-  {title:"Sahifa Sajjadiya · Dua 25: For Children",icon:"🌱",category:"sahifa",tags:["children","family","faith","akhlaq"],subtitle:"Learn about the Imam's prayer for children's wellbeing, faith, and character.",source:"Al-Sahifa al-Sajjadiyya, Supplication 25. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"growth",takeaway:"Grow in health, faith, knowledge, and beautiful character.",reflection:"Help me grow in all that's right,\nIn health and faith, in truth and light.\nWith caring words and actions true,\nI'll try to make goodness shine through.",start:29,end:30}
+  {title:"Sahifa Sajjadiya · Dua 1: Praise of Allah",icon:"🌙",category:"sahifa",tags:["tawhid","gratitude","praise"],subtitle:"Discover how Imam Sajjad teaches us to know and praise Allah.",source:"Al-Sahifa al-Sajjadiyya, Supplication 1. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"stars",takeaway:"Know Allah, praise Him, and thank Him for His gifts.",rhyme:"Allah made the stars and skies above;\nWe thank Him with a heart of love.\nFor every gift, both great and small,\nWe praise our Lord, the source of all.",start:23,end:24},
+  {title:"Sahifa Sajjadiya · Dua 20: Noble Moral Traits",icon:"💛",category:"sahifa",tags:["akhlaq","good character","patience","faith"],subtitle:"Learn about the beautiful character Imam Sajjad asks Allah to help us build.",source:"Al-Sahifa al-Sajjadiyya, Supplication 20. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"growth",takeaway:"Ask Allah for good character, then practise it every day.",rhyme:"Be kind in all you say and do;\nLet truth and patience shine in you.\nA gentle heart, a helping hand,\nCan spread goodness through the land.",start:25,end:26},
+  {title:"Sahifa Sajjadiya · Dua 24: For Parents",icon:"🏡",category:"sahifa",tags:["parents","family","akhlaq","gratitude"],subtitle:"Explore Imam Sajjad's prayer for kindness and gratitude toward parents.",source:"Al-Sahifa al-Sajjadiyya, Supplication 24. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"family",takeaway:"Show gratitude through gentle words and helpful actions.",rhyme:"For caring words and loving ways,\nI thank my parents every day.\nWith gentle words and deeds that show,\nMy love and gratitude can grow.",start:27,end:28},
+  {title:"Sahifa Sajjadiya · Dua 25: For Children",icon:"🌱",category:"sahifa",tags:["children","family","faith","akhlaq"],subtitle:"Learn about the Imam's prayer for children's wellbeing, faith, and character.",source:"Al-Sahifa al-Sajjadiyya, Supplication 25. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/book/export/html/18815",art:"growth",takeaway:"Grow in health, faith, knowledge, and beautiful character.",rhyme:"Help me grow in all that's right,\nIn health and faith, in truth and light.\nWith caring words and actions true,\nI'll try to make goodness shine through.",start:29,end:30}
 
 
 ];
+// Replace short Sahifa paraphrases with complete source-imported English text.
+const importedSahifa=window.LITTLE_LANTERNS_SAHIFA&&window.LITTLE_LANTERNS_SAHIFA.duas;
+if(Array.isArray(importedSahifa)&&importedSahifa.length===54){
+ const legacy=readingChapters.filter(c=>c.category==="sahifa"),rhymes={};
+ legacy.forEach(c=>{const m=c.title.match(/Dua\s*(\d+)/i);if(m&&c.rhyme)rhymes[Number(m[1])]=c.rhyme;});
+ const first=Math.min(...legacy.map(c=>c.start)),last=Math.max(...legacy.map(c=>c.end));
+ if(Number.isFinite(first)&&last===storyPages.length-1)storyPages.splice(first,last-first+1);
+ for(let i=readingChapters.length-1;i>=0;i--)if(readingChapters[i].category==="sahifa")readingChapters.splice(i,1);
+ const split=paragraphs=>{const out=[];let group=[],words=0;paragraphs.forEach(p=>{const n=p.trim().split(/\s+/).length;if(group.length&&(group.length>=5||words+n>480)){out.push(group);group=[];words=0;}group.push(p);words+=n;});if(group.length)out.push(group);return out.length?out:[["The source text is being prepared."]];};
+ importedSahifa.forEach(dua=>{const groups=split(dua.paragraphs||[]),start=storyPages.length;
+  groups.forEach((paragraphs,i)=>storyPages.push({title:"Dua "+dua.number+(groups.length>1?" · Part "+(i+1):""),paragraphs}));
+  readingChapters.push({title:"Sahifa · Dua "+dua.number+": "+dua.title,icon:"🌙",category:"sahifa",tags:["sahifa","dua",...(dua.themes||[])],subtitle:"The complete English supplication, presented in its original sequence.",source:"Al-Sahifa al-Sajjadiyya, Supplication "+dua.number+". Full English translation from the duas.org edition; see About & Sources for attribution.",sourceUrl:dua.sourcePageUrl,sourceLabel:"Open English source at duas.org",art:"stars",takeaway:"Read slowly and reflect on the Imam’s words.",rhyme:rhymes[dua.number]||"",start,end:storyPages.length-1,contentId:dua.id,contentType:"primary-supplication"});
+ });
+}
 readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
     Object.assign(storyPages[i],{
       chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
-      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterSourceUrl:chapter.sourceUrl,
+      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterRhyme:chapter.rhyme,chapterSourceUrl:chapter.sourceUrl,chapterSourceLabel:chapter.sourceLabel,
       chapterIndex:index,chapterCategory:chapter.category,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
       chapterLength:chapter.end-chapter.start+1
     });
@@ -607,7 +621,7 @@ function renderStory(){
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
   $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
-  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource)+(current.chapterSourceUrl?' · <a href="'+current.chapterSourceUrl+'" target="_blank" rel="noopener noreferrer">Open Arabic dua at Al-Islam.org ↗</a>':"");
+  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource)+(current.chapterSourceUrl?' · <a href="'+current.chapterSourceUrl+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(current.chapterSourceLabel||"Open source reference") + " ↗</a>":"");
   $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
   $("storyArt").dataset.art=current.chapterArt||"dream";
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
@@ -622,6 +636,7 @@ function selectWord(target){
   $("wordBreakdown").textContent=target.dataset.parts;
   $("wordMeaning").textContent=target.dataset.meaning;
   $("wordPanel").hidden=false;
+  document.querySelector(".story-reading-stage")?.classList.add("has-word-panel");
   speakText(target.dataset.word);
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
@@ -638,7 +653,7 @@ $("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();
 $("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();syncReadingRoute();}else{showToast("Wonderful reading! You finished every chapter. 🌟");page=0;renderStory();syncReadingRoute();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);try{localStorage.setItem("littleLanternsFontSize",String(fontSize));}catch(e){}renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);try{localStorage.setItem("littleLanternsFontSize",String(fontSize));}catch(e){}renderStory();});
-$("closeWord").addEventListener("click",()=>$("wordPanel").hidden=true);
+$("closeWord").addEventListener("click",()=>{$("wordPanel").hidden=true;document.querySelector(".story-reading-stage")?.classList.remove("has-word-panel");});
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 
 let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
@@ -885,7 +900,8 @@ function currentLessonRoute(){
 function routeForView(view){
   if(view==="reading")return currentLessonRoute();
   const routes={home:"home",speak:"speech",flagSpotter:"flag-spotter",flagMemorizer:"flag-memorizer",values:"values"};
-  return "#/"+(routes[view]||view);
+  const extraRoutes={rhymes:"rhymes",about:"about"};
+  return "#/"+(routes[view]||extraRoutes[view]||view);
 }
 function activateView(view,scroll=true){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
@@ -896,6 +912,7 @@ function activateView(view,scroll=true){
 }
 function navigate(view,options={}){
   if(view==="reading")renderStory();
+  if(view==="rhymes"&&window.renderRhymesView)window.renderRhymesView();
   activateView(view,options.scroll!==false);
   const next=routeForView(view);
   if(options.replace)history.replaceState({view},"",next);
@@ -924,7 +941,7 @@ function applyLocationRoute(){
     if(index<0)history.replaceState({view:"reading"},"",currentLessonRoute());
     return;
   }
-  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values"};
+  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values","rhymes":"rhymes","about":"about"};
   activateView(views[route]||"home",false);
   if(!raw)history.replaceState({view:"home"},"","#/home");
 }

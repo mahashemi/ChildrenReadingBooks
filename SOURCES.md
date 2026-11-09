@@ -125,3 +125,12 @@ The Sahifa lessons are presented through the same reading pane as the other Litt
 Each passage links to the corresponding Arabic supplication in the Al-Islam.org edition. The Arabic text is intentionally not reproduced in the reader at this stage. Qur'anic connections and any future hadith references must be checked individually and clearly distinguished from the supplication itself. A dua is not presented as a standalone fiqh ruling.
 
 The long-term curriculum target is the complete 54-supplication core of *Al-Sahifa al-Sajjadiyya*, followed by clearly distinguished supplementary collections such as the weekday supplications and the 15 whispered prayers (Munajaat). Do not label supplementary material as one of the core 54. Each item must have its number, verified title, source link, original child-friendly explanation, and separately labelled memory rhyme. Expand the collection only after source verification.
+
+
+## Sahifa al-Sajjadiyya — complete English translation
+
+- Core corpus: 54 numbered supplications, imported in full from the English-only edition hosted by [duas.org](https://www.duas.org/sajjadiya.htm).
+- English-only PDF: [Sahifa Sajjadiya — The Psalms of Islam](https://www.duas.org/pdfs/Sahifa-Sajjadiya-simple-english.pdf). The PDF identifies duas.org as the English translation source and The Rashed Foundation as distributor.
+- Individual duas.org supplication pages credit [Al-Islam.org](https://al-islam.org/book/export/html/18815).
+- Reproduction permission has been confirmed by the project maintainer. Preserve the above credits in all copies and derivative displays.
+- Full ordered text, source URLs and stable paragraph chunk IDs are stored in `data/sahifa/core.json`; learning notes and original rhymes remain separate.
