@@ -14,6 +14,8 @@ A warm, responsive, English-first reading and Islamic learning experience for ch
 - Live roadmap and editorial source register.
 
 ## Sahifa corpus scope
+
+**Latest import check (2026-11-09):** CI extracted all 54 core supplications and validated 39,851 words from the credited English-only PDF. Editorial introductions are stored separately from the prayer text, and original paragraph breaks are preserved. Manual item-by-item comparison against the PDF remains open.
 | Collection | Target | Status |
 |---|---:|---|
 | Core Sahifa supplications | 54 | Importer requires all 54 sequential items with non-empty text |
@@ -38,7 +40,8 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 - [ ] Add source-checked learning notes and Qur'anic connections for all 54.
 
 ### Next — Rhymes and meanings
-- [ ] Create age-appropriate original memory rhymes for selected duas; label each as a learning aid.
+- [x] Move the four existing Sahifa memory rhymes into the dedicated Rhymes tab; keep them out of the supplication reader.
+- [ ] Create age-appropriate original memory rhymes for the remaining duas; label each as a learning aid.
 - [ ] Expand the meaning pane with contextual definitions, verified roots/transliteration and source links.
 - [ ] Add a parent/teacher detail mode while keeping the child view uncluttered.
 
