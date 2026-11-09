@@ -33,7 +33,6 @@ jobs:
           node --check reader-layout.js
           node --check flags.js
           node --check flags-data.js
-          node --check sahifa.js
           node --check scripts/vendor-flags.mjs
   deploy:
     needs: validate

@@ -164,13 +164,50 @@ storyPages.push(
   ]}
 );
 
+
+storyPages.push(
+  {title:"Dua 1: Praise and Know Allah",paragraphs:[
+    "Imam Zayn al-Abidin begins the Sahifa by praising Allah. He teaches us to think about the One who created everything and whose knowledge and power have no limit.",
+    "When we look at the sky, the earth, and all the wonderful things around us, we can remember that Allah is their Creator. We can thank Him and worship Him alone."
+  ]},
+  {title:"A Heart Full of Praise",paragraphs:[
+    "Praise is more than saying lovely words. It means knowing that every good thing comes from Allah and trying to use His gifts in a good way.",
+    "When we wake, learn, eat, or receive help, we can remember Allah and say Alhamdulillah with a thankful heart."
+  ]},
+  {title:"Dua 20: Noble Character",paragraphs:[
+    "In this famous supplication, Imam Zayn al-Abidin asks Allah to help him grow in faith and beautiful character. He asks for good intentions, truthful words, patience, and actions that please Allah.",
+    "The Imam teaches us that good character is not only about how we behave when everything is easy. It also matters when we feel upset, tired, or disappointed."
+  ]},
+  {title:"Let Good Character Shine",paragraphs:[
+    "A child can practise noble character by telling the truth, keeping promises, sharing fairly, and speaking gently. Small good choices can become strong habits.",
+    "When we make a mistake, we can admit it, ask Allah for help, and try again. We ask Allah to make our hearts and actions better."
+  ]},
+  {title:"Dua 24: A Prayer for Parents",paragraphs:[
+    "Imam Zayn al-Abidin asks Allah to help him remember the care his parents gave him. He asks for gentle words, respect, kindness, and a heart that notices their efforts.",
+    "The Qur'an teaches us to speak kindly to our parents and treat them with humility. If someone asks us to disobey Allah, we do not obey that request, but we still speak and act with kindness."
+  ]},
+  {title:"Show Love Through Actions",paragraphs:[
+    "We can show gratitude to parents and caregivers by listening, helping with suitable tasks, speaking respectfully, and remembering to say thank you.",
+    "Love is not only a feeling. It can be seen in patient words, helpful hands, and thoughtful actions."
+  ]},
+  {title:"Dua 25: A Prayer for Children",paragraphs:[
+    "Imam Zayn al-Abidin asks Allah to care for children in their bodies, faith, and character. The prayer reminds families that a child's wellbeing includes health, learning, belief, and good manners.",
+    "Children can ask Allah to help them learn what is right, grow stronger in goodness, and become people who bring kindness to others."
+  ]},
+  {title:"Growing in Faith and Goodness",paragraphs:[
+    "Parents and children can learn together. Adults can guide and protect, while children can ask questions, practise good habits, and seek Allah's help.",
+    "A beautiful goal is to grow in knowledge, care for our bodies, strengthen our faith, and treat people with mercy."
+  ]}
+);
+
 const chapterCategories = [
  {id:"science",label:"Science & Nature",icon:"🔬",color:"blue"},
  {id:"akhlaq",label:"Akhlaq",icon:"🌱",color:"green"},
  {id:"aqaid",label:"Aqaid",icon:"🌙",color:"lilac"},
  {id:"quran",label:"Qur'an & Ahlulbayt",icon:"📖",color:"peach"},
  {id:"society",label:"People & Society",icon:"🤝",color:"gold"},
- {id:"discovery",label:"Thinking & Discovery",icon:"💡",color:"mint"}
+ {id:"discovery",label:"Thinking & Discovery",icon:"💡",color:"mint"},
+ {id:"sahifa",label:"Sahifa Sajjadiya",icon:"🌙",color:"mint"}
 ];
 let activeChapterCategory = "all";
 
@@ -296,6 +333,12 @@ const readingChapters = [
     "start": 21,
     "end": 22
   },
+  ,
+  {title:"Sahifa Sajjadiya · Dua 1: Praise of Allah",icon:"🌙",category:"sahifa",tags:["tawhid","gratitude","praise"],subtitle:"Discover how Imam Sajjad teaches us to know and praise Allah.",source:"Al-Sahifa al-Sajjadiyya, Supplication 1. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/1-his-supplication-praising-god",art:"stars",takeaway:"Know Allah, praise Him, and thank Him for His gifts.",reflection:"Allah made the stars and skies above;\nWe thank Him with a heart of love.\nFor every gift, both great and small,\nWe praise our Lord, the source of all.",start:23,end:24},
+  {title:"Sahifa Sajjadiya · Dua 20: Noble Moral Traits",icon:"💛",category:"sahifa",tags:["akhlaq","good character","patience","faith"],subtitle:"Learn about the beautiful character Imam Sajjad asks Allah to help us build.",source:"Al-Sahifa al-Sajjadiyya, Supplication 20. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/20-his-supplication-noble-moral-traits",art:"growth",takeaway:"Ask Allah for good character, then practise it every day.",reflection:"Be kind in all you say and do;\nLet truth and patience shine in you.\nA gentle heart, a helping hand,\nCan spread goodness through the land.",start:25,end:26},
+  {title:"Sahifa Sajjadiya · Dua 24: For Parents",icon:"🏡",category:"sahifa",tags:["parents","family","akhlaq","gratitude"],subtitle:"Explore Imam Sajjad's prayer for kindness and gratitude toward parents.",source:"Al-Sahifa al-Sajjadiyya, Supplication 24. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/24-his-supplication-his-parents-upon-two",art:"family",takeaway:"Show gratitude through gentle words and helpful actions.",reflection:"For caring words and loving ways,\nI thank my parents every day.\nWith gentle words and deeds that show,\nMy love and gratitude can grow.",start:27,end:28},
+  {title:"Sahifa Sajjadiya · Dua 25: For Children",icon:"🌱",category:"sahifa",tags:["children","family","faith","akhlaq"],subtitle:"Learn about the Imam's prayer for children's wellbeing, faith, and character.",source:"Al-Sahifa al-Sajjadiyya, Supplication 25. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/25-his-supplication-his-children",art:"growth",takeaway:"Grow in health, faith, knowledge, and beautiful character.",reflection:"Help me grow in all that's right,\nIn health and faith, in truth and light.\nWith caring words and actions true,\nI'll try to make goodness shine through.",start:29,end:30}
+
 
 ];
 readingChapters.forEach((chapter,index)=>{
@@ -303,7 +346,7 @@ readingChapters.forEach((chapter,index)=>{
     Object.assign(storyPages[i],{
       chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
       chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,
-      chapterIndex:index,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
+      chapterIndex:index,chapterCategory:chapter.category,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
       chapterLength:chapter.end-chapter.start+1
     });
   }
@@ -559,13 +602,13 @@ function renderStory(){
   $("readerTag").textContent="READING CHAPTER "+String(current.chapterIndex+1).padStart(2,"0");
   $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
   storyText.style.setProperty("font-size",fontSize+"px","important");
-  const reflectionHtml=current.chapterReflection&&current.chapterPage===current.chapterLength?'<aside class="islamic-reflection"><b>Think with the Qur’an and Ahlulbayt</b><p>'+linkQuranReferences(renderParagraph(current.chapterReflection),current.chapterReflection,current)+'</p></aside>':'';
+  const reflectionHtml=current.chapterReflection&&current.chapterPage===current.chapterLength?'<aside class="islamic-reflection"><b>'+(current.chapterCategory==="sahifa"?"A little rhyme to remember":"Think with the Qur’an and Ahlulbayt")+'</b><p>'+linkQuranReferences(renderParagraph(current.chapterReflection),current.chapterReflection,current)+'</p></aside>':'';
   storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("")+reflectionHtml;
   storyText.classList.toggle("word-borders-visible",showWordBorders);
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
   $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
-  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);
+  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource)+(current.chapterSourceUrl?' · <a href="'+current.chapterSourceUrl+'" target="_blank" rel="noopener noreferrer">Open Arabic dua at Al-Islam.org ↗</a>':"");
   $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
   $("storyArt").dataset.art=current.chapterArt||"dream";
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
@@ -842,7 +885,7 @@ function currentLessonRoute(){
 }
 function routeForView(view){
   if(view==="reading")return currentLessonRoute();
-  const routes={home:"home",speak:"speech",flagSpotter:"flag-spotter",flagMemorizer:"flag-memorizer",values:"values",sahifa:"sahifa"};
+  const routes={home:"home",speak:"speech",flagSpotter:"flag-spotter",flagMemorizer:"flag-memorizer",values:"values"};
   return "#/"+(routes[view]||view);
 }
 function activateView(view,scroll=true){
@@ -882,7 +925,7 @@ function applyLocationRoute(){
     if(index<0)history.replaceState({view:"reading"},"",currentLessonRoute());
     return;
   }
-  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values","sahifa":"sahifa"};
+  const views={"home":"home","speech":"speak","flag-spotter":"flagSpotter","flag-memorizer":"flagMemorizer","values":"values"};
   activateView(views[route]||"home",false);
   if(!raw)history.replaceState({view:"home"},"","#/home");
 }

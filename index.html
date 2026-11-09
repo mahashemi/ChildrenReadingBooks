@@ -24,7 +24,6 @@
       <button class="nav-link active" data-view="home">Home</button>
       <button class="nav-link" data-view="reading">Reading</button>
       <button class="nav-link" data-view="speak">My speech stage</button>
-      <button class="nav-link" data-view="sahifa">Sahifa Duas</button>
       <div class="nav-dropdown" id="flagsNav">
         <button class="nav-link flags-nav-trigger" id="flagsNavButton" type="button" aria-haspopup="true" aria-expanded="false">Flags <span aria-hidden="true">▾</span></button>
         <div class="nav-submenu" id="flagsSubmenu">
@@ -212,30 +211,11 @@
       <div class="reflection-box"><span>💭</span><div><b>Today’s little reflection</b><p>What is one kind thing you can do for someone today? Can you explain why you chose it?</p></div></div>
     </section>
 
-    <section class="view" id="sahifaView">
-      <div class="page-heading"><div><div class="eyebrow">THE PRAYERS OF IMAM ZAYN AL-ABIDIN</div><h1>Sahifa <span>Du’as</span></h1><p>Read a short passage, discover what it teaches, and turn its guidance into one good action.</p></div><span class="heading-emoji">🌙</span></div>
-      <div class="sahifa-intro">
-        <span class="sahifa-intro-icon">📖</span>
-        <div><b>A prayer can teach the heart.</b><p>Explore selected supplications from <i>Al-Sahifa al-Sajjadiyya</i>, attributed in Shia tradition to Imam Ali ibn al-Husayn (Zayn al-Abidin). Arabic excerpts are shown with child-friendly explanations—not as replacement translations.</p></div>
-      </div>
-      <div class="sahifa-filter-row" id="sahifaFilters" aria-label="Filter supplications by learning connection">
-        <button class="sahifa-filter active" data-filter="all" type="button" aria-pressed="true">All duas</button>
-        <button class="sahifa-filter" data-filter="aqaid" type="button" aria-pressed="false">✨ Aqa’id</button>
-        <button class="sahifa-filter" data-filter="ahkam" type="button" aria-pressed="false">📘 Ahkam</button>
-        <button class="sahifa-filter" data-filter="akhlaq" type="button" aria-pressed="false">💛 Akhlaq</button>
-      </div>
-      <div class="sahifa-layout">
-        <div class="sahifa-dua-list" id="sahifaDuaList" aria-label="Selected supplications"></div>
-        <article class="sahifa-detail" id="sahifaDetail" aria-live="polite"></article>
-      </div>
-      <div class="sahifa-editorial-note"><b>A note about learning Ahkam</b><p>A dua can inspire us to learn our duties, but a dua excerpt is not itself a complete legal ruling. Where a question concerns what is wajib, haram, or the details of a ruling, the lesson points to Qur’anic context and trusted Shia legal guidance rather than guessing.</p></div>
-    </section>
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <div class="modal-backdrop" id="parentModal" hidden><div class="parent-modal"><button class="modal-close" id="closeModal">×</button><span class="modal-icon">🌼</span><h2>A note for grown-ups</h2><p>Little Lanterns is an early visual prototype. Stories, syllable annotations, Qur’anic translations, audio and assessments will go through editorial review before being treated as finished learning material.</p><p>Children should use the site with an appropriate parent or teacher. Little Lanterns does not create child accounts or send learning progress to a server. Flag-learning progress is saved only in this browser on this device. The site does not record a child’s voice.</p><button class="button button-primary" id="gotIt">Got it</button></div></div>
   <script>window.__initialLessonHash = location.hash;</script>
   <script src="./app.js"></script>
-  <script src="./sahifa.js"></script>
   <script src="./reading-enhancements.js"></script> 
   <script src="./reader-layout.js"></script>
   <script src="./flags-data.js"></script>
