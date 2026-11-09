@@ -82,6 +82,6 @@ This is the first visual and functional prototype, not a completed or source-app
 
 The Reading library imports the 54 core supplications in full from the English-only edition hosted by duas.org. The credited edition identifies The Rashed Foundation as distributor, and individual duas.org pages include an Al-Islam.org courtesy credit. Reproduction permission has been confirmed by the project maintainer; see the About & Sources tab.
 
-The build generates and commits `data/sahifa/core.json` (canonical structured corpus for indexing/RAG) and `sahifa-content.js` (browser reader data). To regenerate locally, install `poppler-utils` and run `node scripts/import-sahifa.mjs`. The importer requires exactly 54 sequential, non-empty supplications.
+The build generates and commits `data/sahifa/core.json` (canonical structured corpus for indexing/RAG) and `sahifa-content.js` (browser reader data). To regenerate locally, install `poppler-utils` and run `node scripts/import-sahifa.mjs`. Use `node scripts/import-sahifa.mjs --refresh` only when deliberately refreshing from the source PDF. The importer validates exactly 54 sequential, non-empty supplications.
 
 See [PROJECT-ROADMAP.md](PROJECT-ROADMAP.md) for status and priorities.
