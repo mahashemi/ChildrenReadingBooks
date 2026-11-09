@@ -462,3 +462,6 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
     flex:1 1 auto;min-height:0;
   }
 }
+
+/* Preserve the line breaks in original Little Lanterns memory rhymes. */
+.islamic-reflection>p{white-space:pre-line}

@@ -333,7 +333,6 @@ const readingChapters = [
     "start": 21,
     "end": 22
   },
-  ,
   {title:"Sahifa Sajjadiya · Dua 1: Praise of Allah",icon:"🌙",category:"sahifa",tags:["tawhid","gratitude","praise"],subtitle:"Discover how Imam Sajjad teaches us to know and praise Allah.",source:"Al-Sahifa al-Sajjadiyya, Supplication 1. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/1-his-supplication-praising-god",art:"stars",takeaway:"Know Allah, praise Him, and thank Him for His gifts.",reflection:"Allah made the stars and skies above;\nWe thank Him with a heart of love.\nFor every gift, both great and small,\nWe praise our Lord, the source of all.",start:23,end:24},
   {title:"Sahifa Sajjadiya · Dua 20: Noble Moral Traits",icon:"💛",category:"sahifa",tags:["akhlaq","good character","patience","faith"],subtitle:"Learn about the beautiful character Imam Sajjad asks Allah to help us build.",source:"Al-Sahifa al-Sajjadiyya, Supplication 20. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/20-his-supplication-noble-moral-traits",art:"growth",takeaway:"Ask Allah for good character, then practise it every day.",reflection:"Be kind in all you say and do;\nLet truth and patience shine in you.\nA gentle heart, a helping hand,\nCan spread goodness through the land.",start:25,end:26},
   {title:"Sahifa Sajjadiya · Dua 24: For Parents",icon:"🏡",category:"sahifa",tags:["parents","family","akhlaq","gratitude"],subtitle:"Explore Imam Sajjad's prayer for kindness and gratitude toward parents.",source:"Al-Sahifa al-Sajjadiyya, Supplication 24. Child-friendly learning summary, not a translation.",sourceUrl:"https://al-islam.org/sahifa-al-kamilah-al-sajjadiyya-imam-ali-zayn-al-abidin/24-his-supplication-his-parents-upon-two",art:"family",takeaway:"Show gratitude through gentle words and helpful actions.",reflection:"For caring words and loving ways,\nI thank my parents every day.\nWith gentle words and deeds that show,\nMy love and gratitude can grow.",start:27,end:28},
@@ -345,7 +344,7 @@ readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
     Object.assign(storyPages[i],{
       chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
-      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,
+      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterSourceUrl:chapter.sourceUrl,
       chapterIndex:index,chapterCategory:chapter.category,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
       chapterLength:chapter.end-chapter.start+1
     });
