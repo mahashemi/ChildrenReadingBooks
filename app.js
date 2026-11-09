@@ -351,14 +351,14 @@ if(Array.isArray(importedSahifa)&&importedSahifa.length===54){
  const split=paragraphs=>{const out=[];let group=[],words=0;paragraphs.forEach(p=>{const n=p.trim().split(/\s+/).length;if(group.length&&(group.length>=5||words+n>480)){out.push(group);group=[];words=0;}group.push(p);words+=n;});if(group.length)out.push(group);return out.length?out:[["The source text is being prepared."]];};
  importedSahifa.forEach(dua=>{const groups=split(dua.paragraphs||[]),start=storyPages.length;
   groups.forEach((paragraphs,i)=>storyPages.push({title:"Dua "+dua.number+(groups.length>1?" · Part "+(i+1):""),paragraphs}));
-  readingChapters.push({title:"Sahifa · Dua "+dua.number+": "+dua.title,icon:"🌙",category:"sahifa",tags:["sahifa","dua",...(dua.themes||[])],subtitle:"The complete English supplication, presented in its original sequence.",source:"Al-Sahifa al-Sajjadiyya, Supplication "+dua.number+". Full English translation from the duas.org edition; see About & Sources for attribution.",sourceUrl:dua.sourcePageUrl,art:"stars",takeaway:"Read slowly and reflect on the Imam’s words.",rhyme:rhymes[dua.number]||"",start,end:storyPages.length-1,contentId:dua.id,contentType:"primary-supplication"});
+  readingChapters.push({title:"Sahifa · Dua "+dua.number+": "+dua.title,icon:"🌙",category:"sahifa",tags:["sahifa","dua",...(dua.themes||[])],subtitle:"The complete English supplication, presented in its original sequence.",source:"Al-Sahifa al-Sajjadiyya, Supplication "+dua.number+". Full English translation from the duas.org edition; see About & Sources for attribution.",sourceUrl:dua.sourcePageUrl,sourceLabel:"Open English source at duas.org",art:"stars",takeaway:"Read slowly and reflect on the Imam’s words.",rhyme:rhymes[dua.number]||"",start,end:storyPages.length-1,contentId:dua.id,contentType:"primary-supplication"});
  });
 }
 readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
     Object.assign(storyPages[i],{
       chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
-      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterRhyme:chapter.rhyme,chapterSourceUrl:chapter.sourceUrl,
+      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterRhyme:chapter.rhyme,chapterSourceUrl:chapter.sourceUrl,chapterSourceLabel:chapter.sourceLabel,
       chapterIndex:index,chapterCategory:chapter.category,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
       chapterLength:chapter.end-chapter.start+1
     });
@@ -621,7 +621,7 @@ function renderStory(){
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
   $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
-  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource)+(current.chapterSourceUrl?' · <a href="'+current.chapterSourceUrl+'" target="_blank" rel="noopener noreferrer">Open Arabic dua at Al-Islam.org ↗</a>':"");
+  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource)+(current.chapterSourceUrl?' · <a href="'+current.chapterSourceUrl+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(current.chapterSourceLabel||"Open source reference") + " ↗</a>":"");
   $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
   $("storyArt").dataset.art=current.chapterArt||"dream";
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
