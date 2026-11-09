@@ -20,7 +20,7 @@ const validateCorpus=corpus=>{
  if(corpus?.count!==54||!Array.isArray(corpus.duas)||corpus.duas.length!==54)throw new Error("Stored Sahifa corpus must contain exactly 54 duas.");
  corpus.duas.forEach((dua,i)=>{
   if(dua.number!==i+1||!dua.id||!Array.isArray(dua.paragraphs)||!dua.paragraphs.length||!dua.text)throw new Error("Stored Sahifa corpus has an incomplete item at ordinal "+(i+1)+".");
-  if(dua.paragraphs.some(p=>(/(?<=[A-Za-z)\x27".,;:!?])(?:2[7-9]|[3-9]\\d|1\\d\\d|2[0-6]\\d|27[0-3])(?=\\s|$)/).test(p)))throw new Error("Footnote markers remain in dua "+dua.number+".");
+  if(dua.paragraphs.some(p=>(/(?<=[A-Za-z)'".,;:!?])(?:2[7-9]|[3-9][0-9]|1[0-9][0-9]|2[0-6][0-9]|27[0-3])(?= |$)/).test(p)))throw new Error("Footnote markers remain in dua "+dua.number+".");
  });
  return corpus;
 };
