@@ -61,3 +61,6 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 
 ## Verification
 CI generates the corpus and fails unless all 54 numbered items have non-empty text. JSON is canonical for machine use; the browser consumes the generated runtime binding. Browser/device verification is tracked separately from syntax and CI checks.
+
+
+- Paper-making chapter includes a Qur’an 6:99 reflection: gratitude for Allah’s gifts of water and plant life, learning how creation works, and using resources responsibly.
