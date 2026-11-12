@@ -21,11 +21,10 @@
       <span class="brand-mark">✦</span>
       <span><strong>little lanterns</strong><small>READ · GROW · SHINE</small></span>
     </a>
-    <nav class="main-nav" aria-label="Main navigation">
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
       <button class="nav-link active" data-view="home">Home</button>
       <button class="nav-link" data-view="reading">Reading</button>
       <button class="nav-link" data-view="rhymes">Rhymes</button>
-      <button class="nav-link" data-view="about">About & Sources</button>
       <button class="nav-link" data-view="speak">My speech stage</button>
       <div class="nav-dropdown" id="flagsNav">
         <button class="nav-link flags-nav-trigger" id="flagsNavButton" type="button" aria-haspopup="true" aria-expanded="false">Flags <span aria-hidden="true">▾</span></button>
@@ -34,9 +33,10 @@
           <button class="nav-submenu-link" data-view="flagMemorizer" type="button"><span>🌍</span><span><b>Flag Memorizer</b><small>Learn countries and flags</small></span></button>
         </div>
       </div>
+      <button class="nav-link" data-view="about">About us</button>
     </nav>
     <button class="parent-button" id="parentButton">For grown-ups <span>↗</span></button>
-    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+    <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">☰</button>
   </header>
 
   <main>
@@ -76,7 +76,7 @@
       </section>
 
       <section class="quote-banner"><span class="quote-mark">“</span><div><p>Read with curiosity. Speak with kindness. Let your knowledge become good action.</p><small>A LITTLE LANTERNS REMINDER</small></div><span class="quote-spark">✧</span></section>
-      <footer class="site-footer"><span>✦ little lanterns</span><span>Made for curious hearts and growing minds.</span></footer>
+      <footer class="site-footer"><span>✦ little lanterns</span><span>Made for curious hearts and growing minds.</span><button class="footer-about-link" type="button" data-view="about">About us</button></footer>
     </section>
 
     <section class="view" id="readingView">
@@ -86,7 +86,7 @@
           <div class="drawer-heading"><b>Choose a story</b><button id="closeChapterDrawer" type="button" aria-label="Close chapters">×</button></div>
           <div class="sidebar-title">YOUR STORYBOOK <span>01</span></div>
           <label class="reading-search-label" for="chapterSearch">FIND A CHAPTER</label>
-          <div class="reading-search-control"><span aria-hidden="true">⌕</span><input id="chapterSearch" type="search" placeholder="Search reading passages…" aria-label="Search all 21 reading passages" autocomplete="off"></div>
+          <div class="reading-search-control"><span aria-hidden="true">⌕</span><input id="chapterSearch" type="search" placeholder="Search reading passages…" aria-label="Search all reading passages" autocomplete="off"></div>
           <p class="reading-search-count" id="chapterSearchCount" aria-live="polite"></p>
           <div class="chapter-category-filters" id="chapterCategoryFilters" aria-label="Filter chapters by category"></div>
           <div class="story-library" id="storyLibrary" aria-label="Reading chapters"></div>
@@ -139,13 +139,13 @@
 <div class="audio-toolbar"><div class="audio-toolbar-main"><button class="audio-play-button" id="rhymePlay" type="button" aria-label="Read rhyme aloud">▶</button><button class="audio-icon-button" id="rhymeStop" type="button" aria-label="Stop rhyme">■</button><span class="audio-speed-control"><button id="rhymeSmaller" type="button" aria-label="Smaller rhyme text">A−</button><span>SIZE</span><button id="rhymeLarger" type="button" aria-label="Larger rhyme text">A+</button></span></div></div>
 <p class="rhyme-credit" id="rhymeCredit">Original Little Lanterns learning aid. Not a quotation from Imam Sajjad.</p></article></div></section>
 <section class="view" id="aboutView">
-<div class="page-heading"><div><div class="eyebrow">OUR PURPOSE · OUR SOURCES</div><h1>About <span>Little Lanterns</span></h1><p>Learning with care, gratitude and respect for those who preserved these words.</p></div><span class="heading-emoji">🕯️</span></div>
+<div class="page-heading"><div><div class="eyebrow">OUR PURPOSE · OUR SOURCES</div><h1>About <span>Little Lanterns</span></h1><p>A learning journey guided by curiosity, gratitude and remembrance of Allah.</p></div><span class="heading-emoji">🕯️</span></div>
 <div class="about-source-layout">
-<article class="about-card"><span class="about-icon">🌱</span><h2>Why we are here</h2><p>Little Lanterns helps children read, understand, speak and grow through lessons rooted in the Qur’an and the teachings of the Ahl al-Bayt (peace be upon them).</p><p>We keep original sources visible and distinguish sacred texts from educational explanations and original rhymes.</p></article>
+<article class="about-card about-credit-card"><span class="about-icon">🌱</span><h2>Our creator, vision and mission</h2><p><b>Created by Seyed Mohammad Abuzar Hashemi</b>, a student of the Hawza in Qom.</p><p>Little Lanterns grew from a simple conviction: learning should never be separated from remembering the One who gives us knowledge. When a child learns a new word, reads a sentence or discovers an idea, that moment can also open a door to wonder, gratitude and a deeper connection with Allah.</p><p><b>Our vision</b> is to nurture curious, thoughtful learners whose education strengthens their relationship with Allah, their love for the Qur’an and the Ahl al-Bayt (peace be upon them), and their commitment to beautiful character.</p><p><b>Our mission</b> is to make language learning joyful and meaningful through stories, reading, speaking and reflection rooted in sound Islamic sources. We hope to help children grow in knowledge while understanding the purpose behind what they learn.</p><p>May every small lesson become a lantern: illuminating the mind, softening the heart and guiding each step toward what pleases Allah.</p></article>
 <article class="about-card"><span class="about-icon">📜</span><h2>The Sahifa al-Sajjadiyya</h2><p>The core collection contains 54 numbered supplications attributed to Imam Ali ibn al-Husayn, Zayn al-Abidin (peace be upon him). The complete English text is presented separately from learning notes.</p><p>We do not silently rewrite the supplication into a child-friendly summary.</p></article>
 <article class="about-card about-credit-card"><span class="about-icon">🤲</span><h2>With gratitude and attribution</h2><ul><li><b>Imam Ali ibn al-Husayn Zayn al-Abidin (peace be upon him)</b> — the supplications preserved in the Sahifa.</li><li><b>duas.org</b> — English translation source and individual supplication pages.</li><li><b>The Rashed Foundation</b> — distributor of the English-only Sahifa PDF edition.</li><li><b>Al-Islam.org</b> — courtesy source credited on the duas.org pages and an important reference edition.</li></ul><p>We are grateful to everyone who preserved, translated, hosted and shared these works. May Allah reward them with abundant thawab and accept their service.</p></article>
 <article class="about-card"><span class="about-icon">🔎</span><h2>How to read our sources</h2><p><b>Original supplication:</b> the English translation, kept distinct from commentary.</p><p><b>Learning notes:</b> child-friendly explanations written for Little Lanterns; not the Imam’s words.</p><p><b>Memory rhymes:</b> original learning aids; never quotations from the Imam.</p><p><b>Qur’anic connections:</b> separately referenced. A dua is not presented as a standalone fiqh ruling.</p></article>
-<article class="about-card about-links"><span class="about-icon">🌐</span><h2>Explore the source editions</h2><p><a href="https://www.duas.org/sajjadiya.htm" target="_blank" rel="noopener noreferrer">duas.org — Sahifa index ↗</a></p><p><a href="https://www.duas.org/pdfs/Sahifa-Sajjadiya-simple-english.pdf" target="_blank" rel="noopener noreferrer">English-only PDF · Rashed Foundation edition ↗</a></p><p><a href="https://al-islam.org/book/export/html/18815" target="_blank" rel="noopener noreferrer">Al-Islam.org — As-Sahifa al-Kamilah al-Sajjadiyya ↗</a></p><p><a href="https://github.com/mahashemi/ChildrenReadingBooks/blob/main/PROJECT-ROADMAP.md" target="_blank" rel="noopener noreferrer">Project roadmap and build status ↗</a></p></article>
+<article class="about-card about-links"><span class="about-icon">🌐</span><h2>Explore the source editions</h2><p><a href="https://www.duas.org/sajjadiya.htm" target="_blank" rel="noopener noreferrer">duas.org — Sahifa index ↗</a></p><p><a href="https://www.duas.org/pdfs/Sahifa-Sajjadiya-simple-english.pdf" target="_blank" rel="noopener noreferrer">English-only PDF · Rashed Foundation edition ↗</a></p><p><a href="https://al-islam.org/book/export/html/18815" target="_blank" rel="noopener noreferrer">Al-Islam.org — As-Sahifa al-Kamilah al-Sajjadiyya ↗</a></p></article>
 </div></section>
 <section class="view" id="flagSpotterView">
       <div class="page-heading"><div><div class="eyebrow">LOOK · REMEMBER · FIND</div><h1>Flag <span>spotter</span></h1><p>Look carefully, remember the flags, then find every one in the picture pool.</p></div><span class="heading-emoji">🎯</span></div>

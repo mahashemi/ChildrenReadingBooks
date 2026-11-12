@@ -1,6 +1,6 @@
 # Little Lanterns — Live Project Status & Roadmap
 
-_Last updated: 2026-11-09_
+_Last updated: 2026-11-12_
 
 ## Product direction
 A warm, responsive, English-first reading and Islamic learning experience for children. Original Qur'an, hadith and dua texts remain distinct from child-friendly explanations, reflections and original memory aids. Preserve the mobile experience while making desktop layouts spacious and useful.
@@ -10,6 +10,8 @@ A warm, responsive, English-first reading and Islamic learning experience for ch
 - Separate Rhymes tab using the shared reader/narration visual language.
 - Desktop word meaning pane positioned to the right of the passage; touch layouts retain the stacked presentation.
 - Dedicated About & Sources tab with translation, distribution and courtesy credits.
+- Added the child-friendly science chapter “The Amazing Journey of Paper”, following plant fibres through pulping, sheet formation, drying and recycling.
+- Made reading-library filter totals derive from the live chapter registry, including all 54 imported Sahifa supplications; removed the stale fixed 21-chapter accessibility label.
 - Structured JSON corpus with stable IDs, source traceability and paragraph chunk IDs for future RAG.
 - Live roadmap and editorial source register.
 
@@ -59,3 +61,6 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 
 ## Verification
 CI generates the corpus and fails unless all 54 numbered items have non-empty text. JSON is canonical for machine use; the browser consumes the generated runtime binding. Browser/device verification is tracked separately from syntax and CI checks.
+
+
+- Paper-making chapter includes a Qur’an 6:99 reflection: gratitude for Allah’s gifts of water and plant life, learning how creation works, and using resources responsibly.

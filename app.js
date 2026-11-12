@@ -354,6 +354,44 @@ if(Array.isArray(importedSahifa)&&importedSahifa.length===54){
   readingChapters.push({title:"Sahifa · Dua "+dua.number+": "+dua.title,icon:"🌙",category:"sahifa",tags:["sahifa","dua",...(dua.themes||[])],subtitle:"The complete English supplication, presented in its original sequence.",source:"Al-Sahifa al-Sajjadiyya, Supplication "+dua.number+". Full English translation from the duas.org edition; see About & Sources for attribution.",sourceUrl:dua.sourcePageUrl,sourceLabel:"Open English source at duas.org",art:"stars",takeaway:"Read slowly and reflect on the Imam’s words.",rhyme:rhymes[dua.number]||"",start,end:storyPages.length-1,contentId:dua.id,contentType:"primary-supplication"});
  });
 }
+ 
+// A new science adventure: how a sheet of paper is made.
+{
+ const start=storyPages.length;
+ const pages=[
+  {title:"The Paper Detective",paragraphs:[
+   "Have you ever wondered where a sheet of paper comes from? It may look plain and quiet, but every sheet has a story. Today, you are a paper detective!",
+   "Most paper begins with tiny plant fibres. Many paper makers use wood from trees grown for this purpose. Some paper is made from recycled paper or other plant fibres, too.",
+   "A tree is not simply chopped down anywhere. Responsible paper makers use managed forests, plant new trees and try to protect the soil, water and wildlife."
+  ]},
+  {title:"From Wood to Pulp",paragraphs:[
+   "At a paper mill, workers first remove the bark from the logs. Machines cut the wood into small chips. The chips are mixed with water and processed until the fibres separate.",
+   "These soft, tiny fibres make a wet mixture called pulp. Imagine a bowl of watery plant threads! The pulp is cleaned so that bits that do not belong can be removed.",
+   "Recycled paper can join the journey, too. It is mixed with water, and the old paper fibres are separated. Ink and other unwanted materials are removed as carefully as the process allows."
+  ]},
+  {title:"A Sheet Is Born",paragraphs:[
+   "Next, the watery pulp flows onto a moving screen. Water drains away, and the fibres begin to settle together like a thin blanket.",
+   "The wet sheet passes through presses that squeeze out more water. Then warm, heated rollers dry it. The paper becomes stronger, smoother and ready to be rolled or cut into sheets.",
+   "Different recipes make different papers. Some are thick for boxes, some are smooth for books, and some are made to soak up water, like paper towels."
+  ]},
+  {title:"Give Paper a Second Life",paragraphs:[
+   "When we finish using paper, clean and suitable paper can often be recycled. It is collected, sorted, mixed with water and turned into pulp again. The fibres can be used to make new paper products.",
+   "Paper fibres become shorter each time they are recycled, so they cannot be reused forever. Fresh plant fibres are sometimes added to keep the paper strong.",
+   "Your mission: use both sides of a sheet, keep books safe, and put recyclable paper in the correct recycling bin. Small choices can help save resources.",
+   "There is another lesson in this journey. Allah tells us that He sends down water and brings out plants and crops (Qur’an 6:99). The trees and plants that provide fibres are part of the wonderful world Allah created. Human beings learn how to use these gifts, but we should do so with care.",
+   "When you hold a sheet of paper, remember three things: thank Allah for the gifts of creation, learn how the world works, and use its resources responsibly. Knowledge should help us become more grateful and more careful."
+  ]}
+ ];
+ pages.forEach(p=>storyPages.push(p));
+ readingChapters.push({
+  title:"The Amazing Journey of Paper",icon:"📄",category:"science",
+  tags:["paper","trees","plant fibres","pulp","recycling","science"],
+  subtitle:"Follow a tree fibre as it becomes a page—and perhaps a new page again!",
+  source:"Original child-friendly science lesson based on standard papermaking and recycling methods. Reflection connects plant growth and water to Qur’an 6:99; it is a learning reflection, not a claim that the Qur’an describes modern paper manufacturing.",
+  art:"book",takeaway:"Paper is made from plant fibres. Use it wisely and recycle suitable paper.",
+  start,end:storyPages.length-1
+ });
+}
 readingChapters.forEach((chapter,index)=>{
   for(let i=chapter.start;i<=chapter.end;i++){
     Object.assign(storyPages[i],{
@@ -511,8 +549,11 @@ function renderParagraph(paragraph){
 }
 function renderChapterCategoryFilters(){
  const host=$("chapterCategoryFilters");if(!host)return;
+ // Count the live chapter registry, including every imported Sahifa supplication
+ // and any future chapter category, rather than relying on a historic fixed total.
  const counts=Object.fromEntries(chapterCategories.map(category=>[category.id,readingChapters.filter(chapter=>chapter.category===category.id).length]));
- host.innerHTML='<button class="category-filter '+(activeChapterCategory==="all"?"active":"")+'" data-category="all" type="button" aria-pressed="'+(activeChapterCategory==="all")+'">All <span>'+readingChapters.length+'</span></button>'+
+ const allCount=readingChapters.length;
+ host.innerHTML='<button class="category-filter '+(activeChapterCategory==="all"?"active":"")+'" data-category="all" type="button" aria-pressed="'+(activeChapterCategory==="all")+'">All <span>'+allCount+'</span></button>'+
  chapterCategories.map(category=>'<button class="category-filter category-'+category.color+' '+(activeChapterCategory===category.id?"active":"")+'" data-category="'+category.id+'" type="button" aria-pressed="'+(activeChapterCategory===category.id)+'" '+(counts[category.id]===0?'disabled title="More chapters coming soon"':'')+'><span class="category-filter-icon">'+category.icon+'</span>'+escapeHtml(category.label)+' <span>'+counts[category.id]+'</span></button>').join("");
 }
 function renderStoryLibrary(){
@@ -522,6 +563,7 @@ function renderStoryLibrary(){
  const matches=readingChapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>(activeChapterCategory==="all"||chapter.category===activeChapterCategory)&&(!query||[chapter.title,chapter.subtitle,chapter.source,chapter.takeaway,...(chapter.tags||[])].join(" ").toLowerCase().includes(query)));
  const count=$("chapterSearchCount");
  if(count){const category=chapterCategories.find(item=>item.id===activeChapterCategory);count.textContent=query?matches.length+" passage"+(matches.length===1?"":"s")+" found":activeChapterCategory==="all"?readingChapters.length+" passages to explore":matches.length+" passages · "+(category?category.label:"");}
+ const search=$("chapterSearch");if(search)search.setAttribute("aria-label","Search all "+readingChapters.length+" reading passages");
  host.innerHTML=matches.length?matches.map(({chapter,index})=>'<button class="story-choice '+(index===storyPages[page].chapterIndex?"selected":"")+'" data-chapter="'+index+'" type="button"><span class="story-thumb">'+chapter.icon+'</span><span class="story-choice-copy"><b>'+escapeHtml(chapter.title)+'</b><small>'+escapeHtml(chapter.subtitle)+'</small><small class="story-category-label">'+escapeHtml(chapterCategories.find(item=>item.id===chapter.category)?.label||"")+'</small></span>'+(index===storyPages[page].chapterIndex?'<span class="choice-check">✓</span>':'')+'</button>').join(""):'<div class="reading-no-results">'+(activeChapterCategory!=="all"&&!readingChapters.some(chapter=>chapter.category===activeChapterCategory)?"More adventures in this collection are coming soon.":"No chapters match that search. Try another word.")+'</div>';
 }
 $("chapterCategoryFilters")?.addEventListener("click",event=>{
@@ -908,6 +950,9 @@ function activateView(view,scroll=true){
   const target=$(view+"View");if(target)target.classList.add("active");
   document.querySelectorAll(".nav-link").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
   document.querySelector(".main-nav").classList.remove("open");
+  $("mobileMenu").setAttribute("aria-expanded","false");
+  $("mobileMenu").setAttribute("aria-label","Open menu");
+  $("mobileMenu").textContent="☰";
   if(scroll)window.scrollTo({top:0,behavior:"auto"});
 }
 function navigate(view,options={}){
@@ -949,7 +994,14 @@ document.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("clic
 document.querySelectorAll("[data-go]").forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.go)));
 window.addEventListener("popstate",applyLocationRoute);
 window.addEventListener("hashchange",applyLocationRoute);
-$("mobileMenu").addEventListener("click",()=>document.querySelector(".main-nav").classList.toggle("open"));
+$("mobileMenu").addEventListener("click",()=>{
+  const nav=document.querySelector(".main-nav");
+  const opening=!nav.classList.contains("open");
+  nav.classList.toggle("open",opening);
+  $("mobileMenu").setAttribute("aria-expanded",String(opening));
+  $("mobileMenu").setAttribute("aria-label",opening?"Close menu":"Open menu");
+  $("mobileMenu").textContent=opening?"×":"☰";
+});
 $("parentButton").addEventListener("click",()=>$("parentModal").hidden=false);
 $("closeModal").addEventListener("click",()=>$("parentModal").hidden=true);
 $("gotIt").addEventListener("click",()=>$("parentModal").hidden=true);
