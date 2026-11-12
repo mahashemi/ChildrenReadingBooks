@@ -377,7 +377,9 @@ if(Array.isArray(importedSahifa)&&importedSahifa.length===54){
   {title:"Give Paper a Second Life",paragraphs:[
    "When we finish using paper, clean and suitable paper can often be recycled. It is collected, sorted, mixed with water and turned into pulp again. The fibres can be used to make new paper products.",
    "Paper fibres become shorter each time they are recycled, so they cannot be reused forever. Fresh plant fibres are sometimes added to keep the paper strong.",
-   "Your mission: use both sides of a sheet, keep books safe, and put recyclable paper in the correct recycling bin. Small choices can help save resources."
+   "Your mission: use both sides of a sheet, keep books safe, and put recyclable paper in the correct recycling bin. Small choices can help save resources.",
+   "There is another lesson in this journey. Allah tells us that He sends down water and brings out plants and crops (Qur’an 6:99). The trees and plants that provide fibres are part of the wonderful world Allah created. Human beings learn how to use these gifts, but we should do so with care.",
+   "When you hold a sheet of paper, remember three things: thank Allah for the gifts of creation, learn how the world works, and use its resources responsibly. Knowledge should help us become more grateful and more careful."
   ]}
  ];
  pages.forEach(p=>storyPages.push(p));
@@ -385,7 +387,7 @@ if(Array.isArray(importedSahifa)&&importedSahifa.length===54){
   title:"The Amazing Journey of Paper",icon:"📄",category:"science",
   tags:["paper","trees","plant fibres","pulp","recycling","science"],
   subtitle:"Follow a tree fibre as it becomes a page—and perhaps a new page again!",
-  source:"Original child-friendly science lesson. Process overview based on standard papermaking and paper-recycling methods; not a claim that all paper is made from trees.",
+  source:"Original child-friendly science lesson based on standard papermaking and recycling methods. Reflection connects plant growth and water to Qur’an 6:99; it is a learning reflection, not a claim that the Qur’an describes modern paper manufacturing.",
   art:"book",takeaway:"Paper is made from plant fibres. Use it wisely and recycle suitable paper.",
   start,end:storyPages.length-1
  });
