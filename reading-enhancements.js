@@ -481,7 +481,7 @@
       const guide = soundGuides[base] || "";
       const breakdown = (parts ? parts.join("-") + (lower.endsWith("'s") ? "'s" : "") : (isKnownOne ? "1 syllable" : ""))
         + (guide ? (parts ? " · " : "") + guide : "");
-      const localMeaning = meanings[base] || "";
+      const localMeaning = contextualMeaning(base, paragraph);
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
       const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
       return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +
@@ -500,7 +500,9 @@
     const meaningNode = document.getElementById("wordMeaning");
     document.getElementById("wordDisplay").textContent = word;
     document.getElementById("wordBreakdown").textContent = target.dataset.parts || "";
-    meaningNode.textContent = target.dataset.meaning || meaningFallback;
+    const englishMeaning = target.dataset.meaning || meaningFallback;
+    const paragraphContext = target.closest("p")?.textContent || "";
+    meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, englishMeaning, paragraphContext) : englishMeaning;
     document.getElementById("wordPanel").hidden = false;
     speakText(word);
     if (target.dataset.lookup !== "true") return;
@@ -519,12 +521,14 @@
         }).map(function (item) { return item.definition; }).find(Boolean);
         if (!definition) throw new Error("No definition found");
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
-          meaningNode.textContent = definition;
+          const context = target.closest("p")?.textContent || "";
+          meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, definition, context) : definition;
         }
       })
       .catch(function () {
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
-          meaningNode.textContent = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          const fallback = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, fallback, "") : fallback;
         }
       });
   };
