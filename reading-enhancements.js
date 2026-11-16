@@ -86,6 +86,15 @@
     ancient:"Very old; belonging to a time long ago.",
     area:"A particular part or region of a place.",
     branch:"A part that grows out from the trunk of a tree.",
+    bark:"The tough outer covering of a tree trunk or branch. Paper makers remove it before turning the wood into pulp.",
+    chip:"A small piece cut or broken from a larger piece of wood.",
+    fibre:"A thin thread-like part of a plant; many paper fibres join together to make a sheet.",
+    fiber:"A thin thread-like part of a plant; many paper fibers join together to make a sheet.",
+    log:"A cut section of a tree trunk, often used as wood in paper making.",
+    pulp:"A wet mixture of separated plant fibres used to make paper.",
+    press:"A machine that pushes or squeezes something with force; in paper making it squeezes water from the wet sheet.",
+    roller:"A round moving part that turns and helps press or move paper.",
+    sheet:"A thin, flat piece of paper.",
     bright:"Giving out or reflecting a lot of light; clever or lively.",
     change:"To become or make something different.",
     collect:"To bring things together in one place.",
@@ -441,6 +450,20 @@
   }
 
   const meaningFallback = "A child-friendly definition for this word is not in the vocabulary yet.";
+  function contextualMeaning(word, paragraph) {
+    const key=word.toLowerCase(), context=String(paragraph||"")+" "+(document.getElementById("storyTitle")?.textContent||"");
+    if(key==="bark" && /tree|wood|log|paper|mill|trunk|branch/i.test(context))
+      return "The tough outer covering of a tree trunk or branch. Paper makers remove it before turning the wood into pulp.";
+    if(key==="branch" && /tree|forest|wood|plant/i.test(context))
+      return "A part that grows out from the trunk of a tree.";
+    if(key==="screen" && /pulp|paper|sheet|water|mill/i.test(context))
+      return "A fine mesh that lets water drain through while holding the paper fibres together.";
+    if(key==="press" && /paper|pulp|wet sheet|mill/i.test(context))
+      return "A machine that squeezes water out of the wet paper sheet.";
+    if(key==="roll" && /paper|mill|sheet/i.test(context))
+      return "To wind a long sheet of paper around a cylinder.";
+    return meanings[key] || "";
+  }
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
