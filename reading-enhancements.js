@@ -501,6 +501,7 @@
     document.getElementById("wordDisplay").textContent = word;
     document.getElementById("wordBreakdown").textContent = target.dataset.parts || "";
     const englishMeaning = target.dataset.meaning || meaningFallback;
+    meaningNode.dataset.englishMeaning = englishMeaning;
     const paragraphContext = target.closest("p")?.textContent || "";
     meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, englishMeaning, paragraphContext) : englishMeaning;
     document.getElementById("wordPanel").hidden = false;
@@ -521,6 +522,7 @@
         }).map(function (item) { return item.definition; }).find(Boolean);
         if (!definition) throw new Error("No definition found");
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
+          meaningNode.dataset.englishMeaning = definition;
           const context = target.closest("p")?.textContent || "";
           meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, definition, context) : definition;
         }
