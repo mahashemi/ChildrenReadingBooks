@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css"> 
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./learner-language.css"> 
   <link rel="stylesheet" href="./reader-layout.css">
   <link rel="stylesheet" href="./responsive-cleanup.css">
   <link rel="stylesheet" href="./sahifa-experience.css">
@@ -35,6 +36,7 @@
       </div>
       <button class="nav-link" data-view="about">About us</button>
     </nav>
+    <label class="global-language-picker" aria-label="Learner language"><span>🌐</span><select id="learnerLanguageGlobal" aria-label="Learner language"><option value="en">English</option><option value="ar">العربية</option><option value="fa">فارسی</option><option value="ur">اردو</option></select></label>
     <button class="parent-button" id="parentButton">For grown-ups <span>↗</span></button>
     <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">☰</button>
   </header>
@@ -95,6 +97,7 @@
         <aside class="settings-sidebar" id="settingsSidebar" aria-label="Reading settings" aria-hidden="true">
           <div class="drawer-heading"><b>Reading settings</b><button id="closeSettingsDrawer" type="button" aria-label="Close settings">×</button></div>
           <div class="drawer-settings">
+             <div class="drawer-setting-group learner-language-setting"><label class="drawer-setting-label" for="learnerLanguage">LEARNER LANGUAGE</label><select id="learnerLanguage" aria-label="Choose your learning language"><option value="en">English</option><option value="ar">العربية</option><option value="fa">فارسی</option><option value="ur">اردو</option></select><small>Reading passages stay in English; controls and word help use your language.</small></div>
             <div class="drawer-section-heading"><span>⚙</span><div><b>Make reading yours</b><small>Choose how the story looks and sounds</small></div></div>
             <div class="drawer-setting-group"><label class="drawer-setting-label">WORD DISPLAY</label>
               <div class="mode-switch" role="group" aria-label="Reading mode">
@@ -238,7 +241,8 @@
   <script src="./sahifa-content.js"></script>
   <script src="./app.js"></script>
   <script src="./sahifa-experience.js"></script>
-  <script src="./reading-enhancements.js"></script> 
+  <script src="./reading-enhancements.js"></script>
+  <script src="./learner-language.js"></script> 
   <script src="./reader-layout.js"></script>
   <script src="./flags-data.js"></script>
   <script src="./flags.js"></script>

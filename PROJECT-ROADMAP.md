@@ -1,6 +1,6 @@
 # Little Lanterns — Live Project Status & Roadmap
 
-_Last updated: 2026-11-12_
+_Last updated: 2026-11-16_
 
 ## Product direction
 A warm, responsive, English-first reading and Islamic learning experience for children. Original Qur'an, hadith and dua texts remain distinct from child-friendly explanations, reflections and original memory aids. Preserve the mobile experience while making desktop layouts spacious and useful.
@@ -31,6 +31,14 @@ Never combine addenda or Munajaat into the core 54 count. A dua is complete only
 Each core dua record includes stable ID, collection ID, ordinal, source title, English language, complete-translation content type, ordered paragraphs, full text, word count, paragraph chunk IDs, source page/PDF URLs, attribution and permission status. Keep learning notes, themes, Qur'anic references, legal connections, meanings and rhymes separate from the translation.
 
 ## Roadmap
+
+### Learner-language and reading reliability
+- [x] Add a fallback highlight clock for browsers/voices that do not emit speech word-boundary events; native boundary events remain preferred.
+- [x] Add Arabic, Persian and Urdu learner-interface selection while preserving English reading passages and left-to-right passage layout.
+- [x] Add context-aware paper-making definitions, including *bark* as the outer covering of a tree.
+- [ ] Expand reviewed word meanings and interface translations across the full reading library; do not silently translate ambiguous words using the first dictionary sense.
+- [ ] Verify narration and highlight alignment on current Chrome, Edge, Firefox and Safari on desktop and mobile devices.
+
 
 ### Now — complete Sahifa reader
 - [x] Establish a source-driven import path for all 54 core supplications.

@@ -86,6 +86,15 @@
     ancient:"Very old; belonging to a time long ago.",
     area:"A particular part or region of a place.",
     branch:"A part that grows out from the trunk of a tree.",
+    bark:"The tough outer covering of a tree trunk or branch. Paper makers remove it before turning the wood into pulp.",
+    chip:"A small piece cut or broken from a larger piece of wood.",
+    fibre:"A thin thread-like part of a plant; many paper fibres join together to make a sheet.",
+    fiber:"A thin thread-like part of a plant; many paper fibers join together to make a sheet.",
+    log:"A cut section of a tree trunk, often used as wood in paper making.",
+    pulp:"A wet mixture of separated plant fibres used to make paper.",
+    press:"A machine that pushes or squeezes something with force; in paper making it squeezes water from the wet sheet.",
+    roller:"A round moving part that turns and helps press or move paper.",
+    sheet:"A thin, flat piece of paper.",
     bright:"Giving out or reflecting a lot of light; clever or lively.",
     change:"To become or make something different.",
     collect:"To bring things together in one place.",
@@ -441,6 +450,20 @@
   }
 
   const meaningFallback = "A child-friendly definition for this word is not in the vocabulary yet.";
+  function contextualMeaning(word, paragraph) {
+    const key=word.toLowerCase(), context=String(paragraph||"")+" "+(document.getElementById("storyTitle")?.textContent||"");
+    if(key==="bark" && /tree|wood|log|paper|mill|trunk|branch/i.test(context))
+      return "The tough outer covering of a tree trunk or branch. Paper makers remove it before turning the wood into pulp.";
+    if(key==="branch" && /tree|forest|wood|plant/i.test(context))
+      return "A part that grows out from the trunk of a tree.";
+    if(key==="screen" && /pulp|paper|sheet|water|mill/i.test(context))
+      return "A fine mesh that lets water drain through while holding the paper fibres together.";
+    if(key==="press" && /paper|pulp|wet sheet|mill/i.test(context))
+      return "A machine that squeezes water out of the wet paper sheet.";
+    if(key==="roll" && /paper|mill|sheet/i.test(context))
+      return "To wind a long sheet of paper around a cylinder.";
+    return meanings[key] || "";
+  }
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
@@ -458,7 +481,7 @@
       const guide = soundGuides[base] || "";
       const breakdown = (parts ? parts.join("-") + (lower.endsWith("'s") ? "'s" : "") : (isKnownOne ? "1 syllable" : ""))
         + (guide ? (parts ? " · " : "") + guide : "");
-      const localMeaning = meanings[base] || "";
+      const localMeaning = contextualMeaning(base, paragraph);
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
       const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
       return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +
@@ -477,7 +500,10 @@
     const meaningNode = document.getElementById("wordMeaning");
     document.getElementById("wordDisplay").textContent = word;
     document.getElementById("wordBreakdown").textContent = target.dataset.parts || "";
-    meaningNode.textContent = target.dataset.meaning || meaningFallback;
+    const englishMeaning = target.dataset.meaning || meaningFallback;
+    meaningNode.dataset.englishMeaning = englishMeaning;
+    const paragraphContext = target.closest("p")?.textContent || "";
+    meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, englishMeaning, paragraphContext) : englishMeaning;
     document.getElementById("wordPanel").hidden = false;
     speakText(word);
     if (target.dataset.lookup !== "true") return;
@@ -489,19 +515,35 @@
         return response.json();
       })
       .then(function (entries) {
-        const definition = entries.flatMap(function (entry) {
+        const context = (target.closest("p")?.textContent || "") + " " + (document.getElementById("storyTitle")?.textContent || "");
+        const contextWords = new Set(context.toLowerCase().match(/[a-z]{3,}/g) || []);
+        const stopWords = new Set(["the","and","that","with","from","into","when","then","they","them","this","than","which","were","been","have","has","for","are","was","you","your","their","there","here","about","before","after","paper","lesson"]);
+        const candidates = entries.flatMap(function (entry) {
           return (entry.meanings || []).flatMap(function (meaning) {
-            return meaning.definitions || [];
+            return (meaning.definitions || []).map(function (item) {
+              const searchable = (item.definition || "") + " " + (item.example || "") + " " + (meaning.partOfSpeech || "");
+              const words = searchable.toLowerCase().match(/[a-z]{3,}/g) || [];
+              const score = words.reduce(function (total, token) {
+                return total + (contextWords.has(token) && !stopWords.has(token) ? 1 : 0);
+              }, 0);
+              return { definition:item.definition, score:score };
+            });
           });
-        }).map(function (item) { return item.definition; }).find(Boolean);
+        }).filter(function (item) { return !!item.definition; }).sort(function (a,b) { return b.score-a.score; });
+        const definition = candidates.length && (candidates[0].score > 0 || candidates.length === 1)
+          ? candidates[0].definition
+          : "This word has more than one possible meaning. Look at the whole sentence and ask a parent or teacher which meaning fits best.";
         if (!definition) throw new Error("No definition found");
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
-          meaningNode.textContent = definition;
+          meaningNode.dataset.englishMeaning = definition;
+          meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, definition, context) : definition;
         }
       })
       .catch(function () {
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
-          meaningNode.textContent = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          const fallback = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          meaningNode.dataset.englishMeaning = fallback;
+          meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, fallback, "") : fallback;
         }
       });
   };
