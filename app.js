@@ -835,7 +835,7 @@ function speakStoryParagraph(token,paragraphIndex,startOffset=0){
  clearSpeechHighlightTimer();currentSpeechParagraph=paragraphIndex;
  const paragraphText=paragraphs[paragraphIndex],speechText=paragraphText.slice(startOffset);
  const utterance=new SpeechSynthesisUtterance(speechText);applySpeechVoice(utterance);utterance.rate=speechRate;activeUtterance=utterance;currentSpeechOffset=startOffset;
- let startedAt=0,lastBoundaryAt=0,lastBoundaryIndex=startOffset,boundarySeen=false;
+ let startedAt=0,lastBoundaryAt=0,lastBoundaryIndex=startOffset,boundarySeen=false,lastEventCharIndex=-1,repeatedBoundaryCount=0;
  const paint=index=>{const match=speechWordAt(paragraphText,index);if(!match)return;currentSpeechOffset=index;currentSpeechWordStart=match.index;highlightSpokenWord(paragraphIndex,match.index);};
  utterance.onstart=()=>{
   if(token!==storyReadToken||!isReadingStory)return;
@@ -855,6 +855,13 @@ function speakStoryParagraph(token,paragraphIndex,startOffset=0){
   if(token!==storyReadToken||!isReadingStory||!event||!Number.isFinite(event.charIndex))return;
   // charIndex is relative to the current utterance, including after resume.
   const relative=Math.max(0,Math.min(Math.max(0,speechText.length-1),event.charIndex));
+  // A few engines emit a boundary callback but keep reporting charIndex=0.
+  // Treat repeated non-advancing offsets as missing boundary support so the
+  // timing fallback can take over instead of pinning the highlight to word one.
+  if(relative<=lastEventCharIndex){
+   repeatedBoundaryCount++;
+   if(repeatedBoundaryCount>=2)return;
+  }else{lastEventCharIndex=relative;repeatedBoundaryCount=0;}
   const absolute=startOffset+relative,match=speechWordAt(paragraphText,absolute);if(!match)return;
   boundarySeen=true;lastBoundaryAt=Date.now();lastBoundaryIndex=match.index;paint(match.index);
  };
