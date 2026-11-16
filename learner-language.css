@@ -1,0 +1,11 @@
+/* RTL interface support. The English reading passage deliberately stays LTR. */
+.learner-language-setting select{width:100%;min-height:39px;padding:8px 10px;border:1px solid #dfe8dc;border-radius:9px;background:#fff;color:#425648;font:700 12px Nunito,system-ui,sans-serif}
+.learner-language-setting small{display:block;margin-top:5px;color:#899489;font-size:10px;line-height:1.5}
+body.learner-rtl{direction:rtl}
+body.learner-rtl .story-reading-stage,body.learner-rtl .story-text{direction:ltr;text-align:left}
+body.learner-rtl .story-text{unicode-bidi:plaintext}
+body.learner-rtl .settings-sidebar,body.learner-rtl .story-sidebar,body.learner-rtl .word-panel{text-align:right}
+body.learner-rtl .drawer-heading,body.learner-rtl .drawer-section-heading,body.learner-rtl .drawer-check{direction:rtl}
+body.learner-rtl .reader-card,body.learner-rtl .reader-title-row,body.learner-rtl .reader-topline,body.learner-rtl .reader-bottom{direction:rtl}
+body.learner-rtl .page-buttons{direction:rtl}
+body.learner-rtl .word-panel p{line-height:1.9}
