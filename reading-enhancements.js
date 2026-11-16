@@ -515,21 +515,34 @@
         return response.json();
       })
       .then(function (entries) {
-        const definition = entries.flatMap(function (entry) {
+        const context = (target.closest("p")?.textContent || "") + " " + (document.getElementById("storyTitle")?.textContent || "");
+        const contextWords = new Set(context.toLowerCase().match(/[a-z]{3,}/g) || []);
+        const stopWords = new Set(["the","and","that","with","from","into","when","then","they","them","this","than","which","were","been","have","has","for","are","was","you","your","their","there","here","about","before","after","paper","lesson"]);
+        const candidates = entries.flatMap(function (entry) {
           return (entry.meanings || []).flatMap(function (meaning) {
-            return meaning.definitions || [];
+            return (meaning.definitions || []).map(function (item) {
+              const searchable = (item.definition || "") + " " + (item.example || "") + " " + (meaning.partOfSpeech || "");
+              const words = searchable.toLowerCase().match(/[a-z]{3,}/g) || [];
+              const score = words.reduce(function (total, token) {
+                return total + (contextWords.has(token) && !stopWords.has(token) ? 1 : 0);
+              }, 0);
+              return { definition:item.definition, score:score };
+            });
           });
-        }).map(function (item) { return item.definition; }).find(Boolean);
+        }).filter(function (item) { return !!item.definition; }).sort(function (a,b) { return b.score-a.score; });
+        const definition = candidates.length && (candidates[0].score > 0 || candidates.length === 1)
+          ? candidates[0].definition
+          : "This word has more than one possible meaning. Look at the whole sentence and ask a parent or teacher which meaning fits best.";
         if (!definition) throw new Error("No definition found");
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
           meaningNode.dataset.englishMeaning = definition;
-          const context = target.closest("p")?.textContent || "";
           meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, definition, context) : definition;
         }
       })
       .catch(function () {
         if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
           const fallback = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          meaningNode.dataset.englishMeaning = fallback;
           meaningNode.textContent = window.LittleLanternsLanguage ? window.LittleLanternsLanguage.translateMeaning(word, fallback, "") : fallback;
         }
       });
