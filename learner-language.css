@@ -9,3 +9,7 @@ body.learner-rtl .drawer-heading,body.learner-rtl .drawer-section-heading,body.l
 body.learner-rtl .reader-card,body.learner-rtl .reader-title-row,body.learner-rtl .reader-topline,body.learner-rtl .reader-bottom{direction:rtl}
 body.learner-rtl .page-buttons{direction:rtl}
 body.learner-rtl .word-panel p{line-height:1.9}
+
+.global-language-picker{display:inline-flex;align-items:center;gap:4px;padding:4px 6px;border:1px solid #e4e9df;border-radius:10px;background:#fffefa;color:#56705a;font-size:12px}
+.global-language-picker select{max-width:92px;border:0;background:transparent;color:#48634e;font:800 10px Nunito,system-ui,sans-serif;outline:none}
+@media(max-width:760px){.global-language-picker{margin-left:auto;padding:3px 5px}.global-language-picker select{max-width:78px;font-size:9px}}

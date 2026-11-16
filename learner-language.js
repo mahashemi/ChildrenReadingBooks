@@ -62,7 +62,7 @@ function setLanguage(next){
  document.documentElement.lang=language;document.documentElement.dir=language==="en"?"ltr":"rtl";
  document.body.classList.toggle("learner-rtl",language!=="en");
  const passage=document.getElementById("storyText");if(passage){passage.lang="en";passage.dir="ltr";}
- const selector=document.getElementById("learnerLanguage");if(selector)selector.value=language;
+ document.querySelectorAll("#learnerLanguage,#learnerLanguageGlobal").forEach(selector=>selector.value=language);
  translateTree();document.dispatchEvent(new CustomEvent("littlelanterns:languagechange",{detail:{language}}));
 }
 window.LittleLanternsLanguage={get language(){return language;},setLanguage,translate:t,translateMeaning};
@@ -72,8 +72,7 @@ document.addEventListener("littlelanterns:languagechange",()=>{
   meaning.textContent=translateMeaning(word.textContent,meaning.dataset.englishMeaning);
  }
 });
-const selector=document.getElementById("learnerLanguage");
-if(selector)selector.addEventListener("change",()=>setLanguage(selector.value));
+document.querySelectorAll("#learnerLanguage,#learnerLanguageGlobal").forEach(selector=>selector.addEventListener("change",()=>setLanguage(selector.value)));
 let saved="en";try{saved=localStorage.getItem("littleLanternsLearnerLanguage")||"en";}catch(e){}
 const observer=new MutationObserver(records=>records.forEach(record=>{
  if(record.type==="characterData")translateNode(record.target);
