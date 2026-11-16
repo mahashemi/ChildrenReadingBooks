@@ -777,6 +777,7 @@ function clearSpeechHighlight(){
   storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
 }
 function stopReading(){
+  clearSpeechHighlightTimer();
   storyReadToken++;
   isReadingStory=false;
   isSpeechPaused=false;
@@ -821,50 +822,52 @@ function highlightSpokenWord(paragraphIndex,charIndex){
   const active=wordNodes[tokenIndex];
   if(active){active.classList.add("is-speaking");keepSpeakingWordVisible(active);}
 }
+let speechHighlightTimer=null;
+function clearSpeechHighlightTimer(){if(speechHighlightTimer!==null){clearInterval(speechHighlightTimer);speechHighlightTimer=null;}}
+function speechWordAt(paragraphText,charIndex){
+ const words=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)];
+ return words.find(item=>charIndex>=item.index&&charIndex<item.index+item[0].length)||words.find(item=>item.index>=charIndex)||words[words.length-1]||null;
+}
 function speakStoryParagraph(token,paragraphIndex,startOffset=0){
+ if(token!==storyReadToken||!isReadingStory)return;
+ const paragraphs=storyPages[page].paragraphs;
+ if(paragraphIndex>=paragraphs.length){clearSpeechHighlightTimer();isReadingStory=false;isSpeechPaused=false;currentSpeechOffset=0;currentSpeechWordStart=0;clearSpeechHighlight();updateAudioControls();return;}
+ clearSpeechHighlightTimer();currentSpeechParagraph=paragraphIndex;
+ const paragraphText=paragraphs[paragraphIndex],speechText=paragraphText.slice(startOffset);
+ const utterance=new SpeechSynthesisUtterance(speechText);applySpeechVoice(utterance);utterance.rate=speechRate;activeUtterance=utterance;currentSpeechOffset=startOffset;
+ let startedAt=0,lastBoundaryAt=0,lastBoundaryIndex=startOffset,boundarySeen=false;
+ const paint=index=>{const match=speechWordAt(paragraphText,index);if(!match)return;currentSpeechOffset=index;currentSpeechWordStart=match.index;highlightSpokenWord(paragraphIndex,match.index);};
+ utterance.onstart=()=>{
   if(token!==storyReadToken||!isReadingStory)return;
-  const paragraphs=storyPages[page].paragraphs;
-  if(paragraphIndex>=paragraphs.length){
-    isReadingStory=false;isSpeechPaused=false;currentSpeechOffset=0;currentSpeechWordStart=0;
-    clearSpeechHighlight();updateAudioControls();return;
-  }
-  currentSpeechParagraph=paragraphIndex;
-  const paragraphText=paragraphs[paragraphIndex];
-  const utterance=new SpeechSynthesisUtterance(paragraphText.slice(startOffset));
-  applySpeechVoice(utterance);
-  utterance.rate=speechRate;
-  activeUtterance=utterance;
-  currentSpeechOffset=startOffset;
-  utterance.onstart=()=>{
-    if(token!==storyReadToken||!isReadingStory)return;
-    const first=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)]
-      .find(item=>item.index>=startOffset);
-    if(first){currentSpeechWordStart=first.index;highlightSpokenWord(paragraphIndex,first.index);}
-  };
-  utterance.onboundary=event=>{
-    if(token!==storyReadToken||!isReadingStory||typeof event.charIndex!=="number")return;
-    const absoluteIndex=startOffset+event.charIndex;
-    currentSpeechOffset=absoluteIndex;
-    const match=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)]
-      .find(item=>absoluteIndex>=item.index&&absoluteIndex<item.index+item[0].length)
-      ||[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)].find(item=>item.index>=absoluteIndex);
-    if(match)currentSpeechWordStart=match.index;
-    highlightSpokenWord(paragraphIndex,absoluteIndex);
-  };
-  utterance.onend=()=>{
-    if(token!==storyReadToken||isSpeechPaused)return;
-    currentSpeechOffset=0;currentSpeechWordStart=0;
-    speakStoryParagraph(token,paragraphIndex+1,0);
-  };
-  utterance.onerror=event=>{
-    if(token!==storyReadToken)return;
-    if(event.error==="canceled"||event.error==="interrupted")return;
-    isReadingStory=false;isSpeechPaused=false;clearSpeechHighlight();updateAudioControls();
-    showToast("The reader could not finish speaking. You can try again.");
-  };
-  window.speechSynthesis.speak(utterance);
+  startedAt=Date.now();lastBoundaryAt=startedAt;const first=speechWordAt(paragraphText,startOffset);if(first)paint(first.index);
+  // Chrome and some installed voices omit word-boundary events. Use a timing
+  // estimate only when no boundary arrives (or events stop arriving).
+  speechHighlightTimer=setInterval(()=>{
+   if(token!==storyReadToken||!isReadingStory||isSpeechPaused)return;
+   const now=Date.now();if(boundarySeen&&now-lastBoundaryAt<850)return;
+   const elapsed=(now-(boundarySeen?lastBoundaryAt:startedAt))/1000,anchor=boundarySeen?lastBoundaryIndex:startOffset;
+   const charsPerSecond=Math.max(2,14*Math.max(.25,speechRate));
+   const estimate=Math.min(paragraphText.length-1,anchor+Math.floor(elapsed*charsPerSecond));
+   if(estimate>=anchor)paint(estimate);
+  },120);
+ };
+ utterance.onboundary=event=>{
+  if(token!==storyReadToken||!isReadingStory||!event||!Number.isFinite(event.charIndex))return;
+  // charIndex is relative to the current utterance, including after resume.
+  const relative=Math.max(0,Math.min(Math.max(0,speechText.length-1),event.charIndex));
+  const absolute=startOffset+relative,match=speechWordAt(paragraphText,absolute);if(!match)return;
+  boundarySeen=true;lastBoundaryAt=Date.now();lastBoundaryIndex=match.index;paint(match.index);
+ };
+ utterance.onend=()=>{clearSpeechHighlightTimer();if(token!==storyReadToken||isSpeechPaused)return;currentSpeechOffset=0;currentSpeechWordStart=0;speakStoryParagraph(token,paragraphIndex+1,0);};
+ utterance.onerror=event=>{
+  clearSpeechHighlightTimer();if(token!==storyReadToken)return;
+  if(event.error==="canceled"||event.error==="interrupted")return;
+  isReadingStory=false;isSpeechPaused=false;clearSpeechHighlight();updateAudioControls();showToast("The reader could not finish speaking. You can try again.");
+ };
+ window.speechSynthesis.speak(utterance);
 }
 function startStoryReading(){
+  clearSpeechHighlightTimer();
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
   window.speechSynthesis.cancel();
   clearSpeechHighlight();
@@ -875,6 +878,7 @@ function startStoryReading(){
 }
 function pauseStoryReading(){
   if(!isReadingStory||isSpeechPaused)return;
+  clearSpeechHighlightTimer();
   isSpeechPaused=true;
   currentSpeechOffset=currentSpeechWordStart;
   storyReadToken++;
@@ -890,6 +894,7 @@ function resumeStoryReading(){
 }
 function restartAtCurrentWord(){
   if(!isReadingStory&&!isSpeechPaused)return;
+  clearSpeechHighlightTimer();
   const wasPaused=isSpeechPaused;
   const offset=currentSpeechWordStart;
   storyReadToken++;
