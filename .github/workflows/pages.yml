@@ -31,6 +31,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils
           node scripts/import-sahifa.mjs
+      - name: Validate preschool STEM media references
+        run: node scripts/validate-stem-media.mjs
       - name: Check JavaScript syntax
         run: |
           node --check app.js

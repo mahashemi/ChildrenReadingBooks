@@ -301,6 +301,15 @@
   Object.assign(meanings, extraMeanings);
 
   const reviewedSyllables = {
+    photon:["pho","ton"], electron:["e","lec","tron"], quantum:["quan","tum"],
+    asteroid:["as","ter","oid"], comet:["com","et"], galaxy:["gal","ax","y"],
+    nebula:["neb","u","la"], orbit:["or","bit"], planet:["plan","et"],
+    quasar:["qua","sar"], telescope:["tel","e","scope"], universe:["u","ni","verse"],
+    vacuum:["vac","u","um"], infrared:["in","fra","red"], zenith:["ze","nith"],
+    scientist:["sci","en","tist"], prediction:["pre","dic","tion"], sensor:["sen","sor"],
+    artificial:["ar","ti","fi","cial"], intelligence:["in","tel","li","gence"],
+    molecule:["mol","e","cule"], exoplanet:["ex","o","plan","et"], transit:["tran","sit"],
+
     environment:["en","vi","ron","ment"], environmental:["en","vi","ron","men","tal"],
     biodiversity:["bi","o","di","ver","si","ty"], ecosystem:["e","co","sys","tem"],
     ecosystems:["e","co","sys","tems"], conservation:["con","ser","va","tion"],
