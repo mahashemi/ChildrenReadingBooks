@@ -268,7 +268,43 @@
     photosynthesis:"The process by which green plants use light to make food.",
     pollination:"The transfer of pollen that helps flowering plants make seeds.",
     ecosystem:"A community of living things and their surroundings.",
-    habitat:"The natural home of a plant or animal."
+    habitat:"The natural home of a plant or animal.",
+    photon:"A tiny packet of light energy.",
+    electron:"A very small particle found in atoms.",
+    nucleus:"The small centre of an atom. It contains protons and neutrons.",
+    quantum:"A word scientists use for the special rules that describe very tiny things, such as atoms and light.",
+    laser:"A device that makes a narrow, focused beam of light.",
+    asteroid:"A small rocky object that travels around the Sun.",
+    comet:"An object made mostly of ice, dust and rock. Near the Sun, it can form a glowing cloud and tail.",
+    galaxy:"A huge group of stars, gas and dust held together by gravity.",
+    hubble:"The Hubble Space Telescope, which takes pictures and measurements of objects in space.",
+    jupiter:"The largest planet in our solar system.",
+    nebula:"A large cloud of gas and dust in space.",
+    orbit:"The path one object follows around another object in space.",
+    quasar:"An extremely bright centre of a distant galaxy, powered by matter falling toward a supermassive black hole.",
+    telescope:"A tool that collects light so we can study faraway objects.",
+    vacuum:"A space with very few particles in it.",
+    infrared:"A kind of light that our eyes cannot see; it is often felt as heat.",
+    zenith:"The point in the sky directly above an observer.",
+    scientist:"A person who asks questions and uses observations and tests to learn about the world.",
+    sensor:"A part of a machine that detects something, such as light, touch or distance.",
+    robot:"A machine designed by people to carry out tasks.",
+    ai:"Short for artificial intelligence: computer methods that can find patterns or help with tasks.",
+    artificial:"In this lesson, made by people rather than occurring in nature; artificial intelligence is a way computers find patterns and help with tasks.",
+    intelligence:"In this lesson, part of the phrase artificial intelligence: computer methods that can find patterns or help with tasks.",
+    gene:"A section of DNA that carries information used by cells.",
+    dna:"A molecule that carries genetic information in living things.",
+    exoplanet:"A planet that travels around a star beyond our solar system.",
+    transit:"When one object passes in front of another. Astronomers can spot a planet when it briefly blocks some starlight.",
+    wobble:"A small back-and-forth movement. A planet's gravity can make its star wobble slightly.",
+    black:"In the phrase black hole: part of the name for a region of space whose gravity is so strong that light cannot escape from inside its boundary.",
+    hole:"In the phrase black hole: a region of space whose gravity is so strong that light cannot escape from inside its boundary.",
+    light:"In the phrase light-year: the word refers to light travelling through space; a light-year is a measure of distance, not time.",
+    station:"In International Space Station: a science laboratory that travels around Earth.",
+    belt:"In Kuiper Belt: a region beyond Neptune that contains many icy objects.",
+    helix:"In double helix: the twisted ladder shape of a DNA molecule.",
+    dwarf:"In dwarf planet: part of the name for a small world that orbits the Sun but has not cleared its orbital neighbourhood.",
+    planet:"A large, nearly round object that travels around a star or stellar remnant."
   };
   Object.assign(meanings, extraMeanings);
 
@@ -458,7 +494,19 @@
       const guide = soundGuides[base] || "";
       const breakdown = (parts ? parts.join("-") + (lower.endsWith("'s") ? "'s" : "") : (isKnownOne ? "1 syllable" : ""))
         + (guide ? (parts ? " · " : "") + guide : "");
-      const localMeaning = meanings[base] || "";
+  function contextualGlossaryMeaning(word, paragraph) {
+    const text=String(paragraph||"").toLowerCase();
+    if((word==="black"||word==="hole") && /black\\s+hole/.test(text)) return meanings[word];
+    if(word==="light" && /light[- ]year/.test(text)) return "In the phrase light-year: the word refers to light travelling through space; a light-year is a measure of distance, not time.";
+    if((word==="double"||word==="helix") && /double\\s+helix/.test(text)) return meanings[word] || "In double helix: the twisted ladder shape of a DNA molecule.";
+    if((word==="artificial"||word==="intelligence") && /artificial intelligence/.test(text)) return meanings[word];
+    if(word==="space" && /international space station/.test(text)) return "In International Space Station: a science laboratory that travels around Earth.";
+    if(word==="belt" && /kuiper belt/.test(text)) return meanings[word];
+    if(word==="dwarf" && /dwarf planet/.test(text)) return meanings[word];
+    return "";
+  }
+
+      const localMeaning = contextualGlossaryMeaning(base, paragraph) || meanings[base] || "";
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
       const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
       return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +

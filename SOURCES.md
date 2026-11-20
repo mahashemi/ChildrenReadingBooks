@@ -134,3 +134,17 @@ The long-term curriculum target is the complete 54-supplication core of *Al-Sahi
 - Individual duas.org supplication pages credit [Al-Islam.org](https://al-islam.org/book/export/html/18815).
 - Reproduction permission has been confirmed by the project maintainer. Preserve the above credits in all copies and derivative displays.
 - Full ordered text, source URLs and stable paragraph chunk IDs are stored in `data/sahifa/core.json`; learning notes and original rhymes remain separate.
+
+
+## Preschool STEM adventures — Little Scientists collection
+
+All six lessons are original child-friendly explanations. The named books are topic and age-level inspiration only; their wording, page sequences and illustrations are not reproduced.
+
+- **Tiny World, Big Ideas** — IBM Quantum Learning, quantum mechanics and quantum information modules: https://quantum.cloud.ibm.com/learning/en/modules. The lesson uses a deliberately introductory model and does not suggest electrons are tiny planets or that quantum physics is magic.
+- **Space ABC** — NASA Space Place, Universe and educator media: https://spaceplace.nasa.gov/en/menu/space/ and https://spaceplace.nasa.gov/menu/educators/space/. Definitions follow NASA descriptions; a light-year is correctly described as distance, not time.
+- **The Little Scientist’s Discovery Primer** — Smithsonian Science in Pre-K, inquiry learning and documentation: https://scienceinprek.si.edu/inquiry-science and https://scienceinprek.si.edu/documentation-inquiry-science; Smithsonian National Museum of African American History and Culture, *Q is for Questioning: Early Learners Edition*: https://nmaahc.si.edu/sites/default/files/2021-11/activity_book_q_early_learners_edition.pdf. Activities require adult supervision and safe materials.
+- **Meet the Robots** — NASA Space Place, science and technology, including space robots and machine communication: https://spaceplace.nasa.gov/menu/science-and-technology/ and https://spaceplace.nasa.gov/why-do-we-send-robots-to-space/en/. AI is described as pattern-finding software, not a person with feelings.
+- **The Secret Code Inside You** — National Human Genome Research Institute (NHGRI), DNA and genetics glossary: https://www.genome.gov/genetics-glossary/Deoxyribonucleic-Acid-DNA and https://www.genome.gov/genetics-glossary/Genetics. The code/ladder analogy is identified as a model, not a literal book.
+- **Worlds Beyond Our Sun** — NASA Science, exoplanet discovery methods and transits: https://science.nasa.gov/exoplanets/how-we-find-and-characterize/ and https://science.nasa.gov/exoplanets/whats-a-transit/; NASA Space Place, What Is an Exoplanet?: https://spaceplace.nasa.gov/all-about-exoplanets/en/. The lesson does not claim that life has been found beyond Earth.
+
+The short lesson text is original. The linked pages are optional parent/teacher exploration resources, not required for reading. Qur’anic reflections are clearly distinguished from scientific explanations and are not presented as scientific proof.
