@@ -290,20 +290,12 @@
     sensor:"A part of a machine that detects something, such as light, touch or distance.",
     robot:"A machine designed by people to carry out tasks.",
     ai:"Short for artificial intelligence: computer methods that can find patterns or help with tasks.",
-    artificial:"In this lesson, made by people rather than occurring in nature; artificial intelligence is a way computers find patterns and help with tasks.",
-    intelligence:"In this lesson, part of the phrase artificial intelligence: computer methods that can find patterns or help with tasks.",
     gene:"A section of DNA that carries information used by cells.",
     dna:"A molecule that carries genetic information in living things.",
     exoplanet:"A planet that travels around a star beyond our solar system.",
     transit:"When one object passes in front of another. Astronomers can spot a planet when it briefly blocks some starlight.",
     wobble:"A small back-and-forth movement. A planet's gravity can make its star wobble slightly.",
-    black:"In the phrase black hole: part of the name for a region of space whose gravity is so strong that light cannot escape from inside its boundary.",
-    hole:"In the phrase black hole: a region of space whose gravity is so strong that light cannot escape from inside its boundary.",
-    light:"In the phrase light-year: the word refers to light travelling through space; a light-year is a measure of distance, not time.",
-    station:"In International Space Station: a science laboratory that travels around Earth.",
-    belt:"In Kuiper Belt: a region beyond Neptune that contains many icy objects.",
     helix:"In double helix: the twisted ladder shape of a DNA molecule.",
-    dwarf:"In dwarf planet: part of the name for a small world that orbits the Sun but has not cleared its orbital neighbourhood.",
     planet:"A large, nearly round object that travels around a star or stellar remnant."
   };
   Object.assign(meanings, extraMeanings);
@@ -477,6 +469,18 @@
   }
 
   const meaningFallback = "A child-friendly definition for this word is not in the vocabulary yet.";
+  function contextualGlossaryMeaning(word, paragraph) {
+    const text=String(paragraph||"").toLowerCase();
+    if((word==="black"||word==="hole") && /black\s+hole/.test(text)) return "In the phrase black hole: a region of space whose gravity is so strong that light cannot escape from inside its boundary.";
+    if(word==="light" && /light[- ]year/.test(text)) return "In the phrase light-year: a distance equal to how far light travels in one year. It is not a measure of time.";
+    if((word==="double"||word==="helix") && /double\s+helix/.test(text)) return "In double helix: the twisted ladder shape of a DNA molecule.";
+    if((word==="artificial"||word==="intelligence") && /artificial intelligence/.test(text)) return "In artificial intelligence: computer methods that can find patterns or help with certain tasks.";
+    if(word==="space" && /international space station/.test(text)) return "In International Space Station: a science laboratory that travels around Earth.";
+    if(word==="belt" && /kuiper belt/.test(text)) return "In Kuiper Belt: a region beyond Neptune that contains many icy objects.";
+    if(word==="dwarf" && /dwarf planet/.test(text)) return "In dwarf planet: a small world that orbits the Sun but has not cleared its orbital neighbourhood.";
+    return "";
+  }
+
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
@@ -494,18 +498,6 @@
       const guide = soundGuides[base] || "";
       const breakdown = (parts ? parts.join("-") + (lower.endsWith("'s") ? "'s" : "") : (isKnownOne ? "1 syllable" : ""))
         + (guide ? (parts ? " · " : "") + guide : "");
-  function contextualGlossaryMeaning(word, paragraph) {
-    const text=String(paragraph||"").toLowerCase();
-    if((word==="black"||word==="hole") && /black\\s+hole/.test(text)) return meanings[word];
-    if(word==="light" && /light[- ]year/.test(text)) return "In the phrase light-year: the word refers to light travelling through space; a light-year is a measure of distance, not time.";
-    if((word==="double"||word==="helix") && /double\\s+helix/.test(text)) return meanings[word] || "In double helix: the twisted ladder shape of a DNA molecule.";
-    if((word==="artificial"||word==="intelligence") && /artificial intelligence/.test(text)) return meanings[word];
-    if(word==="space" && /international space station/.test(text)) return "In International Space Station: a science laboratory that travels around Earth.";
-    if(word==="belt" && /kuiper belt/.test(text)) return meanings[word];
-    if(word==="dwarf" && /dwarf planet/.test(text)) return meanings[word];
-    return "";
-  }
-
       const localMeaning = contextualGlossaryMeaning(base, paragraph) || meanings[base] || "";
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
       const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
