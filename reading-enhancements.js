@@ -509,8 +509,25 @@
         + (guide ? (parts ? " · " : "") + guide : "");
       const localMeaning = contextualGlossaryMeaning(base, paragraph) || meanings[base] || "";
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
-      const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
-      return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +
+      const keyConceptWords = new Set([
+        "atom","atoms","electron","electrons","photon","photons","quantum","laser","lasers",
+        "galaxy","galaxies","nebula","nebulae","exoplanet","exoplanets","orbit","orbits",
+        "gravity","black","hole","telescope","asteroid","comet","planet","planets",
+        "robot","robots","sensor","sensors","artificial","intelligence","dna","gene","genes",
+        "cell","cells","helix","ecosystem","photosynthesis","pollination","evaporation",
+        "condensation","watercycle","biodiversity","habitat","habitats","nutrient","nutrients",
+        "experiment","prediction","observe","scientist","scientists","energy","electricity"
+      ]);
+      const highlightedVocabulary = new Set(Object.keys(extraMeanings).filter(function(word){return word.length>=6;}));
+      const classes = [];
+      if (shouldBreak) classes.push(mode === "mixed" ? "mixed-word" : "syllabified");
+      const isKeyConcept = keyConceptWords.has(base);
+      if (localMeaning && (highlightedVocabulary.has(base) || isKeyConcept)) {
+        const tone = (base.split("").reduce(function(sum,ch){return sum+ch.charCodeAt(0);},0)%4)+1;
+        classes.push("vocab-highlight","vocab-tone-"+tone);
+      }
+      if (isKeyConcept) classes.push("key-concept");
+      return escapeHtml(before) + '<span class="story-word ' + classes.join(" ") + '" tabindex="0" role="button" data-word="' +
         escapeHtml(original) + '" data-parts="' + escapeHtml(breakdown) + '" data-meaning="' + escapeHtml(meaning) +
         '" data-lookup="' + (localMeaning ? "false" : "true") + '" aria-label="' + escapeHtml(original) + '">' + escapeHtml(displayed) + '</span>' + escapeHtml(after);
     }).join("");
