@@ -490,6 +490,17 @@
     return "";
   }
 
+  const keyConceptWords = new Set([
+    "atom","atoms","electron","electrons","photon","photons","quantum","laser","lasers",
+    "galaxy","galaxies","nebula","nebulae","exoplanet","exoplanets","orbit","orbits",
+    "gravity","black","hole","telescope","asteroid","comet","planet","planets",
+    "robot","robots","sensor","sensors","artificial","intelligence","dna","gene","genes",
+    "cell","cells","helix","ecosystem","photosynthesis","pollination","evaporation",
+    "condensation","watercycle","biodiversity","habitat","habitats","nutrient","nutrients",
+    "experiment","prediction","observe","scientist","scientists","energy","electricity"
+  ]);
+  const highlightedVocabulary = new Set(Object.keys(extraMeanings).filter(function(word){return word.length>=6;}));
+
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
@@ -509,16 +520,7 @@
         + (guide ? (parts ? " · " : "") + guide : "");
       const localMeaning = contextualGlossaryMeaning(base, paragraph) || meanings[base] || "";
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
-      const keyConceptWords = new Set([
-        "atom","atoms","electron","electrons","photon","photons","quantum","laser","lasers",
-        "galaxy","galaxies","nebula","nebulae","exoplanet","exoplanets","orbit","orbits",
-        "gravity","black","hole","telescope","asteroid","comet","planet","planets",
-        "robot","robots","sensor","sensors","artificial","intelligence","dna","gene","genes",
-        "cell","cells","helix","ecosystem","photosynthesis","pollination","evaporation",
-        "condensation","watercycle","biodiversity","habitat","habitats","nutrient","nutrients",
-        "experiment","prediction","observe","scientist","scientists","energy","electricity"
-      ]);
-      const highlightedVocabulary = new Set(Object.keys(extraMeanings).filter(function(word){return word.length>=6;}));
+
       const classes = [];
       if (shouldBreak) classes.push(mode === "mixed" ? "mixed-word" : "syllabified");
       const isKeyConcept = keyConceptWords.has(base);
