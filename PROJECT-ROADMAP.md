@@ -1,6 +1,6 @@
 # Little Lanterns — Live Project Status & Roadmap
 
-_Last updated: 2026-11-20_
+_Last updated: 2026-11-21_
 
 ## Product direction
 A warm, responsive, English-first reading and Islamic learning experience for children. Original Qur'an, hadith and dua texts remain distinct from child-friendly explanations, reflections and original memory aids. Preserve the mobile experience while making desktop layouts spacious and useful.
@@ -35,9 +35,19 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 **Active reader-quality board:** [docs/READER-QUALITY-TASKBOARD.md](docs/READER-QUALITY-TASKBOARD.md). P0 reader bugs and P1 visual emphasis are tracked there.
 
 
+### Shared reading experience — all chapters and supplications
+- [x] Keep the passage as the primary visual element on mobile and desktop.
+- [x] Use local SVGs as subtle, gently animated backgrounds; respect reduced-motion preferences.
+- [x] Remove child-facing activity and external source links from the reading pane while retaining source attribution text.
+- [x] Emphasize curated glossary words and key concepts with bold, varied colours without changing word interaction or narration highlighting.
+- [ ] Verify at 320px, 375px, tablet and desktop widths in a real browser.
+
 ### Little Scientists — preschool STEM collection
 - [x] Add six original, short-sentence STEM chapters: quantum physics, Space ABC, scientific discovery, robots and AI, DNA, and exoplanets.
-- [x] Add page-specific local animated SVG illustrations and curated grown-up exploration links.
+- [x] Add page-specific local SVG illustrations.
+- [x] Rework SVGs as subtle animated backgrounds behind the shared reading pane; no separate top illustration panel.
+- [x] Remove child-facing activity/exploration links from the reading pane; retain source attribution as plain text and keep source URLs out of child-facing chapter notes.
+- [x] Apply colourful, bold glossary/key-concept emphasis through the shared paragraph renderer across stories and supplications.
 - [ ] Expand contextual vocabulary and learner-language translations for new STEM terms.
 - [ ] Review with a six-year-old early reader and tune sentence length, word difficulty and narration pacing.
 - [ ] Add more source-checked STEM adventures: climate, ocean technology, renewable energy, medical imaging and materials science.

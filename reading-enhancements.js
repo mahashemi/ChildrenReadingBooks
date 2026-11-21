@@ -296,7 +296,23 @@
     transit:"When one object passes in front of another. Astronomers can spot a planet when it briefly blocks some starlight.",
     wobble:"A small back-and-forth movement. A planet's gravity can make its star wobble slightly.",
     helix:"In double helix: the twisted ladder shape of a DNA molecule.",
-    planet:"A large, nearly round object that travels around a star or stellar remnant."
+    planet:"A large, nearly round object that travels around a star or stellar remnant.",
+    atoms:"Tiny basic units that make up ordinary matter.",
+    electrons:"Very small particles found in atoms.",
+    photons:"Tiny packets of light energy.",
+    lasers:"Devices that make narrow, focused beams of light.",
+    galaxies:"Huge groups of stars, gas and dust held together by gravity.",
+    nebulae:"Large clouds of gas and dust in space.",
+    exoplanets:"Planets that travel around stars beyond our solar system.",
+    orbits:"Paths one object follows around another object in space.",
+    planets:"Large, nearly round objects that travel around stars.",
+    robots:"Machines designed by people to carry out tasks.",
+    sensors:"Parts of machines that detect things such as light, touch or distance.",
+    genes:"Sections of DNA that carry information used by cells.",
+    habitats:"Natural homes of plants or animals.",
+    nutrient:"A substance a living thing needs to grow and stay healthy.",
+    scientists:"People who ask questions and use observations and tests to learn about the world.",
+    gravity:"A force that pulls objects toward one another."
   };
   Object.assign(meanings, extraMeanings);
 
@@ -490,6 +506,15 @@
     return "";
   }
 
+  const keyConceptWords = new Set([
+    "atom","atoms","electron","electrons","photon","photons","quantum","laser","lasers",
+    "galaxy","galaxies","nebula","nebulae","exoplanet","exoplanets","orbit","orbits",
+    "gravity","black","hole","telescope","asteroid","comet","planet","planets",
+    "robot","robots","sensor","sensors","artificial","intelligence","dna","gene","genes",
+    "cell","cells","helix","ecosystem","photosynthesis","pollination","evaporation",
+    "condensation","watercycle","biodiversity","habitat","habitats","nutrient","nutrients",
+    "experiment","prediction","observe","scientist","scientists","energy","electricity"
+  ]);
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
@@ -509,8 +534,16 @@
         + (guide ? (parts ? " · " : "") + guide : "");
       const localMeaning = contextualGlossaryMeaning(base, paragraph) || meanings[base] || "";
       const meaning = localMeaning || "Looking up a learner-friendly dictionary meaning…";
-      const classes = shouldBreak ? (mode === "mixed" ? "mixed-word" : "syllabified") : "";
-      return escapeHtml(before) + '<span class="story-word ' + classes + '" tabindex="0" role="button" data-word="' +
+
+      const classes = [];
+      if (shouldBreak) classes.push(mode === "mixed" ? "mixed-word" : "syllabified");
+      const isKeyConcept = keyConceptWords.has(base);
+      if (localMeaning || isKeyConcept) {
+        const tone = (base.split("").reduce(function(sum,ch){return sum+ch.charCodeAt(0);},0)%4)+1;
+        classes.push("vocab-highlight","vocab-tone-"+tone);
+      }
+      if (isKeyConcept) classes.push("key-concept");
+      return escapeHtml(before) + '<span class="story-word ' + classes.join(" ") + '" tabindex="0" role="button" data-word="' +
         escapeHtml(original) + '" data-parts="' + escapeHtml(breakdown) + '" data-meaning="' + escapeHtml(meaning) +
         '" data-lookup="' + (localMeaning ? "false" : "true") + '" aria-label="' + escapeHtml(original) + '">' + escapeHtml(displayed) + '</span>' + escapeHtml(after);
     }).join("");
