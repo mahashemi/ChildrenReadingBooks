@@ -720,7 +720,7 @@ function renderStory(){
    if(mediaHost){
     const media=current.chapterMedia||current.media;
     mediaHost.hidden=!media;
-    mediaHost.innerHTML=media?'<div class="lesson-visual-art"><svg viewBox="0 0 320 200" role="img" aria-label="'+escapeHtml(media.alt)+'"><use href="./assets/stem-illustrations.svg#'+escapeHtml(media.visual)+'"></use></svg></div><div class="lesson-visual-copy"><p>'+escapeHtml(media.caption)+'</p>'+(media.exploreUrl?'<a href="'+escapeHtml(media.exploreUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(media.exploreLabel||"Explore with a grown-up")+' ↗</a>':'')+'</div>':'';
+    mediaHost.innerHTML=media?'<div class="lesson-visual-art"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 320 200" role="img" aria-label="'+escapeHtml(media.alt)+'"><use href="./assets/stem-illustrations.svg#'+escapeHtml(media.visual)+'" xlink:href="./assets/stem-illustrations.svg#'+escapeHtml(media.visual)+'"></use></svg></div><div class="lesson-visual-copy"><p>'+escapeHtml(media.caption)+'</p>'+(media.exploreUrl?'<a href="'+escapeHtml(media.exploreUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(media.exploreLabel||"Explore with a grown-up")+' ↗</a>':'')+'</div>':'';
    }
   $("storyArt").innerHTML='<span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span><span class="art-illustration" aria-hidden="true"><svg viewBox="0 0 160 100" role="presentation"><use href="./assets/reading-illustrations.svg#'+(current.chapterArt||"dream")+'"></use></svg></span>';
   $("wordPanel").hidden=true;
