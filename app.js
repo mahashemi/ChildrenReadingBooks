@@ -726,8 +726,6 @@ function renderStory(){
     artHost.setAttribute("role","img");
     artHost.classList.toggle("has-lesson-illustration",!!media);
   }
-  const mediaHost=$("lessonMedia");
-  if(mediaHost){mediaHost.hidden=true;mediaHost.replaceChildren();}
   $("wordPanel").hidden=true;
   $("modeHint").textContent=mode==="syllables"?"Longer words are divided into syllables. Tap any word to hear it and explore its meaning.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and explore its meaning.":"Read in ordinary English spelling. Tap a word to hear it and explore its meaning.";
   renderStoryLibrary();
