@@ -296,7 +296,23 @@
     transit:"When one object passes in front of another. Astronomers can spot a planet when it briefly blocks some starlight.",
     wobble:"A small back-and-forth movement. A planet's gravity can make its star wobble slightly.",
     helix:"In double helix: the twisted ladder shape of a DNA molecule.",
-    planet:"A large, nearly round object that travels around a star or stellar remnant."
+    planet:"A large, nearly round object that travels around a star or stellar remnant.",
+    atoms:"Tiny basic units that make up ordinary matter.",
+    electrons:"Very small particles found in atoms.",
+    photons:"Tiny packets of light energy.",
+    lasers:"Devices that make narrow, focused beams of light.",
+    galaxies:"Huge groups of stars, gas and dust held together by gravity.",
+    nebulae:"Large clouds of gas and dust in space.",
+    exoplanets:"Planets that travel around stars beyond our solar system.",
+    orbits:"Paths one object follows around another object in space.",
+    planets:"Large, nearly round objects that travel around stars.",
+    robots:"Machines designed by people to carry out tasks.",
+    sensors:"Parts of machines that detect things such as light, touch or distance.",
+    genes:"Sections of DNA that carry information used by cells.",
+    habitats:"Natural homes of plants or animals.",
+    nutrient:"A substance a living thing needs to grow and stay healthy.",
+    scientists:"People who ask questions and use observations and tests to learn about the world.",
+    gravity:"A force that pulls objects toward one another."
   };
   Object.assign(meanings, extraMeanings);
 
@@ -524,7 +540,7 @@
       const classes = [];
       if (shouldBreak) classes.push(mode === "mixed" ? "mixed-word" : "syllabified");
       const isKeyConcept = keyConceptWords.has(base);
-      if (localMeaning && (highlightedVocabulary.has(base) || isKeyConcept)) {
+      if (highlightedVocabulary.has(base) || isKeyConcept) {
         const tone = (base.split("").reduce(function(sum,ch){return sum+ch.charCodeAt(0);},0)%4)+1;
         classes.push("vocab-highlight","vocab-tone-"+tone);
       }
