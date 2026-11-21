@@ -22,7 +22,7 @@ assert.ok(visuals.includes("prefers-reduced-motion:reduce"), "Decorative animati
 for (const term of ["atoms","electrons","photons","lasers","galaxies","nebulae","exoplanets","orbits","planets","robots","sensors","genes","habitats","nutrient","scientists","gravity"]) {
   assert.ok(enhancements.includes(term + ':"'), `Missing child-friendly glossary definition: ${term}`);
 }
-assert.ok(enhancements.includes("if (highlightedVocabulary.has(base) || isKeyConcept)"), "Key concepts must remain visually emphasized even when a local definition is not available");
+assert.ok(enhancements.includes("if (localMeaning || isKeyConcept)"), "Every locally defined word and key concept must receive visual emphasis");
 for (const [, id, alt, caption] of media) {
   assert.ok(symbols.has(id), `Missing SVG symbol: ${id}`);
   assert.ok(alt.trim().length > 12, `Image alt text is too short: ${id}`);
