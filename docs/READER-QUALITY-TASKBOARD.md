@@ -13,9 +13,9 @@ Scope: improve the shared reading experience across every chapter and collection
 
 | Priority | Task | Status | Acceptance criteria |
 |---|---|---|---|
-| P0 | Move all lesson SVGs behind the reading text | Implemented in PR #53; latest CI passed; browser review pending | Artwork is a low-contrast animated background; it consumes no vertical reading space, never covers words, and remains subtle on narrow phones. |
-| P0 | Remove child-facing external activity links | Implemented in PR #53; latest CI pending | No external activity or source URLs render in the child reading pane; plain attribution and Qur’an cross-references remain. |
-| P1 | Apply consistent vocabulary emphasis across all chapters | Implemented in PR #53; latest CI pending; visual review pending | New glossary words and key concepts use bold, varied colours; ordinary text stays calm; definitions, tapping and narration highlighting continue to work. |
+| P0 | Move all lesson SVGs behind the reading text | Implemented in PR #53; CI passed; browser review pending | Artwork is a low-contrast animated background; it consumes no vertical reading space, never covers words, and remains subtle on narrow phones. |
+| P0 | Remove child-facing external activity links | Implemented in PR #53; CI passed | No external activity or source URLs render in the child reading pane; plain attribution and Qur’an cross-references remain. |
+| P1 | Apply consistent vocabulary emphasis across all chapters | Implemented in PR #53; CI passed; visual review pending | New glossary words and key concepts use bold, varied colours; ordinary text stays calm; definitions, tapping and narration highlighting continue to work. |
 | P1 | Respect reduced-motion preferences | Implemented in PR #53 | Background animation stops when the device requests reduced motion; reading and narration are unaffected. |
 | P0 | Eliminate READING CHAPTER NaN | Fix merged; CI passed | Every page has a valid chapter index; defensive fallback never renders NaN. |
 | P1 | Add regression validation for chapter metadata and media wiring | CI passed | CI checks registration order, chapter coverage, media references and fallback label logic. |
@@ -56,4 +56,4 @@ Scope: improve the shared reading experience across every chapter and collection
 - 2026-11-21: Created board and diagnosed the registration-order bug.
 - 2026-11-21: Moved metadata registration after all lesson additions; added defensive chapter numbering, key-concept emphasis and a CI regression validator.
 - 2026-11-21: PR #52 squash-merged; validation workflow passed. Post-merge GitHub Pages deployment queued/in progress.
-- 2026-11-21: Implemented site-wide reading-first visuals in PR #53. A deeper review fixed CSS specificity on mobile, removed source URLs from the child reading pane, and expanded vocabulary styling to all curated glossary terms. Browser/device review remains open.
+- 2026-11-21: Implemented site-wide reading-first visuals in PR #53. Deeper review fixed CSS specificity on mobile, removed external source/activity URLs from the child reading pane, removed the obsolete panel stylesheet, and expanded offline definitions and colour emphasis to plural STEM terms and all locally defined vocabulary. Latest CI passed; browser/device review remains open.
