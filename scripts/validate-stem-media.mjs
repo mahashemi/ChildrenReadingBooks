@@ -12,6 +12,7 @@ assert.ok(!app.includes("exploreUrl") && !app.includes("exploreLabel"), "Externa
 assert.ok(!app.includes("current.chapterSourceUrl"), "External source URLs must not be rendered in the child reading pane");
 assert.ok(app.includes('$("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);'), "Keep readable source attribution and Qur\u2019an reference links without external activity URLs");
 assert.ok(index.includes("./reader-visuals.css"), "The shared reader visual stylesheet must be loaded");
+assert.ok(!index.includes("lesson-media.css") && !index.includes('id="lessonMedia"'), "The old space-consuming illustration panel must stay removed");
 assert.ok(visuals.includes("display:block!important"), "Lesson artwork must be visible behind the passage");
 assert.ok(visuals.includes("position:absolute!important"), "Lesson artwork must be positioned as background art");
 assert.ok(visuals.includes("#readingView.active .story-reading-stage .story-art"), "Background artwork must override the reader\u2019s existing hidden-art rule");
