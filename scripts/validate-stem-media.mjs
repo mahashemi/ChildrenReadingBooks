@@ -9,9 +9,13 @@ const media = [...app.matchAll(/media:m\("([^"]+)","([^"]+)","([^"]+)"\)/g)];
 const symbols = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map(match => match[1]));
 assert.equal(media.length, 19, "Expected one background illustration for each new STEM reading page");
 assert.ok(!app.includes("exploreUrl") && !app.includes("exploreLabel"), "External activity links must be removed from lesson media data");
+assert.ok(!app.includes("current.chapterSourceUrl"), "External source URLs must not be rendered in the child reading pane");
+assert.ok(app.includes('$("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);'), "Keep readable source attribution and Qur\u2019an reference links without external activity URLs");
 assert.ok(index.includes("./reader-visuals.css"), "The shared reader visual stylesheet must be loaded");
 assert.ok(visuals.includes("display:block!important"), "Lesson artwork must be visible behind the passage");
 assert.ok(visuals.includes("position:absolute!important"), "Lesson artwork must be positioned as background art");
+assert.ok(visuals.includes("#readingView.active .story-reading-stage .story-art"), "Background artwork must override the reader\u2019s existing hidden-art rule");
+assert.ok(visuals.includes("@media(max-width:380px)"), "The background must be especially subtle on very narrow phones");
 assert.ok(visuals.includes("prefers-reduced-motion:reduce"), "Decorative animation must respect reduced-motion settings");
 for (const [, id, alt, caption] of media) {
   assert.ok(symbols.has(id), `Missing SVG symbol: ${id}`);
