@@ -499,7 +499,7 @@
     "condensation","watercycle","biodiversity","habitat","habitats","nutrient","nutrients",
     "experiment","prediction","observe","scientist","scientists","energy","electricity"
   ]);
-  const highlightedVocabulary = new Set(Object.keys(extraMeanings).filter(function(word){return word.length>=6;}));
+  const highlightedVocabulary = new Set(Object.keys(extraMeanings));
 
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
