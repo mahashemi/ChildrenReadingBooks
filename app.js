@@ -392,18 +392,6 @@ if(Array.isArray(importedSahifa)&&importedSahifa.length===54){
   start,end:storyPages.length-1
  });
 }
-readingChapters.forEach((chapter,index)=>{
-  for(let i=chapter.start;i<=chapter.end;i++){
-    Object.assign(storyPages[i],{
-      chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
-      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterRhyme:chapter.rhyme,chapterSourceUrl:chapter.sourceUrl,chapterSourceLabel:chapter.sourceLabel,chapterMedia:storyPages[i].media||null,
-      chapterIndex:index,chapterCategory:chapter.category,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
-      chapterLength:chapter.end-chapter.start+1
-    });
-  }
-});
-
-
 /* Original preschool STEM adventures. Broad topic inspiration only; no published wording, page sequence or illustrations are reproduced. */
 {
  const add=(c,p)=>{const start=storyPages.length;p.forEach(x=>storyPages.push(x));readingChapters.push({...c,start,end:storyPages.length-1});};
@@ -440,6 +428,17 @@ readingChapters.forEach((chapter,index)=>{
  {title:"Could There Be Another Earth?",paragraphs:["Some exoplanets are rocky. Some are giant balls of gas. They come in many sizes.","Scientists study whether a planet might have conditions that could support life. That does not mean life has been found there.","We have much more to learn. Careful science helps us tell the difference between a guess and a discovery."],media:m("planet-telescope","A space telescope observes a distant planet and its star.","Telescopes help scientists study the light from faraway worlds.","https://science.nasa.gov/exoplanets/facts/","Explore NASA's exoplanet facts and video")}
  ]);
 }
+
+readingChapters.forEach((chapter,index)=>{
+  for(let i=chapter.start;i<=chapter.end;i++){
+    Object.assign(storyPages[i],{
+      chapterTitle:chapter.title,chapterSubtitle:chapter.subtitle,chapterSource:chapter.source,
+      chapterArt:chapter.art,chapterIcon:chapter.icon,chapterTakeaway:chapter.takeaway,chapterReflection:chapter.reflection,chapterRhyme:chapter.rhyme,chapterSourceUrl:chapter.sourceUrl,chapterSourceLabel:chapter.sourceLabel,chapterMedia:storyPages[i].media||null,
+      chapterIndex:index,chapterCategory:chapter.category,chapterStart:i===chapter.start,chapterPage:i-chapter.start+1,
+      chapterLength:chapter.end-chapter.start+1
+    });
+  }
+});
 
 // These are reviewed pronunciation/teaching annotations, not automatic vowel splits.
 // Original spelling is retained. Possessive endings are attached after the base word.
@@ -568,6 +567,12 @@ function tokenInfo(token){
   const isKnownOne=oneSyllable.has(base.toLowerCase());
   return {original,base,possessive,parts,isKnownOne,reviewed:!!reviewed,known:!!reviewed||isKnownOne};
 }
+const keyConceptWords=new Set([
+  "atom","atoms","cell","cells","photon","photons","electron","electrons","quantum","laser","lasers",
+  "asteroid","black","comet","galaxy","star","stars","orbit","planet","planets","telescope","scientist",
+  "scientists","prediction","sensor","sensors","robot","robots","artificial","intelligence","dna","gene",
+  "genes","exoplanet","exoplanets","transit","wobble","nebula","universe","gravity","energy"
+]);
 function renderParagraph(paragraph){
   return paragraph.split(/(\s+)/).map(piece=>{
     if(/^\s+$/.test(piece))return piece;
@@ -581,7 +586,10 @@ function renderParagraph(paragraph){
     const shown=shouldBreak?parts.join("-")+(possessive?"'s":""):original;
     const breakdown=parts?parts.join("-")+(possessive?"'s":"")+(soundGuides[base.toLowerCase()]?" · "+soundGuides[base.toLowerCase()]:""):soundGuides[base.toLowerCase()]||"";
     const meaning=meanings[base.toLowerCase()]||"Ask a parent or teacher to explain this word, then try using it in your own sentence.";
-    const className=shouldBreak?(mode==="mixed"?"mixed-word":"syllabified"):"";
+    const classes=[];
+    if(shouldBreak)classes.push(mode==="mixed"?"mixed-word":"syllabified");
+    if(keyConceptWords.has(base.toLowerCase()))classes.push("key-concept");
+    const className=classes.join(" ");
     return escapeHtml(before)+'<span class="story-word '+className+'" tabindex="0" role="button" data-word="'+escapeHtml(original)+'" data-parts="'+escapeHtml(breakdown)+'" data-meaning="'+escapeHtml(meaning)+'" aria-label="'+escapeHtml(original)+'">'+escapeHtml(shown)+'</span>'+escapeHtml(after);
   }).join("");
 }
@@ -692,8 +700,11 @@ function renderStory(){
   const current=storyPages[page];
   $("storyTitle").textContent=current.chapterTitle||current.title;
   $("storySubtitle").textContent=current.chapterSubtitle||"A story inspired by the Qur'anic account of Prophet Yusuf (peace be upon him).";
-  $("readerTag").textContent="READING CHAPTER "+String(current.chapterIndex+1).padStart(2,"0");
-  $("pageCount").textContent="PAGE "+current.chapterPage+" OF "+current.chapterLength;
+  const safeChapterIndex=Number.isInteger(current.chapterIndex)?current.chapterIndex:readingChapters.findIndex(chapter=>page>=chapter.start&&page<=chapter.end);
+  const safeChapterPage=Number.isInteger(current.chapterPage)?current.chapterPage:1;
+  const safeChapterLength=Number.isInteger(current.chapterLength)?current.chapterLength:1;
+  $("readerTag").textContent=safeChapterIndex>=0?"READING CHAPTER "+String(safeChapterIndex+1).padStart(2,"0"):"READING";
+  $("pageCount").textContent="PAGE "+safeChapterPage+" OF "+safeChapterLength;
   storyText.style.setProperty("font-size",fontSize+"px","important");
   const reflectionHtml=current.chapterReflection&&current.chapterPage===current.chapterLength?'<aside class="islamic-reflection"><b>'+(current.chapterCategory==="sahifa"?"A little rhyme to remember":"Think with the Qur’an and Ahlulbayt")+'</b><p>'+linkQuranReferences(renderParagraph(current.chapterReflection),current.chapterReflection,current)+'</p></aside>':'';
   storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("")+reflectionHtml;
@@ -707,9 +718,9 @@ function renderStory(){
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
    const mediaHost=$("lessonMedia");
    if(mediaHost){
-    const media=current.chapterMedia;
+    const media=current.chapterMedia||current.media;
     mediaHost.hidden=!media;
-    mediaHost.innerHTML=media?'<div class="lesson-visual-art"><svg viewBox="0 0 320 200" role="img" aria-label="'+escapeHtml(media.alt)+'"><use href="./assets/stem-illustrations.svg#'+escapeHtml(media.visual)+'"></use></svg></div><div class="lesson-visual-copy"><p>'+escapeHtml(media.caption)+'</p>'+(media.exploreUrl?'<a href="'+escapeHtml(media.exploreUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(media.exploreLabel||"Explore with a grown-up")+' ↗</a>':'')+'</div>':'';
+    mediaHost.innerHTML=media?'<div class="lesson-visual-art"><svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 320 200" role="img" aria-label="'+escapeHtml(media.alt)+'"><use href="./assets/stem-illustrations.svg#'+escapeHtml(media.visual)+'" xlink:href="./assets/stem-illustrations.svg#'+escapeHtml(media.visual)+'"></use></svg></div><div class="lesson-visual-copy"><p>'+escapeHtml(media.caption)+'</p>'+(media.exploreUrl?'<a href="'+escapeHtml(media.exploreUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(media.exploreLabel||"Explore with a grown-up")+' ↗</a>':'')+'</div>':'';
    }
   $("storyArt").innerHTML='<span class="art-sun"></span><span class="art-moon">☾</span><span class="art-star s1">✦</span><span class="art-star s2">✧</span><span class="art-hill"></span><span class="art-window">✧</span><span class="art-illustration" aria-hidden="true"><svg viewBox="0 0 160 100" role="presentation"><use href="./assets/reading-illustrations.svg#'+(current.chapterArt||"dream")+'"></use></svg></span>';
   $("wordPanel").hidden=true;

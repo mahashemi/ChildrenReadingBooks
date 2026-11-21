@@ -726,3 +726,8 @@ body.reader-immersive #readingView.active .mode-hint{display:none}
 .category-blue{background:#f0f7fc;border-color:#dcecf7}.category-green{background:#f1f7ee;border-color:#dfecda}.category-lilac{background:#f5f1fb;border-color:#e9e1f5}.category-peach{background:#fff4ed;border-color:#f6e6da}.category-gold{background:#fff8e9;border-color:#f2ead2}.category-mint{background:#eef7f3;border-color:#dceee5}
 .story-choice-copy{min-width:0;flex:1}.story-category-label{display:inline-block;margin-top:4px;padding:2px 6px;border-radius:999px;background:#f2f4ee;color:#708071;font-size:8px!important;font-weight:800}
 @media(max-width:760px){.chapter-category-filters{gap:5px}.category-filter{font-size:8px;padding:5px 7px}}
+
+/* Key learning words receive gentle visual emphasis without changing narration tokens. */
+.story-text .story-word.key-concept{color:#8053a6;font-weight:900;text-decoration:underline;text-decoration-color:#d9c3e8;text-decoration-thickness:2px;text-underline-offset:4px;border-radius:4px}
+.story-text .story-word.key-concept:hover,.story-text .story-word.key-concept:focus-visible{color:#68408d;background:#f5edfb;text-decoration-color:#b99bd2}
+.story-text .story-word.key-concept.is-speaking{color:#4d6f43!important;background:#e4f2d9!important;text-decoration-color:#9bc58b}
