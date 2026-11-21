@@ -35,12 +35,19 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 **Active reader-quality board:** [docs/READER-QUALITY-TASKBOARD.md](docs/READER-QUALITY-TASKBOARD.md). P0 reader bugs and P1 visual emphasis are tracked there.
 
 
+### Shared reading experience — all chapters and supplications
+- [x] Keep the passage as the primary visual element on mobile and desktop.
+- [x] Use local SVGs as subtle, gently animated backgrounds; respect reduced-motion preferences.
+- [x] Remove child-facing activity and external source links from the reading pane while retaining source attribution text.
+- [x] Emphasize curated glossary words and key concepts with bold, varied colours without changing word interaction or narration highlighting.
+- [ ] Verify at 320px, 375px, tablet and desktop widths in a real browser.
+
 ### Little Scientists — preschool STEM collection
 - [x] Add six original, short-sentence STEM chapters: quantum physics, Space ABC, scientific discovery, robots and AI, DNA, and exoplanets.
 - [x] Add page-specific local SVG illustrations.
-- [ ] Rework the SVGs as subtle animated backgrounds behind the shared reading pane; never use a separate top illustration panel.
-- [ ] Remove child-facing activity/exploration links; keep only appropriate source attribution outside the passage.
-- [ ] Apply colourful, bold glossary/key-concept emphasis consistently across every chapter and collection.
+- [x] Rework SVGs as subtle animated backgrounds behind the shared reading pane; no separate top illustration panel.
+- [x] Remove child-facing activity/exploration links from the reading pane; retain source attribution as plain text and keep source URLs out of child-facing chapter notes.
+- [x] Apply colourful, bold glossary/key-concept emphasis through the shared paragraph renderer across stories and supplications.
 - [ ] Expand contextual vocabulary and learner-language translations for new STEM terms.
 - [ ] Review with a six-year-old early reader and tune sentence length, word difficulty and narration pacing.
 - [ ] Add more source-checked STEM adventures: climate, ocean technology, renewable energy, medical imaging and materials science.
