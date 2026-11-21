@@ -18,7 +18,6 @@ Scope: improve the shared reading experience across every chapter and collection
 | P1 | Apply consistent vocabulary emphasis across all chapters | In progress | New glossary words and key concepts use bold, varied colours; ordinary text stays calm; definitions, tapping and narration highlighting continue to work. |
 | P1 | Respect reduced-motion preferences | Planned | Background animation stops when the device requests reduced motion; reading and narration are unaffected. |
 | P0 | Eliminate READING CHAPTER NaN | Fix merged; CI passed | Every page has a valid chapter index; defensive fallback never renders NaN. |
-
 | P1 | Add regression validation for chapter metadata and media wiring | CI passed | CI checks registration order, chapter coverage, media references and fallback label logic. |
 | P1 | Verify reader in Chrome and narrow mobile viewport | Pending | Artwork, paragraph flow, emphasis, audio and navigation are checked in a real browser. |
 
