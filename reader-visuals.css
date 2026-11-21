@@ -12,6 +12,7 @@
   scrollbar-gutter:stable;
 }
 #readingView .story-art{
+  display:block!important;
   position:absolute!important;
   inset:0 0 auto auto!important;
   width:min(54%,390px)!important;
