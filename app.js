@@ -712,7 +712,7 @@ function renderStory(){
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
   $("progressDots").innerHTML=Array.from({length:current.chapterLength},(_,i)=>'<i class="'+(i===current.chapterPage-1?"on":"")+'"></i>').join("");
-  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource)+(current.chapterSourceUrl?' · <a href="'+current.chapterSourceUrl+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(current.chapterSourceLabel||"Open source reference") + " ↗</a>":"");
+  $("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);
   $("readingTakeaway").textContent=current.chapterTakeaway||"Read carefully, think deeply and choose one good action.";
   $("storyArt").dataset.art=current.chapterArt||"dream";
   $("storyArt").setAttribute("aria-label",current.chapterTitle+" illustration");
