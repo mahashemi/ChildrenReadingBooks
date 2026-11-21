@@ -13,10 +13,10 @@ Scope: improve the reading experience after the Little Scientists collection was
 
 | Priority | Task | Status | Acceptance criteria |
 |---|---|---|---|
-| P0 | Restore STEM lesson illustrations | Implemented; CI/browser verification pending | All 19 STEM pages show their matching local SVG illustration, caption and optional grown-up link on desktop and mobile. |
-| P0 | Eliminate READING CHAPTER NaN | Implemented; CI verification pending | Every page has a valid chapter index; defensive fallback never renders NaN. |
-| P1 | Add child-friendly emphasis to key concepts | Implemented; visual review pending | Curated learning words are bold and colored; words remain tappable and narration highlighting still works. |
-| P1 | Add regression validation for chapter metadata and media wiring | Added to CI; run pending | CI checks registration order, chapter coverage, media references and fallback label logic. |
+| P0 | Restore STEM lesson illustrations | Fix merged; CI passed; browser verification pending | All 19 STEM pages show their matching local SVG illustration, caption and optional grown-up link on desktop and mobile. |
+| P0 | Eliminate READING CHAPTER NaN | Fix merged; CI passed | Every page has a valid chapter index; defensive fallback never renders NaN. |
+| P1 | Add child-friendly emphasis to key concepts | Fix merged; visual review pending | Curated learning words are bold and colored; words remain tappable and narration highlighting still works. |
+| P1 | Add regression validation for chapter metadata and media wiring | CI passed | CI checks registration order, chapter coverage, media references and fallback label logic. |
 | P1 | Verify reader in Chrome and narrow mobile viewport | Pending | Artwork, paragraph flow, emphasis, audio and navigation are checked in a real browser. |
 
 ## Root-cause findings
@@ -28,8 +28,8 @@ Scope: improve the reading experience after the Little Scientists collection was
 - [x] Move metadata registration after all chapters and pages—including STEM—are registered.
 - [x] Add a defensive chapter-label fallback.
 - [x] Apply key-concept styling without replacing or wrapping narration tokens.
-- [ ] Run JavaScript syntax, STEM media and metadata validation in CI.
-- [ ] Verify CI and GitHub Pages deployment after merge.
+- [x] Run JavaScript syntax, STEM media and metadata validation in CI.
+- [x] Verify CI validation on PR; [ ] confirm post-merge GitHub Pages deployment.
 
 ## Next priorities
 ### P1 — reading quality
@@ -45,3 +45,4 @@ Scope: improve the reading experience after the Little Scientists collection was
 ## Change log
 - 2026-11-21: Created board and diagnosed the registration-order bug.
 - 2026-11-21: Moved metadata registration after all lesson additions; added defensive chapter numbering, key-concept emphasis and a CI regression validator.
+- 2026-11-21: PR #52 squash-merged; validation workflow passed. Post-merge GitHub Pages deployment queued/in progress.
