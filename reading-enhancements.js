@@ -515,8 +515,6 @@
     "condensation","watercycle","biodiversity","habitat","habitats","nutrient","nutrients",
     "experiment","prediction","observe","scientist","scientists","energy","electricity"
   ]);
-  const highlightedVocabulary = new Set(Object.keys(extraMeanings));
-
   function renderParagraph(paragraph) {
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
@@ -540,7 +538,7 @@
       const classes = [];
       if (shouldBreak) classes.push(mode === "mixed" ? "mixed-word" : "syllabified");
       const isKeyConcept = keyConceptWords.has(base);
-      if (highlightedVocabulary.has(base) || isKeyConcept) {
+      if (localMeaning || isKeyConcept) {
         const tone = (base.split("").reduce(function(sum,ch){return sum+ch.charCodeAt(0);},0)%4)+1;
         classes.push("vocab-highlight","vocab-tone-"+tone);
       }
