@@ -32,6 +32,9 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 
 ## Roadmap
 
+**Active reader-quality board:** [docs/READER-QUALITY-TASKBOARD.md](docs/READER-QUALITY-TASKBOARD.md). P0 reader bugs and P1 visual emphasis are tracked there.
+
+
 ### Little Scientists — preschool STEM collection
 - [x] Add six original, short-sentence STEM chapters: quantum physics, Space ABC, scientific discovery, robots and AI, DNA, and exoplanets.
 - [x] Add page-specific local animated SVG illustrations and curated grown-up exploration links.
