@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 const app = fs.readFileSync("app.js", "utf8");
 const sprite = fs.readFileSync("assets/stem-illustrations.svg", "utf8");
 const visuals = fs.readFileSync("reader-visuals.css", "utf8");
+const enhancements = fs.readFileSync("reading-enhancements.js", "utf8");
 const index = fs.readFileSync("index.html", "utf8");
 const media = [...app.matchAll(/media:m\("([^"]+)","([^"]+)","([^"]+)"\)/g)];
 const symbols = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map(match => match[1]));
@@ -18,6 +19,10 @@ assert.ok(visuals.includes("position:absolute!important"), "Lesson artwork must 
 assert.ok(visuals.includes("#readingView.active .story-reading-stage .story-art"), "Background artwork must override the reader\u2019s existing hidden-art rule");
 assert.ok(visuals.includes("@media(max-width:380px)"), "The background must be especially subtle on very narrow phones");
 assert.ok(visuals.includes("prefers-reduced-motion:reduce"), "Decorative animation must respect reduced-motion settings");
+for (const term of ["atoms","electrons","photons","lasers","galaxies","nebulae","exoplanets","orbits","planets","robots","sensors","genes","habitats","nutrient","scientists","gravity"]) {
+  assert.ok(enhancements.includes(term + ':"'), `Missing child-friendly glossary definition: ${term}`);
+}
+assert.ok(enhancements.includes("if (highlightedVocabulary.has(base) || isKeyConcept)"), "Key concepts must remain visually emphasized even when a local definition is not available");
 for (const [, id, alt, caption] of media) {
   assert.ok(symbols.has(id), `Missing SVG symbol: ${id}`);
   assert.ok(alt.trim().length > 12, `Image alt text is too short: ${id}`);
