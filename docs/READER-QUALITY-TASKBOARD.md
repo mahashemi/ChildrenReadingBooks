@@ -2,7 +2,7 @@
 
 _Last updated: 2026-11-21_
 
-Scope: improve the reading experience after the Little Scientists collection was added. Preserve the existing mobile/desktop layout, word tapping, syllable modes and narration behavior.
+Scope: improve the shared reading experience across every chapter and collection. Reading text always takes priority over decorative artwork. Preserve mobile/desktop layouts, word tapping, syllable modes, contextual meanings and narration behavior.
 
 ## Priority key
 - **P0 — Release blocker:** visible broken functionality or incorrect reader state.
@@ -13,11 +13,22 @@ Scope: improve the reading experience after the Little Scientists collection was
 
 | Priority | Task | Status | Acceptance criteria |
 |---|---|---|---|
-| P0 | Restore STEM lesson illustrations | Fix merged; CI passed; browser verification pending | All 19 STEM pages show their matching local SVG illustration, caption and optional grown-up link on desktop and mobile. |
+| P0 | Move all lesson SVGs behind the reading text | In progress | Artwork is a low-contrast animated background; it consumes no vertical reading space, never covers words, and remains subtle on narrow phones. |
+| P0 | Remove child-facing external activity links | In progress | No Smithsonian/NASA/other activity links appear inside the reading experience; source attribution remains in the adult/source note where appropriate. |
+| P1 | Apply consistent vocabulary emphasis across all chapters | In progress | New glossary words and key concepts use bold, varied colours; ordinary text stays calm; definitions, tapping and narration highlighting continue to work. |
+| P1 | Respect reduced-motion preferences | Planned | Background animation stops when the device requests reduced motion; reading and narration are unaffected. |
 | P0 | Eliminate READING CHAPTER NaN | Fix merged; CI passed | Every page has a valid chapter index; defensive fallback never renders NaN. |
-| P1 | Add child-friendly emphasis to key concepts | Fix merged; visual review pending | Curated learning words are bold and colored; words remain tappable and narration highlighting still works. |
+
 | P1 | Add regression validation for chapter metadata and media wiring | CI passed | CI checks registration order, chapter coverage, media references and fallback label logic. |
 | P1 | Verify reader in Chrome and narrow mobile viewport | Pending | Artwork, paragraph flow, emphasis, audio and navigation are checked in a real browser. |
+
+## Current design requirements
+- [ ] Keep all decorative SVGs behind the reading text; never add a top-of-page illustration row.
+- [ ] Ensure background artwork has low opacity, no hit targets, and no effect on text contrast or passage width.
+- [ ] Animate only decorative elements gently; support `prefers-reduced-motion` and do not compete with word-follow highlighting.
+- [ ] Use four coordinated vocabulary colours for glossary-backed words and a stronger emphasis for key concepts; avoid colouring every ordinary word.
+- [ ] Remove activity/exploration links from child-facing reading pages while retaining factual source attribution separately.
+- [ ] Verify at 320px, 375px, tablet and desktop widths; reading pane must remain the dominant visual element.
 
 ## Root-cause findings
 - [x] **Metadata registration order identified:** metadata was assigned before the six STEM chapters were appended. Their pages therefore had no chapterIndex, chapterPage, chapterLength or chapterMedia.
@@ -46,3 +57,4 @@ Scope: improve the reading experience after the Little Scientists collection was
 - 2026-11-21: Created board and diagnosed the registration-order bug.
 - 2026-11-21: Moved metadata registration after all lesson additions; added defensive chapter numbering, key-concept emphasis and a CI regression validator.
 - 2026-11-21: PR #52 squash-merged; validation workflow passed. Post-merge GitHub Pages deployment queued/in progress.
+- 2026-11-21: Started a site-wide reader visual refinement: move SVGs into a subtle animated background, remove child-facing exploration links, and apply glossary-based colour emphasis across the shared paragraph renderer.
