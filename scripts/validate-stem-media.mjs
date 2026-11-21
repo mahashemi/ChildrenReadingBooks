@@ -10,6 +10,7 @@ const symbols = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map(match 
 assert.equal(media.length, 19, "Expected one illustrated media panel for each new STEM reading page");
 assert.ok(!app.includes("media.exploreUrl"), "Child-facing exploration links must not be rendered in the reader");
 assert.ok(index.includes("./reader-visuals.css"), "The shared reader visual stylesheet must be loaded");
+assert.ok(visuals.includes("display:block!important"), "Lesson artwork must be visible behind the passage");
 assert.ok(visuals.includes("position:absolute!important"), "Lesson artwork must be positioned as background art");
 assert.ok(visuals.includes("prefers-reduced-motion:reduce"), "Decorative animation must respect reduced-motion settings");
 for (const [, id, alt, caption, url, label] of media) {
