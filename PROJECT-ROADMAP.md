@@ -1,6 +1,6 @@
 # Little Lanterns — Live Project Status & Roadmap
 
-_Last updated: 2026-11-20_
+_Last updated: 2026-11-21_
 
 ## Product direction
 A warm, responsive, English-first reading and Islamic learning experience for children. Original Qur'an, hadith and dua texts remain distinct from child-friendly explanations, reflections and original memory aids. Preserve the mobile experience while making desktop layouts spacious and useful.
@@ -37,7 +37,10 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 
 ### Little Scientists — preschool STEM collection
 - [x] Add six original, short-sentence STEM chapters: quantum physics, Space ABC, scientific discovery, robots and AI, DNA, and exoplanets.
-- [x] Add page-specific local animated SVG illustrations and curated grown-up exploration links.
+- [x] Add page-specific local SVG illustrations.
+- [ ] Rework the SVGs as subtle animated backgrounds behind the shared reading pane; never use a separate top illustration panel.
+- [ ] Remove child-facing activity/exploration links; keep only appropriate source attribution outside the passage.
+- [ ] Apply colourful, bold glossary/key-concept emphasis consistently across every chapter and collection.
 - [ ] Expand contextual vocabulary and learner-language translations for new STEM terms.
 - [ ] Review with a six-year-old early reader and tune sentence length, word difficulty and narration pacing.
 - [ ] Add more source-checked STEM adventures: climate, ocean technology, renewable energy, medical imaging and materials science.
