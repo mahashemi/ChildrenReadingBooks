@@ -35,6 +35,8 @@ jobs:
         run: node scripts/validate-stem-media.mjs
       - name: Validate reader chapter metadata wiring
         run: node scripts/validate-reader-metadata.mjs
+      - name: Validate accessible word meaning modal
+        run: node scripts/validate-word-meaning-modal.mjs
       - name: Check JavaScript syntax
         run: |
           node --check app.js
