@@ -97,3 +97,6 @@ CI generates the corpus and fails unless all 54 numbered items have non-empty te
 - 2026-11-22: PR #53 follow-up adds a viewport-filling desktop reading card and mobile narration highlighting fallback with exact rendered-word offsets. GitHub Actions validation passed; physical-device/browser review remains pending.
 
 - 2026-11-22: Added a responsive native word-meaning dialog with explicit definition audio, keyboard dismissal, backdrop dismissal, focus restoration and automated regression checks. Browser/device verification remains open.
+
+
+- 2026-11-22: Expanded The Little Scientist’s Discovery Primer with a safe, household paper-bridge experiment. Learners make a prediction, compare flat and folded paper under the same conditions, count results, record evidence and repeat the test. Automated regression assertions added; PR/browser review pending.
