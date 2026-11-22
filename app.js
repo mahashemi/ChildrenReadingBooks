@@ -566,6 +566,7 @@ function openWordModal(target){
   $("hearMeaning").disabled=false;
   const dialog=$("wordPanel");
   if(!dialog.open)dialog.showModal();
+  speakText(target.dataset.word||"");
 }
 function closeWordModal(){
   const dialog=$("wordPanel");
@@ -583,6 +584,7 @@ $("wordPanel").addEventListener("close",()=>{
   activeWordTarget=null;
 });
 $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
+$("hearWord").addEventListener("click",()=>speakText($("wordDisplay").textContent));
 function escapeHtml(value){return value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function tokenInfo(token){
   const match=token.match(/[A-Za-z]+(?:'[A-Za-z]+)?/);
