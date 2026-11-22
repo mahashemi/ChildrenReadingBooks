@@ -561,14 +561,12 @@
     const word = target.dataset.word || "";
     const lookupWord = word.replace(/'s$/i, "");
     const meaningNode = document.getElementById("wordMeaning");
-    document.getElementById("wordDisplay").textContent = word;
-    document.getElementById("wordBreakdown").textContent = target.dataset.parts || "";
+    openWordModal(target);
     meaningNode.textContent = target.dataset.meaning || meaningFallback;
-    document.getElementById("wordPanel").hidden = false;
-    speakText(word);
     if (target.dataset.lookup !== "true") return;
     const requestWord = lookupWord.toLowerCase();
     meaningNode.textContent = "Finding a simple dictionary definition…";
+    document.getElementById("hearMeaning").disabled = true;
     fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + encodeURIComponent(requestWord))
       .then(function (response) {
         if (!response.ok) throw new Error("No dictionary entry");
@@ -581,13 +579,15 @@
           });
         }).map(function (item) { return item.definition; }).find(Boolean);
         if (!definition) throw new Error("No definition found");
-        if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
+        if (document.getElementById("wordDisplay").textContent === word && document.getElementById("wordPanel").open) {
           meaningNode.textContent = definition;
+          document.getElementById("hearMeaning").disabled = false;
         }
       })
       .catch(function () {
-        if (document.getElementById("wordDisplay").textContent === word && !document.getElementById("wordPanel").hidden) {
+        if (document.getElementById("wordDisplay").textContent === word && document.getElementById("wordPanel").open) {
           meaningNode.textContent = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          document.getElementById("hearMeaning").disabled = false;
         }
       });
   };

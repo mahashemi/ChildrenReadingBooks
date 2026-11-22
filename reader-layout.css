@@ -478,3 +478,91 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
 #readingView.active .story-reading-stage.has-word-panel .word-panel{display:flex;align-self:stretch;width:100%;max-height:none;min-height:0;margin:0;overflow:auto;border:1px solid #e6e8dc;border-radius:16px;background:rgba(255,255,255,.94);box-shadow:0 8px 24px rgba(49,64,47,.07)}
 #readingView.active .story-reading-stage.has-word-panel .word-explorer-content{padding:18px}
 }
+
+
+/* Word meanings use one responsive, keyboard-accessible modal on every device. */
+.word-modal{
+  width:min( min(92vw, 520px), calc(100vw - 28px));
+  max-width:520px;
+  max-height:min(82dvh, 680px);
+  margin:auto;
+  padding:0;
+  overflow:visible;
+  border:0;
+  border-radius:24px;
+  background:transparent;
+  color:var(--ink, #28352f);
+  box-shadow:none;
+}
+.word-modal[open]{display:block}
+.word-modal::backdrop{background:rgba(31,43,35,.58);backdrop-filter:blur(5px)}
+.word-modal-card{
+  position:relative;
+  max-height:min(82dvh,680px);
+  overflow:auto;
+  padding:clamp(26px,5vw,42px);
+  border:1px solid #e7eadf;
+  border-radius:24px;
+  background:linear-gradient(155deg,#fffefa 0%,#f6f8f0 100%);
+  box-shadow:0 24px 80px rgba(25,42,29,.24);
+  text-align:center;
+}
+.word-modal-close{
+  position:absolute;top:14px;right:14px;
+  display:grid;place-items:center;
+  width:42px;height:42px;
+  border:1px solid #e6eae1;border-radius:50%;
+  background:#fff;color:#536657;
+  font-size:27px;line-height:1;
+}
+.word-modal-close:hover{background:#edf4e9}
+.word-modal-eyebrow{
+  display:block;margin:3px 42px 10px;
+  color:#829184;font-size:10px;font-weight:900;letter-spacing:2px;
+}
+.word-modal h2{
+  margin:0;color:#315c48;
+  font-size:clamp(30px,7vw,42px);font-weight:900;letter-spacing:-1px;
+  overflow-wrap:anywhere;
+}
+.word-modal-syllables{
+  min-height:1.2em;margin:7px 0 25px;
+  color:#78927a;font-size:14px;font-weight:800;
+}
+.word-modal-meaning{
+  padding:18px 20px;border:1px solid #e5ecdf;border-radius:17px;
+  background:rgba(255,255,255,.88);text-align:left;
+}
+.word-modal-meaning>span{
+  color:#8a9789;font-size:9px;font-weight:900;letter-spacing:1.5px;
+}
+.word-modal-meaning p{
+  margin:8px 0 0;color:#4b5c4e;
+  font-size:clamp(16px,3.8vw,19px);line-height:1.65;font-weight:600;
+  overflow-wrap:anywhere;
+}
+.meaning-audio-button{
+  display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  min-width:190px;min-height:56px;margin:22px auto 0;padding:12px 22px;
+  border:0;border-radius:16px;background:#477b62;color:#fff;
+  box-shadow:0 8px 18px rgba(71,123,98,.2);
+  font-size:15px;font-weight:900;
+}
+.meaning-audio-button span{font-size:24px;line-height:1}
+.meaning-audio-button:disabled{opacity:.5;cursor:wait}
+.meaning-audio-button:focus-visible,.word-modal-close:focus-visible{
+  outline:3px solid #e4b65d;outline-offset:3px;
+}
+@media(max-width:520px){
+  .word-modal{width:calc(100vw - 28px);max-width:none;max-height:84dvh;border-radius:21px}
+  .word-modal-card{max-height:84dvh;padding:32px 20px 24px;border-radius:21px}
+  .word-modal-close{top:10px;right:10px;width:44px;height:44px}
+  .word-modal-eyebrow{margin-top:12px}
+  .word-modal-syllables{margin-bottom:20px}
+  .word-modal-meaning{padding:16px}
+  .meaning-audio-button{width:100%;min-height:58px;margin-top:18px}
+}
+@media(prefers-reduced-motion:no-preference){
+  .word-modal[open] .word-modal-card{animation:word-modal-in .18s ease-out}
+  @keyframes word-modal-in{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+}

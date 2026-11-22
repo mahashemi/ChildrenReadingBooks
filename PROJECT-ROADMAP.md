@@ -36,6 +36,10 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 
 
 ### Shared reading experience — all chapters and supplications
+- [x] Replace the cramped inline word-meaning panel with a responsive native dialog for touch and desktop.
+- [x] Make definition audio explicit: tapping a word opens its meaning; the speaker button reads the definition, not the word.
+- [x] Support close button, Escape, backdrop click, focus return and speech cancellation when the dialog closes.
+- [ ] Verify the meaning dialog and audio in desktop and mobile browsers, including a physical phone.
 - [x] Keep the passage as the primary visual element on mobile and desktop.
 - [x] Use local SVGs as subtle, gently animated backgrounds; respect reduced-motion preferences.
 - [x] Remove child-facing activity and external source links from the reading pane while retaining source attribution text.
@@ -90,3 +94,5 @@ CI generates the corpus and fails unless all 54 numbered items have non-empty te
 
 
 - 2026-11-22: PR #53 follow-up adds a viewport-filling desktop reading card and mobile narration highlighting fallback with exact rendered-word offsets. GitHub Actions validation passed; physical-device/browser review remains pending.
+
+- 2026-11-22: Added a responsive native word-meaning dialog with explicit definition audio, keyboard dismissal, backdrop dismissal, focus restoration and automated regression checks. Browser/device verification remains open.
