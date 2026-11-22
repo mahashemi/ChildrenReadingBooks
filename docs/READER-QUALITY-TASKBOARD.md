@@ -23,7 +23,7 @@ Scope: improve the shared reading experience across every chapter and collection
 | P1 | Add regression validation for chapter metadata and media wiring | CI passed | CI checks registration order, chapter coverage, media references and fallback label logic. |
 | P1 | Verify reader in Chrome and narrow mobile viewport | Pending | Artwork, paragraph flow, emphasis, audio and navigation are checked in a real browser. |
 
-| P0 | Replace inline word meanings with a responsive modal and definition audio | Implemented in current PR; CI/browser review pending | Tapping a word opens a centered dialog on phone and desktop; a large speaker button reads the definition (not the word); close button, Escape, backdrop click, focus return and audio stop all work. |
+| P0 | Replace inline word meanings with a responsive modal and definition audio | Merged in PR #54; CI passed; browser/device review pending | Tapping a word opens a centered dialog on phone and desktop; a large speaker button reads the definition (not the word); close button, Escape, backdrop click, focus return and audio stop all work. |
 
 ## Current design requirements
 - [x] Keep all decorative SVGs behind the reading text; never add a top-of-page illustration row.
