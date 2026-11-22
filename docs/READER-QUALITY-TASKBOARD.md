@@ -23,6 +23,8 @@ Scope: improve the shared reading experience across every chapter and collection
 | P1 | Add regression validation for chapter metadata and media wiring | CI passed | CI checks registration order, chapter coverage, media references and fallback label logic. |
 | P1 | Verify reader in Chrome and narrow mobile viewport | Pending | Artwork, paragraph flow, emphasis, audio and navigation are checked in a real browser. |
 
+| P0 | Replace inline word meanings with a responsive modal and definition audio | Implemented in current PR; CI/browser review pending | Tapping a word opens a centered dialog on phone and desktop; a large speaker button reads the definition (not the word); close button, Escape, backdrop click, focus return and audio stop all work. |
+
 ## Current design requirements
 - [x] Keep all decorative SVGs behind the reading text; never add a top-of-page illustration row.
 - [x] Ensure background artwork has low opacity, no hit targets, and no effect on text contrast or passage width.
@@ -31,6 +33,7 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Remove activity/exploration links from child-facing reading pages while retaining factual source attribution separately.
 - [ ] Verify at 320px, 375px, tablet and desktop widths; reading pane must remain the dominant visual element.
 - [ ] Verify mobile Chrome narration on a physical device; confirm boundary-event fallback, pause/resume and speed changes.
+- [ ] Verify word-meaning dialog on phone and desktop, including Escape, outside click, focus return and definition audio.
 
 ## Root-cause findings
 - [x] **Metadata registration order identified:** metadata was assigned before the six STEM chapters were appended. Their pages therefore had no chapterIndex, chapterPage, chapterLength or chapterMedia.
@@ -62,3 +65,5 @@ Scope: improve the shared reading experience across every chapter and collection
 - 2026-11-21: Implemented site-wide reading-first visuals in PR #53. Deeper review fixed CSS specificity on mobile, removed external source/activity URLs from the child reading pane, removed the obsolete panel stylesheet, and expanded offline definitions and colour emphasis to plural STEM terms and all locally defined vocabulary. Latest CI passed; browser/device review remains open.
 
 - 2026-11-22: PR #53 follow-up: expanded the normal desktop reader card to use viewport height; added source-character offsets to rendered word spans and a timed narration-highlight fallback for browsers with missing/irregular word-boundary events. Automated and physical-device validation pending.
+
+- 2026-11-22: Replaced the cramped inline word explorer with a responsive native dialog. Word taps no longer auto-speak the word; children can choose the speaker button to hear the meaning. Escape, backdrop click, close button, focus return and audio cancellation are wired; browser/device review pending.
