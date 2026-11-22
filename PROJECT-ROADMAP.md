@@ -40,7 +40,9 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 - [x] Use local SVGs as subtle, gently animated backgrounds; respect reduced-motion preferences.
 - [x] Remove child-facing activity and external source links from the reading pane while retaining source attribution text.
 - [x] Emphasize curated glossary words and key concepts with bold, varied colours without changing word interaction or narration highlighting.
-- [ ] Verify at 320px, 375px, tablet and desktop widths in a real browser.
+- [x] Expand the normal desktop reader to use the available viewport height; the passage stage receives the remaining card space.
+- [x] Map narration character offsets to rendered word spans and provide estimated progress when speech boundary events are absent.
+- [ ] Verify at 320px, 375px, tablet and desktop widths in a real browser, including mobile Chrome narration on a physical device.
 
 ### Little Scientists — preschool STEM collection
 - [x] Add six original, short-sentence STEM chapters: quantum physics, Space ABC, scientific discovery, robots and AI, DNA, and exoplanets.
@@ -85,3 +87,6 @@ CI generates the corpus and fails unless all 54 numbered items have non-empty te
 
 
 - Paper-making chapter includes a Qur’an 6:99 reflection: gratitude for Allah’s gifts of water and plant life, learning how creation works, and using resources responsibly.
+
+
+- 2026-11-22: PR #53 follow-up adds a viewport-filling desktop reading card and mobile narration highlighting fallback with exact rendered-word offsets. GitHub Actions validation passed; physical-device/browser review remains pending.
