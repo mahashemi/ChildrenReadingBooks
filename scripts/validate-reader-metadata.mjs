@@ -12,7 +12,7 @@ assert.ok(app.includes("safeChapterIndex>=0?"), "Reader chapter label must have 
 assert.ok(app.includes("classes.push(\"key-concept\")"), "Key concepts must retain their word-level span styling");
 
 const mediaScript = fs.readFileSync("scripts/validate-stem-media.mjs", "utf8");
-assert.ok(mediaScript.includes("media.length, 19"), "The STEM media validator must continue checking all 19 page illustrations");
+assert.ok(mediaScript.includes("media.length, 20"), "The STEM media validator must continue checking all 19 page illustrations");
 const scientistStart = app.indexOf('add({title:"The Little Scientist’s Discovery Primer"');
 const scientistEnd = app.indexOf('add({title:"Meet the Robots"', scientistStart);
 const scientistChapter = app.slice(scientistStart, scientistEnd);
