@@ -49,6 +49,13 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Run JavaScript syntax, STEM media and metadata validation in CI.
 - [x] Verify CI validation on PR; [ ] confirm post-merge GitHub Pages deployment.
 
+## Latest implementation — scientist home experiment
+- [x] Add a child-led paper-bridge investigation using two books, one sheet of paper and coins.
+- [x] Teach question, prediction, fair testing (change one variable), counting, observation, evidence and repeating a test.
+- [x] Include adult-supervision and coin-safety guidance.
+- [x] Add regression assertions to the existing chapter metadata validator.
+- [ ] Confirm PR CI and GitHub Pages deployment.
+
 ## Next priorities
 ### P1 — reading quality
 - Review sentence length and reading level with a six-year-old early reader.
@@ -68,4 +75,6 @@ Scope: improve the shared reading experience across every chapter and collection
 
 - 2026-11-22: PR #53 follow-up: expanded the normal desktop reader card to use viewport height; added source-character offsets to rendered word spans and a timed narration-highlight fallback for browsers with missing/irregular word-boundary events. Automated and physical-device validation pending.
 
-- 2026-11-22: Replaced the cramped inline word explorer with a responsive native dialog. Word taps no longer auto-speak the word; children can choose the speaker button to hear the meaning. Escape, backdrop click, close button, focus return and audio cancellation are wired; browser/device review pending.
+- 2026-11-22: Replaced the cramped inline word explorer with a responsive native dialog. Word taps open the dialog and automatically pronounce the selected word; a speaker icon replays it, while the separate meaning-audio control reads the definition. Escape, backdrop click, close button, focus return and audio cancellation are wired; browser/device review pending (PR #55 merged; CI passed).
+
+- 2026-11-22: Added a four-step home science experiment to The Little Scientist’s Discovery Primer: children compare a flat and folded paper bridge, count how many coins each holds, and learn to change one variable at a time. CI regression checks cover materials, fair-test guidance and adult supervision.
