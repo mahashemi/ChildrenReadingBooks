@@ -8,7 +8,7 @@ const enhancements = fs.readFileSync("reading-enhancements.js", "utf8");
 const index = fs.readFileSync("index.html", "utf8");
 const media = [...app.matchAll(/media:m\("([^"]+)","([^"]+)","([^"]+)"\)/g)];
 const symbols = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map(match => match[1]));
-assert.equal(media.length, 19, "Expected one background illustration for each new STEM reading page");
+assert.equal(media.length, 20, "Expected one background illustration for each new STEM reading page");
 assert.ok(!app.includes("exploreUrl") && !app.includes("exploreLabel"), "External activity links must be removed from lesson media data");
 assert.ok(!app.includes("current.chapterSourceUrl"), "External source URLs must not be rendered in the child reading pane");
 assert.ok(app.includes('$("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);'), "Keep readable source attribution and Qur\u2019an reference links without external activity URLs");
