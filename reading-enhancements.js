@@ -519,7 +519,7 @@
     let speechSearchFrom = 0;
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
-      const match = piece.match(/[A-Za-z]+(?:'[A-Za-z]+)?/);
+      const match = piece.match(/[A-Za-z]+(?:['’\-][A-Za-z]+)*/);
       if (!match) return escapeHtml(piece);
       const original = match[0], lower = original.toLowerCase();
       const speechStart = paragraph.indexOf(original, speechSearchFrom);
