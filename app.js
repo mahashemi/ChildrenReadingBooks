@@ -556,6 +556,33 @@ let page=0,
   showWordBorders=(()=>{try{return localStorage.getItem("littleLanternsWordBorders")==="true";}catch(e){return false;}})();
 const $=id=>document.getElementById(id);
 const storyText=$("storyText");
+let activeWordTarget=null;
+function openWordModal(target){
+  if(isReadingStory)stopReading();
+  activeWordTarget=target;
+  $("wordDisplay").textContent=target.dataset.word||"";
+  $("wordBreakdown").textContent=target.dataset.parts||"";
+  $("wordMeaning").textContent=target.dataset.meaning||"A child-friendly definition is not available yet.";
+  $("hearMeaning").disabled=false;
+  const dialog=$("wordPanel");
+  if(!dialog.open)dialog.showModal();
+}
+function closeWordModal(){
+  const dialog=$("wordPanel");
+  if("speechSynthesis" in window)window.speechSynthesis.cancel();
+  activeUtterance=null;
+  if(dialog.open)dialog.close();
+  else if(activeWordTarget?.isConnected)activeWordTarget.focus();
+}
+$("closeWord").addEventListener("click",closeWordModal);
+$("wordPanel").addEventListener("click",event=>{if(event.target===$("wordPanel"))closeWordModal();});
+$("wordPanel").addEventListener("close",()=>{
+  if("speechSynthesis" in window)window.speechSynthesis.cancel();
+  activeUtterance=null;
+  if(activeWordTarget?.isConnected)activeWordTarget.focus();
+  activeWordTarget=null;
+});
+$("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
 function escapeHtml(value){return value.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function tokenInfo(token){
   const match=token.match(/[A-Za-z]+(?:'[A-Za-z]+)?/);
@@ -726,18 +753,12 @@ function renderStory(){
     artHost.setAttribute("role","img");
     artHost.classList.toggle("has-lesson-illustration",!!media);
   }
-  $("wordPanel").hidden=true;
+  closeWordModal();
   $("modeHint").textContent=mode==="syllables"?"Longer words are divided into syllables. Tap any word to hear it and explore its meaning.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and explore its meaning.":"Read in ordinary English spelling. Tap a word to hear it and explore its meaning.";
   renderStoryLibrary();
 }
 function selectWord(target){
-  if(isReadingStory)stopReading();
-  $("wordDisplay").textContent=target.dataset.word;
-  $("wordBreakdown").textContent=target.dataset.parts;
-  $("wordMeaning").textContent=target.dataset.meaning;
-  $("wordPanel").hidden=false;
-  document.querySelector(".story-reading-stage")?.classList.add("has-word-panel");
-  speakText(target.dataset.word);
+  openWordModal(target);
 }
 storyText.addEventListener("click",e=>{const word=e.target.closest(".story-word");if(word)selectWord(word);});
 storyText.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("story-word")){e.preventDefault();selectWord(e.target);}});
@@ -753,8 +774,7 @@ $("previousPage").addEventListener("click",()=>{if(isReadingStory)stopReading();
 $("nextPage").addEventListener("click",()=>{if(isReadingStory)stopReading();if(page<storyPages.length-1){page++;renderStory();syncReadingRoute();}else{showToast("Wonderful reading! You finished every chapter. 🌟");page=0;renderStory();syncReadingRoute();}});
 $("smallerText").addEventListener("click",()=>{fontSize=Math.max(16,fontSize-1);try{localStorage.setItem("littleLanternsFontSize",String(fontSize));}catch(e){}renderStory();});
 $("largerText").addEventListener("click",()=>{fontSize=Math.min(28,fontSize+1);try{localStorage.setItem("littleLanternsFontSize",String(fontSize));}catch(e){}renderStory();});
-$("closeWord").addEventListener("click",()=>{$("wordPanel").hidden=true;document.querySelector(".story-reading-stage")?.classList.remove("has-word-panel");});
-$("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textContent));
+
 
 let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
   storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,
