@@ -12,8 +12,14 @@ assert.match(html, /id="closeWord"[^>]*aria-label="Close word meaning"/,
   "Dialog needs a clearly labelled close button");
 assert.match(html, /id="hearMeaning"[^>]*aria-label="Hear the meaning"/,
   "Meaning audio button needs an accessible label");
+assert.match(html, /id="hearWord"[^>]*aria-label="Hear word pronunciation again"/,
+  "Selected word needs an accessible pronunciation replay icon");
 assert.match(app, /function openWordModal\(target\)[\s\S]*?dialog\.showModal\(\)/,
   "Selecting a word must open the modal");
+assert.match(app, /function openWordModal\(target\)[\s\S]*?speakText\(target\.dataset\.word\|\|""\)/,
+  "Opening the modal must pronounce the selected word automatically");
+assert.match(app, /\$\("hearWord"\)\.addEventListener\("click",\(\)=>speakText\(\$\("wordDisplay"\)\.textContent\)\)/,
+  "Pronunciation icon must replay the selected word");
 assert.match(app, /function closeWordModal\(\)[\s\S]*?dialog\.close\(\)/,
   "Modal close helper must close the native dialog");
 assert.match(app, /event\.target===\$\("wordPanel"\)/,

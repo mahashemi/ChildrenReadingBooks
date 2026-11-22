@@ -525,6 +525,26 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
   font-size:clamp(30px,7vw,42px);font-weight:900;letter-spacing:-1px;
   overflow-wrap:anywhere;
 }
+.word-modal-title-row{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  max-width:100%;margin:0 auto;
+}
+.word-modal-title-row h2{min-width:0}
+.word-pronunciation-button{
+  flex:0 0 44px;display:grid;place-items:center;
+  width:44px;height:44px;padding:10px;
+  border:1px solid #dce9dc;border-radius:50%;
+  background:#eaf3e9;color:#3d7658;
+  transition:background .15s ease,transform .15s ease;
+}
+.word-pronunciation-button:hover{background:#dcebdc;transform:scale(1.04)}
+.word-pronunciation-button svg{
+  width:23px;height:23px;fill:none;stroke:currentColor;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+}
+.word-pronunciation-button:focus-visible{
+  outline:3px solid #e4b65d;outline-offset:3px;
+}
 .word-modal-syllables{
   min-height:1.2em;margin:7px 0 25px;
   color:#78927a;font-size:14px;font-weight:800;

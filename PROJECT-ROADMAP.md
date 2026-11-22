@@ -36,6 +36,7 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 
 
 ### Shared reading experience — all chapters and supplications
+- [x] Automatically pronounce the selected word when its meaning modal opens; provide a separate speaker icon to replay the word.
 - [x] Replace the cramped inline word-meaning panel with a responsive native dialog for touch and desktop.
 - [x] Make definition audio explicit: tapping a word opens its meaning; the speaker button reads the definition, not the word.
 - [x] Support close button, Escape, backdrop click, focus return and speech cancellation when the dialog closes.
