@@ -23,6 +23,12 @@ for (const term of ["atoms","electrons","photons","lasers","galaxies","nebulae",
   assert.ok(enhancements.includes(term + ':"'), `Missing child-friendly glossary definition: ${term}`);
 }
 assert.ok(enhancements.includes("if (localMeaning || isKeyConcept)"), "Every locally defined word and key concept must receive visual emphasis");
+assert.ok(enhancements.includes('data-char-start="'), "Rendered word spans must expose source character offsets");
+assert.ok(enhancements.includes("speechSearchFrom"), "Word offsets must be calculated against the original paragraph");
+assert.ok(app.includes("startSpeechFallback"), "Narration must have a fallback when speech boundary events are absent");
+assert.ok(app.includes("clearSpeechFallback"), "Narration fallback timers must be cleaned up on pause, stop and cancellation");
+assert.ok(app.includes("node.dataset.charStart"), "Narration highlighting must map character positions to rendered word spans");
+assert.ok(app.includes("lastBoundaryAt"), "Fallback progression must yield to real speech boundary events");
 for (const [, id, alt, caption] of media) {
   assert.ok(symbols.has(id), `Missing SVG symbol: ${id}`);
   assert.ok(alt.trim().length > 12, `Image alt text is too short: ${id}`);
