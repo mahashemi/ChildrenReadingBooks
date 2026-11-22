@@ -759,6 +759,11 @@ $("hearMeaning").addEventListener("click",()=>speakText($("wordMeaning").textCon
 let speechRate=(()=>{try{return Math.max(.1,Math.min(1.5,Number(localStorage.getItem("littleLanternsSpeechRate"))||1));}catch(e){return 1;}})(),
   storyReadToken=0,isReadingStory=false,isSpeechPaused=false,currentSpeechParagraph=0,
   currentSpeechOffset=0,currentSpeechWordStart=0,selectedSpeechVoice=null,activeUtterance=null;
+let speechFallbackTimer=null,speechFallbackState=null;
+function clearSpeechFallback(){
+  if(speechFallbackTimer!==null){clearInterval(speechFallbackTimer);speechFallbackTimer=null;}
+  speechFallbackState=null;
+}
 function availableSpeechVoices(){return "speechSynthesis" in window?window.speechSynthesis.getVoices():[];}
 function isPreferredEnglishVoice(voice){return /^en([_-]|$)/i.test(voice.lang)&&!/^en[-_]NG/i.test(voice.lang);}
 function defaultSpeechVoice(voices=availableSpeechVoices()){
@@ -835,6 +840,7 @@ function clearSpeechHighlight(){
   storyText.querySelectorAll(".is-speaking,.is-speaking-paragraph").forEach(el=>el.classList.remove("is-speaking","is-speaking-paragraph"));
 }
 function stopReading(){
+  clearSpeechFallback();
   storyReadToken++;
   isReadingStory=false;
   isSpeechPaused=false;
@@ -866,18 +872,52 @@ let autoScrollEnabled=(()=>{try{return localStorage.getItem("littleLanternsAutoS
 const autoScrollToggle=$("autoScrollToggle");
 if(autoScrollToggle){autoScrollToggle.checked=autoScrollEnabled;autoScrollToggle.addEventListener("change",()=>{autoScrollEnabled=autoScrollToggle.checked;try{localStorage.setItem("littleLanternsAutoScroll",String(autoScrollEnabled));}catch(e){}});}
 function highlightSpokenWord(paragraphIndex,charIndex){
-  const paragraph=storyPages[page].paragraphs[paragraphIndex];
-  const tokens=[...paragraph.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)];
-  let tokenIndex=tokens.findIndex(match=>charIndex>=match.index&&charIndex<match.index+match[0].length);
-  if(tokenIndex<0)tokenIndex=tokens.findIndex(match=>match.index>=charIndex);
   const paragraphNode=storyText.children[paragraphIndex];
-  if(!paragraphNode)return;
+  if(!paragraphNode)return null;
+  const wordNodes=[...paragraphNode.querySelectorAll(".story-word")];
+  const active=wordNodes.find(node=>{
+    const start=Number(node.dataset.charStart),end=Number(node.dataset.charEnd);
+    return Number.isFinite(start)&&Number.isFinite(end)&&charIndex>=start&&charIndex<end;
+  })||wordNodes.find(node=>Number(node.dataset.charStart)>=charIndex);
   clearSpeechHighlight();
   paragraphNode.classList.add("is-speaking-paragraph");
-  if(tokenIndex<0)return;
-  const wordNodes=paragraphNode.querySelectorAll(".story-word");
-  const active=wordNodes[tokenIndex];
-  if(active){active.classList.add("is-speaking");keepSpeakingWordVisible(active);}
+  if(active){
+    active.classList.add("is-speaking");
+    currentSpeechWordStart=Number(active.dataset.charStart)||0;
+    keepSpeakingWordVisible(active);
+  }
+  return active;
+}
+function startSpeechFallback(paragraphIndex,paragraphText,startOffset,token){
+  clearSpeechFallback();
+  const paragraphNode=storyText.children[paragraphIndex];
+  if(!paragraphNode)return;
+  const words=[...paragraphNode.querySelectorAll(".story-word")].map(node=>({
+    node,start:Number(node.dataset.charStart),end:Number(node.dataset.charEnd),
+    duration:Math.max(230,(190+Math.max(1,(node.textContent.match(/[aeiouy]+/gi)||[]).length)*105)/speechRate)
+  })).filter(word=>Number.isFinite(word.start)&&word.start>=startOffset);
+  if(!words.length)return;
+  const firstIndex=words.findIndex(word=>word.start>=startOffset);
+  speechFallbackState={token,paragraphIndex,words,index:Math.max(0,firstIndex),lastTick:Date.now(),elapsed:0,lastBoundaryAt:Date.now()};
+  speechFallbackTimer=setInterval(()=>{
+    const state=speechFallbackState;
+    if(!state||state.token!==storyReadToken||token!==storyReadToken||!isReadingStory||isSpeechPaused){clearSpeechFallback();return;}
+    const now=Date.now(),delta=Math.min(250,Math.max(0,now-state.lastTick));
+    state.lastTick=now;
+    if(now-state.lastBoundaryAt<950)return;
+    state.elapsed+=delta;
+    let current=state.words[state.index];
+    while(current&&state.elapsed>=current.duration&&state.index<state.words.length-1){
+      state.elapsed-=current.duration;
+      state.index++;
+      current=state.words[state.index];
+    }
+    if(current){
+      currentSpeechWordStart=current.start;
+      currentSpeechOffset=current.start;
+      highlightSpokenWord(paragraphIndex,current.start);
+    }
+  },120);
 }
 function speakStoryParagraph(token,paragraphIndex,startOffset=0){
   if(token!==storyReadToken||!isReadingStory)return;
@@ -895,27 +935,39 @@ function speakStoryParagraph(token,paragraphIndex,startOffset=0){
   currentSpeechOffset=startOffset;
   utterance.onstart=()=>{
     if(token!==storyReadToken||!isReadingStory)return;
-    const first=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)]
-      .find(item=>item.index>=startOffset);
-    if(first){currentSpeechWordStart=first.index;highlightSpokenWord(paragraphIndex,first.index);}
+    const first=[...storyText.children[paragraphIndex].querySelectorAll(".story-word")]
+      .find(node=>Number(node.dataset.charStart)>=startOffset);
+    if(first){
+      currentSpeechWordStart=Number(first.dataset.charStart)||0;
+      highlightSpokenWord(paragraphIndex,currentSpeechWordStart);
+    }
+    startSpeechFallback(paragraphIndex,paragraphText,startOffset,token);
   };
   utterance.onboundary=event=>{
     if(token!==storyReadToken||!isReadingStory||typeof event.charIndex!=="number")return;
     const absoluteIndex=startOffset+event.charIndex;
     currentSpeechOffset=absoluteIndex;
-    const match=[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)]
-      .find(item=>absoluteIndex>=item.index&&absoluteIndex<item.index+item[0].length)
-      ||[...paragraphText.matchAll(/[A-Za-z]+(?:'[A-Za-z]+)?/g)].find(item=>item.index>=absoluteIndex);
-    if(match)currentSpeechWordStart=match.index;
-    highlightSpokenWord(paragraphIndex,absoluteIndex);
+    const active=highlightSpokenWord(paragraphIndex,absoluteIndex);
+    if(active){
+      currentSpeechWordStart=Number(active.dataset.charStart)||absoluteIndex;
+      if(speechFallbackState&&speechFallbackState.token===token){
+        const index=speechFallbackState.words.findIndex(word=>word.start===currentSpeechWordStart);
+        if(index>=0)speechFallbackState.index=index;
+        speechFallbackState.elapsed=0;
+        speechFallbackState.lastTick=Date.now();
+        speechFallbackState.lastBoundaryAt=Date.now();
+      }
+    }
   };
   utterance.onend=()=>{
+    clearSpeechFallback();
     if(token!==storyReadToken||isSpeechPaused)return;
     currentSpeechOffset=0;currentSpeechWordStart=0;
     speakStoryParagraph(token,paragraphIndex+1,0);
   };
   utterance.onerror=event=>{
     if(token!==storyReadToken)return;
+    clearSpeechFallback();
     if(event.error==="canceled"||event.error==="interrupted")return;
     isReadingStory=false;isSpeechPaused=false;clearSpeechHighlight();updateAudioControls();
     showToast("The reader could not finish speaking. You can try again.");
@@ -924,6 +976,7 @@ function speakStoryParagraph(token,paragraphIndex,startOffset=0){
 }
 function startStoryReading(){
   if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
+  clearSpeechFallback();
   window.speechSynthesis.cancel();
   clearSpeechHighlight();
   const token=++storyReadToken;
@@ -933,6 +986,7 @@ function startStoryReading(){
 }
 function pauseStoryReading(){
   if(!isReadingStory||isSpeechPaused)return;
+  clearSpeechFallback();
   isSpeechPaused=true;
   currentSpeechOffset=currentSpeechWordStart;
   storyReadToken++;
@@ -948,6 +1002,7 @@ function resumeStoryReading(){
 }
 function restartAtCurrentWord(){
   if(!isReadingStory&&!isSpeechPaused)return;
+  clearSpeechFallback();
   const wasPaused=isSpeechPaused;
   const offset=currentSpeechWordStart;
   storyReadToken++;
