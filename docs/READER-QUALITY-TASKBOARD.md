@@ -25,6 +25,8 @@ Scope: improve the shared reading experience across every chapter and collection
 
 | P0 | Replace inline word meanings with a responsive modal and definition audio | Merged in PR #54; CI passed; browser/device review pending | Tapping a word opens a centered dialog on phone and desktop; a large speaker button reads the definition (not the word); close button, Escape, backdrop click, focus return and audio stop all work. |
 
+| P0 | Auto-pronounce the selected word when its meaning modal opens, with a replay icon | Implemented in current PR; CI/browser review pending | Opening a word modal speaks the word once; a dedicated speaker icon beside the word repeats its pronunciation. Definition audio remains a separate control. |
+
 ## Current design requirements
 - [x] Keep all decorative SVGs behind the reading text; never add a top-of-page illustration row.
 - [x] Ensure background artwork has low opacity, no hit targets, and no effect on text contrast or passage width.
