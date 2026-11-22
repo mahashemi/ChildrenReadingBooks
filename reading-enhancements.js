@@ -516,11 +516,15 @@
     "experiment","prediction","observe","scientist","scientists","energy","electricity"
   ]);
   function renderParagraph(paragraph) {
+    let speechSearchFrom = 0;
     return paragraph.split(/(\s+)/).map(function (piece) {
       if (/^\s+$/.test(piece)) return piece;
       const match = piece.match(/[A-Za-z]+(?:'[A-Za-z]+)?/);
       if (!match) return escapeHtml(piece);
       const original = match[0], lower = original.toLowerCase();
+      const speechStart = paragraph.indexOf(original, speechSearchFrom);
+      const speechEnd = speechStart + original.length;
+      speechSearchFrom = speechEnd;
       const base = lower.replace(/'s$/i, "");
       const parts = getParts(base);
       const isKnownOne = oneSyllable.has(base);
@@ -544,7 +548,7 @@
       }
       if (isKeyConcept) classes.push("key-concept");
       return escapeHtml(before) + '<span class="story-word ' + classes.join(" ") + '" tabindex="0" role="button" data-word="' +
-        escapeHtml(original) + '" data-parts="' + escapeHtml(breakdown) + '" data-meaning="' + escapeHtml(meaning) +
+        escapeHtml(original) + '" data-char-start="' + speechStart + '" data-char-end="' + speechEnd + '" data-parts="' + escapeHtml(breakdown) + '" data-meaning="' + escapeHtml(meaning) +
         '" data-lookup="' + (localMeaning ? "false" : "true") + '" aria-label="' + escapeHtml(original) + '">' + escapeHtml(displayed) + '</span>' + escapeHtml(after);
     }).join("");
   }
