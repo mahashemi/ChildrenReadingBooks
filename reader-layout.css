@@ -166,8 +166,14 @@ body.reader-immersive .story-reading-stage{min-height:0}
 #readingView.active .source-note{flex:0 0 auto;margin-top:7px;padding:7px 10px;font-size:8px}
 #readingView.active .settings-sidebar .drawer-setting-group:has(#smallerText){display:none!important}
 @media(min-width:761px){
-  #readingView.active{min-height:calc(100svh - 100px)}
-  #readingView.active .reader-card{height:calc(100svh - 230px);min-height:540px;max-width:1180px;margin:0 auto}
+  /* Give the normal desktop reader the viewport height, not only immersive mode. */
+  #readingView.active{min-height:0;display:flex;flex-direction:column}
+  #readingView.active>.reader-layout{display:flex!important;flex:1 1 auto;min-height:0;width:100%}
+  #readingView.active .reader-card{
+    box-sizing:border-box;flex:1 1 auto;width:100%;height:calc(100dvh - 170px);
+    min-height:560px;max-height:none;max-width:1280px;margin:0 auto
+  }
+  #readingView.active .story-reading-stage{flex:1 1 auto;min-height:320px}
 }
 @media(max-width:760px){
   #readingView.active{height:calc(100dvh - 70px);min-height:0;display:flex;flex-direction:column;overflow:hidden}
