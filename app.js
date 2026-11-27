@@ -691,7 +691,7 @@ $("chapterDrawerToggle").addEventListener("click",()=>{
 $("conceptExplorerToggle").addEventListener("click",openConceptModal);
 $("previousConcept").addEventListener("click",()=>showConceptSlide(conceptSlideIndex-1,true));
 $("nextConcept").addEventListener("click",()=>showConceptSlide(conceptSlideIndex+1,true));
-$("hearConcept").addEventListener("click",()=>{const slide=conceptSlides[conceptSlideIndex];if(slide)speakText(slide.caption||slide.alt);});
+$("hearConcept").addEventListener("click",()=>{const slide=conceptSlides[conceptSlideIndex];if(slide)speakConceptNarration(slide.caption||slide.alt);});
 $("closeConceptModal").addEventListener("click",()=>$("conceptModal").close());
 $("conceptModal").addEventListener("click",event=>{if(event.target===$("conceptModal"))$("conceptModal").close();});
 $("conceptModal").addEventListener("close",()=>$("conceptExplorerToggle").focus());
@@ -750,6 +750,35 @@ function renderConceptExplorer(current){
  conceptSlideIndex=Math.max(0,conceptSlides.findIndex(slide=>slide.title===current.title));
  showConceptSlide(conceptSlideIndex,false);
 }
+function prepareConceptNarration(text){
+ const clean=String(text||"").replace(/\s+/g," ").trim();
+ if(!clean)return "";
+ const punctuated=clean.replace(/\s+([,.;:!?])/g,"$1").replace(/([.!?])(?=[A-Z])/g,"$1 ").replace(/\s+/g," ");
+ return /[.!?…]["')\]]?$/.test(punctuated)?punctuated:punctuated+".";
+}
+let conceptNarrationToken=0;
+function speakConceptNarration(text){
+ const narration=prepareConceptNarration(text);
+ if(!narration)return;
+ if(!("speechSynthesis" in window)){showToast("Audio is not available in this browser.");return;}
+ if(isReadingStory)stopReading();
+ const token=++conceptNarrationToken;
+ window.speechSynthesis.cancel();
+ const sentences=narration.match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g)||[narration];
+ const speakAt=index=>{
+  if(token!==conceptNarrationToken||index>=sentences.length)return;
+  const sentence=sentences[index].trim();
+  if(!sentence){speakAt(index+1);return;}
+  const utterance=new SpeechSynthesisUtterance(sentence);
+  applySpeechVoice(utterance);
+  utterance.rate=speechRate;
+  utterance.onend=()=>{if(token===conceptNarrationToken&&index+1<sentences.length)setTimeout(()=>speakAt(index+1),420);};
+  utterance.onerror=()=>{if(token===conceptNarrationToken&&index+1<sentences.length)setTimeout(()=>speakAt(index+1),420);};
+  activeUtterance=utterance;
+  window.speechSynthesis.speak(utterance);
+ };
+ speakAt(0);
+}
 function showConceptSlide(index,announce){
  if(!conceptSlides.length)return;
  conceptSlideIndex=Math.max(0,Math.min(index,conceptSlides.length-1));
@@ -764,7 +793,7 @@ function showConceptSlide(index,announce){
  $("previousConcept").disabled=conceptSlideIndex===0;
  $("nextConcept").disabled=conceptSlideIndex===conceptSlides.length-1;
  $("nextConcept").textContent=conceptSlideIndex===conceptSlides.length-1?"All explored ✓":"Next ✨";
- if(announce)speakText(slide.caption||slide.alt);
+ if(announce)speakConceptNarration(slide.caption||slide.alt);
 }
 function openConceptModal(){
  closeWordModal();
@@ -773,11 +802,7 @@ function openConceptModal(){
  if(!dialog.open)dialog.showModal();
  showConceptSlide(conceptSlideIndex,true);
 }
-function openConceptModal(){
-  closeWordModal();
-  const dialog=$("conceptModal");
-  if(!dialog.open)dialog.showModal();
-}
+
 function renderStory(){
   const current=storyPages[page];
   $("storyTitle").textContent=current.chapterTitle||current.title;
