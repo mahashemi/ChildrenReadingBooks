@@ -128,3 +128,9 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Improve toolbar, title hierarchy, reading stage, narration dock and page navigation styling.
 - [x] Add a shorter-desktop-height layout so the controls remain usable.
 - [ ] Review visual balance and scrolling on real desktop browsers; verify 320px/375px mobile layouts remain unchanged.
+
+
+## Trilingual STEM glossary expansion
+- [x] Add child-friendly Arabic, Persian and Urdu meanings for 22 core STEM terms across physics, astronomy, robotics, biology and scientific inquiry.
+- [x] Extend CI coverage to require all new translations.
+- [ ] Review translated wording with native readers and continue coverage for all key terms in every chapter.
