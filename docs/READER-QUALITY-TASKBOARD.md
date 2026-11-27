@@ -92,3 +92,11 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Avoid duplicate fallback slides in chapters without page-level concept artwork.
 - [x] Add regression checks for toolbar placement, slide navigation, narration, focus restoration and reduced-motion support.
 - [ ] Verify toolbar alignment and concept navigation on physical mobile Chrome and desktop browsers.
+
+
+## Concept narration clarity
+- [x] Normalize concept captions so every spoken description ends with clear sentence punctuation.
+- [x] Speak sentence-by-sentence with a short pause between sentences, while preserving comma pauses within sentences.
+- [x] Ensure opening the Concepts modal starts narration; remove the duplicate modal opener that shadowed the narrated implementation.
+- [x] Add regression checks for punctuation, sentence pauses, and narration on modal open.
+- [ ] Listen to narration on physical mobile Chrome and desktop browsers and tune pause length if needed.

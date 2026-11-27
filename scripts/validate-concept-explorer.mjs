@@ -15,7 +15,12 @@ assert.ok(html.includes('aria-labelledby="conceptModalTitle"'),"The concept dial
 assert.ok(app.includes("function renderConceptExplorer(current)"),"The current chapter must populate the concept explorer");
 assert.ok(app.includes("illustratedPages.length?illustratedPages:[current]"),"The carousel must use distinct illustrated lesson pages without repeating fallback art");
 assert.ok(app.includes("function showConceptSlide(index,announce)"),"Concept navigation must render individual slides");
-assert.ok(app.includes("speakText(slide.caption||slide.alt)"),"Opening and advancing concepts must narrate the current idea");
+assert.ok(app.includes("function prepareConceptNarration(text)"),"Concept narration must normalize sentence punctuation");
+assert.ok(app.includes("function speakConceptNarration(text)"),"Concept narration must use its dedicated paced speech queue");
+assert.ok(app.includes("setTimeout(()=>speakAt(index+1),420)"),"Sentence boundaries must include a child-friendly pause");
+assert.ok(app.includes("if(announce)speakConceptNarration(slide.caption||slide.alt)"),"Advancing concepts must narrate the current idea");
+assert.equal(app.split("function openConceptModal(").length-1,1,"There must be one modal opener");
+assert.ok(app.includes("showConceptSlide(conceptSlideIndex,true)"),"Opening the modal must speak the first concept");
 assert.ok(app.includes('addEventListener("click",()=>showConceptSlide(conceptSlideIndex+1,true))'),"Next must advance and narrate");
 assert.ok(app.includes('addEventListener("click",openConceptModal)'),"The Concepts button must open the dialog");
 assert.ok(app.includes('addEventListener("close",()=>$("conceptExplorerToggle").focus())'),"Closing the dialog must restore focus");
