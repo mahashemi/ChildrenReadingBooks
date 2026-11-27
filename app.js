@@ -744,7 +744,8 @@ function conceptMediaForPage(pageData){
 function renderConceptExplorer(current){
  const chapter=readingChapters[current.chapterIndex];
  const pages=chapter?storyPages.slice(chapter.start,chapter.end+1):[current];
- conceptSlides=pages.map(conceptMediaForPage);
+ const illustratedPages=pages.filter(pageData=>pageData.chapterMedia||pageData.media);
+ conceptSlides=(illustratedPages.length?illustratedPages:[current]).map(conceptMediaForPage);
  if(!conceptSlides.length)conceptSlides=[conceptMediaForPage(current)];
  conceptSlideIndex=Math.max(0,conceptSlides.findIndex(slide=>slide.title===current.title));
  showConceptSlide(conceptSlideIndex,false);
