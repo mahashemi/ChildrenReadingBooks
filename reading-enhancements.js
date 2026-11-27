@@ -312,7 +312,7 @@
     habitats:"Natural homes of plants or animals.",
     nutrient:"A substance a living thing needs to grow and stay healthy.",
     scientists:"People who ask questions and use observations and tests to learn about the world.",
-    gravity:"A force that pulls objects toward one another."
+    gravity:"A force that pulls objects toward one another.",
     bark:"The tough outer covering of a tree trunk or branch. Paper makers remove it before turning the wood into pulp.",
     chip:"A small piece cut or broken from a larger piece of wood.",
     fibre:"A thin, thread-like part of a plant. Many fibres join together to make a sheet of paper.",
