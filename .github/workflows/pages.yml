@@ -37,6 +37,8 @@ jobs:
         run: node scripts/validate-reader-metadata.mjs
       - name: Validate accessible word meaning modal
         run: node scripts/validate-word-meaning-modal.mjs
+      - name: Validate reading artwork removal and concept explorer
+        run: node scripts/validate-concept-explorer.mjs
       - name: Check JavaScript syntax
         run: |
           node --check app.js
@@ -48,6 +50,7 @@ jobs:
           node --check flags.js
           node --check flags-data.js
           node --check scripts/vendor-flags.mjs
+          node --check scripts/validate-concept-explorer.mjs
   deploy:
     needs: validate
     if: github.event_name != 'pull_request'
