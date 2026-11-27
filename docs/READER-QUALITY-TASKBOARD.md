@@ -114,3 +114,10 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Add curated Arabic, Persian and Urdu meanings for 15 paper-making vocabulary terms; clearly label English fallback where a reviewed translation is not yet available.
 - [x] Add CI regression checks for selectors, language persistence, RTL/LTR isolation and glossary coverage.
 - [ ] Review translations with native readers and expand the reviewed glossary to STEM and story vocabulary.
+
+
+## Context-aware dictionary meanings
+- [x] Rank online dictionary definitions using words in the selected story sentence and chapter title.
+- [x] Ignore common stop words so they do not dominate the match.
+- [x] Show a clear ambiguity message when no definition has a meaningful context match instead of silently choosing the first dictionary sense.
+- [x] Preserve the English source meaning so the selected learner language can translate it.
