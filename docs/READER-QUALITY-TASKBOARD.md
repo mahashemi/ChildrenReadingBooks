@@ -121,3 +121,10 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Ignore common stop words so they do not dominate the match.
 - [x] Show a clear ambiguity message when no definition has a meaningful context match instead of silently choosing the first dictionary sense.
 - [x] Preserve the English source meaning so the selected learner language can translate it.
+
+
+## Desktop reader visual refinement
+- [x] Give the desktop reading card a viewport-aware, spacious visual treatment with a clear passage focus.
+- [x] Improve toolbar, title hierarchy, reading stage, narration dock and page navigation styling.
+- [x] Add a shorter-desktop-height layout so the controls remain usable.
+- [ ] Review visual balance and scrolling on real desktop browsers; verify 320px/375px mobile layouts remain unchanged.
