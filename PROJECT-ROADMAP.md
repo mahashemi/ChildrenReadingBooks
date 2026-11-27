@@ -42,7 +42,7 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 - [x] Support close button, Escape, backdrop click, focus return and speech cancellation when the dialog closes.
 - [ ] Verify the meaning dialog and audio in desktop and mobile browsers, including a physical phone.
 - [x] Keep the passage as the primary visual element on mobile and desktop.
-- [x] Use local SVGs as subtle, gently animated backgrounds; respect reduced-motion preferences.
+- [x] Keep the reading pane text-only; show local SVG concept illustrations on demand in an animated modal with reduced-motion support.
 - [x] Remove child-facing activity and external source links from the reading pane while retaining source attribution text.
 - [x] Emphasize curated glossary words and key concepts with bold, varied colours without changing word interaction or narration highlighting.
 - [x] Expand the normal desktop reader to use the available viewport height; the passage stage receives the remaining card space.
@@ -52,7 +52,7 @@ Each core dua record includes stable ID, collection ID, ordinal, source title, E
 ### Little Scientists — preschool STEM collection
 - [x] Add six original, short-sentence STEM chapters: quantum physics, Space ABC, scientific discovery, robots and AI, DNA, and exoplanets.
 - [x] Add page-specific local SVG illustrations.
-- [x] Rework SVGs as subtle animated backgrounds behind the shared reading pane; no separate top illustration panel.
+- [x] Move chapter SVGs out of the reading pane into the on-demand Concepts modal; no artwork obscures reading text.
 - [x] Remove child-facing activity/exploration links from the reading pane; retain source attribution as plain text and keep source URLs out of child-facing chapter notes.
 - [x] Apply colourful, bold glossary/key-concept emphasis through the shared paragraph renderer across stories and supplications.
 - [ ] Expand contextual vocabulary and learner-language translations for new STEM terms.
@@ -100,3 +100,6 @@ CI generates the corpus and fails unless all 54 numbered items have non-empty te
 
 
 - 2026-11-22: Expanded The Little Scientist’s Discovery Primer with a safe, household paper-bridge experiment. Learners make a prediction, compare flat and folded paper under the same conditions, count results, record evidence and repeat the test. Automated regression assertions added; PR/browser review pending.
+
+
+- 2026-11-27: Following the repository rename to LittleLanternsBooks, the reading pane has been made fully text-only to remove corner artwork that competed with the passage. A Concepts button beside Chapters opens an accessible, responsive modal showing the current page's illustration with gentle motion and key concepts from its text. Automated regression checks added; browser/device review pending.

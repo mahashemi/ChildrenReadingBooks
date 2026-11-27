@@ -688,6 +688,10 @@ function closeSettingsDrawer(restoreFocus=true){
 $("chapterDrawerToggle").addEventListener("click",()=>{
   document.body.classList.contains("chapter-drawer-open")?closeChapterDrawer():openChapterDrawer();
 });
+$("conceptExplorerToggle").addEventListener("click",openConceptModal);
+$("closeConceptModal").addEventListener("click",()=>$("conceptModal").close());
+$("conceptModal").addEventListener("click",event=>{if(event.target===$("conceptModal"))$("conceptModal").close();});
+$("conceptModal").addEventListener("close",()=>$("conceptExplorerToggle").focus());
 $("settingsDrawerToggle").addEventListener("click",()=>{
   document.body.classList.contains("settings-drawer-open")?closeSettingsDrawer():openSettingsDrawer();
 });
@@ -726,6 +730,24 @@ function linkQuranReferences(rendered,paragraph,current){
 function linkQuranSourceNote(source){
   return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
 }
+function renderConceptExplorer(current,media){
+  const visualId=media&&/^[a-z0-9-]+$/.test(media.visual||"")?media.visual:null;
+  const fallbackId=/^[a-z0-9-]+$/.test(current.chapterArt||"")?current.chapterArt:"dream";
+  const sprite=visualId?"./assets/stem-illustrations.svg#"+visualId:"./assets/reading-illustrations.svg#"+fallbackId;
+  const label=media&&media.alt?media.alt:(current.chapterTitle||current.title)+" concept illustration";
+  const stage=$("conceptAnimation");
+  stage.innerHTML='<span class="concept-orbit concept-orbit-one" aria-hidden="true"></span><span class="concept-orbit concept-orbit-two" aria-hidden="true"></span><svg viewBox="0 0 320 200" role="presentation" focusable="false"><use href="'+sprite+'" xlink:href="'+sprite+'"></use></svg><span class="concept-spark concept-spark-one" aria-hidden="true">✦</span><span class="concept-spark concept-spark-two" aria-hidden="true">✧</span>';
+  stage.setAttribute("aria-label",label);
+  $("conceptModalTitle").textContent=current.chapterTitle||current.title||"Explore this idea";
+  $("conceptModalDescription").textContent=media&&media.caption?media.caption:(media&&media.alt?media.alt:"Look closely at the picture, then find the idea in the reading.");
+  const words=[...new Set(((current.paragraphs||[]).join(" ").toLowerCase().match(/[a-z]+/g))||[])].filter(word=>keyConceptWords.has(word)).slice(0,8);
+  $("conceptTags").innerHTML=words.length?words.map(word=>'<span class="concept-tag">'+escapeHtml(word)+'</span>').join(""):'<span class="concept-tag">Look closely</span>';
+}
+function openConceptModal(){
+  closeWordModal();
+  const dialog=$("conceptModal");
+  if(!dialog.open)dialog.showModal();
+}
 function renderStory(){
   const current=storyPages[page];
   $("storyTitle").textContent=current.chapterTitle||current.title;
@@ -756,6 +778,7 @@ function renderStory(){
     artHost.setAttribute("role","img");
     artHost.classList.toggle("has-lesson-illustration",!!media);
   }
+  renderConceptExplorer(current,media);
   closeWordModal();
   $("modeHint").textContent=mode==="syllables"?"Longer words are divided into syllables. Tap any word to hear it and explore its meaning.":mode==="mixed"?"Longer words are divided; shorter words stay whole. Tap any word to hear it and explore its meaning.":"Read in ordinary English spelling. Tap a word to hear it and explore its meaning.";
   renderStoryLibrary();
