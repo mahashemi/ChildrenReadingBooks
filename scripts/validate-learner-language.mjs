@@ -25,4 +25,13 @@ assert.ok(language.includes('localStorage.setItem("littleLanternsLearnerLanguage
 assert.ok(language.includes('translateTree()'),"Dynamic interface text must be translated");
 assert.ok(css.includes("body.learner-rtl"),"RTL layout rules must be present");
 assert.ok(css.includes(".story-reading-stage")&&css.includes("direction:ltr"),"RTL interface must not reverse English story text");
+
+const enhancements=fs.readFileSync("reading-enhancements.js","utf8");
+for (const word of ["bark","chip","fibre","fiber","log","pulp","press","roller","screen","sheet","wood"]) {
+  assert.ok(enhancements.includes(word+":"), "Missing English child-friendly paper vocabulary: "+word);
+}
+assert.ok(enhancements.includes("contextualGlossaryMeaning"),"Glossary definitions must use story context for ambiguous words");
+assert.ok(enhancements.includes("translateMeaning(word, initialMeaning)"),"Word meanings must use the selected learner language");
+assert.ok(enhancements.includes("meaningNode.dataset.englishMeaning = definition"),"Keep the English source meaning available for language switching");
+
 console.log("Validated English, Arabic, Persian and Urdu selectors, RTL/LTR behavior, preference persistence and 15 curated glossary entries.");
