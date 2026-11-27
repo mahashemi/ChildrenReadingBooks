@@ -42,3 +42,8 @@ assert.match(css, /\.meaning-audio-button:focus-visible/,
   "Audio control must have a visible keyboard focus style");
 
 console.log("Word meaning modal validation passed.");
+
+
+assert.ok(enhancements.includes("const contextWords = new Set(context.toLowerCase().match"),"Online definitions must be ranked using the current story sentence");
+assert.ok(enhancements.includes("const stopWords = new Set"),"Common words must not dominate contextual dictionary ranking");
+assert.ok(enhancements.includes("This word has more than one possible meaning."),"Ambiguous dictionary results must be explained instead of guessing");
