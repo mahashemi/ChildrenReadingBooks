@@ -116,6 +116,13 @@ Scope: improve the shared reading experience across every chapter and collection
 - [ ] Review translations with native readers and expand the reviewed glossary to STEM and story vocabulary.
 
 
+## Context-aware dictionary meanings
+- [x] Rank online dictionary definitions using words in the selected story sentence and chapter title.
+- [x] Ignore common stop words so they do not dominate the match.
+- [x] Show a clear ambiguity message when no definition has a meaningful context match instead of silently choosing the first dictionary sense.
+- [x] Preserve the English source meaning so the selected learner language can translate it.
+
+
 ## Desktop reader visual refinement
 - [x] Give the desktop reading card a viewport-aware, spacious visual treatment with a clear passage focus.
 - [x] Improve toolbar, title hierarchy, reading stage, narration dock and page navigation styling.
