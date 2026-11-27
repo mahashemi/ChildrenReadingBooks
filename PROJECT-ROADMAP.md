@@ -114,3 +114,9 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 - [x] Preserve English reading passages in left-to-right layout when the surrounding interface uses RTL.
 - [x] Add 15 curated trilingual paper-making glossary entries and a clear English fallback for terms not yet reviewed.
 - [ ] Expand reviewed translations across STEM and story vocabulary; validate wording with native readers before marking the corpus complete.
+
+
+### Context-aware vocabulary meanings
+- [x] Prefer dictionary senses that match the selected word's story sentence and chapter context.
+- [x] Avoid guessing when several meanings are possible; tell the learner to use the sentence and ask a grown-up.
+- [ ] Expand offline, reviewed meanings and trilingual translations across all reading chapters.
