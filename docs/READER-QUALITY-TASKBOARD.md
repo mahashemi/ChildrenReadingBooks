@@ -13,10 +13,10 @@ Scope: improve the shared reading experience across every chapter and collection
 
 | Priority | Task | Status | Acceptance criteria |
 |---|---|---|---|
-| P0 | Move all lesson SVGs behind the reading text | Implemented in PR #53; CI passed; browser review pending | Artwork is a low-contrast animated background; it consumes no vertical reading space, never covers words, and remains subtle on narrow phones. |
+| P0 | Keep lesson artwork out of the reading area | Implemented in current PR; CI/browser review pending | The reading pane contains text only; artwork appears on demand in the Concepts modal. |
 | P0 | Remove child-facing external activity links | Implemented in PR #53; CI passed | No external activity or source URLs render in the child reading pane; plain attribution and Qur’an cross-references remain. |
 | P1 | Apply consistent vocabulary emphasis across all chapters | Implemented in PR #53; CI passed; visual review pending | New glossary words and key concepts use bold, varied colours; ordinary text stays calm; definitions, tapping and narration highlighting continue to work. |
-| P1 | Respect reduced-motion preferences | Implemented in PR #53 | Background animation stops when the device requests reduced motion; reading and narration are unaffected. |
+| P1 | Respect reduced-motion preferences | Implemented in current PR | Concept-modal animation stops when the device requests reduced motion; reading and narration are unaffected. |
 | P0 | Give desktop reading pane a comfortable viewport height | Implemented in PR #53 follow-up; CI/browser review pending | Normal desktop mode uses the available viewport height; the passage receives remaining card space; mobile layout is unchanged. |
 | P0 | Make word-follow highlighting reliable in mobile Chrome | Implemented in PR #53 follow-up; CI/device review pending | Character offsets map to actual rendered word spans; estimated progress advances when boundary events are absent; pause/resume, speed changes and stop clear/restart fallback state safely. |
 | P0 | Eliminate READING CHAPTER NaN | Fix merged; CI passed | Every page has a valid chapter index; defensive fallback never renders NaN. |
@@ -27,9 +27,11 @@ Scope: improve the shared reading experience across every chapter and collection
 
 | P0 | Auto-pronounce the selected word when its meaning modal opens, with a replay icon | Implemented in current PR; CI/browser review pending | Opening a word modal speaks the word once; a dedicated speaker icon beside the word repeats its pronunciation. Definition audio remains a separate control. |
 
+| P1 | Add an on-demand animated concept explorer | Implemented in current PR; CI/browser review pending | A button beside Chapters opens a responsive modal with the current page illustration, gentle animation and key concepts detected in the passage. Escape/backdrop/close and focus restoration work. |
+
 ## Current design requirements
-- [x] Keep all decorative SVGs behind the reading text; never add a top-of-page illustration row.
-- [x] Ensure background artwork has low opacity, no hit targets, and no effect on text contrast or passage width.
+- [x] Keep decorative SVGs out of the reading stage; show them only when a child opens Concepts.
+- [x] Ensure the reading stage is text-only so no illustration can obscure words or consume passage space.
 - [x] Animate only decorative elements gently; support `prefers-reduced-motion` and do not compete with word-follow highlighting.
 - [x] Use four coordinated vocabulary colours for every curated glossary word and stronger emphasis for key concepts; avoid colouring every ordinary word.
 - [x] Remove activity/exploration links from child-facing reading pages while retaining factual source attribution separately.
@@ -78,3 +80,6 @@ Scope: improve the shared reading experience across every chapter and collection
 - 2026-11-22: Replaced the cramped inline word explorer with a responsive native dialog. Word taps open the dialog and automatically pronounce the selected word; a speaker icon replays it, while the separate meaning-audio control reads the definition. Escape, backdrop click, close button, focus return and audio cancellation are wired; browser/device review pending (PR #55 merged; CI passed).
 
 - 2026-11-22: Added a four-step home science experiment to The Little Scientist’s Discovery Primer: children compare a flat and folded paper bridge, count how many coins each holds, and learn to change one variable at a time. CI regression checks cover materials, fair-test guidance and adult supervision.
+
+
+- 2026-11-27: Removed the corner artwork from the reading pane. Added a Concepts button beside Chapters; its accessible modal shows the current page's local SVG illustration with gentle motion and key-concept tags from the passage. Reduced-motion, Escape, backdrop close and focus return are covered by CSS/behavior and regression checks. Browser/device review pending.
