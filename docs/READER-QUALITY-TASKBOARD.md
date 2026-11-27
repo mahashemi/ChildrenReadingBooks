@@ -83,3 +83,12 @@ Scope: improve the shared reading experience across every chapter and collection
 
 
 - 2026-11-27: Removed the corner artwork from the reading pane. Added a Concepts button beside Chapters; its accessible modal shows the current page's local SVG illustration with gentle motion and key-concept tags from the passage. Reduced-motion, Escape, backdrop close and focus return are covered by CSS/behavior and regression checks. Browser/device review pending.
+
+
+## Latest interaction pass — narrated concept carousel and toolbar alignment
+- [x] Pin the reading-settings control to a dedicated right-hand toolbar column across desktop and mobile widths.
+- [x] Replace the single concept illustration with a chapter carousel built from distinct illustrated lesson pages.
+- [x] Add Back, Next and Hear controls; opening a concept and moving to another slide reads its explanation aloud using the selected browser narrator and reading speed.
+- [x] Avoid duplicate fallback slides in chapters without page-level concept artwork.
+- [x] Add regression checks for toolbar placement, slide navigation, narration, focus restoration and reduced-motion support.
+- [ ] Verify toolbar alignment and concept navigation on physical mobile Chrome and desktop browsers.
