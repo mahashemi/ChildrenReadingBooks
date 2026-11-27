@@ -646,3 +646,30 @@ body.reader-immersive #readingView.active .story-reading-stage{flex:1;min-height
 @media(max-width:760px){
   .concept-toolbar-button{padding:7px 10px;font-size:10px}
 }
+
+
+/* Keep all reader toolbar controls in a predictable row; settings stays pinned right. */
+#readingView.active .reader-drawer-toolbar{display:grid!important;grid-template-columns:max-content max-content minmax(0,1fr) 38px;align-items:center;gap:8px;width:100%;min-width:0}
+#readingView.active .reader-drawer-toolbar>span{min-width:0;flex:initial;justify-self:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#readingView.active .reader-drawer-toolbar>.settings-toolbar-button{grid-column:4;justify-self:end;flex:0 0 38px;position:static!important;transform:none!important;margin:0!important}
+#readingView.active .reader-drawer-toolbar>.chapter-toolbar-button,#readingView.active .reader-drawer-toolbar>.concept-toolbar-button{min-width:0;white-space:nowrap}
+.concept-navigation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px;margin:20px auto 0}
+.concept-navigation button{min-height:42px;padding:9px 15px;border:1px solid #dce8d9;border-radius:13px;background:#fff;color:#496b50;font:900 12px Nunito,system-ui,sans-serif;cursor:pointer;transition:transform .16s ease,background .16s ease}
+.concept-navigation button:hover:not(:disabled){transform:translateY(-2px);background:#edf5e9}
+.concept-navigation button:disabled{opacity:.42;cursor:not-allowed}
+.concept-navigation #conceptSlideCount{min-width:48px;color:#7d8d7d;font-size:12px;font-weight:900;font-variant-numeric:tabular-nums}
+.concept-navigation .concept-next-button{border-color:#477b62;background:#477b62;color:#fff;box-shadow:0 5px 12px rgba(71,123,98,.18)}
+.concept-navigation .concept-next-button:hover:not(:disabled){background:#38684f}
+.concept-navigation button:focus-visible{outline:3px solid #e4b65d;outline-offset:3px}
+@media(max-width:760px){
+ #readingView.active .reader-drawer-toolbar{grid-template-columns:max-content max-content minmax(0,1fr) 36px;gap:6px}
+ #readingView.active .reader-drawer-toolbar .button{padding:8px 9px;font-size:11px}
+ #readingView.active .reader-drawer-toolbar>.settings-toolbar-button{width:36px;height:36px;flex-basis:36px}
+}
+@media(max-width:360px){
+ #readingView.active .reader-drawer-toolbar{grid-template-columns:max-content max-content 36px;gap:5px}
+ #readingView.active .reader-drawer-toolbar>span{display:none}
+ #readingView.active .reader-drawer-toolbar>.settings-toolbar-button{grid-column:3}
+ #readingView.active .reader-drawer-toolbar .button{padding:7px 8px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.concept-navigation button{transition:none}}
