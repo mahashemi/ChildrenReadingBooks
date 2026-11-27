@@ -739,7 +739,7 @@ function conceptMediaForPage(pageData){
  const media=pageData.chapterMedia||pageData.media;
  const visual=media&&/^[a-z0-9-]+$/.test(media.visual||"")?media.visual:null;
  const art=/^[a-z0-9-]+$/.test(pageData.chapterArt||"")?pageData.chapterArt:"dream";
- const paragraphs=(pageData.paragraphs||[]).map(text=>String(text||"").replace(/^\\s*(?:\\d+[.)]\\s*|[-•]\\s*)/,"").trim()).filter(Boolean);
+ const paragraphs=(pageData.paragraphs||[]).map(text=>String(text||"").replace(/^\s*(?:\d+[.)]\s*|[-•]\s*)/,"").trim()).filter(Boolean);
  const isGeneric=value=>/look closely at this picture|find the idea in the story|look closer/i.test(String(value||""));
  const authoredCaption=media&&media.caption&&!isGeneric(media.caption)?media.caption.trim():"";
  const meaningfulAlt=media&&media.alt&&!isGeneric(media.alt)?media.alt.trim():"";
