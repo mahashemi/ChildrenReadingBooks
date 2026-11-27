@@ -16,7 +16,7 @@ assert.ok(html.includes("./learner-language.css"),"Learner-language styles must 
 assert.ok(html.includes("./learner-language.js"),"Learner-language module must load");
 assert.ok(workflow.includes("node --check learner-language.js"),"CI must syntax-check learner-language.js");
 for (const languageCode of ["ar:","fa:","ur:"]) assert.ok(language.includes(languageCode),"Missing UI translations for "+languageCode);
-for (const word of ["bark","log","pulp","fibre","fiber","press","screen","sheet","roller","chip","branch","tree","wood","paper","recycle"]) {
+for (const word of ["bark","log","pulp","fibre","fiber","press","screen","sheet","roller","chip","branch","tree","wood","paper","recycle","atom","electron","photon","quantum","laser","galaxy","nebula","exoplanet","orbit","gravity","robot","sensor","dna","gene","cell","ecosystem","photosynthesis","habitat","experiment","prediction","observation","scientist"]) {
   assert.ok(language.includes(word+":{"),"Missing curated trilingual glossary entry: "+word);
 }
 assert.ok(language.includes('document.documentElement.dir=language==="en"?"ltr":"rtl"'),"Interface direction must follow selected language");
