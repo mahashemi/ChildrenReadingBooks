@@ -103,3 +103,7 @@ CI generates the corpus and fails unless all 54 numbered items have non-empty te
 
 
 - 2026-11-27: Following the repository rename to LittleLanternsBooks, the reading pane has been made fully text-only to remove corner artwork that competed with the passage. A Concepts button beside Chapters opens an accessible, responsive modal showing the current page's illustration with gentle motion and key concepts from its text. Automated regression checks added; PR #57 merged, CI and GitHub Pages deployment passed; physical browser/device review pending.
+
+
+## Reader polish — narrated concept explorer
+The Concepts dialog now presents distinct chapter illustrations as a navigable sequence. Each slide has a short spoken explanation, replay control and child-friendly next/back navigation. Reader settings remain anchored at the far right of the chapter/concepts toolbar. Physical-device visual review remains outstanding.
