@@ -2,7 +2,7 @@
 
 A joyful, online-first English learning experience for children. The project brings together English reading, understanding, speaking, writing and speeches with Qur'anic learning, Akhlaq, Aqa'id and Fitrat.
 
-**Live site:** https://mahashemi.github.io/ChildrenReadingBooks/
+**Live site:** https://mahashemi.github.io/LittleLanternsBooks/
 
 ## First prototype
 
