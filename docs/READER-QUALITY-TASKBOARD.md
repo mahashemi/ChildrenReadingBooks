@@ -114,3 +114,10 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Add curated Arabic, Persian and Urdu meanings for 15 paper-making vocabulary terms; clearly label English fallback where a reviewed translation is not yet available.
 - [x] Add CI regression checks for selectors, language persistence, RTL/LTR isolation and glossary coverage.
 - [ ] Review translations with native readers and expand the reviewed glossary to STEM and story vocabulary.
+
+
+## Desktop reader visual refinement
+- [x] Give the desktop reading card a viewport-aware, spacious visual treatment with a clear passage focus.
+- [x] Improve toolbar, title hierarchy, reading stage, narration dock and page navigation styling.
+- [x] Add a shorter-desktop-height layout so the controls remain usable.
+- [ ] Review visual balance and scrolling on real desktop browsers; verify 320px/375px mobile layouts remain unchanged.
