@@ -1,6 +1,6 @@
 # Little Lanterns — Live Project Status & Roadmap
 
-_Last updated: 2026-11-21_
+_Last updated: 2026-11-27_
 
 ## Product direction
 A warm, responsive, English-first reading and Islamic learning experience for children. Original Qur'an, hadith and dua texts remain distinct from child-friendly explanations, reflections and original memory aids. Preserve the mobile experience while making desktop layouts spacious and useful.
@@ -107,3 +107,10 @@ CI generates the corpus and fails unless all 54 numbered items have non-empty te
 
 ## Reader polish — narrated concept explorer
 The Concepts dialog now presents distinct chapter illustrations as a navigable sequence. Each slide has a short spoken explanation, replay control and child-friendly next/back navigation. Reader settings remain anchored at the far right of the chapter/concepts toolbar. Physical-device visual review remains outstanding.
+
+
+### Learner language — first release
+- [x] Add English, Arabic, Persian and Urdu interface selection.
+- [x] Preserve English reading passages in left-to-right layout when the surrounding interface uses RTL.
+- [x] Add 15 curated trilingual paper-making glossary entries and a clear English fallback for terms not yet reviewed.
+- [ ] Expand reviewed translations across STEM and story vocabulary; validate wording with native readers before marking the corpus complete.

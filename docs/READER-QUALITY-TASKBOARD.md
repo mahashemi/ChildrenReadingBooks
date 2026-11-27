@@ -105,3 +105,12 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Ensure opening the Concepts modal starts narration; remove the duplicate modal opener that shadowed the narrated implementation.
 - [x] Add regression checks for punctuation, sentence pauses, and narration on modal open.
 - [ ] Listen to narration on physical mobile Chrome and desktop browsers and tune pause length if needed.
+
+
+## Learner-language support — first release
+- [x] Add English, Arabic, Persian and Urdu interface selectors in the header and reading settings.
+- [x] Keep English story passages explicitly left-to-right while the surrounding interface follows Arabic/Persian/Urdu direction.
+- [x] Persist the selected learner language and translate dynamically rendered interface text.
+- [x] Add curated Arabic, Persian and Urdu meanings for 15 paper-making vocabulary terms; clearly label English fallback where a reviewed translation is not yet available.
+- [x] Add CI regression checks for selectors, language persistence, RTL/LTR isolation and glossary coverage.
+- [ ] Review translations with native readers and expand the reviewed glossary to STEM and story vocabulary.

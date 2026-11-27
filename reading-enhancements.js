@@ -312,7 +312,18 @@
     habitats:"Natural homes of plants or animals.",
     nutrient:"A substance a living thing needs to grow and stay healthy.",
     scientists:"People who ask questions and use observations and tests to learn about the world.",
-    gravity:"A force that pulls objects toward one another."
+    gravity:"A force that pulls objects toward one another.",
+    bark:"The tough outer covering of a tree trunk or branch. Paper makers remove it before turning the wood into pulp.",
+    chip:"A small piece cut or broken from a larger piece of wood.",
+    fibre:"A thin, thread-like part of a plant. Many fibres join together to make a sheet of paper.",
+    fiber:"A thin, thread-like part of a plant. Many fibers join together to make a sheet of paper.",
+    log:"A cut section of a tree trunk, often used as wood in paper making.",
+    pulp:"A wet mixture of separated plant fibres used to make paper.",
+    press:"A machine that pushes or squeezes something with force; in paper making, it removes water from a wet sheet.",
+    roller:"A round moving part that turns and helps press or move paper.",
+    screen:"A fine mesh that lets water drain through while holding paper fibres together.",
+    sheet:"A thin, flat piece of paper.",
+    wood:"The hard material that makes up the trunk and branches of a tree.",
   };
   Object.assign(meanings, extraMeanings);
 
@@ -503,6 +514,11 @@
     if(word==="space" && /international space station/.test(text)) return "In International Space Station: a science laboratory that travels around Earth.";
     if(word==="belt" && /kuiper belt/.test(text)) return "In Kuiper Belt: a region beyond Neptune that contains many icy objects.";
     if(word==="dwarf" && /dwarf planet/.test(text)) return "In dwarf planet: a small world that orbits the Sun but has not cleared its orbital neighbourhood.";
+    if(word==="bark" && /tree|wood|log|paper|mill|trunk|branch/.test(text)) return meanings.bark;
+    if(word==="screen" && /pulp|paper|sheet|water|mill/.test(text)) return "A fine mesh that lets water drain through while holding paper fibres together.";
+    if(word==="press" && /paper|pulp|wet sheet|mill/.test(text)) return "A machine that squeezes water out of a wet paper sheet.";
+    if(word==="roll" && /paper|mill|sheet/.test(text)) return "To wind a long sheet of paper around a cylinder.";
+
     return "";
   }
 
@@ -562,7 +578,11 @@
     const lookupWord = word.replace(/'s$/i, "");
     const meaningNode = document.getElementById("wordMeaning");
     openWordModal(target);
-    meaningNode.textContent = target.dataset.meaning || meaningFallback;
+    const initialMeaning = target.dataset.meaning || meaningFallback;
+    meaningNode.dataset.englishMeaning = initialMeaning;
+    meaningNode.textContent = window.LittleLanternsLanguage
+      ? window.LittleLanternsLanguage.translateMeaning(word, initialMeaning)
+      : initialMeaning;
     if (target.dataset.lookup !== "true") return;
     const requestWord = lookupWord.toLowerCase();
     meaningNode.textContent = "Finding a simple dictionary definition…";
@@ -580,13 +600,20 @@
         }).map(function (item) { return item.definition; }).find(Boolean);
         if (!definition) throw new Error("No definition found");
         if (document.getElementById("wordDisplay").textContent === word && document.getElementById("wordPanel").open) {
-          meaningNode.textContent = definition;
+          meaningNode.dataset.englishMeaning = definition;
+          meaningNode.textContent = window.LittleLanternsLanguage
+            ? window.LittleLanternsLanguage.translateMeaning(word, definition)
+            : definition;
           document.getElementById("hearMeaning").disabled = false;
         }
       })
       .catch(function () {
         if (document.getElementById("wordDisplay").textContent === word && document.getElementById("wordPanel").open) {
-          meaningNode.textContent = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          const fallbackMeaning = "This word is not in the offline glossary, and its online dictionary entry could not be loaded. Please try again when connected.";
+          meaningNode.dataset.englishMeaning = fallbackMeaning;
+          meaningNode.textContent = window.LittleLanternsLanguage
+            ? window.LittleLanternsLanguage.translateMeaning(word, fallbackMeaning)
+            : fallbackMeaning;
           document.getElementById("hearMeaning").disabled = false;
         }
       });
