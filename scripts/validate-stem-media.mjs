@@ -5,6 +5,7 @@ const app = fs.readFileSync("app.js", "utf8");
 const sprite = fs.readFileSync("assets/stem-illustrations.svg", "utf8");
 const visuals = fs.readFileSync("reader-visuals.css", "utf8");
 const enhancements = fs.readFileSync("reading-enhancements.js", "utf8");
+const layout = fs.readFileSync("reader-layout.css", "utf8");
 const index = fs.readFileSync("index.html", "utf8");
 const media = [...app.matchAll(/media:m\("([^"]+)","([^"]+)","([^"]+)"\)/g)];
 const symbols = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map(match => match[1]));
@@ -14,11 +15,11 @@ assert.ok(!app.includes("current.chapterSourceUrl"), "External source URLs must 
 assert.ok(app.includes('$("sourceNoteText").innerHTML=linkQuranSourceNote(current.chapterSource);'), "Keep readable source attribution and Qur\u2019an reference links without external activity URLs");
 assert.ok(index.includes("./reader-visuals.css"), "The shared reader visual stylesheet must be loaded");
 assert.ok(!index.includes("lesson-media.css") && !index.includes('id="lessonMedia"'), "The old space-consuming illustration panel must stay removed");
-assert.ok(visuals.includes("display:block!important"), "Lesson artwork must be visible behind the passage");
-assert.ok(visuals.includes("position:absolute!important"), "Lesson artwork must be positioned as background art");
+assert.ok(visuals.includes(".story-art{display:none!important}"), "Lesson artwork must stay out of the reading pane");
+assert.ok(!visuals.includes("little-lanterns-art-drift"), "Background artwork animation must not run in the reading pane");
 assert.ok(visuals.includes("#readingView.active .story-reading-stage .story-art"), "Background artwork must override the reader\u2019s existing hidden-art rule");
-assert.ok(visuals.includes("@media(max-width:380px)"), "The background must be especially subtle on very narrow phones");
-assert.ok(visuals.includes("prefers-reduced-motion:reduce"), "Decorative animation must respect reduced-motion settings");
+assert.ok(layout.includes(".concept-animation-stage"), "Lesson illustrations must be available in the on-demand concept modal");
+assert.ok(layout.includes("prefers-reduced-motion:reduce"), "Concept animation must respect reduced-motion settings");
 for (const term of ["atoms","electrons","photons","lasers","galaxies","nebulae","exoplanets","orbits","planets","robots","sensors","genes","habitats","nutrient","scientists","gravity"]) {
   assert.ok(enhancements.includes(term + ':"'), `Missing child-friendly glossary definition: ${term}`);
 }
@@ -37,4 +38,4 @@ for (const [, id, alt, caption] of media) {
 for (const title of ["Tiny World, Big Ideas","Space ABC","The Little Scientist’s Discovery Primer","Meet the Robots","The Secret Code Inside You","Worlds Beyond Our Sun"]) {
   assert.ok(app.includes(title), `Missing STEM chapter: ${title}`);
 }
-console.log(`Validated ${media.length} STEM background illustrations and ${symbols.size} SVG symbols across six chapters.`);
+console.log(`Validated ${media.length} STEM concept illustrations and ${symbols.size} SVG symbols across six chapters.`);
