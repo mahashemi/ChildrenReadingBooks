@@ -1,54 +1,6 @@
-/* Reading-first illustrations: decorative SVGs live behind the passage.
-   Preserve the existing stage and text scrolling/layout rules in reader-layout.css. */
-#readingView.active .story-reading-stage .story-art{
-  display:block!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:0!important;
-  width:min(54%,390px)!important;
-  height:100%!important;
-  min-height:0!important;
-  margin:0!important;
-  border:0!important;
-  border-radius:0!important;
-  overflow:visible!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  opacity:.14!important;
-  pointer-events:none!important;
-}
-#readingView.active .story-reading-stage .story-art .art-sun,
-#readingView.active .story-reading-stage .story-art .art-moon,
-#readingView.active .story-reading-stage .story-art .art-star,
-#readingView.active .story-reading-stage .story-art .art-hill,
-#readingView.active .story-reading-stage .story-art .art-window{display:none!important}
-#readingView.active .story-reading-stage .story-art .art-illustration{
-  position:absolute!important;
-  inset:0!important;
-  display:grid!important;
-  place-items:start end!important;
-  overflow:visible!important;
-  opacity:1!important;
-  transform-origin:70% 30%;
-  animation:little-lanterns-art-drift 11s ease-in-out infinite;
-}
-#readingView.active .story-reading-stage .story-art .art-illustration svg{
-  display:block!important;
-  width:100%!important;
-  height:100%!important;
-  max-height:240px!important;
-  overflow:visible!important;
-  filter:drop-shadow(0 8px 14px rgba(55,75,58,.12));
-}
-#readingView.active .story-reading-stage .story-art .art-sparkle{
-  position:absolute;
-  z-index:1;
-  color:#d9b96e;
-  font-size:19px;
-  animation:little-lanterns-twinkle 3.8s ease-in-out infinite;
-}
-#readingView.active .story-reading-stage .story-art .art-sparkle-one{top:18%;right:28%}
-#readingView.active .story-reading-stage .story-art .art-sparkle-two{top:48%;right:8%;animation-delay:1.4s}
+/* The reading passage is the only visual priority in the reader stage.
+   Chapter illustrations are shown on demand in the Concepts modal instead. */
+#readingView.active .story-reading-stage .story-art{display:none!important}
 #readingView.active .story-text .story-word.vocab-highlight{
   font-weight:900!important;
   border-radius:5px;
@@ -79,28 +31,4 @@
   background:#fff0c9;
   outline:2px solid #e8c56e;
   outline-offset:1px;
-}
-@keyframes little-lanterns-art-drift{
-  0%,100%{transform:translate3d(0,0,0) rotate(-.5deg)}
-  50%{transform:translate3d(-5px,7px,0) rotate(.5deg)}
-}
-@keyframes little-lanterns-twinkle{
-  0%,100%{opacity:.35;transform:scale(.85)}
-  50%{opacity:1;transform:scale(1.12)}
-}
-@media(max-width:760px){
-  #readingView.active .story-reading-stage .story-art{
-    width:78%!important;
-    height:165px!important;
-    opacity:.11!important;
-  }
-  #readingView.active .story-reading-stage .story-art .art-illustration svg{max-height:165px!important}
-}
-@media(max-width:380px){
-  #readingView.active .story-reading-stage .story-art{width:88%!important;opacity:.08!important}
-}
-@media(prefers-reduced-motion:reduce){
-  #readingView.active .story-reading-stage .story-art .art-illustration,
-  #readingView.active .story-reading-stage .story-art .art-sparkle{animation:none!important}
-  #readingView.active .story-reading-stage .story-art .art-illustration{transform:none!important}
 }
