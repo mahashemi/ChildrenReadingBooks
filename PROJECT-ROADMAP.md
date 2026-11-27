@@ -125,3 +125,8 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 ### Trilingual STEM vocabulary
 - [x] Add 22 curated Arabic, Persian and Urdu meanings for core terms in physics, astronomy, robotics, biology and scientific inquiry.
 - [ ] Native-reader review and expansion to the remaining STEM and story vocabulary.
+
+
+### Full key-concept translation coverage
+- [x] Add Arabic, Persian and Urdu meanings for the current key-concept set, including plural and compound science terms.
+- [ ] Native-reader review and future vocabulary expansion.
