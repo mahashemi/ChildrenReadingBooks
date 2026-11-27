@@ -94,6 +94,11 @@ Scope: improve the shared reading experience across every chapter and collection
 - [ ] Verify toolbar alignment and concept navigation on physical mobile Chrome and desktop browsers.
 
 
+## Contextual concept descriptions
+- [x] Remove the generic picture prompt and use each slide's authored explanation or a meaningful sentence from that story page.
+- [x] Avoid generic fallback tags when no key concept keyword is detected.
+- [x] Add regression checks preventing the static prompt and tag from returning.
+
 ## Concept narration clarity
 - [x] Normalize concept captions so every spoken description ends with clear sentence punctuation.
 - [x] Speak sentence-by-sentence with a short pause between sentences, while preserving comma pauses within sentences.

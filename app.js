@@ -739,7 +739,13 @@ function conceptMediaForPage(pageData){
  const media=pageData.chapterMedia||pageData.media;
  const visual=media&&/^[a-z0-9-]+$/.test(media.visual||"")?media.visual:null;
  const art=/^[a-z0-9-]+$/.test(pageData.chapterArt||"")?pageData.chapterArt:"dream";
- return {sprite:visual?"./assets/stem-illustrations.svg#"+visual:"./assets/reading-illustrations.svg#"+art,title:pageData.title||pageData.chapterTitle||"Look closer",alt:media&&media.alt?media.alt:(pageData.chapterTitle||pageData.title||"Chapter")+" illustration",caption:media&&media.caption?media.caption:(media&&media.alt?media.alt:"Look closely at this picture and find the idea in the story."),paragraphs:pageData.paragraphs||[]};
+ const paragraphs=(pageData.paragraphs||[]).map(text=>String(text||"").replace(/^\s*(?:\d+[.)]\s*|[-•]\s*)/,"").trim()).filter(Boolean);
+ const isGeneric=value=>/look closely at this picture|find the idea in the story|look closer/i.test(String(value||""));
+ const authoredCaption=media&&media.caption&&!isGeneric(media.caption)?media.caption.trim():"";
+ const meaningfulAlt=media&&media.alt&&!isGeneric(media.alt)?media.alt.trim():"";
+ const storyIdea=paragraphs.find(text=>text.length>35)||paragraphs[0]||pageData.chapterTakeaway||pageData.takeaway||pageData.chapterTitle||pageData.title||"This part teaches an important idea.";
+ const caption=authoredCaption||meaningfulAlt||storyIdea;
+ return {sprite:visual?"./assets/stem-illustrations.svg#"+visual:"./assets/reading-illustrations.svg#"+art,title:pageData.title||pageData.chapterTitle||"Explore the idea",alt:meaningfulAlt||(pageData.title||pageData.chapterTitle||"Lesson")+" illustration",caption,paragraphs};
 }
 function renderConceptExplorer(current){
  const chapter=readingChapters[current.chapterIndex];
@@ -788,7 +794,7 @@ function showConceptSlide(index,announce){
  $("conceptModalTitle").textContent=slide.title;
  $("conceptModalDescription").textContent=slide.caption;
  const words=[...new Set((slide.paragraphs.join(" ").toLowerCase().match(/[a-z]+/g))||[])].filter(word=>keyConceptWords.has(word)).slice(0,8);
- $("conceptTags").innerHTML=words.length?words.map(word=>'<span class="concept-tag">'+escapeHtml(word)+'</span>').join(""):'<span class="concept-tag">Look closely</span>';
+ $("conceptTags").innerHTML=words.length?words.map(word=>'<span class="concept-tag">'+escapeHtml(word)+'</span>').join(""):'';
  $("conceptSlideCount").textContent=(conceptSlideIndex+1)+" of "+conceptSlides.length;
  $("previousConcept").disabled=conceptSlideIndex===0;
  $("nextConcept").disabled=conceptSlideIndex===conceptSlides.length-1;

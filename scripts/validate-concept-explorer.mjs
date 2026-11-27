@@ -13,6 +13,10 @@ assert.ok(html.includes('id="nextConcept"')&&html.includes('id="previousConcept"
 assert.ok(html.includes('id="hearConcept"'),"Children must be able to replay concept narration");
 assert.ok(html.includes('aria-labelledby="conceptModalTitle"'),"The concept dialog must have an accessible title");
 assert.ok(app.includes("function renderConceptExplorer(current)"),"The current chapter must populate the concept explorer");
+assert.ok(app.includes("const storyIdea=paragraphs.find(text=>text.length>35)"),"Concept descriptions without authored captions must use the current story's actual teaching text");
+assert.ok(app.includes("const caption=authoredCaption||meaningfulAlt||storyIdea"),"Concept captions must prefer authored explanations and fall back to story-specific ideas");
+assert.ok(!app.includes("Look closely at this picture and find the idea in the story"),"The generic picture prompt must never appear in concept descriptions");
+assert.ok(!app.includes('concept-tag">Look closely</span>'),"The generic concept tag must not appear when no key concept keyword is detected");
 assert.ok(app.includes("illustratedPages.length?illustratedPages:[current]"),"The carousel must use distinct illustrated lesson pages without repeating fallback art");
 assert.ok(app.includes("function showConceptSlide(index,announce)"),"Concept navigation must render individual slides");
 assert.ok(app.includes("function prepareConceptNarration(text)"),"Concept narration must normalize sentence punctuation");
