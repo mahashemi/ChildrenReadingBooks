@@ -120,3 +120,8 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 - [x] Prefer dictionary senses that match the selected word's story sentence and chapter context.
 - [x] Avoid guessing when several meanings are possible; tell the learner to use the sentence and ask a grown-up.
 - [ ] Expand offline, reviewed meanings and trilingual translations across all reading chapters.
+
+
+### Trilingual STEM vocabulary
+- [x] Add 22 curated Arabic, Persian and Urdu meanings for core terms in physics, astronomy, robotics, biology and scientific inquiry.
+- [ ] Native-reader review and expansion to the remaining STEM and story vocabulary.
