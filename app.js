@@ -689,6 +689,9 @@ $("chapterDrawerToggle").addEventListener("click",()=>{
   document.body.classList.contains("chapter-drawer-open")?closeChapterDrawer():openChapterDrawer();
 });
 $("conceptExplorerToggle").addEventListener("click",openConceptModal);
+$("previousConcept").addEventListener("click",()=>showConceptSlide(conceptSlideIndex-1,true));
+$("nextConcept").addEventListener("click",()=>showConceptSlide(conceptSlideIndex+1,true));
+$("hearConcept").addEventListener("click",()=>{const slide=conceptSlides[conceptSlideIndex];if(slide)speakText(slide.caption||slide.alt);});
 $("closeConceptModal").addEventListener("click",()=>$("conceptModal").close());
 $("conceptModal").addEventListener("click",event=>{if(event.target===$("conceptModal"))$("conceptModal").close();});
 $("conceptModal").addEventListener("close",()=>$("conceptExplorerToggle").focus());
@@ -730,18 +733,44 @@ function linkQuranReferences(rendered,paragraph,current){
 function linkQuranSourceNote(source){
   return escapeHtml(source||"Educational retelling; see the chapter note.").replace(/([0-9]{1,3}):([0-9]{1,3})(?:[–-]([0-9]{1,3}))?/g,(match,surah,ayah)=>'<a class="quran-ayah-link" href="'+quranAyahUrl(surah,ayah)+'" target="_blank" rel="noopener noreferrer" aria-label="Open Qur\'an surah '+surah+', ayah '+ayah+' to listen">'+match+'</a>');
 }
-function renderConceptExplorer(current,media){
-  const visualId=media&&/^[a-z0-9-]+$/.test(media.visual||"")?media.visual:null;
-  const fallbackId=/^[a-z0-9-]+$/.test(current.chapterArt||"")?current.chapterArt:"dream";
-  const sprite=visualId?"./assets/stem-illustrations.svg#"+visualId:"./assets/reading-illustrations.svg#"+fallbackId;
-  const label=media&&media.alt?media.alt:(current.chapterTitle||current.title)+" concept illustration";
-  const stage=$("conceptAnimation");
-  stage.innerHTML='<span class="concept-orbit concept-orbit-one" aria-hidden="true"></span><span class="concept-orbit concept-orbit-two" aria-hidden="true"></span><svg viewBox="0 0 320 200" role="presentation" focusable="false"><use href="'+sprite+'" xlink:href="'+sprite+'"></use></svg><span class="concept-spark concept-spark-one" aria-hidden="true">✦</span><span class="concept-spark concept-spark-two" aria-hidden="true">✧</span>';
-  stage.setAttribute("aria-label",label);
-  $("conceptModalTitle").textContent=current.chapterTitle||current.title||"Explore this idea";
-  $("conceptModalDescription").textContent=media&&media.caption?media.caption:(media&&media.alt?media.alt:"Look closely at the picture, then find the idea in the reading.");
-  const words=[...new Set(((current.paragraphs||[]).join(" ").toLowerCase().match(/[a-z]+/g))||[])].filter(word=>keyConceptWords.has(word)).slice(0,8);
-  $("conceptTags").innerHTML=words.length?words.map(word=>'<span class="concept-tag">'+escapeHtml(word)+'</span>').join(""):'<span class="concept-tag">Look closely</span>';
+let conceptSlides=[];
+let conceptSlideIndex=0;
+function conceptMediaForPage(pageData){
+ const media=pageData.chapterMedia||pageData.media;
+ const visual=media&&/^[a-z0-9-]+$/.test(media.visual||"")?media.visual:null;
+ const art=/^[a-z0-9-]+$/.test(pageData.chapterArt||"")?pageData.chapterArt:"dream";
+ return {sprite:visual?"./assets/stem-illustrations.svg#"+visual:"./assets/reading-illustrations.svg#"+art,title:pageData.title||pageData.chapterTitle||"Look closer",alt:media&&media.alt?media.alt:(pageData.chapterTitle||pageData.title||"Chapter")+" illustration",caption:media&&media.caption?media.caption:(media&&media.alt?media.alt:"Look closely at this picture and find the idea in the story."),paragraphs:pageData.paragraphs||[]};
+}
+function renderConceptExplorer(current){
+ const chapter=readingChapters[current.chapterIndex];
+ const pages=chapter?storyPages.slice(chapter.start,chapter.end+1):[current];
+ conceptSlides=pages.map(conceptMediaForPage);
+ if(!conceptSlides.length)conceptSlides=[conceptMediaForPage(current)];
+ conceptSlideIndex=Math.max(0,conceptSlides.findIndex(slide=>slide.title===current.title));
+ showConceptSlide(conceptSlideIndex,false);
+}
+function showConceptSlide(index,announce){
+ if(!conceptSlides.length)return;
+ conceptSlideIndex=Math.max(0,Math.min(index,conceptSlides.length-1));
+ const slide=conceptSlides[conceptSlideIndex],stage=$("conceptAnimation");
+ stage.innerHTML='<span class="concept-orbit concept-orbit-one" aria-hidden="true"></span><span class="concept-orbit concept-orbit-two" aria-hidden="true"></span><svg viewBox="0 0 320 200" role="presentation" focusable="false"><use href="'+slide.sprite+'" xlink:href="'+slide.sprite+'"></use></svg><span class="concept-spark concept-spark-one" aria-hidden="true">✦</span><span class="concept-spark concept-spark-two" aria-hidden="true">✧</span>';
+ stage.setAttribute("aria-label",slide.alt);
+ $("conceptModalTitle").textContent=slide.title;
+ $("conceptModalDescription").textContent=slide.caption;
+ const words=[...new Set((slide.paragraphs.join(" ").toLowerCase().match(/[a-z]+/g))||[])].filter(word=>keyConceptWords.has(word)).slice(0,8);
+ $("conceptTags").innerHTML=words.length?words.map(word=>'<span class="concept-tag">'+escapeHtml(word)+'</span>').join(""):'<span class="concept-tag">Look closely</span>';
+ $("conceptSlideCount").textContent=(conceptSlideIndex+1)+" of "+conceptSlides.length;
+ $("previousConcept").disabled=conceptSlideIndex===0;
+ $("nextConcept").disabled=conceptSlideIndex===conceptSlides.length-1;
+ $("nextConcept").textContent=conceptSlideIndex===conceptSlides.length-1?"All explored ✓":"Next ✨";
+ if(announce)speakText(slide.caption||slide.alt);
+}
+function openConceptModal(){
+ closeWordModal();
+ if(isReadingStory)stopReading();
+ const dialog=$("conceptModal");
+ if(!dialog.open)dialog.showModal();
+ showConceptSlide(conceptSlideIndex,true);
 }
 function openConceptModal(){
   closeWordModal();
