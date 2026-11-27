@@ -134,3 +134,10 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Add child-friendly Arabic, Persian and Urdu meanings for 22 core STEM terms across physics, astronomy, robotics, biology and scientific inquiry.
 - [x] Extend CI coverage to require all new translations.
 - [ ] Review translated wording with native readers and continue coverage for all key terms in every chapter.
+
+
+## Complete key-concept translation coverage
+- [x] Add Arabic, Persian and Urdu meanings for every key concept detected by the reader across the current STEM and nature glossary.
+- [x] Cover plural forms and multiword science concepts such as black hole, double helix and artificial intelligence.
+- [x] Extend automated coverage to the complete curated key-concept set.
+- [ ] Native-reader review remains required before marking translations as fully approved.
