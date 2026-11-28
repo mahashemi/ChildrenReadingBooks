@@ -137,3 +137,5 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 - [x] Provide typed-answer fallback where speech recognition is unavailable and disclose browser microphone processing.
 - [ ] Add chapter-specific speaking tasks: retell the story, explain a key concept, give a reason and example, and share a personal reflection.
 - [ ] Test with real children and caregivers; tune prompts, recognition behavior and feedback for ages 7–9.
+
+- [x] Connect each reading page to the speaking studio with a prompt grounded in that chapter's title, category and takeaway.

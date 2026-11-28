@@ -44,6 +44,7 @@
   let recognition = null;
   let listening = false;
   let finalText = "";
+  let activeStoryContext = null;
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const supported = !!SpeechRecognition;
 
@@ -63,7 +64,19 @@
   function renderFrames() {
     const host = $("speakingFrames");
     const lesson = lessons[topic.value] || lessons.story;
-    question.textContent = lesson.question;
+    if (topic.value === "story" && activeStoryContext) {
+      const title = activeStoryContext.title;
+      const category = activeStoryContext.category;
+      if (category === "science" || category === "discovery") {
+        question.textContent = "Explain one idea you discovered in " + title + ". What did you notice, and why do you think it matters?";
+      } else if (category === "sahifa") {
+        question.textContent = "What feeling or good action does " + title + " remind you of? Explain it in your own words."; 
+      } else {
+        question.textContent = "Tell the story or main idea of " + title + " in your own words. What happened or what did you learn? Give an example from your life.";
+      }
+    } else {
+      question.textContent = lesson.question;
+    }
     host.innerHTML = lesson.frames.map((frame) =>
       '<button type="button" data-frame="' + frame.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;") + '">' +
       frame.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim().replace(/\s+$/, "") + "…</button>"
@@ -158,6 +171,23 @@
   }
 
   topic.addEventListener("change", renderFrames);
+  const storySpeakButton = $("storySpeakButton");
+  if (storySpeakButton) storySpeakButton.addEventListener("click", function (event) {
+    const button = event.currentTarget;
+    activeStoryContext = {
+      title: button.dataset.storyTitle || "this chapter",
+      category: button.dataset.storyCategory || "",
+      takeaway: button.dataset.storyTakeaway || ""
+    };
+    lessons.story.example = activeStoryContext.takeaway
+      ? "This chapter is about " + activeStoryContext.title + ". One thing I learned is " + activeStoryContext.takeaway + " I can use this lesson in my own life."
+      : "This chapter is about " + activeStoryContext.title + ". First, I will tell what happened. Then I will explain what I learned and give my own example.";
+    topic.value = "story";
+    renderFrames();
+    const navButton = document.querySelector('[data-view="speak"]');
+    if (navButton) navButton.click();
+    $("speechStatus").textContent = "Your reading is ready. Think about the chapter, then tell it in your own English words.";
+  });
   $("speakingFrames").addEventListener("click", (event) => {
     const button = event.target.closest("[data-frame]");
     if (!button) return;

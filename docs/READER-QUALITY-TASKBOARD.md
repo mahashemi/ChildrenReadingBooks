@@ -151,3 +151,6 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Add responsive styling, reduced-motion support and CI regression checks.
 - [ ] Test microphone permission, recognition accuracy, interruptions and fallback typing on physical mobile Chrome and desktop browsers; review prompts with a child and a grown-up.
 - [ ] Expand speaking prompts so each reading chapter has a story-specific retell, explain and opinion task.
+
+- [x] Add a "Talk about this story" action to every reader page; pass the current chapter title, category and takeaway into the speaking studio.
+- [x] Generate a chapter-aware retell/explain/reflection question and a model speaking structure.

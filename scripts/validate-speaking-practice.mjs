@@ -4,6 +4,7 @@ const html=fs.readFileSync("index.html","utf8");
 const script=fs.readFileSync("speaking-practice.js","utf8");
 const css=fs.readFileSync("speaking-practice.css","utf8");
 const app=fs.readFileSync("app.js","utf8");
+const speech=fs.readFileSync("speaking-practice.js","utf8");
 assert.match(html,/id="speakView"/);
 assert.match(html,/id="speakingTopic"/);
 assert.match(html,/id="speechStart"/);
@@ -29,3 +30,10 @@ assert.doesNotMatch(app,/Start with the speech starter below/);
 assert.match(css,/prefers-reduced-motion/);
 assert.match(css,/@media\(max-width:700px\)/);
 console.log("English speaking studio checks passed.");
+
+assert.match(html, /id="storySpeakButton"/, "Every reading page needs a path into spoken practice");
+assert.match(speech, /storySpeakButton/, "Speaking studio must receive chapter-specific prompts");
+assert.match(speech, /activeStoryContext\.title/, "Chapter title must shape the speaking question");
+assert.match(speech, /activeStoryContext\.takeaway/, "Chapter takeaway must shape the model response");
+assert.match(app, /storySpeakButton\.dataset\.storyTitle/, "Reader must pass the current chapter title");
+assert.match(app, /storySpeakButton\.dataset\.storyTakeaway/, "Reader must pass the current chapter takeaway");
