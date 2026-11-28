@@ -48,3 +48,9 @@
 .story-speaking-cta span{font-size:11px;line-height:1.5;color:#777}
 .story-speaking-cta .button{font-size:12px;padding:10px 14px;white-space:nowrap}
 @media(max-width:560px){.story-speaking-cta{align-items:stretch;flex-direction:column}.story-speaking-cta .button{width:100%}}
+
+.speaking-next-question-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px}
+.speaking-next-question-row span{font-size:11px;font-weight:900;color:#8a8097}
+.speaking-next-question-row .button{font-size:12px;padding:10px 14px}
+.speaking-next-question-row .button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:560px){.speaking-next-question-row{align-items:stretch;flex-direction:column}.speaking-next-question-row .button{width:100%}}

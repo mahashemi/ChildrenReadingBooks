@@ -143,3 +143,7 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 ### Progressive spoken-English practice
 - [x] Scaffold independent speaking from one sentence to a reason, an example and a short 4–6 sentence talk.
 - [ ] Observe children and caregivers using the practice ladder and refine the progression.
+
+### Two-way English conversation practice
+- [x] Add short topic- and chapter-specific follow-up questions so children practise listening, thinking and responding across three turns.
+- [ ] Observe real conversation attempts and refine question wording and difficulty.

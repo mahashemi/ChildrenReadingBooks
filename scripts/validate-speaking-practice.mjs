@@ -45,3 +45,11 @@ assert.match(script, /stepName === "sentence"/);
 assert.match(script, /stepName === "reason"/);
 assert.match(script, /stepName === "example"/);
 assert.match(script, /Step 4/, "The final practice step must combine the learner's ideas");
+
+assert.match(html, /id="speechNextQuestion"/, "Learners need a follow-up question control");
+assert.match(html, /id="speechConversationProgress"/, "Conversation turns must be announced");
+assert.match(script, /function getFollowupQuestions/, "Provide authored follow-up questions");
+assert.match(script, /conversationTurn \+= 1/, "Allow the learner to advance through conversation turns");
+assert.match(script, /What would you do if you were in the same situation/, "Story prompts should invite personal responses");
+assert.match(script, /How could you test your idea/, "Science prompts should invite explanation and inquiry");
+assert.match(script, /Question " \+ \(conversationTurn \+ 1\) \+ " of 3/, "Announce conversation progress");
