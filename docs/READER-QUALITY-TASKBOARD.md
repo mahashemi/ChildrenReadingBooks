@@ -141,3 +141,13 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Cover plural forms and multiword science concepts such as black hole, double helix and artificial intelligence.
 - [x] Extend automated coverage to the complete curated key-concept set.
 - [ ] Native-reader review remains required before marking translations as fully approved.
+
+
+## P1 — Spoken English practice
+- [x] Replace the static speech-stage placeholder with a real child-first speaking studio and age-appropriate topic prompts.
+- [x] Add opt-in English speech recognition with live transcript, start/stop controls and a typed-answer fallback for unsupported browsers.
+- [x] Add sentence starters, spoken model answers, word-count feedback and gentle coaching for reasons, examples and pauses.
+- [x] Explain microphone permission and browser speech processing; do not save audio or transcripts.
+- [x] Add responsive styling, reduced-motion support and CI regression checks.
+- [ ] Test microphone permission, recognition accuracy, interruptions and fallback typing on physical mobile Chrome and desktop browsers; review prompts with a child and a grown-up.
+- [ ] Expand speaking prompts so each reading chapter has a story-specific retell, explain and opinion task.
