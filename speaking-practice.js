@@ -171,6 +171,23 @@
   }
 
   topic.addEventListener("change", renderFrames);
+  const storySpeakButton = $("storySpeakButton");
+  if (storySpeakButton) storySpeakButton.addEventListener("click", function (event) {
+    const button = event.currentTarget;
+    activeStoryContext = {
+      title: button.dataset.storyTitle || "this chapter",
+      category: button.dataset.storyCategory || "",
+      takeaway: button.dataset.storyTakeaway || ""
+    };
+    lessons.story.example = activeStoryContext.takeaway
+      ? "This chapter is about " + activeStoryContext.title + ". One thing I learned is " + activeStoryContext.takeaway + " I can use this lesson in my own life."
+      : "This chapter is about " + activeStoryContext.title + ". First, I will tell what happened. Then I will explain what I learned and give my own example.";
+    topic.value = "story";
+    renderFrames();
+    const navButton = document.querySelector('[data-view="speak"]');
+    if (navButton) navButton.click();
+    $("speechStatus").textContent = "Your reading is ready. Think about the chapter, then tell it in your own English words.";
+  });
   $("speakingFrames").addEventListener("click", (event) => {
     const button = event.target.closest("[data-frame]");
     if (!button) return;
