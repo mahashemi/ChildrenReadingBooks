@@ -170,21 +170,30 @@
 
   function reviewAnswer() {
     const text = transcript.value.trim();
-    const words = text.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || [];
+    const words = text.match(/[A-Za-z]+(?:[\'’][A-Za-z]+)*/g) || [];
     const lower = text.toLowerCase();
+    const stepName = step ? step.value : "sentence";
     if (!words.length) {
       feedback.textContent = "First, try saying one idea. You can begin with: “I think…”";
       return;
     }
-    const suggestions = [];
-    if (words.length < 12) suggestions.push("Try adding one more sentence to explain your idea.");
-    if (!/\b(because|so|since)\b/.test(lower)) suggestions.push("Tell us why. Try adding “because…”");
-    if (!/\b(for example|for instance|one time|when i)\b/.test(lower)) suggestions.push("Make your idea clearer with an example. Try “For example…”");
-    if (!/[.!?]/.test(text)) suggestions.push("Pause between ideas. You can add a full stop when one thought is finished.");
-    if (!suggestions.length) suggestions.push("You shared an idea, a reason and an example. Wonderful speaking! Now try saying it once more, a little more slowly and clearly.");
-    feedback.textContent = "You shared " + words.length + " words. " + suggestions.join(" ");
+    let message = "";
+    if (stepName === "sentence") {
+      message = words.length < 5 ? "Add a few more words so your listener understands your idea." : "That is a lovely first sentence. When you are ready, move to Step 2 and tell us why.";
+    } else if (stepName === "reason") {
+      message = /\b(because|since)\b/.test(lower) ? "You gave a reason. Well done! Step 3 is where you add an example." : "Try joining your idea to a reason with the word “because”.";
+    } else if (stepName === "example") {
+      message = /\b(for example|for instance|one time|when i)\b/.test(lower) ? "Your example helps us understand. Now try Step 4 and put your ideas together." : "Add a real example. You can begin with “For example…” or “One time…”";
+    } else {
+      const suggestions = [];
+      if (words.length < 25) suggestions.push("Try adding another sentence or two to build a short talk.");
+      if (!/\b(because|so|since)\b/.test(lower)) suggestions.push("Tell us why. Try adding “because…”");
+      if (!/\b(for example|for instance|one time|when i)\b/.test(lower)) suggestions.push("Make your idea clearer with an example. Try “For example…”");
+      if (!/[.!?]/.test(text)) suggestions.push("Pause between ideas. Add a full stop when one thought is finished.");
+      message = suggestions.length ? suggestions.join(" ") : "You shared an idea, a reason and an example. Wonderful speaking! Try saying it once more, a little more slowly and clearly.";
+    }
+    feedback.textContent = "You shared " + words.length + " words. " + message;
   }
-
   topic.addEventListener("change", renderFrames);
   if (step) step.addEventListener("change", renderFrames);
   const storySpeakButton = $("storySpeakButton");
@@ -199,6 +208,7 @@
       ? "This chapter is about " + activeStoryContext.title + ". One thing I learned is " + activeStoryContext.takeaway + " I can use this lesson in my own life."
       : "This chapter is about " + activeStoryContext.title + ". First, I will tell what happened. Then I will explain what I learned and give my own example.";
     topic.value = "story";
+    if (step) step.value = "sentence";
     renderFrames();
     const navButton = document.querySelector('[data-view="speak"]');
     if (navButton) navButton.click();
