@@ -44,6 +44,7 @@
   let recognition = null;
   let listening = false;
   let finalText = "";
+  let activeStoryContext = null;
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const supported = !!SpeechRecognition;
 
