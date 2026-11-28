@@ -228,8 +228,20 @@
     }
     feedback.textContent = "You shared " + words.length + " words. " + message;
   }
-  topic.addEventListener("change", renderFrames);
+  topic.addEventListener("change", () => { conversationTurn = 0; renderFrames(); });
   if (step) step.addEventListener("change", renderFrames);
+  if (nextQuestion) nextQuestion.addEventListener("click", () => {
+    if (conversationTurn >= 2) return;
+    stopRecognition();
+    conversationTurn += 1;
+    transcript.value = "";
+    finalText = "";
+    if (step) step.value = "sentence";
+    updateCount();
+    renderFrames();
+    feedback.textContent = "Good answer! Now listen to this next question and share another idea.";
+    setStatus("Question " + (conversationTurn + 1) + " of 3. Take your time.");
+  });
   const storySpeakButton = $("storySpeakButton");
   if (storySpeakButton) storySpeakButton.addEventListener("click", function (event) {
     const button = event.currentTarget;
@@ -242,6 +254,7 @@
       ? "This chapter is about " + activeStoryContext.title + ". One thing I learned is " + activeStoryContext.takeaway + " I can use this lesson in my own life."
       : "This chapter is about " + activeStoryContext.title + ". First, I will tell what happened. Then I will explain what I learned and give my own example.";
     topic.value = "story";
+    conversationTurn = 0;
     if (step) step.value = "sentence";
     renderFrames();
     const navButton = document.querySelector('[data-view="speak"]');
