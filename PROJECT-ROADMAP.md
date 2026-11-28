@@ -130,3 +130,10 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 ### Full key-concept translation coverage
 - [x] Add Arabic, Persian and Urdu meanings for the current key-concept set, including plural and compound science terms.
 - [ ] Native-reader review and future vocabulary expansion.
+
+
+### Spoken English — active learning priority
+- [x] Replace the placeholder speech-stage button with a working speaking studio: topic prompts, optional browser speech-to-text, editable transcript, sentence frames, model audio and supportive feedback.
+- [x] Provide typed-answer fallback where speech recognition is unavailable and disclose browser microphone processing.
+- [ ] Add chapter-specific speaking tasks: retell the story, explain a key concept, give a reason and example, and share a personal reflection.
+- [ ] Test with real children and caregivers; tune prompts, recognition behavior and feedback for ages 7–9.
