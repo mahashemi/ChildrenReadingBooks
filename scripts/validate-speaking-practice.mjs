@@ -37,3 +37,11 @@ assert.match(speech, /activeStoryContext\.title/, "Chapter title must shape the 
 assert.match(speech, /activeStoryContext\.takeaway/, "Chapter takeaway must shape the model response");
 assert.match(app, /storySpeakButton\.dataset\.storyTitle/, "Reader must pass the current chapter title");
 assert.match(app, /storySpeakButton\.dataset\.storyTakeaway/, "Reader must pass the current chapter takeaway");
+
+assert.match(html, /id="speakingStep"/, "Speaking practice must have a scaffolded progression");
+assert.match(script, /stepFrames/, "Sentence starters must change with the speaking step");
+assert.match(script, /stepPrompts/, "The speaking question must change with the speaking step");
+assert.match(script, /stepName === "sentence"/);
+assert.match(script, /stepName === "reason"/);
+assert.match(script, /stepName === "example"/);
+assert.match(script, /Step 4/, "The final practice step must combine the learner's ideas");
