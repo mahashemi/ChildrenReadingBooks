@@ -1225,11 +1225,6 @@ $("mobileMenu").addEventListener("click",()=>{
 $("parentButton").addEventListener("click",()=>$("parentModal").hidden=false);
 $("closeModal").addEventListener("click",()=>$("parentModal").hidden=true);
 $("gotIt").addEventListener("click",()=>$("parentModal").hidden=true);
-$("speechStart").addEventListener("click",()=>showToast("Start with the speech starter below. You can do it! 🎤"));
-$("copyPrompt").addEventListener("click",async()=>{
-  const text="Good morning, everyone. Today I would like to talk about kindness. I think kindness is important because…";
-  try{await navigator.clipboard.writeText(text);showToast("Speech starter copied!");}catch(e){showToast("Select and copy the speech starter above.");}
-});
 renderStory();
 $("toggleWordBorders").checked=showWordBorders;
 $("autoScrollToggle").checked=autoScrollEnabled;
