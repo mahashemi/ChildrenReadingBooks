@@ -12,6 +12,8 @@
   const feedback = $("speechFeedback");
   const wordCount = $("speechWordCount");
   const liveDot = $("speechLiveDot");
+  const nextQuestion = $("speechNextQuestion");
+  const conversationProgress = $("speechConversationProgress");
   if (!topic || !question || !transcript || !start || !stop) return;
 
   const lessons = {
@@ -46,6 +48,7 @@
   let listening = false;
   let finalText = "";
   let activeStoryContext = null;
+  let conversationTurn = 0;
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const supported = !!SpeechRecognition;
 
@@ -62,6 +65,30 @@
     wordCount.textContent = words.length + (words.length === 1 ? " word" : " words");
   }
 
+  function getFollowupQuestions() {
+    if (activeStoryContext && topic.value === "story") {
+      if (activeStoryContext.category === "science" || activeStoryContext.category === "discovery") return [
+        "What do you think would happen if you changed one thing?",
+        "How could you test your idea and find out if you are right?"
+      ];
+      if (activeStoryContext.category === "sahifa") return [
+        "How could you use this good action in your day today?",
+        "What question would you like to ask about this prayer?"
+      ];
+      return [
+        "Which part of the story surprised you most? Why?",
+        "What would you do if you were in the same situation?"
+      ];
+    }
+    const followups = {
+      story: ["Which part of the story do you remember best? Why?", "What would you do if you were in the same situation?"],
+      learning: ["How would you explain this new idea to a younger child?", "What question would you like to explore next?"],
+      kindness: ["How could you help someone who feels left out?", "How do you think that person might feel after your help?"],
+      science: ["What do you think would happen if you changed one thing?", "How could you test your idea?"],
+      opinion: ["Can you give another reason for your opinion?", "What might someone who disagrees say?"]
+    };
+    return followups[topic.value] || followups.story;
+  }
   function renderFrames() {
     const host = $("speakingFrames");
     const lesson = lessons[topic.value] || lessons.story;
@@ -77,6 +104,8 @@
         baseQuestion = "Tell the story or main idea of " + title + " in your own words. What happened or what did you learn?";
       }
     }
+    const followups = getFollowupQuestions();
+    if (conversationTurn > 0) baseQuestion = followups[conversationTurn - 1] || baseQuestion;
     const stepName = step ? step.value : "sentence";
     const about = activeStoryContext && topic.value === "story" ? activeStoryContext.title : "this topic";
     const stepPrompts = {
@@ -97,6 +126,11 @@
       '<button type="button" data-frame="' + frame.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;") + '">' +
       frame.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim().replace(/\\s+$/, "") + "…</button>"
     ).join("");
+    if (conversationProgress) conversationProgress.textContent = "Question " + (conversationTurn + 1) + " of 3";
+    if (nextQuestion) {
+      nextQuestion.disabled = conversationTurn >= 2;
+      nextQuestion.textContent = conversationTurn >= 2 ? "Conversation complete ✓" : "Ask me another question →";
+    }
   }
   function speak(text) {
     if (!("speechSynthesis" in window) || !window.SpeechSynthesisUtterance) {
