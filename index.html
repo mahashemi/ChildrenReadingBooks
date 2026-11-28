@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./speaking-practice.css">
   <link rel="stylesheet" href="./learner-language.css">
   <link rel="stylesheet" href="./reader-layout.css">
   <link rel="stylesheet" href="./responsive-cleanup.css">
@@ -220,10 +221,67 @@
 
 
     <section class="view" id="speakView">
-      <div class="page-heading"><div><div class="eyebrow">YOUR VOICE MATTERS</div><h1>My speech <span>stage</span></h1><p>Start with one sentence. Grow toward five wonderful minutes.</p></div><span class="heading-emoji">🎤</span></div>
-      <div class="speech-hero"><div><span class="tag tag-lilac">TODAY’S SPEAKING CHALLENGE</span><h2>Why is kindness important?</h2><p>Tell us what kindness means, share an example and explain how you can show kindness today.</p><button class="button button-primary" id="speechStart">Let’s practice →</button></div><div class="speech-mic">🎙️<span>✦</span></div></div>
-      <div class="speech-grid"><div class="content-panel"><span class="eyebrow">BUILD YOUR SPEECH</span><h3>Your five little steps</h3><ol class="speech-outline"><li><b>Say hello</b><small>Greet your audience and introduce your topic.</small></li><li><b>Explain your idea</b><small>What does kindness mean?</small></li><li><b>Give an example</b><small>Tell a short story from everyday life.</small></li><li><b>Connect to your values</b><small>What do the Qur’an and good character teach?</small></li><li><b>Finish with a thought</b><small>What will you do differently today?</small></li></ol></div><div class="content-panel timer-panel"><span class="eyebrow">YOUR SPEAKING JOURNEY</span><h3>Every voice grows</h3><div class="time-ladder"><div><span>🌱</span><b>30 seconds</b><small>Say one clear idea</small></div><div><span>🌿</span><b>1 minute</b><small>Explain and give an example</small></div><div><span>🌳</span><b>2–3 minutes</b><small>Build a beginning, middle and end</small></div><div><span>⭐</span><b>5 minutes</b><small>Speak with confidence and clarity</small></div></div></div></div>
-      <div class="speech-prompt"><b>Try this opening:</b><p>“Good morning, everyone. Today I would like to talk about kindness. I think kindness is important because…”</p><button class="button button-outline" id="copyPrompt">Copy speech starter</button></div>
+      <div class="page-heading"><div><div class="eyebrow">YOUR VOICE MATTERS</div><h1>My speaking <span>studio</span></h1><p>Listen, think, speak, and grow. Every brave try helps your English.</p></div><span class="heading-emoji">🎤</span></div>
+
+      <section class="speaking-practice-card" aria-labelledby="speakingTitle">
+        <div class="speaking-practice-intro">
+          <span class="tag tag-lilac">A LITTLE PRACTICE EVERY DAY</span>
+          <h2 id="speakingTitle">Let’s talk about an idea!</h2>
+          <p>Choose a topic. Think about it. Then tell us your ideas in your own English words.</p>
+        </div>
+        <div class="speaking-topic-row">
+          <label for="speakingTopic">Today I want to talk about</label>
+          <select id="speakingTopic">
+            <option value="story">A story I have read</option>
+            <option value="learning">Something new I learned</option>
+            <option value="kindness">Why kindness matters</option>
+            <option value="science">A science discovery</option>
+            <option value="opinion">An idea I believe in</option>
+          </select>
+        </div>
+        <div class="speaking-question" aria-live="polite">
+          <span>YOUR QUESTION</span>
+          <h3 id="speakingQuestion">What happened in the story? Who was in it, and what lesson did you learn?</h3>
+          <button class="button button-outline" id="speechReadPrompt" type="button">🔊 Hear the question</button>
+        </div>
+        <div class="speaking-steps" aria-label="A simple speaking plan">
+          <div><b>1. Start</b><span>Say what you are talking about.</span></div>
+          <div><b>2. Explain</b><span>Share your idea and why.</span></div>
+          <div><b>3. Give an example</b><span>Tell us something that happened.</span></div>
+          <div><b>4. Finish</b><span>Tell us what you learned.</span></div>
+        </div>
+        <div class="speaking-phrase-bank">
+          <b>Helpful sentence starters</b>
+          <div id="speakingFrames" class="speaking-frame-list">
+            <button type="button" data-frame="I read a story about ">I read a story about…</button>
+            <button type="button" data-frame="I think this is important because ">I think… because…</button>
+            <button type="button" data-frame="For example, ">For example…</button>
+            <button type="button" data-frame="I learned that ">I learned that…</button>
+          </div>
+        </div>
+        <div class="speaking-recorder">
+          <div class="speaking-recorder-heading"><div><span class="eyebrow">YOUR TURN TO SPEAK</span><h3>Use your voice</h3></div><span class="speaking-live-dot" id="speechLiveDot" aria-hidden="true"></span></div>
+          <p class="speaking-privacy">When voice recognition is available, your browser listens and turns your speech into text. Ask a grown-up before using the microphone. This page does not save your audio or transcript. Your browser's speech service may process audio to provide recognition.</p>
+          <div class="speaking-controls">
+            <button class="button button-primary" id="speechStart" type="button">🎙️ Start speaking</button>
+            <button class="button button-outline" id="speechStop" type="button" disabled>Stop</button>
+            <button class="button button-outline" id="speechReadExample" type="button">Hear an example</button>
+          </div>
+          <p id="speechStatus" class="speaking-status" role="status" aria-live="polite">When you are ready, press Start speaking and answer in English.</p>
+          <label class="speaking-transcript-label" for="speechTranscript">Your words (you can edit them)</label>
+          <textarea id="speechTranscript" rows="5" placeholder="Your spoken words will appear here. If voice recognition is not available, you can type your answer instead." spellcheck="true"></textarea>
+          <div class="speaking-review-row">
+            <span id="speechWordCount">0 words</span>
+            <div><button class="button button-outline" id="speechReview" type="button">Help me improve</button><button class="button button-outline" id="speechClear" type="button">Try again</button></div>
+          </div>
+          <div id="speechFeedback" class="speaking-feedback" role="status" aria-live="polite">There is no perfect answer. We are practising clear ideas, one sentence at a time.</div>
+        </div>
+      </section>
+
+      <div class="speech-grid">
+        <div class="content-panel"><span class="eyebrow">YOUR SPEAKING JOURNEY</span><h3>Small steps make a strong voice</h3><div class="time-ladder"><div><span>🌱</span><b>30 seconds</b><small>Share one clear idea.</small></div><div><span>🌿</span><b>1 minute</b><small>Explain and give an example.</small></div><div><span>🌳</span><b>2–3 minutes</b><small>Build a beginning, middle and end.</small></div><div><span>⭐</span><b>5 minutes</b><small>Speak with confidence and clarity.</small></div></div></div>
+        <div class="content-panel"><span class="eyebrow">A KIND REMINDER</span><h3>Brave voices grow with practice</h3><p class="speaking-encouragement">Speak slowly. Take a little pause when you need one. It is okay to make mistakes. Try again, learn a new word, and enjoy sharing your ideas.</p><p class="speaking-encouragement"><strong>Grown-ups:</strong> Give children time to finish. Listen first, praise their ideas, and gently model one improved sentence instead of correcting every mistake.</p></div>
+      </div>
     </section>
 
     <section class="view" id="valuesView">
@@ -248,5 +306,6 @@
   <script src="./reader-layout.js"></script>
   <script src="./flags-data.js"></script>
   <script src="./flags.js"></script>
+<script src="./speaking-practice.js"></script>
 </body>
 </html>
