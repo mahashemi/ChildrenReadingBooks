@@ -1,0 +1,43 @@
+/* English speaking studio */
+.speaking-practice-card{margin-top:20px;padding:clamp(18px,3vw,30px);border:1px solid #e8e1f1;border-radius:24px;background:linear-gradient(145deg,#fff 0%,#fbf8ff 58%,#fffaf2 100%);box-shadow:0 14px 38px rgba(67,49,92,.07)}
+.speaking-practice-intro h2{margin:12px 0 6px;font-size:clamp(23px,3vw,32px);letter-spacing:-.7px;color:#403653}
+.speaking-practice-intro p{margin:0;color:#777184;line-height:1.65;font-size:14px}
+.speaking-topic-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 14px}
+.speaking-topic-row label,.speaking-transcript-label{font-size:13px;font-weight:900;color:#514765}
+.speaking-topic-row select{min-width:min(100%,280px);padding:11px 14px;border:1px solid #ded5ed;border-radius:12px;background:#fff;color:#403653;font:inherit;font-weight:800}
+.speaking-question{padding:20px;border-radius:18px;background:#f0eafb;border:1px solid #e5dcf4}
+.speaking-question>span{font-size:10px;font-weight:900;letter-spacing:1.2px;color:#8771a9}
+.speaking-question h3{font-size:clamp(18px,2.2vw,24px);line-height:1.45;color:#43365b;margin:8px 0 13px}
+.speaking-question .button{padding:9px 13px;font-size:12px}
+.speaking-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
+.speaking-steps div{display:flex;flex-direction:column;gap:5px;padding:13px;border:1px solid #eee8f4;border-radius:14px;background:#fff}
+.speaking-steps b{font-size:13px;color:#5e795f}
+.speaking-steps span{font-size:11px;line-height:1.45;color:#777}
+.speaking-phrase-bank{padding:15px 0 18px;border-bottom:1px solid #eee8f4}
+.speaking-phrase-bank>b{display:block;margin-bottom:10px;font-size:12px;color:#514765}
+.speaking-frame-list{display:flex;gap:8px;flex-wrap:wrap}
+.speaking-frame-list button{border:1px solid #dce9df;border-radius:999px;background:#f7fbf7;padding:9px 12px;color:#47664e;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.speaking-frame-list button:hover,.speaking-frame-list button:focus-visible{background:#eaf5eb;outline:2px solid #94bc9b;outline-offset:2px}
+.speaking-recorder{margin-top:18px;padding:18px;border:1px solid #e9e2f0;border-radius:18px;background:#fff}
+.speaking-recorder-heading{display:flex;align-items:center;justify-content:space-between}
+.speaking-recorder-heading h3{margin:5px 0 0;font-size:20px;color:#43365b}
+.speaking-live-dot{width:12px;height:12px;border-radius:50%;background:#c7c2ce;box-shadow:0 0 0 5px #f3f1f5}
+.speaking-live-dot.is-listening{background:#e45d6c;box-shadow:0 0 0 5px #fce8eb;animation:speakingPulse 1.2s infinite}
+@keyframes speakingPulse{50%{box-shadow:0 0 0 9px #fce8eb}}
+.speaking-privacy{font-size:11px;line-height:1.55;color:#777184;background:#faf8fc;border-radius:10px;padding:10px 12px;margin:14px 0}
+.speaking-controls{display:flex;gap:9px;flex-wrap:wrap}
+.speaking-controls .button{font-size:12px;padding:11px 15px}
+.speaking-controls button:disabled{opacity:.45;cursor:not-allowed}
+.speaking-status{font-size:12px;font-weight:800;color:#5d765f;min-height:20px;margin:13px 0}
+.speaking-transcript-label{display:block;margin:14px 0 7px}
+#speechTranscript{width:100%;min-height:130px;resize:vertical;padding:13px 14px;border:1px solid #ddd5e8;border-radius:13px;background:#fffefa;color:#403653;font:500 15px/1.7 Nunito, sans-serif}
+#speechTranscript:focus{outline:3px solid #e9def8;border-color:#9d83c0}
+.speaking-review-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:11px}
+#speechWordCount{font-size:11px;font-weight:900;color:#8a8097}
+.speaking-review-row>div{display:flex;gap:8px;flex-wrap:wrap}
+.speaking-review-row .button{font-size:11px;padding:8px 11px}
+.speaking-feedback{margin-top:13px;padding:13px 15px;border-radius:12px;background:#f0f7ef;color:#4f6d52;font-size:13px;line-height:1.6}
+.speaking-encouragement{font-size:13px;line-height:1.75;color:#6d6876}
+.speaking-encouragement strong{color:#4d6650}
+@media(max-width:700px){.speaking-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.speaking-practice-card{padding:17px;border-radius:18px}.speaking-recorder{padding:14px}.speaking-topic-row{align-items:stretch;flex-direction:column}.speaking-topic-row select{width:100%}.speaking-review-row{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.speaking-live-dot.is-listening{animation:none}}
