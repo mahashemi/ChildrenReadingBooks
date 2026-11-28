@@ -41,3 +41,10 @@
 .speaking-encouragement strong{color:#4d6650}
 @media(max-width:700px){.speaking-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.speaking-practice-card{padding:17px;border-radius:18px}.speaking-recorder{padding:14px}.speaking-topic-row{align-items:stretch;flex-direction:column}.speaking-topic-row select{width:100%}.speaking-review-row{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.speaking-live-dot.is-listening{animation:none}}
+
+.story-speaking-cta{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:16px 0 4px;padding:14px 17px;border:1px solid #e5e9df;border-radius:15px;background:linear-gradient(100deg,#f5faf1,#fffaf1)}
+.story-speaking-cta>div{display:flex;flex-direction:column;gap:4px}
+.story-speaking-cta b{font-size:13px;color:#4d6650}
+.story-speaking-cta span{font-size:11px;line-height:1.5;color:#777}
+.story-speaking-cta .button{font-size:12px;padding:10px 14px;white-space:nowrap}
+@media(max-width:560px){.story-speaking-cta{align-items:stretch;flex-direction:column}.story-speaking-cta .button{width:100%}}
