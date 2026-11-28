@@ -159,3 +159,8 @@ Scope: improve the shared reading experience across every chapter and collection
 - [x] Break speaking into four achievable steps: one sentence, add a reason, give an example, and deliver a short 4–6 sentence talk.
 - [x] Change the question and sentence starters at each step; give feedback appropriate to the selected step instead of asking beginners to do everything at once.
 - [ ] Observe children using the four steps and adjust the language, timing and difficulty.
+
+## P1 — Two-way spoken-English conversations
+- [x] Add two authored follow-up questions for each practice topic and for chapter-linked story/science/Sahifa prompts.
+- [x] Let children answer three turns in sequence, with visible question progress and a fresh response area for each turn.
+- [ ] Observe children answering follow-up questions naturally; refine prompts and turn lengths.
