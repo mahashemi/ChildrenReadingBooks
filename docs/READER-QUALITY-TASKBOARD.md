@@ -154,3 +154,8 @@ Scope: improve the shared reading experience across every chapter and collection
 
 - [x] Add a "Talk about this story" action to every reader page; pass the current chapter title, category and takeaway into the speaking studio.
 - [x] Generate a chapter-aware retell/explain/reflection question and a model speaking structure.
+
+## P1 — Progressive spoken-English scaffolding
+- [x] Break speaking into four achievable steps: one sentence, add a reason, give an example, and deliver a short 4–6 sentence talk.
+- [x] Change the question and sentence starters at each step; give feedback appropriate to the selected step instead of asking beginners to do everything at once.
+- [ ] Observe children using the four steps and adjust the language, timing and difficulty.

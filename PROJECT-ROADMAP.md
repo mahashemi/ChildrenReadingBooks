@@ -139,3 +139,7 @@ The Concepts dialog now presents distinct chapter illustrations as a navigable s
 - [ ] Test with real children and caregivers; tune prompts, recognition behavior and feedback for ages 7–9.
 
 - [x] Connect each reading page to the speaking studio with a prompt grounded in that chapter's title, category and takeaway.
+
+### Progressive spoken-English practice
+- [x] Scaffold independent speaking from one sentence to a reason, an example and a short 4–6 sentence talk.
+- [ ] Observe children and caregivers using the practice ladder and refine the progression.
