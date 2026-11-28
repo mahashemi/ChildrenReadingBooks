@@ -64,7 +64,19 @@
   function renderFrames() {
     const host = $("speakingFrames");
     const lesson = lessons[topic.value] || lessons.story;
-    question.textContent = lesson.question;
+    if (topic.value === "story" && activeStoryContext) {
+      const title = activeStoryContext.title;
+      const category = activeStoryContext.category;
+      if (category === "science" || category === "discovery") {
+        question.textContent = "Explain one idea you discovered in " + title + ". What did you notice, and why do you think it matters?";
+      } else if (category === "sahifa") {
+        question.textContent = "What feeling or good action does " + title + " remind you of? Explain it in your own words."; 
+      } else {
+        question.textContent = "Tell the story or main idea of " + title + " in your own words. What happened or what did you learn? Give an example from your life.";
+      }
+    } else {
+      question.textContent = lesson.question;
+    }
     host.innerHTML = lesson.frames.map((frame) =>
       '<button type="button" data-frame="' + frame.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;") + '">' +
       frame.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim().replace(/\s+$/, "") + "…</button>"
