@@ -44,6 +44,7 @@
     }
   };
 
+  const defaultStoryExample = lessons.story.example;
   let recognition = null;
   let listening = false;
   let finalText = "";
@@ -228,7 +229,14 @@
     }
     feedback.textContent = "You shared " + words.length + " words. " + message;
   }
-  topic.addEventListener("change", () => { conversationTurn = 0; renderFrames(); });
+  topic.addEventListener("change", () => {
+    conversationTurn = 0;
+    if (topic.value !== "story") {
+      activeStoryContext = null;
+      lessons.story.example = defaultStoryExample;
+    }
+    renderFrames();
+  });
   if (step) step.addEventListener("change", renderFrames);
   if (nextQuestion) nextQuestion.addEventListener("click", () => {
     if (conversationTurn >= 2) return;
