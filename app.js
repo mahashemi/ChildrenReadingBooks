@@ -821,6 +821,14 @@ function renderStory(){
   storyText.style.setProperty("font-size",fontSize+"px","important");
   const reflectionHtml=current.chapterReflection&&current.chapterPage===current.chapterLength?'<aside class="islamic-reflection"><b>'+(current.chapterCategory==="sahifa"?"A little rhyme to remember":"Think with the Qur’an and Ahlulbayt")+'</b><p>'+linkQuranReferences(renderParagraph(current.chapterReflection),current.chapterReflection,current)+'</p></aside>':'';
   storyText.innerHTML=current.paragraphs.map(p=>"<p>"+linkQuranReferences(renderParagraph(p),p,current)+"</p>").join("")+reflectionHtml;
+  const storySpeakButton=$("storySpeakButton");
+  if(storySpeakButton){
+    const chapterMeta=readingChapters[safeChapterIndex]||{};
+    storySpeakButton.dataset.storyTitle=current.chapterTitle||chapterMeta.title||current.title;
+    storySpeakButton.dataset.storyTakeaway=current.chapterTakeaway||chapterMeta.takeaway||"";
+    storySpeakButton.dataset.storyCategory=current.chapterCategory||chapterMeta.category||"";
+    storySpeakButton.dataset.storySummary=current.paragraphs.join(" ").slice(0,1200);
+  }
   storyText.classList.toggle("word-borders-visible",showWordBorders);
   $("previousPage").disabled=page===0;
   $("nextPage").textContent=current.chapterPage===current.chapterLength?"Next chapter →":"Next page →";
